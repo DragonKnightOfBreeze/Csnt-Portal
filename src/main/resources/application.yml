@@ -1,0 +1,27 @@
+server:
+  tomcat:
+    # 配置Tomcat的访问日志
+    accesslog:
+      enabled: true
+    # 指定Tomcat的发布目录
+    basedir: target/tomcat
+
+spring:
+  thymeleaf:
+    # 允许Thymeleaf模版在开发阶段被重载
+    cache: true
+  jpa:
+    # 显示SQL
+    show-sql: true
+  # NOTE 配置数据源
+  datasource:
+    username: admin
+    password: 123
+    url: jdbc:mysql://localhost:3306/CsntPortal
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      data-source-properties:
+        serverTimezone: GMT-8
+
+
+
