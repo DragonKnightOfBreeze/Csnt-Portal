@@ -20,6 +20,7 @@ spring:
     url: jdbc:mysql://localhost:3306/CsntPortal
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
+      # 配置数据库的时区，否则会报错
       data-source-properties:
         serverTimezone: GMT-8
 
