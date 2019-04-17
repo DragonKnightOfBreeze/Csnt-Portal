@@ -1,4 +1,4 @@
-package com.windea.csntportal;
+package com.windea.demo.csntportal;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

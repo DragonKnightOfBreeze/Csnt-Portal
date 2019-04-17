@@ -4,12 +4,22 @@
 
 介绍专业特色、实时动态、教师队伍、专业发展、教学改革和学习专栏等。
 
+# 参考链接
+
+* Angular教程
+	* [Angular - 什么是 Angular？](https://www.angular.cn/docs)
+* SpringBoot教程
+	* [Spring Boot 中文导航](http://springboot.fun/)
+* Demo参考
+	* [Angular-SpringBoot-REST-JWT](https://github.com/mrin9/Angular-SpringBoot-REST-JWT)
+	* [SpringBootAngular7Integration](https://github.com/SKrudra/SpringBootAngular7Integration)
+	* [SpringBoot-Angular7-ShoppingCart](https://github.com/zhulinn/SpringBoot-Angular7-ShoppingCart)
+
 # 功能需求
 
 ## 通用的功能
 
 * 整合SpringBoot和Angular
-* 连接到MySql
 * Restful风格的url
 * 全局异常管理（使用Spring异常处理器）
 * 全局缓存管理？（使用Redis）
@@ -76,13 +86,15 @@
 # 技术要求
 
 * 通用
-	* Maven
-	* MySQL
-	* Git
 	* Markdown
 	* Xml
 	* Json
 	* Yaml
+	* Maven
+	* Git
+	* Docker？
+	* Spring Security？
+	* JWT Authentication？
 * 前端
 	* Html5
 	* Css3
@@ -92,13 +104,17 @@
 	* TypeScript
 	* Sass
 	* Angular7
+	* Angular Cli
+	* H2？
 * 后台
 	* Java
 	* Spring
-	* SpringBoot
-	* SpringWebMvc
-	* SpringDataJba
+	* Spring Boot
+	* Spring Web Mvc
+	* Spring Data Jba
+	* Lombok？
 	* Redis
+	* MySQL
 	
 # 目录概述
 
@@ -147,3 +163,9 @@ README.md       # 说明文档
 
 * 对于Idea的数据库连接，打开配置，在参数`URL`后面加上`?GMT%2B8`。
 * 如果运行时出错，在`application.yml`中也要特别配置`serverTimezone: GMT-8`。
+
+## 如何整合前后端
+
+* 后端直接使用RestController，绑定Rest风格的url，收发json数据。
+* 前端直接跳过http请求，指定泛型，以对应的url和http头为参数，收发json数据。
+* 后端不需要指定视图解析器，
