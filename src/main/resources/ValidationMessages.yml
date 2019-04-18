@@ -1,0 +1,69 @@
+# NOTE 在这里配置本地化的验证消息
+
+# **Validation特殊语法**
+
+# 通过`{propName}`引用`classpath:ValidationMessages.{properties,yml}`的对应属性的值。`propName`是相对于配置文件的全路径。
+# 通过`{propName}`引用注解中的其他属性的值。
+# 通过`${validatedValue}`引用要验证的字段的值，附带`.length()`等方法。
+
+# **SpringBoot Config特殊语法**
+
+# 通过`${propName}`引用相同或绑定的配置文件中的其他属性的值。`propName`是相对于配置文件的全路径。
+# 通过`${random.int}`,`${random.uuid}`,`${random.int(10)}`,`${random.value}`等生成不同类型的随机值。
+
+# 将配置文件的数据绑定到实体类：
+# 为启动类注上`@EnableConfigurationProperties({ConfigBean.class})`，以指定需要配置的实体类。
+# 为实体类注上`@ConfigurationProperties(prefix = "com.md")`，以指明前缀。
+# 为实体类注上`@PropertySource("classpath:test.properties")`，以指明绑定的配置文件，默认为`application.{properties,yml}`。
+
+# TODO 完善验证消息
+
+user:
+  username:
+    notEmpty: 用户名不能为空！
+    pattern: 用户名格式不合法！
+  password:
+    notEmpty: 密码不能为空！
+    pattern: 密码格式不合法！
+  phoneNum:
+    notEmpty: 电话号码不能为空！
+    size: 电话号码格式不合法！
+  email:
+    notEmpty: 邮箱地址不能为空！
+    email: 邮箱地址格式不合法！
+  nickname:
+    notEmpty: 昵称不能为空！
+    size: 昵称格式不合法！
+
+column:
+  title:
+    notEmpty: 标题不能为空！
+    size: 标题格式不合法！
+  content:
+    notEmpty: 内容不能为空！
+  author:
+    notEmpty: 作者不能为空！
+    size: 作者格式不合法！
+
+dynamic:
+  subject:
+    notEmpty: 主题不能为空！
+    size: 主题文本过长！
+  content:
+    notEmpty: 内容不能为空！
+
+teacherTeam:
+  name:
+    notEmpty: 名字不能为空！
+    size: 名字文本过长！
+  introduce:
+    notEmpty: 介绍不能为空！
+    size: 介绍文本过长！
+
+teacherDetail:
+  name:
+    notEmpty: 名字不能为空！
+    size: 名字文本过长！
+  introduce:
+    notEmpty: 介绍不能为空！
+    size: 介绍文本过长！

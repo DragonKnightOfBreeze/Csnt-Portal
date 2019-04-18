@@ -1,0 +1,10 @@
+# NOTE 在这里配置自定义配置项以及本地化的消息
+
+# 用于Jwt验证的一些配置
+# TODO 套用到项目中
+jwt:
+  secret: com.windea
+  expiration: 86400
+  user-query: select username, password from User where username=?
+  role-query: select username, role from User where username=?
+

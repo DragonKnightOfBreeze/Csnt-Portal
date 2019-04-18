@@ -1,3 +1,5 @@
+# NOTE 在这里配置系统配置项
+
 server:
   tomcat:
     # 配置Tomcat的访问日志
@@ -5,6 +7,9 @@ server:
       enabled: true
     # 指定Tomcat的发布目录
     basedir: target/tomcat
+  servlet:
+    # 指定服务器的内容根路径
+    context-path: /csnt-portal
 
 spring:
   thymeleaf:
@@ -13,16 +18,15 @@ spring:
   jpa:
     # 显示SQL
     show-sql: true
-  # NOTE 配置数据源
+    # 表不存在时自动创建，之后更新
+    hibernate:
+      ddl-auto: update
+  # NOTE 在这里配置数据源
   datasource:
     username: admin
     password: 123
-    url: jdbc:mysql://localhost:3306/CsntPortal
+    # 配置数据库的时区，否则会报错
+    url: jdbc:mysql://localhost:3306/CsntPortal?serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      # 配置数据库的时区，否则会报错
-      data-source-properties:
-        serverTimezone: GMT-8
-
 
 
