@@ -20,7 +20,7 @@ public class Introduce implements Serializable {
 	/** 主键。 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	/** 标题。 */
 	@ColumnDefault(GlobalConsts.PH_C_TITLE)
@@ -48,11 +48,20 @@ public class Introduce implements Serializable {
 	private LocalDateTime updateTime;
 
 
-	public Long getId() {
+	public Introduce() {}
+
+	public Introduce(String title, String content, String author) {
+		this.title = title;
+		this.content = content;
+		this.author = author;
+	}
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -94,15 +103,5 @@ public class Introduce implements Serializable {
 
 	public void setUpdateTime(LocalDateTime updateTime) {
 		this.updateTime = updateTime;
-	}
-
-
-	public Introduce() {
-	}
-
-	public Introduce(String title, String content, String author) {
-		this.title = title;
-		this.content = content;
-		this.author = author;
 	}
 }

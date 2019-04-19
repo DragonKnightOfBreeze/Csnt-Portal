@@ -4,23 +4,33 @@ import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.enums.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetailsPasswordService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * 用户的服务接口。
+ * 用户的服务接口。<br>
+ * 继承UserDetailsService接口以进行安全验证。继承UserDetailsPasswordService接口以修改密码。
  */
-public interface UserService {
-	User loginByUsername(String username, String password);
+public interface UserService extends UserDetailsService, UserDetailsPasswordService {
+	User save(User user);
 
-	User loginByEmail(String email, String password);
-
-	User loginByPhoneNum(String phoneNum, String password);
+	User update(User user);
 
 
-	Page<User> findByNicknameLike(String nickname, Pageable pageable);
+	User findById(Integer id);
 
-	Page<User> findByGender(Gender gender, Pageable pageable);
+	User findByUsername(String username);
 
-	Page<User> findByRole(Role role, Pageable pageable);
+	User findByUsernameAndPassword(String username, String password);
 
-	Page<User> findByProfession(Profession profession, Pageable pageable);
+
+	Page<User> findAll(Pageable pageable);
+
+	Page<User> findAllByNicknameLike(String nickname, Pageable pageable);
+
+	Page<User> findAllByGender(Gender gender, Pageable pageable);
+
+	Page<User> findAllByRole(Role role, Pageable pageable);
+
+	Page<User> findAllByProfession(Profession profession, Pageable pageable);
 }

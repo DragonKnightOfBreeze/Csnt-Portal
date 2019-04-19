@@ -10,16 +10,16 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
- * 教师详情的实体类。
+ * 教师信息的实体类。
  */
 @Entity
-public class TeacherDetail implements Serializable {
+public class TeacherInfo implements Serializable {
 	private static final long serialVersionUID = 7294090774828562605L;
 
 	/** 主键。 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	/** 名字。 */
 	@NotEmpty(message = "{teacherDetail.name.notEmpty}")
@@ -45,11 +45,23 @@ public class TeacherDetail implements Serializable {
 	private TeacherTeam teacherTeam;
 
 
-	public Long getId() {
+	public TeacherInfo() {}
+
+	public TeacherInfo(String name, Gender gender, Profession profession, String introduce,
+		TeacherTeam teacherTeam) {
+		this.name = name;
+		this.gender = gender;
+		this.profession = profession;
+		this.introduce = introduce;
+		this.teacherTeam = teacherTeam;
+	}
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -90,19 +102,6 @@ public class TeacherDetail implements Serializable {
 	}
 
 	public void setTeacherTeam(TeacherTeam teacherTeam) {
-		this.teacherTeam = teacherTeam;
-	}
-
-
-	public TeacherDetail() {
-	}
-
-	public TeacherDetail(String name, Gender gender, Profession profession, String introduce,
-			TeacherTeam teacherTeam) {
-		this.name = name;
-		this.gender = gender;
-		this.profession = profession;
-		this.introduce = introduce;
 		this.teacherTeam = teacherTeam;
 	}
 }

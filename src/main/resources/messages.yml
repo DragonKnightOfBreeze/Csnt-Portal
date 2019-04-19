@@ -1,10 +1,20 @@
 # NOTE 在这里配置自定义配置项以及本地化的消息
 
-# 用于Jwt验证的一些配置
-# TODO 套用到项目中
-jwt:
-  secret: com.windea
-  expiration: 86400
-  user-query: select username, password from User where username=?
-  role-query: select username, role from User where username=?
+# **SpringBoot Config特殊语法**
+
+# 通过`${propName}`引用相同或绑定的配置文件中的其他属性的值。`propName`是相对于配置文件的全路径。
+# 通过`${random.int}`,`${random.uuid}`,`${random.int(10)}`,`${random.value}`等生成不同类型的随机值。
+
+# 将配置文件的数据绑定到实体类：
+# 为启动类注上`@EnableConfigurationProperties({ConfigBean.class})`，以指定需要配置的实体类。
+# 为实体类注上`@ConfigurationProperties(prefix = "com.md")`，以指明前缀。
+# 为实体类注上`@PropertySource("classpath:test.properties")`，以指明绑定的配置文件，默认为`application.{properties,yml}`。
+
+# Spring Security的相关配置，整合Jwt
+security:
+  userQuery: select username, password from User where username=?
+  roleQuery: select username, role from User where username=?
+  jwtSecret: com.windea
+  jwtExpiration: 86400
+
 

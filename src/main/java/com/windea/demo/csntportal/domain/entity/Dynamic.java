@@ -22,7 +22,7 @@ public class Dynamic implements Serializable {
 	/** 主键。 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	/** 主题。 */
 	@ColumnDefault(GlobalConsts.PH_D_SUBJECT)
@@ -53,11 +53,21 @@ public class Dynamic implements Serializable {
 	private LocalDateTime sponsorTime;
 
 
-	public Long getId() {
+	public Dynamic() {}
+
+	public Dynamic(String subject, DynamicCategory category, String content, User sponsorUser) {
+		this.subject = subject;
+		this.category = category;
+		this.content = content;
+		this.sponsorUser = sponsorUser;
+	}
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -99,16 +109,5 @@ public class Dynamic implements Serializable {
 
 	public void setSponsorTime(LocalDateTime sponsorTime) {
 		this.sponsorTime = sponsorTime;
-	}
-
-
-	public Dynamic() {
-	}
-
-	public Dynamic(String subject, DynamicCategory category, String content, User sponsorUser) {
-		this.subject = subject;
-		this.category = category;
-		this.content = content;
-		this.sponsorUser = sponsorUser;
 	}
 }

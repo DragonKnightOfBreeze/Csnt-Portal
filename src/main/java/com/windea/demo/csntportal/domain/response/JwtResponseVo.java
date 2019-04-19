@@ -1,9 +1,13 @@
 package com.windea.demo.csntportal.domain.response;
 
+import com.windea.demo.csntportal.enums.Role;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 /**
  * Jwt响应的视图对象。<br>
- * 用于安全验证。<br>
- * TODO 套用到项目中
+ * 用于进行安全验证。
  */
 public class JwtResponseVo {
 	/** Jwt口令。 */
@@ -12,14 +16,19 @@ public class JwtResponseVo {
 	/** Jwt类型 */
 	private String type = "Bearer";
 
-	/** Jwt帐号。 */
-	private String account;
-
-	/** Jwt姓名。 */
-	private String name;
+	/** Jwt用户名。 */
+	private String username;
 
 	/** Jwt身份。 */
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
+
+	public JwtResponseVo(String token, String username, Role role) {
+		this.token = token;
+		this.username = username;
+		this.role = role;
+	}
 
 
 	public String getToken() {
@@ -38,35 +47,19 @@ public class JwtResponseVo {
 		this.type = type;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-
-	public JwtResponseVo(String token, String account, String name, String role) {
-		this.token = token;
-		this.account = account;
-		this.name = name;
+	public void setRole(Role role) {
 		this.role = role;
 	}
 }

@@ -22,7 +22,7 @@ public class TeacherTeam implements Serializable {
 	/** 主键。 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	/** 名字。 */
 	@NotEmpty(message = "{teacherTeam.name.notEmpty}")
@@ -42,18 +42,27 @@ public class TeacherTeam implements Serializable {
 	@CreationTimestamp
 	private LocalDateTime createTime;
 
-	/** 教师详情的集合。 */
-	//NOTE 这里的级联级别不能是ALL，当删除教师队伍时，教师详情不删除
+	/** 教师信息的集合。 */
+	//NOTE 这里的级联级别不能是ALL，当删除教师队伍时，教师信息不删除
 	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "teacherTeam")
 	@JsonIgnore
-	private List<TeacherDetail> teacherDetailList = new ArrayList<>();
+	private List<TeacherInfo> teacherInfoList = new ArrayList<>();
 
 
-	public Long getId() {
+	public TeacherTeam() {}
+
+	public TeacherTeam(String name, ProfessionLevel professionLevel, String introduce) {
+		this.name = name;
+		this.professionLevel = professionLevel;
+		this.introduce = introduce;
+	}
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -89,25 +98,15 @@ public class TeacherTeam implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public List<TeacherDetail> getTeacherDetailList() {
-		return teacherDetailList;
+	public List<TeacherInfo> getTeacherInfoList() {
+		return teacherInfoList;
 	}
 
-	public void setTeacherDetailList(List<TeacherDetail> teacherDetailList) {
-		this.teacherDetailList = teacherDetailList;
+	public void setTeacherInfoList(List<TeacherInfo> teacherInfoList) {
+		this.teacherInfoList = teacherInfoList;
 	}
 
 	public Integer getTeacherCount() {
-		return teacherDetailList.size();
-	}
-
-
-	public TeacherTeam() {
-	}
-
-	public TeacherTeam(String name, ProfessionLevel professionLevel, String introduce) {
-		this.name = name;
-		this.professionLevel = professionLevel;
-		this.introduce = introduce;
+		return teacherInfoList.size();
 	}
 }

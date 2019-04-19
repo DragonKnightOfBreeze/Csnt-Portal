@@ -4,25 +4,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.demo.csntportal.GlobalConsts;
 import com.windea.demo.csntportal.enums.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
- * 用户的实体类。
+ * 用户的实体类。<br>
+ * 实现UserDetails接口以进行安全验证。
  */
 @Entity
-public class User implements Serializable {
+public class User implements UserDetails {
 	private static final long serialVersionUID = 1767704296003338587L;
 
 	/** 主键。 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	/** 用户名。 */
 	@NotEmpty(message = "{user.username.notEmpty}")
@@ -76,11 +78,26 @@ public class User implements Serializable {
 	private List<Dynamic> dynamicList = new ArrayList<>();
 
 
-	public Long getId() {
+	public User() {}
+
+	public User(String username, String password, String phoneNum, String email, String nickname, Gender gender,
+		Role role, Profession profession) {
+		this.username = username;
+		this.password = password;
+		this.phoneNum = phoneNum;
+		this.email = email;
+		this.nickname = nickname;
+		this.gender = gender;
+		this.role = role;
+		this.profession = profession;
+	}
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -165,18 +182,28 @@ public class User implements Serializable {
 	}
 
 
-	public User() {
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Set.of(new SimpleGrantedAuthority(role.toString()));
 	}
 
-	public User(String username, String password, String phoneNum, String email, String nickname, Gender gender,
-			Role role, Profession profession) {
-		this.username = username;
-		this.password = password;
-		this.phoneNum = phoneNum;
-		this.email = email;
-		this.nickname = nickname;
-		this.gender = gender;
-		this.role = role;
-		this.profession = profession;
+	@Override
+	public boolean isAccountNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 }

@@ -20,7 +20,7 @@ public class DevelopmentColumn implements Serializable {
 	/** 主键。 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	/** 标题。 */
 	@ColumnDefault(GlobalConsts.PH_C_TITLE)
@@ -47,11 +47,21 @@ public class DevelopmentColumn implements Serializable {
 	@UpdateTimestamp
 	private LocalDateTime updateTime;
 
-	public Long getId() {
+
+	public DevelopmentColumn() {}
+
+	public DevelopmentColumn(String title, String content, String author) {
+		this.title = title;
+		this.content = content;
+		this.author = author;
+	}
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -93,15 +103,5 @@ public class DevelopmentColumn implements Serializable {
 
 	public void setUpdateTime(LocalDateTime updateTime) {
 		this.updateTime = updateTime;
-	}
-
-
-	public DevelopmentColumn() {
-	}
-
-	public DevelopmentColumn(String title, String content, String author) {
-		this.title = title;
-		this.content = content;
-		this.author = author;
 	}
 }
