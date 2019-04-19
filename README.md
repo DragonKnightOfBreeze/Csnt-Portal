@@ -50,6 +50,7 @@
 	* JavaScript(ES6)
 	* Npm
 	* Bootstrap4
+	* Font Awesome
 	* TypeScript
 	* Sass
 	* Angular7
@@ -116,6 +117,6 @@ README.md       # 说明文档
 
 ## 如何整合前后端
 
-* 后端直接使用RestController，绑定Rest风格的url，收发json数据。
+* 后端直接使用@RestController，绑定Rest风格的url，收发json数据。（仍然需要为参数添加必要的@RequestParam）
 * 前端直接通过http请求，指定对应数据类型的泛型，以对应的url和http头为参数，收发json数据。
 * 后端不需要配置视图解析器，跳过模版引擎。

@@ -9,8 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户的实体类。
@@ -73,7 +73,7 @@ public class User implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sponsorUser")
 	//实体类或者集合属性需要加上这个注解
 	@JsonIgnore
-	private Set<Dynamic> dynamicSet = new HashSet<>();
+	private List<Dynamic> dynamicList = new ArrayList<>();
 
 
 	public Long getId() {
@@ -156,12 +156,12 @@ public class User implements Serializable {
 		this.signUpTime = signUpTime;
 	}
 
-	public Set<Dynamic> getDynamicSet() {
-		return dynamicSet;
+	public List<Dynamic> getDynamicList() {
+		return dynamicList;
 	}
 
-	public void setDynamicSet(Set<Dynamic> dynamicSet) {
-		this.dynamicSet = dynamicSet;
+	public void setDynamicList(List<Dynamic> dynamicList) {
+		this.dynamicList = dynamicList;
 	}
 
 

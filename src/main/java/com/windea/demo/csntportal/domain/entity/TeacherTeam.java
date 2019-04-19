@@ -9,8 +9,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 教师队伍的实体类。
@@ -46,7 +46,7 @@ public class TeacherTeam implements Serializable {
 	//NOTE 这里的级联级别不能是ALL，当删除教师队伍时，教师详情不删除
 	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "teacherTeam")
 	@JsonIgnore
-	private Set<TeacherDetail> teacherDetailSet = new HashSet<>();
+	private List<TeacherDetail> teacherDetailList = new ArrayList<>();
 
 
 	public Long getId() {
@@ -89,16 +89,16 @@ public class TeacherTeam implements Serializable {
 		this.createTime = createTime;
 	}
 
-	public Set<TeacherDetail> getTeacherDetailSet() {
-		return teacherDetailSet;
+	public List<TeacherDetail> getTeacherDetailList() {
+		return teacherDetailList;
 	}
 
-	public void setTeacherDetailSet(Set<TeacherDetail> teacherDetailSet) {
-		this.teacherDetailSet = teacherDetailSet;
+	public void setTeacherDetailList(List<TeacherDetail> teacherDetailList) {
+		this.teacherDetailList = teacherDetailList;
 	}
 
 	public Integer getTeacherCount() {
-		return teacherDetailSet.size();
+		return teacherDetailList.size();
 	}
 
 
