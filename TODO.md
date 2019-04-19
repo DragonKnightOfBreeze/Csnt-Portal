@@ -58,7 +58,7 @@
             * 对于@Id，添加@GeneratedValue(strategy = GenerationType.AUTO)
             * 对于@OneToOne、@OneToMany，指定mappedBy（以及fetch和cascade？）属性，并添加@JsonIgnore
         * 添加必要的Validation注解
-            - [ ] 暂不写上验证消息，以后放在`messages.yml`中去
+            - [X] 暂不写上验证消息，以后放在`messages.yml`中去
         * 不使用Lombok
             - [ ] 使用IDE生成get、set方法、无参构造、全参构造，暂不重写`equals()`等方法
 	- [X] 展示数据 
@@ -80,10 +80,10 @@
 			* 用户注册表单：用户名，昵称，密码，性别，手机号，QQ号，邮箱，身份
 			* 用户登录表单：用户名/手机号/邮箱，密码
 	- [ ] 相关的视图对象
-- [ ] 枚举 enums
+- [X] 枚举 enums
     * **［注意事项］**
         * 枚举值要全大写，同时大部分情况下需要重载`toString()`方法
-- [ ] 异常类 exception
+- [X] 异常类 exception
     * **［注意事项］**
         * 存在基础异常，同时所有自定义异常都是运行时异常
 - [X] Spring Security security
@@ -93,15 +93,21 @@
 - [ ] 持久层 repository
     * **［注意事项］**
         * 没什么好说的写法，接口继承自`JpaRepository<T, ID>`，添加必要的命名有规则的方法
+        * 方法命名规则：越详细越好，包括排序等
+        * 保留那些目前可能用不上，以后用来拓展功能的方法
 - [ ] 服务层 service
     * **［注意事项］**
         * 分为接口和实现类，实现类在`service.impl`中，类名以`Impl`结尾
-        * 不处理异常，使用@NonNull等注解判断空值
+        * 不处理异常，断言结果以抛出运行时异常
+        * 方法命名规则：除了排序等部分以外，与持久层保持一致
 - [ ] 控制层 api
     * **［注意事项］**
         * 使用Rest风格的url，同时总是使用@RestController
-        * 在类上加上@CrossOrigin，以开启跨域
+        * 在类上加上@CrossOrigin以开启跨域
+        * 捕获异常，根据异常类型设置不同的状态码，基于ResponseEntity，将数据放到响应体中
+        * 方法命名规则：贴近实际更的命名
+        * 如：`add,register,deleteById,cancelById,update,get,list,searchByTitle,advanceSearch`
         * 返回值不再是代表url的字符串，而是数据或以数据类型为泛型的ResponseEntity
         * 使用@Valid指定需要验证的输入数据，使用紧随的bindingResult得到可能的验证错误
         * 使用MultipleFile file得到传入的文件数据
-        - [ ] 整合Spring Security、Jwt
+        * 整合Spring Security和Jwt
