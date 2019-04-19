@@ -79,29 +79,32 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<User> findAllByNicknameLike(String nickname, Pageable pageable) {
 		nickname = nickname.strip();
-		var resultPage = nickname.isEmpty() ? repository.findAll(pageable) :
-			repository.findAllByNicknameLike(nickname, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultNotFoundException();});
+		Page<User> resultPage;
+		if(nickname.isEmpty()) {
+			resultPage = repository.findAll(pageable);
+		} else {
+			resultPage = repository.findAllByNicknameLikeIgnoreCase(nickname, pageable);
+		}
 		return resultPage;
 	}
 
 	@Override
 	public Page<User> findAllByGender(Gender gender, Pageable pageable) {
-		var resultPage = repository.findAllByGenderOrderByRoleAscProfessionAsc(gender, pageable);
+		var resultPage = repository.findAllByGender(gender, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultNotFoundException();});
 		return resultPage;
 	}
 
 	@Override
 	public Page<User> findAllByRole(Role role, Pageable pageable) {
-		var resultPage = repository.findAllByRoleOrderByGenderAscProfessionAsc(role, pageable);
+		var resultPage = repository.findAllByRole(role, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultNotFoundException();});
 		return resultPage;
 	}
 
 	@Override
 	public Page<User> findAllByProfession(Profession profession, Pageable pageable) {
-		var resultPage = repository.findAllByProfessionOrderByGenderAscRoleAsc(profession, pageable);
+		var resultPage = repository.findAllByProfession(profession, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultNotFoundException();});
 		return resultPage;
 	}

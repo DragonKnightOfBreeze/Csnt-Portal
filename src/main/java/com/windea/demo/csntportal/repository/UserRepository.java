@@ -42,11 +42,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByUsernameAndPassword(String username, String password);
 
 
-	Page<User> findAllByNicknameLike(String nickname, Pageable pageable);
+	Page<User> findAllByNicknameLikeIgnoreCase(String nickname, Pageable pageable);
 
-	Page<User> findAllByGenderOrderByRoleAscProfessionAsc(Gender gender, Pageable pageable);
+	Page<User> findAllByGender(Gender gender, Pageable pageable);
 
-	Page<User> findAllByRoleOrderByGenderAscProfessionAsc(Role role, Pageable pageable);
+	Page<User> findAllByRole(Role role, Pageable pageable);
 
-	Page<User> findAllByProfessionOrderByGenderAscRoleAsc(Profession profession, Pageable pageable);
+	Page<User> findAllByProfession(Profession profession, Pageable pageable);
 }
