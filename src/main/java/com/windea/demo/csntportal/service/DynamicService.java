@@ -24,7 +24,7 @@ public interface DynamicService {
 
 	Page<Dynamic> findAll(Pageable pageable);
 
-	Page<Dynamic> findAllByTitleContaining(String title, Pageable pageable);
+	Page<Dynamic> findAllBySubjectContaining(String title, Pageable pageable);
 
 	Page<Dynamic> findAllByCategoryIn(Set<DynamicCategory> categorySet, Pageable pageable);
 

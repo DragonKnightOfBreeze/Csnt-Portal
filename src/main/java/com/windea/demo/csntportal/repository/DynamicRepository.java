@@ -12,17 +12,17 @@ import org.springframework.data.repository.query.Param;
 import java.util.Set;
 
 /**
- * 实时动态的持久接口。
- * TODO 测试通过
+ * 实时动态的持久接口。<br>
+ * NOTE 可以直接调用实体类的实体类属性的属性
  */
 public interface DynamicRepository extends JpaRepository<Dynamic, Integer> {
 	Page<Dynamic> findAllBySubjectContainingIgnoreCase(String title, Pageable pageable);
 
 	Page<Dynamic> findAllByCategoryIn(Set<DynamicCategory> categorySet, Pageable pageable);
 
-	//NOTE 可以直接调用实体类的实体类属性的属性
 	@Query("select d from Dynamic d where d.sponsorUser.username=:username")
 	Page<Dynamic> findAllBySponsorUsername(@Param("username") String username, Pageable pageable);
+
 
 	@Query("select u as sponsorUser from Dynamic d join d.sponsorUser u where d.id=:id")
 	SponsorUserPr findSponsorUserById(@Param("id") Integer id);

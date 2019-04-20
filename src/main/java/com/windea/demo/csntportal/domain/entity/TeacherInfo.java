@@ -1,19 +1,19 @@
 package com.windea.demo.csntportal.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.enums.Gender;
 import com.windea.demo.csntportal.enums.Profession;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 /**
  * 教师信息的实体类。
  */
 @Entity
-public class TeacherInfo implements Serializable {
+public class TeacherInfo extends TBean {
 	private static final long serialVersionUID = 7294090774828562605L;
 
 	/** 主键。 */

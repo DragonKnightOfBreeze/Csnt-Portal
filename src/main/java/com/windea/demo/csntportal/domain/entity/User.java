@@ -1,5 +1,6 @@
 package com.windea.demo.csntportal.domain.entity;
 
+import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.GlobalConsts;
 import com.windea.demo.csntportal.enums.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,7 +18,7 @@ import java.util.*;
  * 实现UserDetails接口以进行安全验证。
  */
 @Entity
-public class User implements UserDetails {
+public class User extends TBean implements UserDetails {
 	private static final long serialVersionUID = 1767704296003338587L;
 
 	/** 主键。 */
@@ -28,6 +29,7 @@ public class User implements UserDetails {
 	/** 用户名。 */
 	@NotEmpty(message = "{user.username.notEmpty}")
 	@Pattern(regexp = GlobalConsts.RE_USERNAME, message = "{user.username.pattern}")
+	@Column(unique = true)
 	private String username;
 
 	/** 密码。 */
@@ -38,11 +40,13 @@ public class User implements UserDetails {
 	/** 电话号码。 */
 	@NotEmpty(message = "{user.phoneNum.notEmpty}")
 	@Size(min = 11, max = 11, message = "{user.phoneNum.size}")
+	@Column(unique = true)
 	private String phoneNum;
 
 	/** 邮箱地址。 */
 	@NotEmpty(message = "{user.email.notEmpty}")
 	@Email(message = "{user.email.email}")
+	@Column(unique = true)
 	private String email;
 
 	/** 昵称。 */

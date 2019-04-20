@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class RepositoryTests {
 	@Autowired private DynamicRepository dynamicRepository;
 
-
 	private static final String prefix = "*****************";
 
 	private void print(String arg) {
@@ -29,7 +28,7 @@ public class RepositoryTests {
 		System.out.println(prefix + result.getContent());
 	}
 
-	//TESTED
+	//TESTED 除了@Entity外，继续添加@Component和@Validated也是可以的
 	@Test
 	public void test2() {
 		var result = dynamicRepository.findSponsorUserById(1);

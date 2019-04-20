@@ -1,13 +1,11 @@
 {
-  "properties": [
+  "groups": [
     {
-      "name": "com.windea.security.jwtSecret",
-      "type": "java.lang.String",
-      "description": "Description for com.windea.security.jwtSecret."
+      "name": "com.windea.security",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>"
     }, {
-      "name": "com.windea.security.jwtExpiration",
-      "type": "java.lang.String",
-      "description": "Description for com.windea.security.jwtExpiration."
+      "name": "com.windea.validation",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>"
     }
   ]
 }

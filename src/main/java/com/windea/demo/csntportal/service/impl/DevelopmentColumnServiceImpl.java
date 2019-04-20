@@ -8,6 +8,7 @@ import com.windea.demo.csntportal.service.DevelopmentColumnService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Service
@@ -16,17 +17,19 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 
 	public DevelopmentColumnServiceImpl(DevelopmentColumnRepository repository) {this.repository = repository;}
 
-
+	@Transactional
 	@Override
 	public DevelopmentColumn save(DevelopmentColumn column) {
 		return repository.save(column);
 	}
 
+	@Transactional
 	@Override
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
 
+	@Transactional
 	@Override
 	public DevelopmentColumn update(DevelopmentColumn column) {
 		var origin = findById(column.getId());
@@ -45,17 +48,17 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 
 
 	@Override
-	public Page<DevelopmentColumn> findAllByTitleContaining(String title, Pageable pageable) {
-		//如果搜索域为空，则查询所有数据
-		title = title.strip();
-		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
+	public Page<DevelopmentColumn> findAll(Pageable pageable) {
+		var resultPage = repository.findAll(pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}
 
 	@Override
-	public Page<DevelopmentColumn> findAll(Pageable pageable) {
-		var resultPage = repository.findAll(pageable);
+	public Page<DevelopmentColumn> findAllByTitleContaining(String title, Pageable pageable) {
+		//如果搜索域为空，则查询所有数据
+		title = title.strip();
+		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}

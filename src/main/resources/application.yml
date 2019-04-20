@@ -47,7 +47,6 @@ spring:
       db-properties:
         close-method: close
 
-
 com:
   windea:
     # Spring Security的相关配置，整合Jwt

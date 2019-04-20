@@ -1,5 +1,6 @@
 package com.windea.demo.csntportal.domain.entity;
 
+import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.GlobalConsts;
 import org.hibernate.annotations.*;
 
@@ -7,14 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * 专业特色介绍的实体类。
  */
 @Entity
-public class Introduce implements Serializable {
+public class Introduce extends TBean {
 	private static final long serialVersionUID = -7416725898580708133L;
 
 	/** 主键。 */
@@ -23,20 +23,20 @@ public class Introduce implements Serializable {
 	private Integer id;
 
 	/** 标题。 */
-	@ColumnDefault(GlobalConsts.PH_C_TITLE)
 	@NotEmpty(message = "{column.title.notEmpty}")
 	@Size(min = 1, max = 32, message = "{column.title.size}")
+	@ColumnDefault(GlobalConsts.PH_C_TITLE)
 	private String title;
 
 	/** 内容。 */
-	@ColumnDefault(GlobalConsts.PH_C_CONTENT)
 	@NotEmpty(message = "{column.content.notEmpty}")
+	@ColumnDefault(GlobalConsts.PH_C_CONTENT)
 	private String content;
 
 	/** 作者。 */
-	@ColumnDefault(GlobalConsts.PH_C_AUTHOR)
 	@NotEmpty(message = "{column.author.notEmpty}")
 	@Size(min = 1, max = 32, message = "{column.author.size}")
+	@ColumnDefault(GlobalConsts.PH_C_AUTHOR)
 	private String author;
 
 	/** 发表时间。 */

@@ -1,6 +1,7 @@
 package com.windea.demo.csntportal.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.GlobalConsts;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import org.hibernate.annotations.ColumnDefault;
@@ -9,14 +10,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * 实时动态的实体类。
  */
 @Entity
-public class Dynamic implements Serializable {
+public class Dynamic extends TBean {
 	private static final long serialVersionUID = 4662673897790133674L;
 
 	/** 主键。 */
@@ -25,9 +25,9 @@ public class Dynamic implements Serializable {
 	private Integer id;
 
 	/** 主题。 */
-	@ColumnDefault(GlobalConsts.PH_D_SUBJECT)
 	@NotEmpty(message = "{dynamic.subject.notEmpty}")
 	@Size(min = 1, max = 32, message = "{dynamic.subject.size}")
+	@ColumnDefault(GlobalConsts.PH_D_SUBJECT)
 	private String subject;
 
 	/** 动态分类。 */
@@ -35,8 +35,8 @@ public class Dynamic implements Serializable {
 	private DynamicCategory category;
 
 	/** 内容。 */
-	@ColumnDefault(GlobalConsts.PH_D_CONTENT)
 	@NotEmpty(message = "{dynamic.content.notEmpty}")
+	@ColumnDefault(GlobalConsts.PH_D_CONTENT)
 	private String content;
 
 	/** 发起的用户。 */

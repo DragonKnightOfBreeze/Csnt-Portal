@@ -1,12 +1,12 @@
 package com.windea.demo.csntportal.domain.entity;
 
+import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * 教师队伍的实体类。
  */
 @Entity
-public class TeacherTeam implements Serializable {
+public class TeacherTeam extends TBean {
 	private static final long serialVersionUID = -4818632335709225692L;
 
 	/** 主键。 */

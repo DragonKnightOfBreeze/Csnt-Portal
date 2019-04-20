@@ -77,6 +77,7 @@
             * 存到数据库中的仍然是枚举值的默认名字
             * 对于属于附属者向所有者的引用的字段，一般是注有@ManyToOne的字段，添加@JsonIgnore以避免无限循环
         * 添加必要的Validation注解
+            * 除了实体类之外，也可以为组件类添加@ConfigurationProperties，@Validated以启用参数验证
         * 不使用Lombok
 	- [X] 展示数据 
 		* 专业特色介绍：标题，作者，内容，发表时间，更新时间
