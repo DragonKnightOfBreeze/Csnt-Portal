@@ -2,8 +2,7 @@ package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.enums.*;
-import com.windea.demo.csntportal.exception.ResultNotFoundException;
-import com.windea.demo.csntportal.exception.UserNotFoundException;
+import com.windea.demo.csntportal.exception.*;
 import com.windea.demo.csntportal.repository.UserRepository;
 import com.windea.demo.csntportal.service.UserService;
 import org.springframework.data.domain.Page;
@@ -31,6 +30,9 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public User save(User user) {
+		//不允许重复用户名、邮箱和电话号码的新注册用户
+		var exists = exists(user.getUsername(), user.getEmail(), user.getPhoneNum());
+		Assert.isTrue(exists, () -> {throw new UserDuplicateException();});
 		//加密密码
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return repository.save(user);
@@ -39,7 +41,8 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public User update(User user) {
-		var origin = repository.findById(user.getId()).orElseThrow(() -> {throw new UserNotFoundException();});
+		//得到原始的用户信息，然后更改必要的属性
+		var origin = findById(user.getId());
 		origin.setPassword(passwordEncoder.encode(user.getPassword()));
 		origin.setPhoneNum(user.getPhoneNum());
 		origin.setEmail(user.getEmail());
@@ -50,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new UserNotFoundException();});
+		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
 		return result;
 	}
 
@@ -72,51 +75,58 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<User> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultNotFoundException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}
 
 	@Override
 	public Page<User> findAllByNicknameLike(String nickname, Pageable pageable) {
+		//如果搜索域为空，则查询所有数据
 		nickname = nickname.strip();
 		Page<User> resultPage;
 		if(nickname.isEmpty()) {
-			resultPage = repository.findAll(pageable);
+			resultPage = findAll(pageable);
 		} else {
 			resultPage = repository.findAllByNicknameLikeIgnoreCase(nickname, pageable);
 		}
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}
 
 	@Override
 	public Page<User> findAllByGender(Gender gender, Pageable pageable) {
 		var resultPage = repository.findAllByGender(gender, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultNotFoundException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}
 
 	@Override
 	public Page<User> findAllByRole(Role role, Pageable pageable) {
 		var resultPage = repository.findAllByRole(role, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultNotFoundException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}
 
 	@Override
 	public Page<User> findAllByProfession(Profession profession, Pageable pageable) {
 		var resultPage = repository.findAllByProfession(profession, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultNotFoundException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}
 
+
+	@Override
+	public boolean exists(String username, String email, String phoneNum) {
+		var result = repository.existsByUsernameOrEmailOrPhoneNum(username, email, phoneNum);
+		return result;
+	}
 
 	/**
 	 * 通过用户名得到用户，以进行权限验证。
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-		var result = repository.findByUsername(username);
-		Assert.notNull(result, () -> {throw new UserNotFoundException();});
+		var result = findByUsername(username);
 		return result;
 	}
 
@@ -125,8 +135,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public UserDetails updatePassword(UserDetails user, String newPassword) {
-		var origin = repository.findByUsername(user.getUsername());
-		Assert.notNull(origin, () -> {throw new UserNotFoundException();});
+		var origin = findByUsername(user.getUsername());
 		origin.setPassword(passwordEncoder.encode(user.getPassword()));
 		return repository.save(origin);
 	}

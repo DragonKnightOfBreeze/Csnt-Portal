@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().cors().and().authorizeRequests()
 			//NOTE 在这里配置路径权限规则
 			.antMatchers("/account/**").authenticated()
+			.antMatchers("/study-column/**").authenticated()
 			.antMatchers("/admin/**").hasRole(Role.ADMIN.toString())
 			.anyRequest().permitAll()
 			//登录：转发到`/login`。使用默认配置

@@ -9,6 +9,7 @@
 # TODO 完善验证消息
 
 user:
+  duplicate: 用户已存在！
   username:
     notEmpty: 用户名不能为空！
     pattern: 用户名格式不合法！

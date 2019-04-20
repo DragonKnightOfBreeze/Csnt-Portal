@@ -49,4 +49,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	Page<User> findAllByRole(Role role, Pageable pageable);
 
 	Page<User> findAllByProfession(Profession profession, Pageable pageable);
+
+
+	boolean existsByUsernameOrEmailOrPhoneNum(String username, String email, String phoneNum);
 }

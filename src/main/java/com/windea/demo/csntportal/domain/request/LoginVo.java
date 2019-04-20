@@ -9,7 +9,7 @@ import javax.validation.constraints.Pattern;
  * 用户登录表单的视图对象。<br>
  * TODO 适配多种登录方式
  */
-public class UserLoginVo {
+public class LoginVo {
 	/** 用户名。 */
 	@NotEmpty(message = "{user.username.notEmpty}")
 	@Pattern(regexp = GlobalConsts.RE_USERNAME, message = "{user.username.pattern}")

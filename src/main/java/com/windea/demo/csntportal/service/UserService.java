@@ -33,4 +33,7 @@ public interface UserService extends UserDetailsService, UserDetailsPasswordServ
 	Page<User> findAllByRole(Role role, Pageable pageable);
 
 	Page<User> findAllByProfession(Profession profession, Pageable pageable);
+
+
+	boolean exists(String username, String email, String phoneNum);
 }
