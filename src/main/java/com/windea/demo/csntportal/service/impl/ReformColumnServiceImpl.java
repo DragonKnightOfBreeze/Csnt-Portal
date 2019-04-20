@@ -18,8 +18,8 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 
 
 	@Override
-	public ReformColumn save(ReformColumn developmentColumn) {
-		return repository.save(developmentColumn);
+	public ReformColumn save(ReformColumn column) {
+		return repository.save(column);
 	}
 
 	@Override
@@ -28,11 +28,11 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 	}
 
 	@Override
-	public ReformColumn update(ReformColumn developmentColumn) {
-		var origin = findById(developmentColumn.getId());
-		origin.setTitle(developmentColumn.getTitle());
-		origin.setAuthor(developmentColumn.getAuthor());
-		origin.setContent(developmentColumn.getContent());
+	public ReformColumn update(ReformColumn column) {
+		var origin = findById(column.getId());
+		origin.setTitle(column.getTitle());
+		origin.setAuthor(column.getAuthor());
+		origin.setContent(column.getContent());
 		return repository.save(origin);
 	}
 
@@ -45,15 +45,10 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 
 
 	@Override
-	public Page<ReformColumn> findAllByTitleLike(String title, Pageable pageable) {
+	public Page<ReformColumn> findAllByTitleContaining(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
-		Page<ReformColumn> resultPage;
-		if(title.isEmpty()) {
-			resultPage = findAll(pageable);
-		} else {
-			resultPage = repository.findAllByTitleLikeIgnoreCase(title, pageable);
-		}
+		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}

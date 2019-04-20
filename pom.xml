@@ -21,7 +21,7 @@
     <!--配置项目的输出编码-->
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!--配置项目的jdk版本-->
-    <java.version>12(Preview)</java.version>
+    <java.version>12</java.version>
   </properties>
 
   <dependencies>
@@ -52,6 +52,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
     </dependency>
 
     <dependency>
@@ -88,6 +93,14 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <compilerArgument>--enable-preview</compilerArgument>
+          <testCompilerArgument>--enable-preview</testCompilerArgument>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>

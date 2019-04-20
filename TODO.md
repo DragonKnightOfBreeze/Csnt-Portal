@@ -59,15 +59,25 @@
 
 # 功能实现
 
+- [ ] 配置文件
+    * @PropertySource,@Value只能与properties文件配套使用，而非yaml
+    * @ConfigurationProperties可以实现自动注入，但是需要使用@EnableConfigurationProperties包含该组件类/Bean类
 - [ ] 实体类 domain
     * **［注意事项］**
         * 添加必要的Jpa注解
             * 对于@Id，添加@GeneratedValue(strategy = GenerationType.AUTO)
-            * 对于@OneToOne、@OneToMany，指定mappedBy（以及fetch和cascade？）属性，并添加@JsonIgnore
+            * 对于@OneToOne、@OneToMany，指定mappedBy（以及fetch和cascade？）属性（除非单向）
+            * CascadeType：给当前设置的实体操作另一个实体的权限
+            * 一般情况下，为所有者的对应字段指定CascadeType.ALL，为附属者的对应字段指定CascadeType.MERGE
+            * 一般情况下，如果多个实体类可以操作同一个实体类，即@ManyToAny，则为前者添加CascadeType.REFRESH
+            * ~~如果所有者以附属者作为主要内容，应该为附属者的对应字段指定CascadeType.REMOVE~~
+            * 如果id是随机字符串，不应使用CascadeType.PERSIST，而应使用CascadeType.MERGE
+            * 对于基础类型字段，可选添加@Basic，对于基础类型集合字段，需要添加@ElementCollection
+            * 对于枚举字段，需要添加@Enumerated，并按情况再添加@ElementCollection，按情况替换成@MapKeyEnumerated
+            * 存到数据库中的仍然是枚举值的默认名字
+            * 对于属于附属者向所有者的引用的字段，一般是注有@ManyToOne的字段，添加@JsonIgnore以避免无限循环
         * 添加必要的Validation注解
-            - [X] 暂不写上验证消息，以后放在`messages.yml`中去
         * 不使用Lombok
-            - [ ] 使用IDE生成get、set方法、无参构造、全参构造，暂不重写`equals()`等方法
 	- [X] 展示数据 
 		* 专业特色介绍：标题，作者，内容，发表时间，更新时间
 		* 专业发展专栏：标题，作者，内容，发表时间，更新时间
@@ -107,6 +117,7 @@
         * 分为接口和实现类，实现类在`service.impl`中，类名以`Impl`结尾
         * 不处理异常，断言结果以抛出运行时异常
         * 方法命名规则：除了排序等部分以外，与持久层保持一致
+        * 为所有删改操作开启事务，即添加@Transactional
 - [ ] 控制层 api
     * **［注意事项］**
         * 使用Rest风格的url，同时总是使用@RestController

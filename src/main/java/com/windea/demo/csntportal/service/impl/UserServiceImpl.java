@@ -80,15 +80,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Page<User> findAllByNicknameLike(String nickname, Pageable pageable) {
+	public Page<User> findAllByNicknameContaining(String nickname, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		nickname = nickname.strip();
-		Page<User> resultPage;
-		if(nickname.isEmpty()) {
-			resultPage = findAll(pageable);
-		} else {
-			resultPage = repository.findAllByNicknameLikeIgnoreCase(nickname, pageable);
-		}
+		var resultPage = repository.findAllByNicknameContainingIgnoreCase(nickname, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}

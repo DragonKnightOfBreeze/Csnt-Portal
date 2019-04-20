@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "com.windea.security.jwtSecret",
+      "type": "java.lang.String",
+      "description": "Description for com.windea.security.jwtSecret."
+    }, {
+      "name": "com.windea.security.jwtExpiration",
+      "type": "java.lang.String",
+      "description": "Description for com.windea.security.jwtExpiration."
+    }
+  ]
+}

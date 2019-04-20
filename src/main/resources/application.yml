@@ -1,5 +1,15 @@
 # NOTE 在这里配置系统配置项
 
+# **SpringBoot Config特殊语法**
+
+# 通过`${propName}`引用相同或绑定的配置文件中的其他属性的值。`propName`是相对于配置文件的全路径。
+# 通过`${random.int}`,`${random.uuid}`,`${random.int(10)}`,`${random.value}`等生成不同类型的随机值。
+
+# 将配置文件的数据绑定到实体类：
+# 为启动类注上`@EnableConfigurationProperties({ConfigBean.class})`，以指定需要配置的实体类，或者为其指定@Component。
+# 为实体类注上`@ConfigurationProperties(prefix = "com.md")`，以指明前缀。
+# 为实体类注上`@PropertySource("classpath:test.properties")`，以指明绑定的配置文件，默认为`application.{properties,yml}`。
+
 server:
   tomcat:
     # 配置Tomcat的访问日志
@@ -13,6 +23,8 @@ server:
 
 spring:
   jpa:
+    # 用于Jpa控制台调试
+    database-platform: org.hibernate.dialect.MySQLDialect
     # 显示SQL
     show-sql: true
     # 表不存在时自动创建，之后更新
@@ -22,6 +34,23 @@ spring:
   datasource:
     username: admin
     password: 123
-    # 配置数据库的时区，否则会报错
-    url: jdbc:mysql://localhost:3306/CsntPortal?serverTimezone=GMT%2B8
+
+    url: jdbc:mysql://localhost:3306/CsntPortal
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      data-source-properties:
+        # 不使用SSL，否则结束应用时会报错SSLException
+        useSSL: false
+        # 配置数据库的时区，否则会报错
+        serverTimezone: GMT-8
+    tomcat:
+      db-properties:
+        close-method: close
+
+
+com:
+  windea:
+    # Spring Security的相关配置，整合Jwt
+    security:
+      jwtSecret: com.windea
+      jwtExpiration: 86400

@@ -18,8 +18,8 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 
 
 	@Override
-	public StudyColumn save(StudyColumn developmentColumn) {
-		return repository.save(developmentColumn);
+	public StudyColumn save(StudyColumn column) {
+		return repository.save(column);
 	}
 
 	@Override
@@ -28,11 +28,11 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 	}
 
 	@Override
-	public StudyColumn update(StudyColumn developmentColumn) {
-		var origin = findById(developmentColumn.getId());
-		origin.setTitle(developmentColumn.getTitle());
-		origin.setAuthor(developmentColumn.getAuthor());
-		origin.setContent(developmentColumn.getContent());
+	public StudyColumn update(StudyColumn column) {
+		var origin = findById(column.getId());
+		origin.setTitle(column.getTitle());
+		origin.setAuthor(column.getAuthor());
+		origin.setContent(column.getContent());
 		return repository.save(origin);
 	}
 
@@ -45,15 +45,10 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 
 
 	@Override
-	public Page<StudyColumn> findAllByTitleLike(String title, Pageable pageable) {
+	public Page<StudyColumn> findAllByTitleContaining(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
-		Page<StudyColumn> resultPage;
-		if(title.isEmpty()) {
-			resultPage = findAll(pageable);
-		} else {
-			resultPage = repository.findAllByTitleLikeIgnoreCase(title, pageable);
-		}
+		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}

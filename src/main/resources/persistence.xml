@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+  <!--用于Jpa控制台测试-->
+  <persistence-unit name="NewPersistenceUnit">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.windea.demo.csntportal.domain.entity.Dynamic</class>
+    <class>com.windea.demo.csntportal.domain.entity.DevelopmentColumn</class>
+    <class>com.windea.demo.csntportal.domain.entity.Introduce</class>
+    <class>com.windea.demo.csntportal.domain.entity.TeacherInfo</class>
+    <class>com.windea.demo.csntportal.domain.entity.TeacherTeam</class>
+    <class>com.windea.demo.csntportal.domain.entity.ReformColumn</class>
+    <class>com.windea.demo.csntportal.domain.entity.User</class>
+    <properties>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306?serverTimezone=GM%2B8"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="hibernate.connection.username" value="admin"/>
+      <property name="hibernate.connection.password" value="123"/>
+      <property name="hibernate.archive.autodetection" value="class"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hbm2ddl.auto" value="update"/>
+    </properties>
+  </persistence-unit>
+</persistence>

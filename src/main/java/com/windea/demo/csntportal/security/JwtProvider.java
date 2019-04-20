@@ -4,8 +4,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -17,14 +16,13 @@ import java.util.Date;
  * Jwt提供器的组件。
  */
 @Component
-@PropertySource("classpath:messages.yml")
+//使用这个注解从application.yml中的对应前缀的属性注入到对应的字段
+@ConfigurationProperties("com.windea.security")
 public class JwtProvider {
 	private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
-	@Value("${security.jwtSecret}")
 	private String jwtSecret;
 
-	@Value("${security.jwtExpiration}")
 	private int jwtExpiration;
 
 	/**

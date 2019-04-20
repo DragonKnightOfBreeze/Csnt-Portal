@@ -40,7 +40,7 @@ public class TeacherInfo implements Serializable {
 	private String introduce;
 
 	/** 教师队伍。 */
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JsonIgnore
 	private TeacherTeam teacherTeam;
 

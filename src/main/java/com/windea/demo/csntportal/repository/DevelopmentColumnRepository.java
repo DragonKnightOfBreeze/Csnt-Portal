@@ -10,5 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 专业发展专栏的持久接口。
  */
 public interface DevelopmentColumnRepository extends JpaRepository<DevelopmentColumn, Integer> {
-	Page<DevelopmentColumn> findAllByTitleLikeIgnoreCase(String title, Pageable pageable);
+	Page<DevelopmentColumn> findAllByTitleContainingIgnoreCase(String title, Pageable pageable);
 }

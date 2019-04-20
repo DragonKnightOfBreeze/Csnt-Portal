@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 /**
  * 用户重置密码表单的视图对象。
  */
-public class ResetPasswordVo {
+public class UserResetPasswordVo {
 	/** 密码。 */
 	@NotEmpty(message = "{user.password.notEmpty}")
 	@Pattern(regexp = GlobalConsts.RE_PASSWORD, message = "{user.password.pattern}")
@@ -17,5 +17,9 @@ public class ResetPasswordVo {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

@@ -114,6 +114,8 @@ README.md       # 说明文档
 
 * 对于Idea的数据库连接，打开配置，在参数`URL`后面加上`?GMT%2B8`。
 * 如果运行时出错，在`application.yml`中的`spring.datasource.url`后面也要加上，或者特别配置`serverTimezone: GMT-8`。
+* 解决关闭数据池时报错SSLException问题：特别配置`useSSL: false`
+* 解决内存溢出问题：在tomcat的配置文件`context.xml`中配置Resource.closeMethod=close
 
 ## 如何整合前后端
 

@@ -1,6 +1,5 @@
 package com.windea.demo.csntportal.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -44,8 +43,7 @@ public class TeacherTeam implements Serializable {
 
 	/** 教师信息的集合。 */
 	//NOTE 这里的级联级别不能是ALL，当删除教师队伍时，教师信息不删除
-	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "teacherTeam")
-	@JsonIgnore
+	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "teacherTeam")
 	private List<TeacherInfo> teacherInfoList = new ArrayList<>();
 
 

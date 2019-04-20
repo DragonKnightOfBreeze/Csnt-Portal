@@ -1,8 +1,8 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.demo.csntportal.domain.entity.User;
-import com.windea.demo.csntportal.domain.request.LoginVo;
-import com.windea.demo.csntportal.domain.request.ResetPasswordVo;
+import com.windea.demo.csntportal.domain.request.UserLoginVo;
+import com.windea.demo.csntportal.domain.request.UserResetPasswordVo;
 import com.windea.demo.csntportal.domain.response.JwtResponseVo;
 import com.windea.demo.csntportal.exception.*;
 import com.windea.demo.csntportal.security.JwtProvider;
@@ -63,7 +63,7 @@ public class UserController {
 	 * 登录用户。使用参数验证。
 	 */
 	@PostMapping("/login")
-	public ResponseEntity login(@Valid @RequestBody LoginVo vo, BindingResult bindingResult) {
+	public ResponseEntity login(@Valid @RequestBody UserLoginVo vo, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(bindingResult);
 		}
@@ -110,7 +110,7 @@ public class UserController {
 	 * 重置用户密码。适用参数验证。
 	 */
 	@PutMapping("/reset-password")
-	public ResponseEntity resetPassword(@Valid @RequestBody ResetPasswordVo vo, BindingResult bindingResult) {
+	public ResponseEntity resetPassword(@Valid @RequestBody UserResetPasswordVo vo, BindingResult bindingResult) {
 		throw new NotImplementedException();
 	}
 
@@ -163,12 +163,12 @@ public class UserController {
 	/**
 	 * 根据昵称查询用户。
 	 */
-	@GetMapping("/admin/user/list")
+	@GetMapping("/admin/user/search")
 	public ResponseEntity<Page<User>> searchByNickname(@RequestParam String nickname,
 		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
 		try {
 			var pageable = PageRequest.of(page - 1, size);
-			var resultPage = service.findAllByNicknameLike(nickname, pageable);
+			var resultPage = service.findAllByNicknameContaining(nickname, pageable);
 			return ResponseEntity.ok(resultPage);
 		} catch(Exception e) {
 			return ResponseEntity.noContent().build();

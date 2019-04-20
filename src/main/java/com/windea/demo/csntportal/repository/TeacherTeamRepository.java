@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 教师队伍的持久接口。
  */
 public interface TeacherTeamRepository extends JpaRepository<TeacherTeam, Integer> {
-	Page<TeacherTeam> findAllByNameLikeIgnoreCase(String title, Pageable pageable);
+	Page<TeacherTeam> findAllByNameContainingIgnoreCase(String title, Pageable pageable);
 }

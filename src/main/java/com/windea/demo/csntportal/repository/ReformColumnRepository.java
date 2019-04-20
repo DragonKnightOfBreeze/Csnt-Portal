@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 教学改革专栏的持久接口。
  */
 public interface ReformColumnRepository extends JpaRepository<ReformColumn, Integer> {
-	Page<ReformColumn> findAllByTitleLikeIgnoreCase(String title, Pageable pageable);
+	Page<ReformColumn> findAllByTitleContainingIgnoreCase(String title, Pageable pageable);
 }

@@ -2,14 +2,14 @@ package com.windea.demo.csntportal.security;
 
 import com.windea.demo.csntportal.enums.Role;
 import com.windea.demo.csntportal.service.UserService;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -21,16 +21,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @EnableWebSecurity
-@PropertySource("classpath:messages.yml")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private final JwtFilter jwtFilter;
 	private final JwtEntryPoint jwtEntryPoint;
 	private final UserService userService;
+	private final PasswordEncoder passwordEncoder;
 
-	public SecurityConfig(JwtFilter jwtFilter, JwtEntryPoint jwtEntryPoint, UserService userService) {
+	public SecurityConfig(JwtFilter jwtFilter, JwtEntryPoint jwtEntryPoint, UserService userService,
+		PasswordEncoder passwordEncoder) {
 		this.jwtFilter = jwtFilter;
 		this.jwtEntryPoint = jwtEntryPoint;
 		this.userService = userService;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	/**
@@ -38,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
 	}
 
 	/**
@@ -75,14 +77,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
-	}
-
-	/**
-	 * 密码编码器的Bean。
-	 */
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 }
 

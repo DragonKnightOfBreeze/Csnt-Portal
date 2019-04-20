@@ -26,7 +26,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 结果存在多个的情况，可以将返回值设为Page<T>, 将最后一个参数设为pageable
 
 自定义SQL查询：为相关方法注上@Query(sql)，按情况注上@Transactional，@Modifying
-里面的sql语句是jpa的写法，使用实体类名和字段名，占位符写成?1,?2的形式
+里面的sql语句是jpa的写法，使用实体类名和字段名，引用实体类字段的字段需要join该实体类字段
+占位符写成?1,?2的形式，也可以为参数注上@Param，然后写成:paramName的形式
 
 多表查询：利用 Hibernate 的级联查询来实现，或者创建一个结果集接口来接收连表查询后的结果
 这个结果集接口中的虚方法为对应的get方法，默认方法为特定的已实现的get方法
@@ -42,7 +43,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByUsernameAndPassword(String username, String password);
 
 
-	Page<User> findAllByNicknameLikeIgnoreCase(String nickname, Pageable pageable);
+	Page<User> findAllByNicknameContainingIgnoreCase(String nickname, Pageable pageable);
 
 	Page<User> findAllByGender(Gender gender, Pageable pageable);
 

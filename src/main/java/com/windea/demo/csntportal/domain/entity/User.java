@@ -1,6 +1,5 @@
 package com.windea.demo.csntportal.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.demo.csntportal.GlobalConsts;
 import com.windea.demo.csntportal.enums.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -73,8 +72,6 @@ public class User implements UserDetails {
 	//表示一对多关系
 	//mapperBy指定要映射到的另一个实体类的属性名
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sponsorUser")
-	//实体类或者集合属性需要加上这个注解
-	@JsonIgnore
 	private List<Dynamic> dynamicList = new ArrayList<>();
 
 

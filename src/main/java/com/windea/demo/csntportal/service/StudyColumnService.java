@@ -8,11 +8,11 @@ import org.springframework.data.domain.Pageable;
  * 学习专栏的服务接口。
  */
 public interface StudyColumnService {
-	StudyColumn save(StudyColumn introduce);
+	StudyColumn save(StudyColumn column);
 
 	void deleteById(Integer id);
 
-	StudyColumn update(StudyColumn introduce);
+	StudyColumn update(StudyColumn column);
 
 
 	StudyColumn findById(Integer id);
@@ -20,5 +20,5 @@ public interface StudyColumnService {
 
 	Page<StudyColumn> findAll(Pageable pageable);
 
-	Page<StudyColumn> findAllByTitleLike(String title, Pageable pageable);
+	Page<StudyColumn> findAllByTitleContaining(String title, Pageable pageable);
 }
