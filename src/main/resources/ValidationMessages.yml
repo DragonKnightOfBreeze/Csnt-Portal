@@ -45,7 +45,7 @@ teacherTeam:
   introduce:
     notEmpty: 介绍不能为空！
     size: 介绍文本过长！
-teacherDetail:
+teacherInfo:
   name:
     notEmpty: 名字不能为空！
     size: 名字文本过长！

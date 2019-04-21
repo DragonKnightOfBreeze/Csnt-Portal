@@ -1,6 +1,7 @@
 package com.windea.demo.csntportal.service;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
+import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.request.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import org.springframework.data.domain.Page;
@@ -31,4 +32,7 @@ public interface DynamicService {
 	Page<Dynamic> findAllBySponsorUsername(String username, Pageable pageable);
 
 	Page<Dynamic> findAllByConditions(DynamicSearchVo vo, Pageable pageable);
+
+
+	User findSponsorUserById(Integer id);
 }

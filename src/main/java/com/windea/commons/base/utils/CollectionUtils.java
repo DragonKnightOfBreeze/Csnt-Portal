@@ -1,7 +1,6 @@
 package com.windea.commons.base.utils;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.*;
 
 import java.util.Collection;
 import java.util.Map;
@@ -18,7 +17,7 @@ public class CollectionUtils {
 	 * @param collection 指定的泛型集合
 	 */
 	@Contract(value = "null -> true", pure = true)
-	public static <E> boolean isEmpty(@Nullable Collection<E> collection) {
+	public static <C extends Collection<E>, E> boolean isEmpty(@Nullable C collection) {
 		return collection == null || collection.isEmpty();
 	}
 
@@ -29,7 +28,7 @@ public class CollectionUtils {
 	 * @param length 指定的长度
 	 */
 	@Contract(value = "null, _ -> true", pure = true)
-	public static <E> boolean isLessE(@Nullable Collection<E> collection, int length) {
+	public static <C extends Collection<E>, E> boolean isLessE(@Nullable C collection, int length) {
 		return collection == null || collection.size() <= length;
 	}
 
@@ -40,8 +39,36 @@ public class CollectionUtils {
 	 * @param length 指定的长度
 	 */
 	@Contract(value = "null, _ -> false", pure = true)
-	public static <E> boolean isGreaterE(@Nullable Collection<E> collection, int length) {
+	public static <C extends Collection<E>, E> boolean isGreaterE(@Nullable C collection, int length) {
 		return collection != null && collection.size() <= length;
+	}
+
+
+	/**
+	 * 连接两个集合。可以指定是否去掉重复项。
+	 */
+	public static <C extends Collection<E>, E> C concat(boolean allowDuplicate,
+		@NotNull C collection, @NotNull C other) {
+		if(!allowDuplicate) {
+			collection.removeAll(other);
+		}
+		collection.addAll(other);
+		return collection;
+	}
+
+	/**
+	 * 连接多个集合。可以指定是否去掉重复项。
+	 */
+	@SafeVarargs
+	public static <C extends Collection<E>, E> C concat(boolean allowDuplicate,
+		@NotNull C collection, @NotNull C... others) {
+		for(var other : others) {
+			if(!allowDuplicate) {
+				collection.removeAll(other);
+			}
+			collection.addAll(other);
+		}
+		return collection;
 	}
 
 
@@ -51,7 +78,7 @@ public class CollectionUtils {
 	 * @param map 指定的泛型映射
 	 */
 	@Contract(value = "null -> true", pure = true)
-	public static <K, V> boolean isEmpty(@Nullable Map<K, V> map) {
+	public static <M extends Map<K, V>, K, V> boolean isEmpty(@Nullable M map) {
 		return map == null || map.isEmpty();
 	}
 
@@ -62,7 +89,7 @@ public class CollectionUtils {
 	 * @param length 指定的长度
 	 */
 	@Contract(value = "null, _ -> true", pure = true)
-	public static <K, V> boolean isLessE(@Nullable Map<K, V> map, int length) {
+	public static <M extends Map<K, V>, K, V> boolean isLessE(@Nullable M map, int length) {
 		return map == null || map.size() <= length;
 	}
 
@@ -73,7 +100,43 @@ public class CollectionUtils {
 	 * @param length 指定的长度
 	 */
 	@Contract(value = "null, _ -> false", pure = true)
-	public static <K, V> boolean isGreaterE(@Nullable Map<K, V> map, int length) {
+	public static <M extends Map<K, V>, K, V> boolean isGreaterE(@Nullable M map, int length) {
 		return map != null && map.size() <= length;
+	}
+
+
+	/**
+	 * 连接两个映射。可以指定是否覆盖重复项。
+	 */
+	public static <M extends Map<K, V>, K, V> M concat(boolean allowCover,
+		@NotNull M map, @NotNull M other) {
+		for(var entry : other.entrySet()) {
+			if(map.containsKey(entry.getKey())) {
+				if(allowCover) {
+					map.put(entry.getKey(), entry.getValue());
+				}
+			}
+			map.put(entry.getKey(), entry.getValue());
+		}
+		return map;
+	}
+
+	/**
+	 * 连接多个映射。可以指定是否覆盖重复项。
+	 */
+	@SafeVarargs
+	public static <M extends Map<K, V>, K, V> M concat(boolean allowCover,
+		@NotNull M map, @NotNull M... others) {
+		for(var other : others) {
+			for(var entry : other.entrySet()) {
+				if(map.containsKey(entry.getKey())) {
+					if(allowCover) {
+						map.put(entry.getKey(), entry.getValue());
+					}
+				}
+				map.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return map;
 	}
 }

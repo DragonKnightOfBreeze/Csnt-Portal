@@ -1,20 +1,22 @@
 package com.windea.demo.csntportal.service.impl;
 
+import com.windea.commons.springboot.utils.PageUtils;
 import com.windea.demo.csntportal.domain.entity.Dynamic;
+import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.request.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import com.windea.demo.csntportal.exception.*;
 import com.windea.demo.csntportal.repository.DynamicRepository;
 import com.windea.demo.csntportal.repository.UserRepository;
 import com.windea.demo.csntportal.service.DynamicService;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class DynamicServiceImpl implements DynamicService {
@@ -90,13 +92,17 @@ public class DynamicServiceImpl implements DynamicService {
 
 	@Override
 	public Page<Dynamic> findAllByConditions(DynamicSearchVo vo, Pageable pageable) {
-		var subPage1 = repository.findAllBySubjectContainingIgnoreCase(vo.getSubject(), pageable);
-		var subPage2 = repository.findAllByCategoryIn(vo.getCategorySet(), pageable);
-		var subPage3 = repository.findAllBySponsorUsername(vo.getSponsorUsername(), pageable);
-		//是否存在一个工具方法，或者有必要自己创建？
-		var list = subPage1.and(subPage2).and(subPage3).stream().distinct().collect(Collectors.toList());
-		Assert.notEmpty(list, () -> {throw new ResultEmptyException();});
-		var resultPage = new PageImpl<>(list, pageable, list.size());
+		var page1 = repository.findAllBySubjectContainingIgnoreCase(vo.getSubject(), pageable);
+		var page2 = repository.findAllByCategoryIn(vo.getCategorySet(), pageable);
+		var page3 = repository.findAllBySponsorUsername(vo.getSponsorUsername(), pageable);
+		var resultPage = PageUtils.concat(pageable, page1, page2, page3);
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
+	}
+
+	@Override
+	public User findSponsorUserById(Integer id) {
+		var result = repository.findSponsorUserById(id).getSponsorUser();
+		return result;
 	}
 }

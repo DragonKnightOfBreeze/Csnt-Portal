@@ -21,7 +21,7 @@
     <!--配置项目的输出编码-->
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <!--配置项目的jdk版本-->
-    <java.version>12</java.version>
+    <java.version>12(Preview)</java.version>
   </properties>
 
   <dependencies>
@@ -104,6 +104,8 @@
         <configuration>
           <compilerArgument>--enable-preview</compilerArgument>
           <testCompilerArgument>--enable-preview</testCompilerArgument>
+          <source>12</source>
+          <target>12</target>
         </configuration>
       </plugin>
       <plugin>

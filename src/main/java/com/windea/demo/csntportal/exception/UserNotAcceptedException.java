@@ -1,5 +1,8 @@
 package com.windea.demo.csntportal.exception;
 
+/**
+ * 用户不被允许时的异常。
+ */
 public class UserNotAcceptedException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 

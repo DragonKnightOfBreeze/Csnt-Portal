@@ -1,7 +1,7 @@
 package com.windea.demo.csntportal.exception;
 
 /**
- * 用户重复的异常。
+ * 用户重复时的异常。
  */
 public class UserDuplicateException extends RuntimeException {
 	private static final long serialVersionUID = 7043120389926838859L;
