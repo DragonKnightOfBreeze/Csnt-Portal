@@ -12,8 +12,8 @@ public class CollectionUtils {
 	private CollectionUtils() {}
 
 	/**
-	 * 判断集合是否为null、为空。
-	 * <p>空值安全。
+	 * 判断集合是否为null、为空。<br>
+	 * 空值安全。
 	 * @param collection 指定的泛型集合
 	 */
 	@Contract(value = "null -> true", pure = true)
@@ -22,8 +22,8 @@ public class CollectionUtils {
 	}
 
 	/**
-	 * 判断集合是否为null、小于等于指定长度。
-	 * <p>空值安全。
+	 * 判断集合是否为null、小于等于指定长度。<br>
+	 * 空值安全。
 	 * @param collection 指定的泛型集合
 	 * @param length 指定的长度
 	 */
@@ -33,8 +33,8 @@ public class CollectionUtils {
 	}
 
 	/**
-	 * 判断集合是否大于等于指定长度。
-	 * <p>空值安全。
+	 * 判断集合是否大于等于指定长度。<br>
+	 * 空值安全。
 	 * @param collection 指定的泛型集合
 	 * @param length 指定的长度
 	 */
@@ -47,9 +47,9 @@ public class CollectionUtils {
 	/**
 	 * 连接两个集合。可以指定是否去掉重复项。
 	 */
-	public static <C extends Collection<E>, E> C concat(boolean allowDuplicate,
+	public static <C extends Collection<E>, E> C concat(boolean allowsDuplicate,
 		@NotNull C collection, @NotNull C other) {
-		if(!allowDuplicate) {
+		if(!allowsDuplicate) {
 			collection.removeAll(other);
 		}
 		collection.addAll(other);
@@ -60,10 +60,10 @@ public class CollectionUtils {
 	 * 连接多个集合。可以指定是否去掉重复项。
 	 */
 	@SafeVarargs
-	public static <C extends Collection<E>, E> C concat(boolean allowDuplicate,
+	public static <C extends Collection<E>, E> C concat(boolean allowsDuplicate,
 		@NotNull C collection, @NotNull C... others) {
 		for(var other : others) {
-			if(!allowDuplicate) {
+			if(!allowsDuplicate) {
 				collection.removeAll(other);
 			}
 			collection.addAll(other);
@@ -73,8 +73,8 @@ public class CollectionUtils {
 
 
 	/**
-	 * 判断映射是否为null、为空。
-	 * <p>空值安全。
+	 * 判断映射是否为null、为空。<br>
+	 * 空值安全。
 	 * @param map 指定的泛型映射
 	 */
 	@Contract(value = "null -> true", pure = true)
@@ -83,8 +83,8 @@ public class CollectionUtils {
 	}
 
 	/**
-	 * 判断映射是否为null、小于等于指定长度。
-	 * <p>空值安全。
+	 * 判断映射是否为null、小于等于指定长度。<br>
+	 * 空值安全。
 	 * @param map 指定的泛型映射
 	 * @param length 指定的长度
 	 */
@@ -94,8 +94,8 @@ public class CollectionUtils {
 	}
 
 	/**
-	 * 判断映射是否大于等于指定长度。
-	 * <p>空值安全。
+	 * 判断映射是否大于等于指定长度。<br>
+	 * 空值安全。
 	 * @param map 指定的泛型映射
 	 * @param length 指定的长度
 	 */
@@ -108,11 +108,11 @@ public class CollectionUtils {
 	/**
 	 * 连接两个映射。可以指定是否覆盖重复项。
 	 */
-	public static <M extends Map<K, V>, K, V> M concat(boolean allowCover,
+	public static <M extends Map<K, V>, K, V> M concat(boolean allowsMerge,
 		@NotNull M map, @NotNull M other) {
 		for(var entry : other.entrySet()) {
 			if(map.containsKey(entry.getKey())) {
-				if(allowCover) {
+				if(allowsMerge) {
 					map.put(entry.getKey(), entry.getValue());
 				}
 			}
@@ -125,12 +125,12 @@ public class CollectionUtils {
 	 * 连接多个映射。可以指定是否覆盖重复项。
 	 */
 	@SafeVarargs
-	public static <M extends Map<K, V>, K, V> M concat(boolean allowCover,
+	public static <M extends Map<K, V>, K, V> M concat(boolean allowsMerge,
 		@NotNull M map, @NotNull M... others) {
 		for(var other : others) {
 			for(var entry : other.entrySet()) {
 				if(map.containsKey(entry.getKey())) {
-					if(allowCover) {
+					if(allowsMerge) {
 						map.put(entry.getKey(), entry.getValue());
 					}
 				}

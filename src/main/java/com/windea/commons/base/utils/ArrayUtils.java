@@ -11,8 +11,8 @@ public class ArrayUtils {
 	private ArrayUtils() {}
 
 	/**
-	 * 判断数组是否为null、为空。
-	 * <p>空值安全。
+	 * 判断数组是否为null、为空。<br>
+	 * 空值安全。
 	 * @param array 指定的泛型数组
 	 */
 	@Contract(value = "null -> true", pure = true)
@@ -21,8 +21,8 @@ public class ArrayUtils {
 	}
 
 	/**
-	 * 判断数组是否为null、小于等于指定长度。
-	 * <p>空值安全。
+	 * 判断数组是否为null、小于等于指定长度。<br>
+	 * 空值安全。
 	 * @param array 指定的泛型数组
 	 * @param length 指定的长度
 	 */
@@ -32,8 +32,8 @@ public class ArrayUtils {
 	}
 
 	/**
-	 * 判断数组是否大于等于指定长度。
-	 * <p>空值安全。
+	 * 判断数组是否大于等于指定长度。<br>
+	 * 空值安全。
 	 * @param array 指定的泛型数组
 	 * @param length 指定的长度
 	 */
@@ -42,23 +42,36 @@ public class ArrayUtils {
 		return array != null && array.length <= length;
 	}
 
+
 	/**
-	 * 将数组转化为字符串数组。
-	 * <p>空值安全。
-	 * @param array 指定的泛型数组
-	 * @return 转化后的字符串数组
+	 * 连接两个数组。可以指定是否去掉重复项。
 	 */
-	@Contract("null -> null")
-	@Nullable
-	public static <T> String[] toStrArray(@Nullable T[] array) {
-		if(array == null)
-			return null;
-		String[] result = new String[array.length];
-		for(int i = 0; i < array.length; i++) {
-			result[i] = array[i] != null ? array[i].toString() : "";
+	public static <T> T[] concat(boolean allowsDuplicate, @NotNull T[] array, @NotNull T[] other) {
+		var list = Arrays.asList(array);
+		var otherList = Arrays.asList(other);
+		if(!allowsDuplicate) {
+			list.removeAll(otherList);
 		}
-		return result;
+		list.addAll(otherList);
+		return list.toArray(array);
 	}
+
+	/**
+	 * 连接多个数组。可以指定是否去掉重复项。
+	 */
+	@SafeVarargs
+	public static <T> T[] concat(boolean allowsDuplicate, @NotNull T[] array, @NotNull T[]... others) {
+		var list = Arrays.asList(array);
+		for(var other : others) {
+			var otherList = Arrays.asList(other);
+			if(!allowsDuplicate) {
+				list.removeAll(otherList);
+			}
+			list.addAll(otherList);
+		}
+		return list.toArray(array);
+	}
+
 
 	/**
 	 * 将基本类型数组转化为包装对象数组。
@@ -89,5 +102,22 @@ public class ArrayUtils {
 	public static Float[] toBoxedArray(double[] array) {
 		return (Float[]) Arrays.stream(array).boxed().toArray();
 	}
-}
 
+	/**
+	 * 将数组转化为字符串数组。<br>
+	 * 空值安全。
+	 * @param array 指定的泛型数组
+	 * @return 转化后的字符串数组
+	 */
+	@Contract("null -> null")
+	@Nullable
+	public static <T> String[] toStringArray(@Nullable T[] array) {
+		if(array == null)
+			return null;
+		String[] result = new String[array.length];
+		for(int i = 0; i < array.length; i++) {
+			result[i] = array[i] != null ? array[i].toString() : "";
+		}
+		return result;
+	}
+}
