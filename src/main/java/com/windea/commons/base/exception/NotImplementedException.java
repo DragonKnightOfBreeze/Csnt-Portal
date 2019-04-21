@@ -7,12 +7,10 @@ public class NotImplementedException extends RuntimeException {
 	private static final long serialVersionUID = 1221511937742237208L;
 
 	public NotImplementedException() {
-		super();
-		System.out.println("Not implemented code!");
+		super("Not implemented code!");
 	}
 
 	public NotImplementedException(String message) {
-		super(message);
-		System.out.println("Not implemented code!");
+		super("Not implemented code!\n" + message);
 	}
 }
