@@ -8,6 +8,7 @@ import com.windea.demo.csntportal.service.StudyColumnService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Service
@@ -17,16 +18,19 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 	public StudyColumnServiceImpl(StudyColumnRepository repository) {this.repository = repository;}
 
 
+	@Transactional
 	@Override
 	public StudyColumn save(StudyColumn column) {
 		return repository.save(column);
 	}
 
+	@Transactional
 	@Override
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
 
+	@Transactional
 	@Override
 	public StudyColumn update(StudyColumn column) {
 		var origin = findById(column.getId());

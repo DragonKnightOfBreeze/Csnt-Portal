@@ -11,6 +11,7 @@ import com.windea.demo.csntportal.service.TeacherTeamService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.Set;
@@ -21,16 +22,19 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 
 	public TeacherTeamServiceImpl(TeacherTeamRepository repository) {this.repository = repository;}
 
+	@Transactional
 	@Override
 	public TeacherTeam save(TeacherTeam teacherTeam) {
 		return repository.save(teacherTeam);
 	}
 
+	@Transactional
 	@Override
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
 
+	@Transactional
 	@Override
 	public TeacherTeam update(TeacherTeam teacherTeam) {
 		var origin = findById(teacherTeam.getId());
