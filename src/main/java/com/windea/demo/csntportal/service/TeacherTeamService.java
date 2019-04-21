@@ -28,7 +28,7 @@ public interface TeacherTeamService {
 
 	Page<TeacherTeam> findAllByProfessionLevelIn(Set<ProfessionLevel> levelSet, Pageable pageable);
 
-	Page<TeacherTeam> findAllByTeacherCountBetween(Integer begin, Integer end, Pageable pageable);
+	Page<TeacherTeam> findAllByTeacherCountBetween(Integer start, Integer end, Pageable pageable);
 
 	Page<TeacherTeam> findAllByConditions(TeacherTeamSearchVo vo, Pageable pageable);
 

@@ -17,7 +17,7 @@ public interface TeacherTeamRepository extends JpaRepository<TeacherTeam, Intege
 
 	Page<TeacherTeam> findAllByProfessionLevelIn(Set<ProfessionLevel> levelSet, Pageable pageable);
 
-	Page<TeacherTeam> findAllByTeacherCountBetween(Integer begin, Integer end, Pageable pageable);
+	Page<TeacherTeam> findAllByTeacherCountBetween(Integer start, Integer end, Pageable pageable);
 
-	Page<TeacherTeam> findAllByCreateTimeBetween(LocalDateTime begin, LocalDateTime end, Pageable pageable);
+	Page<TeacherTeam> findAllByCreateTimeBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);
 }

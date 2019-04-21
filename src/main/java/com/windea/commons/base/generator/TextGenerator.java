@@ -1,10 +1,14 @@
 package com.windea.commons.base.generator;
 
-import com.windea.commons.base.annotation.InfiniteLoopPossible;
+import com.windea.commons.base.annotation.*;
+import com.windea.commons.base.exception.NotImplementedException;
 import com.windea.commons.base.utils.MathUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.function.*;
 import java.util.stream.Stream;
@@ -13,10 +17,12 @@ import java.util.stream.Stream;
  * 自定义的文本生成器。
  */
 public class TextGenerator implements TGenerator {
+	private static final Log log = LogFactory.getLog(TextGenerator.class);
+
 	private StringBuilder builder = new StringBuilder();
 
 
-	TextGenerator() {}
+	private TextGenerator() {}
 
 	/** 实例化空的文本生成器。 */
 	public static TextGenerator gen() {
@@ -27,11 +33,7 @@ public class TextGenerator implements TGenerator {
 	/* 属性访问 */
 
 	public String text() {
-		return this.builder.toString();
-	}
-
-	public int length() {
-		return this.builder.length();
+		return builder.toString();
 	}
 
 
@@ -73,13 +75,13 @@ public class TextGenerator implements TGenerator {
 		return this;
 	}
 
-	/** 添加左斜杠`/`。 */
+	/** 添加左斜杠 {@code "/"}。 */
 	public TextGenerator lSep() {
 		builder.append("/");
 		return this;
 	}
 
-	/** 添加右斜杠`\\`。 */
+	/** 添加右斜杠 {@code "\\"}。 */
 	public TextGenerator rSep() {
 		builder.append("\\");
 		return this;
@@ -96,6 +98,13 @@ public class TextGenerator implements TGenerator {
 		return this;
 	}
 
+	/** 提供空的文本生成器，添加一段文本。 */
+	public TextGenerator add(@NotNull Function<TextGenerator, TextGenerator> textFunction) {
+		var gen = TextGenerator.gen();
+		var text = textFunction.apply(gen).text();
+		return add(text);
+	}
+
 	/** 添加一段文本。 */
 	@Deprecated
 	public TextGenerator add(@NotNull Supplier<String> textSupplier) {
@@ -106,11 +115,15 @@ public class TextGenerator implements TGenerator {
 		return this;
 	}
 
-	/** 提供空的文本生成器，添加一段文本。 */
-	public TextGenerator add(@NotNull Function<TextGenerator, TextGenerator> textFunction) {
-		var gen = TextGenerator.gen();
-		var text = textFunction.apply(gen).text();
-		return add(text);
+
+	/** 添加一行文本。 */
+	public TextGenerator addLine(@Nullable String text) {
+		return add(text).newLine();
+	}
+
+	/** 提供空的文本生成器，添加一行文本。 */
+	public TextGenerator addLine(@NotNull Function<TextGenerator, TextGenerator> textFunction) {
+		return add(textFunction).newLine();
 	}
 
 
@@ -212,11 +225,10 @@ public class TextGenerator implements TGenerator {
 		return surround(fix, fix, ignoreEmpty);
 	}
 
-	/** 根据前后缀，包围当前文本。指定当当前文本为空时，是否仍然适用。 */
+	/** 提供空的文本生成器，根据前后缀，包围当前文本。指定当当前文本为空时，是否仍然适用。 */
 	public TextGenerator surround(@NotNull Function<TextGenerator, TextGenerator> fixFunction, boolean ignoreEmpty) {
 		return surround(fixFunction, fixFunction, ignoreEmpty);
 	}
-
 
 	/** 根据前缀和后缀，包围当前文本。指定当当前文本为空时，是否仍然适用。 */
 	public TextGenerator surround(@Nullable String prefix, @Nullable String suffix, boolean ignoreEmpty) {
@@ -228,7 +240,7 @@ public class TextGenerator implements TGenerator {
 		return gen;
 	}
 
-	/** 根据前缀和后缀，包围当前文本。指定当当前文本为空时，是否仍然适用。 */
+	/** 提供空的文本生成器，根据前缀和后缀，包围当前文本。指定当当前文本为空时，是否仍然适用。 */
 	public TextGenerator surround(@NotNull Function<TextGenerator, TextGenerator> prefixFunction,
 		@NotNull Function<TextGenerator, TextGenerator> suffixFunction, boolean ignoreEmpty) {
 		var doSurround = !ignoreEmpty || !text().isEmpty();
@@ -250,7 +262,7 @@ public class TextGenerator implements TGenerator {
 		return this;
 	}
 
-	/** 插入一段文本。 */
+	/** 提供空的文本生成器，插入一段文本。 */
 	public TextGenerator insert(int offset, @NotNull Function<TextGenerator, TextGenerator> textFunction) {
 		var gen = TextGenerator.gen();
 		var text = textFunction.apply(gen).text();
@@ -262,37 +274,40 @@ public class TextGenerator implements TGenerator {
 
 	/** 删除一段文本。 */
 	public TextGenerator delete(int start) {
-		return delete(start, length());
+		return delete(start, text().length());
 	}
 
 	/** 删除一段文本。如果结束位置为负数，则从文本末尾开始计数。 */
 	public TextGenerator delete(int start, int end) {
 		start = Math.max(0, start);
-		end = end < 0 ? length() - end : end;
-		end = MathUtils.clamp(end, start, length());
+		end = end < 0 ? text().length() - end : end;
+		end = MathUtils.clamp(end, start, text().length());
 		builder.delete(start, end);
 		return this;
 	}
 
 	/** 清空当前文本。 */
 	public TextGenerator empty() {
-		builder = new StringBuilder();
+		builder.delete(0, builder.length());
 		return this;
 	}
+
 
 	/* 修改文本 */
 
 	/** 替换一段文本。 */
-	public TextGenerator replace(int start, int end, String text) {
-		start = Math.max(0, start);
-		end = end < 0 ? length() - end : end;
-		end = MathUtils.clamp(end, start, length());
-		builder.replace(start, end, text);
+	public TextGenerator replace(int start, int end, @Nullable String text) {
+		if(text != null) {
+			start = Math.max(0, start);
+			end = end < 0 ? text().length() - end : end;
+			end = MathUtils.clamp(end, start, text().length());
+			builder.replace(start, end, text);
+		}
 		return this;
 	}
 
 	/** 替换文本。 */
-	public TextGenerator replace(String origin, String text) {
+	public TextGenerator replace(@Nullable String origin, @Nullable String text) {
 		if(origin != null && text != null) {
 			var resultText = text().replace(origin, text);
 			return TextGenerator.gen().add(resultText);
@@ -301,7 +316,7 @@ public class TextGenerator implements TGenerator {
 	}
 
 	/** 根据正则表达式替换文本。 */
-	public TextGenerator reReplace(String pattern, String text) {
+	public TextGenerator reReplace(@Nullable String pattern, @Nullable String text) {
 		if(pattern != null && text != null) {
 			var resultText = text().replaceAll(pattern, text);
 			return TextGenerator.gen().add(resultText);
@@ -309,18 +324,41 @@ public class TextGenerator implements TGenerator {
 		return this;
 	}
 
-	/** 对于每一行文本，适用过滤。 */
-	public TextGenerator filterLines(Predicate<String> predicate) {
+
+	/**
+	 * 格式化文本。使用索引占位符{@code "{0}"}。<br>
+	 * 用法示例：{@code gen.add("hello {0}").format("world";)}。
+	 * @see MessageFormat
+	 */
+	public TextGenerator formatByNum(Object... args) {
+		try {
+			var text = MessageFormat.format(text(), args);
+			builder = new StringBuilder().append(text);
+		} catch(IllegalArgumentException e) {
+			log.warn("Format failed. Please check your args.");
+			e.printStackTrace();
+		}
 		return this;
 	}
 
-	/** 对于每一行文本，适用自动换行 */
-	public TextGenerator wrapLines(int width) {
-		var text = text().lines()
-			.map(line -> line.length() > width ? line.substring(0, width) + "\n" + line.substring(width) : line)
-			.reduce((a, b) -> a + b);
-		builder.append(text);
-		return this;
+	/**
+	 * 格式化文本。使用名字占位符{@code "${name}"}。<br>
+	 * 用法示例：{@code var name="world"; gen.add("hello ${name}").format(world)}。
+	 * @see MessageFormat
+	 */
+	@PerformanceAffectPossible
+	@NotImplemented
+	public TextGenerator formatByName(Object... args) {
+		throw new NotImplementedException();
+	}
+
+
+	/* 转到其他生成器 */
+
+	/** 转到自定义的每行文本生成器。 */
+	public TextLineGenerator withLines() {
+		var gen = TextLineGenerator.gen(text().lines());
+		return gen;
 	}
 
 

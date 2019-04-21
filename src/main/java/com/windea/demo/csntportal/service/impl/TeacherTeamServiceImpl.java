@@ -74,8 +74,8 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 	}
 
 	@Override
-	public Page<TeacherTeam> findAllByTeacherCountBetween(Integer begin, Integer end, Pageable pageable) {
-		var resultPage = repository.findAllByTeacherCountBetween(begin, end, pageable);
+	public Page<TeacherTeam> findAllByTeacherCountBetween(Integer start, Integer end, Pageable pageable) {
+		var resultPage = repository.findAllByTeacherCountBetween(start, end, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}
@@ -84,7 +84,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 	public Page<TeacherTeam> findAllByConditions(TeacherTeamSearchVo vo, Pageable pageable) {
 		var page1 = repository.findAllByNameContainingIgnoreCase(vo.getName(), pageable);
 		var page2 = repository.findAllByProfessionLevelIn(vo.getLevelSet(), pageable);
-		var page3 = repository.findAllByTeacherCountBetween(vo.getBegin(), vo.getEnd(), pageable);
+		var page3 = repository.findAllByTeacherCountBetween(vo.getMin(), vo.getMax(), pageable);
 		var resultPage = PageUtils.concat(pageable, page1, page2, page3);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;

@@ -20,10 +20,10 @@ public class TeacherTeamSearchVo {
 	private Set<ProfessionLevel> levelSet = new HashSet<>();
 
 	/** 最少人数。 */
-	private Integer begin;
+	private Integer min;
 
 	/** 最大人数。 */
-	private Integer end;
+	private Integer max;
 
 
 	public String getName() {
@@ -42,19 +42,19 @@ public class TeacherTeamSearchVo {
 		this.levelSet = levelSet;
 	}
 
-	public Integer getBegin() {
-		return begin;
+	public Integer getMin() {
+		return min;
 	}
 
-	public void setBegin(Integer begin) {
-		this.begin = begin;
+	public void setMin(Integer min) {
+		this.min = min;
 	}
 
-	public Integer getEnd() {
-		return end;
+	public Integer getMax() {
+		return max;
 	}
 
-	public void setEnd(Integer end) {
-		this.end = end;
+	public void setMax(Integer max) {
+		this.max = max;
 	}
 }
