@@ -25,6 +25,7 @@ public interface DynamicRepository extends JpaRepository<Dynamic, Integer> {
 	@Query("select d from Dynamic d where d.sponsorUser.username=:username")
 	Page<Dynamic> findAllBySponsorUsername(@Param("username") String username, Pageable pageable);
 
+	//TODO
 	Page<Dynamic> findAllBySponsorTimeBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);
 
 

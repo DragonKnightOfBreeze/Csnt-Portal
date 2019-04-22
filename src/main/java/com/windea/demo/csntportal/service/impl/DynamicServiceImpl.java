@@ -3,7 +3,7 @@ package com.windea.demo.csntportal.service.impl;
 import com.windea.commons.springboot.utils.PageUtils;
 import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
-import com.windea.demo.csntportal.domain.request.DynamicSearchVo;
+import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import com.windea.demo.csntportal.exception.*;
 import com.windea.demo.csntportal.repository.DynamicRepository;
@@ -36,7 +36,7 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Dynamic saveBySponsorUsername(Dynamic dynamic, String username) {
 		var user = userRepository.findByUsername(username);
-		Assert.notNull(user, () -> {throw new UserNotFoundException();});
+		Assert.notNull(user, () -> {throw new ResultNotFoundException();});
 		dynamic.setSponsorUser(user);
 		return repository.save(dynamic);
 	}

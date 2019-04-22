@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal;
 
-import com.windea.demo.csntportal.domain.request.DynamicSearchVo;
+import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import com.windea.demo.csntportal.service.DynamicService;
 import com.windea.demo.csntportal.service.UserService;

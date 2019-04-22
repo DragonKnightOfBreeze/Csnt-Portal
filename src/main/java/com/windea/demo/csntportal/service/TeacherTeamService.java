@@ -1,7 +1,7 @@
 package com.windea.demo.csntportal.service;
 
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
-import com.windea.demo.csntportal.domain.request.TeacherTeamSearchVo;
+import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +28,7 @@ public interface TeacherTeamService {
 
 	Page<TeacherTeam> findAllByProfessionLevelIn(Set<ProfessionLevel> levelSet, Pageable pageable);
 
-	Page<TeacherTeam> findAllByTeacherCountBetween(Integer start, Integer end, Pageable pageable);
+	Page<TeacherTeam> findAllByTeacherCountBetween(Integer min, Integer max, Pageable pageable);
 
 	Page<TeacherTeam> findAllByConditions(TeacherTeamSearchVo vo, Pageable pageable);
 

@@ -42,8 +42,8 @@
 	* Maven
 	* Git
 	* Docker？
-	* Spring Security？
-	* JWT Authentication？
+	* Spring Security
+	* JWT Authentication
 * 前端
 	* Html5
 	* Css3

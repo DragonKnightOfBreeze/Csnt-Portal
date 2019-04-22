@@ -7,7 +7,7 @@ import com.windea.commons.base.template.IEnumWithText;
  */
 public enum ResultState implements IEnumWithText {
 	FINE("正常。"),
-	VALID_ERROR("错误：验证错误！"),
+	VALIDATE_ERROR("错误：验证错误！"),
 	RESULT_EMPTY("错误：查询结果为空！"),
 	RESULT_NOT_FOUND("错误：查询结果不存在！"),
 	USER_DUPLICATE("错误：用户重复！"),

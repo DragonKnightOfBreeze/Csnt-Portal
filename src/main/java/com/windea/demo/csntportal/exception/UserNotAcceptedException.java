@@ -6,7 +6,7 @@ import com.windea.demo.csntportal.enums.ResultState;
  * 用户不被接受时的异常。
  */
 public class UserNotAcceptedException extends RuntimeException {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2924809862252473699L;
 
 	public UserNotAcceptedException() {
 		super(ResultState.USER_NOT_ACCEPTED.text());

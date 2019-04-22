@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Jwt进入点的组件。
+ * Jwt进入点的组件。<br>
+ * 由ExceptionTranslationFilter使用，开始一个安全验证方案。
  */
 @Component
 public class JwtEntryPoint implements AuthenticationEntryPoint {

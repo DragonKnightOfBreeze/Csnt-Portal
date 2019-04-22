@@ -1,4 +1,4 @@
-package com.windea.demo.csntportal.domain.request;
+package com.windea.demo.csntportal.domain.vo;
 
 import com.windea.demo.csntportal.enums.ProfessionLevel;
 

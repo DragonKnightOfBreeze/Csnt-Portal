@@ -18,5 +18,5 @@ public interface IntroduceService {
 	Introduce findById(Integer id);
 
 
-	List<Introduce> findAll(String title);
+	List<Introduce> findAll();
 }

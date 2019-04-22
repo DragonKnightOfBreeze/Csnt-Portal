@@ -45,10 +45,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Page<User> findAllByNicknameContainingIgnoreCase(String nickname, Pageable pageable);
 
+	//TODO
 	Page<User> findAllByGender(Gender gender, Pageable pageable);
 
+	//TODO
 	Page<User> findAllByRole(Role role, Pageable pageable);
 
+	//TODO
 	Page<User> findAllByProfession(Profession profession, Pageable pageable);
 
 

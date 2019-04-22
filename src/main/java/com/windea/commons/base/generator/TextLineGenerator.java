@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  * 自定义的每行文本生成器。
  */
 public class TextLineGenerator implements TGenerator {
-	private static final Log log = LogFactory.getLog(TextLineGenerator.class);
+	private static final Log logger = LogFactory.getLog(TextLineGenerator.class);
 
 	private Stream<String> lines = Stream.empty();
 

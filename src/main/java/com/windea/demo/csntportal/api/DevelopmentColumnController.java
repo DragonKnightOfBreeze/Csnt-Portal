@@ -1,11 +1,13 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.demo.csntportal.domain.entity.DevelopmentColumn;
+import com.windea.demo.csntportal.exception.ValidateException;
 import com.windea.demo.csntportal.service.DevelopmentColumnService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,30 +24,28 @@ public class DevelopmentColumnController {
 
 	public DevelopmentColumnController(DevelopmentColumnService service) {this.service = service;}
 
+
 	/**
 	 * 新建专业发展专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "/create", params = "admin")
-	public ResponseEntity create(
-		@Valid @RequestBody DevelopmentColumn column, BindingResult bindingResult
+	@PostMapping(value = "/create", params = "role=admin")
+	public DevelopmentColumn create(
+		@Valid @RequestBody DevelopmentColumn column,
+		BindingResult bindingResult
 	) {
-		if(bindingResult.hasErrors()) {
-			return ResponseEntity.badRequest().body(bindingResult);
-		}
-		try {
-			var result = service.save(column);
-			return ResponseEntity.ok(result);
-		} catch(Exception e) {
-			return ResponseEntity.badRequest().build();
-		}
+		var validated = !bindingResult.hasErrors();
+		Assert.isTrue(validated, () -> {throw new ValidateException();});
+
+		var result = service.save(column);
+		return result;
 	}
 
 	/**
 	 * 删除专业发展专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping(value = "/{id}", params = "admin")
+	@DeleteMapping(value = "/{id}", params = "role=admin")
 	public ResponseEntity delete(
 		@PathVariable Integer id
 	) {
@@ -57,19 +57,16 @@ public class DevelopmentColumnController {
 	 * 更新专业发展专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update", params = "admin")
-	public ResponseEntity update(
-		@Valid @RequestBody DevelopmentColumn column, BindingResult bindingResult
+	@PutMapping(value = "/update", params = "role=admin")
+	public DevelopmentColumn update(
+		@Valid @RequestBody DevelopmentColumn column,
+		BindingResult bindingResult
 	) {
-		if(bindingResult.hasErrors()) {
-			return ResponseEntity.badRequest().body(bindingResult);
-		}
-		try {
-			var result = service.update(column);
-			return ResponseEntity.ok(result);
-		} catch(Exception e) {
-			return ResponseEntity.notFound().build();
-		}
+		var validated = !bindingResult.hasErrors();
+		Assert.isTrue(validated, () -> {throw new ValidateException();});
+
+		var result = service.update(column);
+		return result;
 	}
 
 
@@ -77,15 +74,11 @@ public class DevelopmentColumnController {
 	 * 得到专业发展专栏信息。
 	 */
 	@GetMapping("/{id}")
-	public ResponseEntity<DevelopmentColumn> get(
+	public DevelopmentColumn get(
 		@PathVariable Integer id
 	) {
-		try {
-			var result = service.findById(id);
-			return ResponseEntity.ok(result);
-		} catch(Exception e) {
-			return ResponseEntity.notFound().build();
-		}
+		var result = service.findById(id);
+		return result;
 	}
 
 
@@ -93,34 +86,24 @@ public class DevelopmentColumnController {
 	 * 查询所有专业发展专栏信息。
 	 */
 	@GetMapping("/list")
-	public ResponseEntity<Page<DevelopmentColumn>> list(
-		@RequestParam(defaultValue = "1") Integer page,
-		@RequestParam(defaultValue = "10") Integer size
+	public Page<DevelopmentColumn> list(
+		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
-		try {
-			var pageable = PageRequest.of(page - 1, size);
-			var resultPage = service.findAll(pageable);
-			return ResponseEntity.ok(resultPage);
-		} catch(Exception e) {
-			return ResponseEntity.noContent().build();
-		}
+		var pageable = PageRequest.of(page - 1, size);
+		var resultPage = service.findAll(pageable);
+		return resultPage;
 	}
 
 	/**
 	 * 根据标题查询专业发展专栏信息。
 	 */
-	@GetMapping("/search")
-	public ResponseEntity<Page<DevelopmentColumn>> searchByTitle(
+	@GetMapping(value = "/search", params = "method=title")
+	public Page<DevelopmentColumn> searchByTitle(
 		@RequestParam String title,
-		@RequestParam(defaultValue = "1") Integer page,
-		@RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
-		try {
-			var pageable = PageRequest.of(page - 1, size);
-			var resultPage = service.findAllByTitleContaining(title, pageable);
-			return ResponseEntity.ok(resultPage);
-		} catch(Exception e) {
-			return ResponseEntity.noContent().build();
-		}
+		var pageable = PageRequest.of(page - 1, size);
+		var resultPage = service.findAllByTitleContaining(title, pageable);
+		return resultPage;
 	}
 }

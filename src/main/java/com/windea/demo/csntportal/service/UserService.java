@@ -4,14 +4,12 @@ import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.enums.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetailsPasswordService;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * 用户的服务接口。<br>
  * 继承UserDetailsService接口以进行安全验证。继承UserDetailsPasswordService接口以修改密码。
  */
-public interface UserService extends UserDetailsService, UserDetailsPasswordService {
+public interface UserService {
 	User save(User user);
 
 	User update(User user);

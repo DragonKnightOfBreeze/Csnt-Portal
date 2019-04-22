@@ -49,7 +49,7 @@ public class IntroduceServiceImpl implements IntroduceService {
 
 
 	@Override
-	public List<Introduce> findAll(String title) {
+	public List<Introduce> findAll() {
 		var resultList = repository.findAll();
 		Assert.notEmpty(resultList, () -> {throw new ResultEmptyException();});
 		return resultList;

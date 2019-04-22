@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * 用户的实体类。<br>
- * 实现UserDetails接口以进行安全验证。
+ * 用户的实体类。
  */
 @Entity
 public class User extends TBean implements UserDetails {

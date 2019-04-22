@@ -2,7 +2,7 @@ package com.windea.demo.csntportal.service;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
-import com.windea.demo.csntportal.domain.request.DynamicSearchVo;
+import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

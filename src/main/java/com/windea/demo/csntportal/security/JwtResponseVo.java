@@ -1,15 +1,13 @@
-package com.windea.demo.csntportal.domain.response;
+package com.windea.demo.csntportal.security;
 
-import com.windea.demo.csntportal.enums.Role;
-
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import java.io.Serializable;
 
 /**
- * Jwt响应的视图对象。<br>
- * 用于进行安全验证。
+ * Jwt响应的视图对象。
  */
-public class JwtResponseVo {
+public class JwtResponseVo implements Serializable {
+	private static final long serialVersionUID = -2582893279697162978L;
+
 	/** Jwt口令。 */
 	private String token;
 
@@ -20,11 +18,10 @@ public class JwtResponseVo {
 	private String username;
 
 	/** Jwt身份。 */
-	@Enumerated(EnumType.STRING)
-	private Role role;
+	private String role;
 
 
-	public JwtResponseVo(String token, String username, Role role) {
+	public JwtResponseVo(String token, String username, String role) {
 		this.token = token;
 		this.username = username;
 		this.role = role;
@@ -55,11 +52,11 @@ public class JwtResponseVo {
 		this.username = username;
 	}
 
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 }

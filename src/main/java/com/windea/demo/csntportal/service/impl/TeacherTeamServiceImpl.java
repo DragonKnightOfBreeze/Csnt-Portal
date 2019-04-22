@@ -2,7 +2,7 @@ package com.windea.demo.csntportal.service.impl;
 
 import com.windea.commons.springboot.utils.PageUtils;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
-import com.windea.demo.csntportal.domain.request.TeacherTeamSearchVo;
+import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
 import com.windea.demo.csntportal.exception.ResultEmptyException;
 import com.windea.demo.csntportal.exception.ResultNotFoundException;
@@ -87,8 +87,8 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAllByTeacherCountBetween(Integer start, Integer end, Pageable pageable) {
-		var resultPage = repository.findAllByTeacherCountBetween(start, end, pageable);
+	public Page<TeacherTeam> findAllByTeacherCountBetween(Integer min, Integer max, Pageable pageable) {
+		var resultPage = repository.findAllByTeacherCountBetween(min, max, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}

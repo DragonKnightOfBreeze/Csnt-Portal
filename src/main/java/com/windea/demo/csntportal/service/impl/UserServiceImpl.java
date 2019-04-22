@@ -8,7 +8,6 @@ import com.windea.demo.csntportal.service.UserService;
 import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +20,7 @@ import org.springframework.util.Assert;
 @CacheConfig(cacheNames = "userCache")
 public class UserServiceImpl implements UserService {
 	private final UserRepository repository;
+
 	private final PasswordEncoder passwordEncoder;
 
 	public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {
@@ -35,18 +35,18 @@ public class UserServiceImpl implements UserService {
 		//不允许重复用户名、邮箱和电话号码的新注册用户
 		var exists = exists(user.getUsername(), user.getEmail(), user.getPhoneNum());
 		Assert.isTrue(exists, () -> {throw new UserDuplicateException();});
-		//加密密码
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return repository.save(user);
 	}
+
 
 	@CachePut
 	@Transactional
 	@Override
 	public User update(User user) {
 		//得到原始的用户信息，然后更改必要的属性
+		//不允许修改密码
 		var origin = findById(user.getId());
-		origin.setPassword(passwordEncoder.encode(user.getPassword()));
 		origin.setPhoneNum(user.getPhoneNum());
 		origin.setEmail(user.getEmail());
 		origin.setNickname(user.getNickname());
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUsername(String username) {
 		var result = repository.findByUsername(username);
-		Assert.notNull(result, () -> {throw new UserNotFoundException();});
+		Assert.notNull(result, () -> {throw new ResultNotFoundException();});
 		return result;
 	}
 
@@ -116,24 +116,5 @@ public class UserServiceImpl implements UserService {
 	public boolean exists(String username, String email, String phoneNum) {
 		var result = repository.existsByUsernameOrEmailOrPhoneNum(username, email, phoneNum);
 		return result;
-	}
-
-	/**
-	 * 通过用户名得到用户，以进行权限验证。
-	 */
-	@Override
-	public UserDetails loadUserByUsername(String username) {
-		var result = findByUsername(username);
-		return result;
-	}
-
-	/**
-	 * 修改密码。
-	 */
-	@Override
-	public UserDetails updatePassword(UserDetails user, String newPassword) {
-		var origin = findByUsername(user.getUsername());
-		origin.setPassword(passwordEncoder.encode(user.getPassword()));
-		return repository.save(origin);
 	}
 }
