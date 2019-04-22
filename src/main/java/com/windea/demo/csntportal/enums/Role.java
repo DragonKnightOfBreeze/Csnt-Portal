@@ -3,13 +3,14 @@ package com.windea.demo.csntportal.enums;
 import com.windea.commons.base.template.IEnumWithText;
 
 /**
- * 用户身份的枚举。
+ * 用户身份的枚举。<br>
+ * NOTE 这里不需要为枚举值添加`ROLE_`前缀
  */
 public enum Role implements IEnumWithText {
-	ROLE_VISITOR("游客"),
-	ROLE_STUDENT("学生"),
-	ROLE_TEACHER("教师"),
-	ROLE_ADMIN("管理员");
+	VISITOR("游客"),
+	STUDENT("学生"),
+	TEACHER("教师"),
+	ADMIN("管理员");
 
 
 	private final String text;

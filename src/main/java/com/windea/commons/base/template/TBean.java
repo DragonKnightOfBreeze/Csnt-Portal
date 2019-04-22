@@ -51,7 +51,7 @@ public abstract class TBean<ID> implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return toString(true, -1);
+		return toString(false, 0);
 	}
 
 	public String toString(boolean breakLine, int indent) {

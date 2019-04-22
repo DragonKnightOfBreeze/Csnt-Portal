@@ -7,7 +7,7 @@
 
 # 将配置文件的数据绑定到实体类：
 # 为启动类注上`@EnableConfigurationProperties({ConfigBean.class})`，以指定需要配置的实体类，或者为其指定@Component。
-# 为实体类注上`@ConfigurationProperties(prefix = "com.md")`，以指明前缀。
+# 为实体类注上`@ConfigurationProperties(prefix :  "com.md")`，以指明前缀。
 # 为实体类注上`@PropertySource("classpath:test.properties")`，以指明绑定的配置文件，默认为`application.{properties,yml}`。
 
 server:
@@ -25,16 +25,17 @@ spring:
   jpa:
     # 用于Jpa控制台调试
     database-platform: org.hibernate.dialect.MySQLDialect
-    # 显示SQL
-    show-sql: true
     # 表不存在时自动创建，之后更新
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
   # NOTE 在这里配置数据源
   datasource:
     username: admin
     password: 123
-
     url: jdbc:mysql://localhost:3306/CsntPortal
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
@@ -43,9 +44,33 @@ spring:
         useSSL: false
         # 配置数据库的时区，否则会报错
         serverTimezone: GMT-8
+        # 允许使用服务器提供的公钥
+        allowPublicKeyRetrieval: true
     tomcat:
       db-properties:
         close-method: close
+  # NOTE 在这里配置Redis（缓存管理）
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: localhost
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: -1
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 8
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 0
+
+# NOTE 在这里配置自定义项
 
 com:
   windea:

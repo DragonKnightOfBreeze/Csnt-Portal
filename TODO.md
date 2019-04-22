@@ -28,12 +28,14 @@
     * 分页功能
     * 简单的查询功能
     * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存
 * 教学改革专栏（文章列表，存在详情页面）
     * 单一数据展示
     * 所有数据展示
     * 分页功能
     * 简单的查询功能
     * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存
 * 学习专栏（文章列表，存在详情页面）
     * ［需要登录］单一数据展示
     * ［需要登录］所有数据展示
@@ -49,6 +51,7 @@
 	* ［需要登录］用户动态增加
 	* ［需要登录］用户动态删除
 	* ［管理员］数据删除
+	* 启用Redis缓存
 * 教师队伍（媒体列表，存在详情页面）
     * 单一数据展示
     * 所有数据展示
@@ -56,6 +59,13 @@
     * 简单的查询功能
     * 复杂的查询功能
     * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存
+* 用户
+    * ［管理员］单一数据展示
+    * ［管理员］所有数据展示
+    * ［管理员］分页功能
+    * ［管理员］简单的查询功能
+    * 启用Redis缓存
 
 # 功能实现
 
@@ -116,7 +126,25 @@
     * **［注意事项］**
         * 没什么好说的写法，接口继承自`JpaRepository<T, ID>`，添加必要的命名有规则的方法
         * 方法命名规则：越详细越好，关注忽略大小写，关注必要的分页，不关注排序
+        * 可以直接调用实体类的实体类属性的属性
         * 保留那些目前可能用不上，以后用来拓展功能的方法
+        * `@RepositoryRestResource`：自动根据参数和持久层方法名构建Rest，允许直接从控制台根据特定url进行测试，存在默认配置
+    * **［自定义查询规则］**
+        * `@Query`：自定义查询规则，返回匹配对象或集合对象或结果接口，可能需要添加`@Modify`
+        * `:username`表示与注有`@Param("username")`的方法参数相匹配的参数
+        * sql语句中的是实体类以及实体类的属性，可以直接调用实体类的实体类属性的属性
+    * **［启用缓存功能］**
+        * 在`application.yml`中添加相应的配置项
+        * 为配置类添加`@EnableCaching`
+        * 为需要启用缓存的类添加`@CacheConfig`，以共享缓存配置。一般会配置`cacheNames`
+        * `@Caching`：为一个方法声明多个`@Cacheable`，`@CacheEvict`，`@CachePut`
+        * `@Cacheable`：为入口操作启用缓存（查找）
+        * `@CacheEvict`：为出口操作启用缓存（增加，删除），一般需要设置`allEntries=true`
+        * `@CachePut`：为更新操作启用缓存（修改）
+        * 使用示例：
+        * `@Cacheable(cacheNames="books", key="T(someType).hash(#isbn)", keyGenerator="myKeyGen", sync=true)`
+        * `@Cacheable(cacheNames="book", condition="#name.length() < 32", unless="#result?.hardback")`
+        * **注意：** 不要在持久层接口上使用cache注解，推荐在服务层实现类上使用。
 - [ ] 服务层 service
     * **［注意事项］**
         * 分为接口和实现类，实现类在`service.impl`中，类名以`Impl`结尾
@@ -136,7 +164,8 @@
         * 使用@Valid指定需要验证的输入数据，使用紧随的bindingResult得到可能的验证错误
         * 使用MultipleFile file得到传入的文件数据
         * 整合Spring Security和Jwt
-        * 为方法加上`@PreAuthorize("hasRole('ADMIN')")`以开启权限限制，注意数据库中存储的应该是`ROLE_ADMIN`
+        * 为方法加上`@PreAuthorize("hasRole('ADMIN')")`以开启权限限制。注意对应的枚举值是`ADMIN`
+        * ~~数据库中存储的应该是`ROLE_ADMIN`~~数据库中存的是枚举好不好！
 
 # API参考
 

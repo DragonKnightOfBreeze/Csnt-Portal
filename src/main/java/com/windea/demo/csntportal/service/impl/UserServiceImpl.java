@@ -5,6 +5,7 @@ import com.windea.demo.csntportal.enums.*;
 import com.windea.demo.csntportal.exception.*;
 import com.windea.demo.csntportal.repository.UserRepository;
 import com.windea.demo.csntportal.service.UserService;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,7 @@ import org.springframework.util.Assert;
  * 用户的服务类。
  */
 @Service
+@CacheConfig(cacheNames = "userCache")
 public class UserServiceImpl implements UserService {
 	private final UserRepository repository;
 	private final PasswordEncoder passwordEncoder;
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-
+	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public User save(User user) {
@@ -38,6 +40,7 @@ public class UserServiceImpl implements UserService {
 		return repository.save(user);
 	}
 
+	@CachePut
 	@Transactional
 	@Override
 	public User update(User user) {
@@ -51,12 +54,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	@Cacheable
 	@Override
 	public User findById(Integer id) {
 		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
 		return result;
 	}
 
+	@Cacheable
 	@Override
 	public User findByUsername(String username) {
 		var result = repository.findByUsername(username);
@@ -65,6 +70,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	@Cacheable
 	@Override
 	public Page<User> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
@@ -72,6 +78,7 @@ public class UserServiceImpl implements UserService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<User> findAllByNicknameContaining(String nickname, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
@@ -81,6 +88,7 @@ public class UserServiceImpl implements UserService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<User> findAllByGender(Gender gender, Pageable pageable) {
 		var resultPage = repository.findAllByGender(gender, pageable);
@@ -88,6 +96,7 @@ public class UserServiceImpl implements UserService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<User> findAllByRole(Role role, Pageable pageable) {
 		var resultPage = repository.findAllByRole(role, pageable);

@@ -80,7 +80,7 @@ public class User extends TBean implements UserDetails {
 	/** 关联的动态集合。 */
 	//表示一对多关系
 	//mapperBy指定要映射到的另一个实体类的属性名
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sponsorUser")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sponsorUser")
 	private List<Dynamic> dynamicList = new ArrayList<>();
 
 

@@ -5,6 +5,7 @@ import com.windea.demo.csntportal.enums.ProfessionLevel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 /**
  * 教师队伍的持久接口。
  */
+@RepositoryRestResource
 public interface TeacherTeamRepository extends JpaRepository<TeacherTeam, Integer> {
 	Page<TeacherTeam> findAllByNameContainingIgnoreCase(String title, Pageable pageable);
 

@@ -5,6 +5,7 @@ import com.windea.demo.csntportal.exception.ResultEmptyException;
 import com.windea.demo.csntportal.exception.ResultNotFoundException;
 import com.windea.demo.csntportal.repository.DevelopmentColumnRepository;
 import com.windea.demo.csntportal.service.DevelopmentColumnService;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,23 +13,28 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Service
+@CacheConfig(cacheNames = "developmentColumnCache")
 public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 	private final DevelopmentColumnRepository repository;
 
 	public DevelopmentColumnServiceImpl(DevelopmentColumnRepository repository) {this.repository = repository;}
 
+
+	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public DevelopmentColumn save(DevelopmentColumn column) {
 		return repository.save(column);
 	}
 
+	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
 
+	@CachePut
 	@Transactional
 	@Override
 	public DevelopmentColumn update(DevelopmentColumn column) {
@@ -40,6 +46,7 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 	}
 
 
+	@Cacheable
 	@Override
 	public DevelopmentColumn findById(Integer id) {
 		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
@@ -47,6 +54,7 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 	}
 
 
+	@Cacheable
 	@Override
 	public Page<DevelopmentColumn> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
@@ -54,6 +62,7 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<DevelopmentColumn> findAllByTitleContaining(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据

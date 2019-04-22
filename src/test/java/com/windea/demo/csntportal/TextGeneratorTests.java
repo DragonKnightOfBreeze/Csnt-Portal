@@ -1,9 +1,6 @@
 package com.windea.demo.csntportal;
 
-import com.windea.commons.base.generator.TextGenerator;
 import org.junit.Test;
-
-import java.util.List;
 
 public class TextGeneratorTests {
 
@@ -52,10 +49,10 @@ public class TextGeneratorTests {
 
 	@Test
 	public void test2() {
-		var text1 = TextGenerator.gen().addStream(List.of("aaa", "bbb", "ccc").stream(), e -> e).text();
-		System.out.println(text1);
-
-		var text2 = TextGenerator.gen().joinStream(List.of("aaa", "bbb", "ccc").stream(), e -> e, "***").text();
-		System.out.println(text2);
+		//var text1 = TextGenerator.gen().addStream(List.of("aaa", "bbb", "ccc").stream(), e -> e).text();
+		//System.out.println(text1);
+		//
+		//var text2 = TextGenerator.gen().joinStream(List.of("aaa", "bbb", "ccc").stream(), e -> e, "***").text();
+		//System.out.println(text2);
 	}
 }

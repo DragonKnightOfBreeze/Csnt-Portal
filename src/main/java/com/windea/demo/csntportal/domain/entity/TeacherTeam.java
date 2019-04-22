@@ -46,7 +46,7 @@ public class TeacherTeam extends TBean {
 	/** 教师信息的集合。 */
 	//NOTE fetchType默认LAZY，谁显示声明谁SB
 	//NOTE 这里的级联级别不能是ALL，当删除教师队伍时，教师信息不删除
-	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "teacherTeam")
+	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "teacherTeam")
 	private List<TeacherInfo> teacherInfoList = new ArrayList<>();
 
 

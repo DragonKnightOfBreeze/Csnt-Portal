@@ -8,14 +8,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
  * 实时动态的持久接口。<br>
- * NOTE 可以直接调用实体类的实体类属性的属性
  */
+@RepositoryRestResource
 public interface DynamicRepository extends JpaRepository<Dynamic, Integer> {
 	Page<Dynamic> findAllBySubjectContainingIgnoreCase(String title, Pageable pageable);
 

@@ -9,6 +9,7 @@ import com.windea.demo.csntportal.exception.*;
 import com.windea.demo.csntportal.repository.DynamicRepository;
 import com.windea.demo.csntportal.repository.UserRepository;
 import com.windea.demo.csntportal.service.DynamicService;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Service
+@CacheConfig(cacheNames = "dynamicServiceCache")
 public class DynamicServiceImpl implements DynamicService {
 	private final DynamicRepository repository;
 	private final UserRepository userRepository;
@@ -28,6 +30,8 @@ public class DynamicServiceImpl implements DynamicService {
 		this.userRepository = userRepository;
 	}
 
+
+	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public Dynamic saveBySponsorUsername(Dynamic dynamic, String username) {
@@ -37,12 +41,14 @@ public class DynamicServiceImpl implements DynamicService {
 		return repository.save(dynamic);
 	}
 
+	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
 
+	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public void deleteByIdAndSponsorUsername(Integer id, String username) {
@@ -54,6 +60,7 @@ public class DynamicServiceImpl implements DynamicService {
 	}
 
 
+	@Cacheable
 	@Override
 	public Dynamic findById(Integer id) {
 		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
@@ -61,6 +68,7 @@ public class DynamicServiceImpl implements DynamicService {
 	}
 
 
+	@Cacheable
 	@Override
 	public Page<Dynamic> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
@@ -68,6 +76,7 @@ public class DynamicServiceImpl implements DynamicService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<Dynamic> findAllBySubjectContaining(String title, Pageable pageable) {
 		title = title.strip();
@@ -76,6 +85,7 @@ public class DynamicServiceImpl implements DynamicService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<Dynamic> findAllByCategoryIn(Set<DynamicCategory> categorySet, Pageable pageable) {
 		var resultPage = repository.findAllByCategoryIn(categorySet, pageable);
@@ -83,6 +93,7 @@ public class DynamicServiceImpl implements DynamicService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<Dynamic> findAllBySponsorUsername(String username, Pageable pageable) {
 		var resultPage = repository.findAllBySponsorUsername(username, pageable);
@@ -90,6 +101,7 @@ public class DynamicServiceImpl implements DynamicService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<Dynamic> findAllByConditions(DynamicSearchVo vo, Pageable pageable) {
 		var page1 = repository.findAllBySubjectContainingIgnoreCase(vo.getSubject(), pageable);
@@ -100,6 +112,7 @@ public class DynamicServiceImpl implements DynamicService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public User findSponsorUserById(Integer id) {
 		var result = repository.findSponsorUserById(id).getSponsorUser();

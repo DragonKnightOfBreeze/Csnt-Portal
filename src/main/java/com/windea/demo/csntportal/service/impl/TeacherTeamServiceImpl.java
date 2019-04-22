@@ -8,6 +8,7 @@ import com.windea.demo.csntportal.exception.ResultEmptyException;
 import com.windea.demo.csntportal.exception.ResultNotFoundException;
 import com.windea.demo.csntportal.repository.TeacherTeamRepository;
 import com.windea.demo.csntportal.service.TeacherTeamService;
+import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,24 +17,30 @@ import org.springframework.util.Assert;
 
 import java.util.Set;
 
+
 @Service
+@CacheConfig(cacheNames = "teacherTeamCache")
 public class TeacherTeamServiceImpl implements TeacherTeamService {
 	private final TeacherTeamRepository repository;
 
 	public TeacherTeamServiceImpl(TeacherTeamRepository repository) {this.repository = repository;}
 
+
+	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public TeacherTeam save(TeacherTeam teacherTeam) {
 		return repository.save(teacherTeam);
 	}
 
+	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public void deleteById(Integer id) {
 		repository.deleteById(id);
 	}
 
+	@CachePut
 	@Transactional
 	@Override
 	public TeacherTeam update(TeacherTeam teacherTeam) {
@@ -46,12 +53,15 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 	}
 
 
+	@Cacheable
 	@Override
 	public TeacherTeam findById(Integer id) {
 		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
 		return result;
 	}
 
+
+	@Cacheable
 	@Override
 	public Page<TeacherTeam> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
@@ -59,6 +69,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<TeacherTeam> findAllByNameContaining(String name, Pageable pageable) {
 		var resultPage = repository.findAllByNameContainingIgnoreCase(name, pageable);
@@ -66,6 +77,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<TeacherTeam> findAllByProfessionLevelIn(Set<ProfessionLevel> levelSet, Pageable pageable) {
 		var resultPage = repository.findAllByProfessionLevelIn(levelSet, pageable);
@@ -73,6 +85,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<TeacherTeam> findAllByTeacherCountBetween(Integer start, Integer end, Pageable pageable) {
 		var resultPage = repository.findAllByTeacherCountBetween(start, end, pageable);
@@ -80,6 +93,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 		return resultPage;
 	}
 
+	@Cacheable
 	@Override
 	public Page<TeacherTeam> findAllByConditions(TeacherTeamSearchVo vo, Pageable pageable) {
 		var page1 = repository.findAllByNameContainingIgnoreCase(vo.getName(), pageable);
