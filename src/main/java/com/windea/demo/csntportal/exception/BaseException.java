@@ -1,9 +1,9 @@
 package com.windea.demo.csntportal.exception;
 
 /**
- * 项目的基础异常。
+ * 基础异常。
  */
-public class BaseException extends RuntimeException {
+public abstract class BaseException extends RuntimeException {
 	private static final long serialVersionUID = 7606669941220183553L;
 
 	public BaseException() {

@@ -1,8 +1,24 @@
 package com.windea.demo.csntportal.enums;
 
+import com.windea.commons.base.template.IEnumWithText;
+
 /**
  * 用户登录类型。
  */
-public enum LoginType {
-	BY_USERNAME, BY_PHONE_NUM, BY_EMAIL
+public enum LoginType implements IEnumWithText {
+	BY_USERNAME("用户名登录"),
+	BY_PHONE_NUM("电话号码登录"),
+	BY_EMAIL("邮箱地址登录");
+
+
+	private final String text;
+
+	LoginType(String text) {
+		this.text = text;
+	}
+
+	@Override
+	public String text() {
+		return this.text;
+	}
 }

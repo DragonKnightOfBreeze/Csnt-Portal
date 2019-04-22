@@ -1,18 +1,25 @@
 package com.windea.demo.csntportal.enums;
 
+import com.windea.commons.base.template.IEnumWithText;
+
 /**
  * 用户身份的枚举。
  */
-public enum Role {
-	ROLE_VISITOR, ROLE_STUDENT, ROLE_TEACHER, ROLE_ADMIN;
+public enum Role implements IEnumWithText {
+	ROLE_VISITOR("游客"),
+	ROLE_STUDENT("学生"),
+	ROLE_TEACHER("教师"),
+	ROLE_ADMIN("管理员");
+
+
+	private final String text;
+
+	Role(String text) {
+		this.text = text;
+	}
 
 	@Override
-	public String toString() {
-		return switch(this) {
-			case ROLE_VISITOR -> "游客";
-			case ROLE_STUDENT -> "学生";
-			case ROLE_TEACHER -> "教师";
-			case ROLE_ADMIN -> "管理员";
-		};
+	public String text() {
+		return this.text;
 	}
 }

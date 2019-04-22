@@ -1,19 +1,27 @@
 package com.windea.demo.csntportal.enums;
 
+import com.windea.commons.base.template.IEnumWithText;
+
 /**
  * 难度级别的枚举。
  */
-public enum DifficultyLevel {
-	EASY, NORMAL, HARD, HELL, INHUMAN;
+public enum DifficultyLevel implements IEnumWithText {
+	EASY("简单"),
+	NORMAL("普通"),
+	HARD("困难"),
+	HELL("地狱"),
+	INHUMAN("非人"),
+	IMMORTAL("远非常人");
+
+
+	private final String text;
+
+	DifficultyLevel(String text) {
+		this.text = text;
+	}
 
 	@Override
-	public String toString() {
-		return switch(this) {
-			case EASY -> "简单";
-			case NORMAL -> "普通";
-			case HARD -> "困难";
-			case HELL -> "炼狱";
-			case INHUMAN -> "非人";
-		};
+	public String text() {
+		return this.text;
 	}
 }

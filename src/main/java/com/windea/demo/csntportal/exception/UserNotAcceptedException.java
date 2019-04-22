@@ -1,13 +1,15 @@
 package com.windea.demo.csntportal.exception;
 
+import com.windea.demo.csntportal.enums.ResultState;
+
 /**
- * 用户不被允许时的异常。
+ * 用户不被接受时的异常。
  */
 public class UserNotAcceptedException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public UserNotAcceptedException() {
-		super();
+		super(ResultState.USER_NOT_ACCEPTED.text());
 	}
 
 	public UserNotAcceptedException(String message) {

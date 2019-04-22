@@ -29,29 +29,31 @@ public class User extends TBean implements UserDetails {
 	/** 用户名。 */
 	@NotEmpty(message = "{user.username.notEmpty}")
 	@Pattern(regexp = GlobalConsts.RE_USERNAME, message = "{user.username.pattern}")
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String username;
 
 	/** 密码。 */
 	@NotEmpty(message = "{user.password.notEmpty}")
 	@Pattern(regexp = GlobalConsts.RE_PASSWORD, message = "{user.password.pattern}")
+	@Column(nullable = false)
 	private String password;
 
 	/** 电话号码。 */
 	@NotEmpty(message = "{user.phoneNum.notEmpty}")
 	@Size(min = 11, max = 11, message = "{user.phoneNum.size}")
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String phoneNum;
 
 	/** 邮箱地址。 */
 	@NotEmpty(message = "{user.email.notEmpty}")
 	@Email(message = "{user.email.email}")
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String email;
 
 	/** 昵称。 */
 	@NotEmpty(message = "{user.nickname.notEmpty}")
 	@Size(min = 1, max = 32, message = "{user.nickname.size}")
+	@Column(nullable = false)
 	private String nickname;
 
 	/** 性别。 */
