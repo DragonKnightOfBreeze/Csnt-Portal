@@ -24,6 +24,7 @@ public class TeacherInfo extends TBean {
 	/** 名字。 */
 	@NotEmpty(message = "{teacherInfo.name.notEmpty}")
 	@Size(min = 1, max = 32, message = "{teacherInfo.name.size}")
+	@Column(nullable = false, length = 32)
 	private String name;
 
 	/** 性别。 */
@@ -37,6 +38,7 @@ public class TeacherInfo extends TBean {
 	/** 介绍。 */
 	@NotEmpty(message = "{teacherInfo.introduce.notEmpty}")
 	@Size(min = 1, max = 256, message = "{teacherInfo.introduce.notEmpty}")
+	@Column(nullable = false, length = 256)
 	private String introduce;
 
 	/** 教师队伍。 */

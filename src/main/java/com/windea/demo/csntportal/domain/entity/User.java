@@ -1,5 +1,6 @@
 package com.windea.demo.csntportal.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.GlobalConsts;
 import com.windea.demo.csntportal.enums.*;
@@ -29,10 +30,12 @@ public class User extends TBean implements UserDetails {
 	/** 用户名。 */
 	@NotEmpty(message = "{user.username.notEmpty}")
 	@Pattern(regexp = GlobalConsts.RE_USERNAME, message = "{user.username.pattern}")
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 12)
 	private String username;
 
 	/** 密码。 */
+	//密码需要被忽略掉，尽管是加密后的，并且不要限制行的长度
+	@JsonIgnore
 	@NotEmpty(message = "{user.password.notEmpty}")
 	@Pattern(regexp = GlobalConsts.RE_PASSWORD, message = "{user.password.pattern}")
 	@Column(nullable = false)
@@ -41,7 +44,7 @@ public class User extends TBean implements UserDetails {
 	/** 电话号码。 */
 	@NotEmpty(message = "{user.phoneNum.notEmpty}")
 	@Size(min = 11, max = 11, message = "{user.phoneNum.size}")
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 11)
 	private String phoneNum;
 
 	/** 邮箱地址。 */
@@ -53,11 +56,11 @@ public class User extends TBean implements UserDetails {
 	/** 昵称。 */
 	@NotEmpty(message = "{user.nickname.notEmpty}")
 	@Size(min = 1, max = 32, message = "{user.nickname.size}")
-	@Column(nullable = false)
+	@Column(nullable = false, length = 32)
 	private String nickname;
 
 	/** 性别。 */
-	//当字段的类型为枚举时需要加上这个注解，并以对应的字符串为准
+	//当字段的类型为枚举时需要加上这个注解，并以枚举值的名字为准，附加信息请自定义属性
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
 
@@ -192,17 +195,17 @@ public class User extends TBean implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override

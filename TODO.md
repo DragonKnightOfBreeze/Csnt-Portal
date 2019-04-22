@@ -76,6 +76,9 @@
             * 对于枚举字段，需要添加@Enumerated，并按情况再添加@ElementCollection，按情况替换成@MapKeyEnumerated
             * 存到数据库中的仍然是枚举值的默认名字
             * 对于属于附属者向所有者的引用的字段，一般是注有@ManyToOne的字段，添加@JsonIgnore以避免无限循环
+        * 指定默认值
+            * 第一种方案：使用`@ColumnDefault("'abc'")`
+            * 第二种方案：使用`@Column(columnDefinition = "text default 'abc'")`，其中类型是必须的
         * 添加必要的Validation注解
             * 除了实体类之外，也可以为组件类添加@ConfigurationProperties，@Validated以启用参数验证
         * 不使用Lombok

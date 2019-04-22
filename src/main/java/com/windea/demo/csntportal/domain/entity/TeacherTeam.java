@@ -26,6 +26,7 @@ public class TeacherTeam extends TBean {
 	/** 名字。 */
 	@NotEmpty(message = "{teacherTeam.name.notEmpty}")
 	@Size(min = 1, max = 32, message = "{teacherTeam.name.size}")
+	@Column(nullable = false, length = 32)
 	private String name;
 
 	/** 专业级别。 */
@@ -35,6 +36,7 @@ public class TeacherTeam extends TBean {
 	/** 介绍。 */
 	@NotEmpty(message = "{teacherTeam.introduce.notEmpty}")
 	@Size(min = 1, max = 256, message = "{teacherTeam.introduce.notEmpty}")
+	@Column(nullable = false, length = 256)
 	private String introduce;
 
 	/** 创建时间。 */
@@ -42,6 +44,7 @@ public class TeacherTeam extends TBean {
 	private LocalDateTime createTime;
 
 	/** 教师信息的集合。 */
+	//NOTE fetchType默认LAZY，谁显示声明谁SB
 	//NOTE 这里的级联级别不能是ALL，当删除教师队伍时，教师信息不删除
 	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "teacherTeam")
 	private List<TeacherInfo> teacherInfoList = new ArrayList<>();

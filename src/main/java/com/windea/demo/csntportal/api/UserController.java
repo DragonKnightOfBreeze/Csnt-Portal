@@ -76,13 +76,15 @@ public class UserController {
 			return ResponseEntity.badRequest().body(bindingResult);
 		}
 		try {
-			//创建验证对象，然后进行验证，然后保存到SecurityContextHolder中
+			//创建验证令牌，然后进行验证，然后保存到SecurityContextHolder中
 			var auth = new UsernamePasswordAuthenticationToken(vo.getUsername(), vo.getPassword());
 			var fullAuth = authenticationManager.authenticate(auth);
 			SecurityContextHolder.getContext().setAuthentication(fullAuth);
-			//生成jwt口令并据此找到用户实体类对象
+			//生成jwt口令并据此找到用户详情实体类对象
 			String jwt = jwtProvider.generate(fullAuth);
 			var userDetails = (UserDetails) fullAuth.getPrincipal();
+			//根据用户详情实体类对象中的用户名字段，从数据库进行查找
+			//NOTE 没有必要在服务层编写根据用户名和密码查找用户的方法，数据库中的密码已加密
 			var user = service.findByUsername(userDetails.getUsername());
 
 			var result = new JwtResponseVo(jwt, user.getUsername(), user.getRole());

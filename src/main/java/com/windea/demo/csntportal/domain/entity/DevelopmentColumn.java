@@ -1,10 +1,9 @@
 package com.windea.demo.csntportal.domain.entity;
 
 import com.windea.commons.base.template.TBean;
-import com.windea.demo.csntportal.GlobalConsts;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -25,18 +24,18 @@ public class DevelopmentColumn extends TBean {
 	/** 标题。 */
 	@NotEmpty(message = "{column.title.notEmpty}")
 	@Size(min = 1, max = 32, message = "{column.title.size}")
-	@ColumnDefault(GlobalConsts.PH_C_TITLE)
+	@Column(nullable = false, length = 32, columnDefinition = "varchar default '请输入标题'")
 	private String title;
 
 	/** 内容。 */
 	@NotEmpty(message = "{column.content.notEmpty}")
-	@ColumnDefault(GlobalConsts.PH_C_CONTENT)
+	@Column(nullable = false, columnDefinition = "text default '请输入内容'")
 	private String content;
 
 	/** 作者。 */
 	@NotEmpty(message = "{column.author.notEmpty}")
 	@Size(min = 1, max = 32, message = "{column.author.size}")
-	@ColumnDefault(GlobalConsts.PH_C_AUTHOR)
+	@Column(nullable = false, length = 32, columnDefinition = "varchar default '匿名'")
 	private String author;
 
 	/** 发表时间。 */

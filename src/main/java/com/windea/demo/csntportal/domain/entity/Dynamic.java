@@ -2,9 +2,7 @@ package com.windea.demo.csntportal.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.commons.base.template.TBean;
-import com.windea.demo.csntportal.GlobalConsts;
 import com.windea.demo.csntportal.enums.DynamicCategory;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -27,7 +25,7 @@ public class Dynamic extends TBean {
 	/** 主题。 */
 	@NotEmpty(message = "{dynamic.subject.notEmpty}")
 	@Size(min = 1, max = 32, message = "{dynamic.subject.size}")
-	@ColumnDefault(GlobalConsts.PH_D_SUBJECT)
+	@Column(nullable = false, length = 32, columnDefinition = "varchar default '请输入主体'")
 	private String subject;
 
 	/** 动态分类。 */
@@ -36,7 +34,7 @@ public class Dynamic extends TBean {
 
 	/** 内容。 */
 	@NotEmpty(message = "{dynamic.content.notEmpty}")
-	@ColumnDefault(GlobalConsts.PH_D_CONTENT)
+	@Column(nullable = false, columnDefinition = "text default '请输入内容'")
 	private String content;
 
 	/** 发起的用户。 */
