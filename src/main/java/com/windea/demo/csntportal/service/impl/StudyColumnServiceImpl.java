@@ -56,7 +56,7 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 
 	@Cacheable
 	@Override
-	public Page<StudyColumn> findAllByTitleContaining(String title, Pageable pageable) {
+	public Page<StudyColumn> findAllByTitle(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
 		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);

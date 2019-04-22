@@ -24,11 +24,11 @@ public interface TeacherTeamService {
 
 	Page<TeacherTeam> findAll(Pageable pageable);
 
-	Page<TeacherTeam> findAllByNameContaining(String name, Pageable pageable);
+	Page<TeacherTeam> findAllByName(String name, Pageable pageable);
 
-	Page<TeacherTeam> findAllByProfessionLevelIn(Set<ProfessionLevel> levelSet, Pageable pageable);
+	Page<TeacherTeam> findAllByProfessionLevel(Set<ProfessionLevel> levelSet, Pageable pageable);
 
-	Page<TeacherTeam> findAllByTeacherCountBetween(Integer min, Integer max, Pageable pageable);
+	Page<TeacherTeam> findAllByTeacherCount(Integer min, Integer max, Pageable pageable);
 
 	Page<TeacherTeam> findAllByConditions(TeacherTeamSearchVo vo, Pageable pageable);
 

@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @RepositoryRestResource
 public interface DynamicRepository extends JpaRepository<Dynamic, Integer> {
-	Page<Dynamic> findAllBySubjectContainingIgnoreCase(String title, Pageable pageable);
+	Page<Dynamic> findAllBySubjectContainingIgnoreCase(String subject, Pageable pageable);
 
 	Page<Dynamic> findAllByCategoryIn(Set<DynamicCategory> categorySet, Pageable pageable);
 

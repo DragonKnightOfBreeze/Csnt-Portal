@@ -71,7 +71,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAllByNameContaining(String name, Pageable pageable) {
+	public Page<TeacherTeam> findAllByName(String name, Pageable pageable) {
 		var resultPage = repository.findAllByNameContainingIgnoreCase(name, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
@@ -79,7 +79,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAllByProfessionLevelIn(Set<ProfessionLevel> levelSet, Pageable pageable) {
+	public Page<TeacherTeam> findAllByProfessionLevel(Set<ProfessionLevel> levelSet, Pageable pageable) {
 		var resultPage = repository.findAllByProfessionLevelIn(levelSet, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
@@ -87,7 +87,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAllByTeacherCountBetween(Integer min, Integer max, Pageable pageable) {
+	public Page<TeacherTeam> findAllByTeacherCount(Integer min, Integer max, Pageable pageable) {
 		var resultPage = repository.findAllByTeacherCountBetween(min, max, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;

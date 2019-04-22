@@ -20,5 +20,5 @@ public interface DevelopmentColumnService {
 
 	Page<DevelopmentColumn> findAll(Pageable pageable);
 
-	Page<DevelopmentColumn> findAllByTitleContaining(String title, Pageable pageable);
+	Page<DevelopmentColumn> findAllByTitle(String title, Pageable pageable);
 }

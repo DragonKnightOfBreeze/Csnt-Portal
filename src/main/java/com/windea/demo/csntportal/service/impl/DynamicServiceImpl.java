@@ -78,16 +78,16 @@ public class DynamicServiceImpl implements DynamicService {
 
 	@Cacheable
 	@Override
-	public Page<Dynamic> findAllBySubjectContaining(String title, Pageable pageable) {
-		title = title.strip();
-		var resultPage = repository.findAllBySubjectContainingIgnoreCase(title, pageable);
+	public Page<Dynamic> findAllBySubject(String subject, Pageable pageable) {
+		subject = subject.strip();
+		var resultPage = repository.findAllBySubjectContainingIgnoreCase(subject, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<Dynamic> findAllByCategoryIn(Set<DynamicCategory> categorySet, Pageable pageable) {
+	public Page<Dynamic> findAllByCategory(Set<DynamicCategory> categorySet, Pageable pageable) {
 		var resultPage = repository.findAllByCategoryIn(categorySet, pageable);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
 		return resultPage;

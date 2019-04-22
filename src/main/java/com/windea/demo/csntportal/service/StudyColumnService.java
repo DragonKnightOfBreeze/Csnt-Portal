@@ -20,5 +20,5 @@ public interface StudyColumnService {
 
 	Page<StudyColumn> findAll(Pageable pageable);
 
-	Page<StudyColumn> findAllByTitleContaining(String title, Pageable pageable);
+	Page<StudyColumn> findAllByTitle(String title, Pageable pageable);
 }

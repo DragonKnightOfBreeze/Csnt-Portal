@@ -103,7 +103,7 @@ public class StudyColumnController {
 		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByTitleContaining(title, pageable);
+		var resultPage = service.findAllByTitle(title, pageable);
 		return resultPage;
 	}
 }

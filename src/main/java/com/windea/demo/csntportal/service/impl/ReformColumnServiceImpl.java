@@ -56,7 +56,7 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 
 	@Cacheable
 	@Override
-	public Page<ReformColumn> findAllByTitleContaining(String title, Pageable pageable) {
+	public Page<ReformColumn> findAllByTitle(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
 		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);

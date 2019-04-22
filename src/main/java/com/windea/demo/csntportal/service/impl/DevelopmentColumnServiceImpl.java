@@ -64,7 +64,7 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 
 	@Cacheable
 	@Override
-	public Page<DevelopmentColumn> findAllByTitleContaining(String title, Pageable pageable) {
+	public Page<DevelopmentColumn> findAllByTitle(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
 		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);

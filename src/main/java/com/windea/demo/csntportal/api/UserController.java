@@ -167,7 +167,7 @@ public class UserController {
 		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByNicknameContaining(nickname, pageable);
+		var resultPage = service.findAllByNickname(nickname, pageable);
 		return resultPage;
 	}
 }

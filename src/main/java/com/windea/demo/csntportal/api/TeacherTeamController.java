@@ -106,7 +106,7 @@ public class TeacherTeamController {
 		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByNameContaining(name, pageable);
+		var resultPage = service.findAllByName(name, pageable);
 		return resultPage;
 	}
 
@@ -119,7 +119,7 @@ public class TeacherTeamController {
 		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByProfessionLevelIn(levelSet, pageable);
+		var resultPage = service.findAllByProfessionLevel(levelSet, pageable);
 		return resultPage;
 	}
 
@@ -133,7 +133,7 @@ public class TeacherTeamController {
 		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByTeacherCountBetween(min, max, pageable);
+		var resultPage = service.findAllByTeacherCount(min, max, pageable);
 		return resultPage;
 	}
 

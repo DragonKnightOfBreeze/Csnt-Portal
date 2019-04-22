@@ -119,7 +119,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllBySubjectContaining(subject, pageable);
+		var resultPage = service.findAllBySubject(subject, pageable);
 		return resultPage;
 	}
 
@@ -145,7 +145,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByCategoryIn(categorySet, pageable);
+		var resultPage = service.findAllByCategory(categorySet, pageable);
 		return resultPage;
 	}
 

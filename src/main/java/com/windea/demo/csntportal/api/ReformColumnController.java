@@ -104,7 +104,7 @@ public class ReformColumnController {
 
 
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByTitleContaining(title, pageable);
+		var resultPage = service.findAllByTitle(title, pageable);
 		return resultPage;
 	}
 }

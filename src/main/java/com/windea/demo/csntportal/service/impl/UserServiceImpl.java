@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
 	@Cacheable
 	@Override
-	public Page<User> findAllByNicknameContaining(String nickname, Pageable pageable) {
+	public Page<User> findAllByNickname(String nickname, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		nickname = nickname.strip();
 		var resultPage = repository.findAllByNicknameContainingIgnoreCase(nickname, pageable);

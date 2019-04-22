@@ -20,5 +20,5 @@ public interface ReformColumnService {
 
 	Page<ReformColumn> findAll(Pageable pageable);
 
-	Page<ReformColumn> findAllByTitleContaining(String title, Pageable pageable);
+	Page<ReformColumn> findAllByTitle(String title, Pageable pageable);
 }

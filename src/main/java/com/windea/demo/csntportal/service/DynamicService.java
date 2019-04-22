@@ -25,9 +25,9 @@ public interface DynamicService {
 
 	Page<Dynamic> findAll(Pageable pageable);
 
-	Page<Dynamic> findAllBySubjectContaining(String title, Pageable pageable);
+	Page<Dynamic> findAllBySubject(String subject, Pageable pageable);
 
-	Page<Dynamic> findAllByCategoryIn(Set<DynamicCategory> categorySet, Pageable pageable);
+	Page<Dynamic> findAllByCategory(Set<DynamicCategory> categorySet, Pageable pageable);
 
 	Page<Dynamic> findAllBySponsorUsername(String username, Pageable pageable);
 

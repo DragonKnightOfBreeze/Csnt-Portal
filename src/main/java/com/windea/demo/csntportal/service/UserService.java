@@ -22,7 +22,7 @@ public interface UserService {
 
 	Page<User> findAll(Pageable pageable);
 
-	Page<User> findAllByNicknameContaining(String nickname, Pageable pageable);
+	Page<User> findAllByNickname(String nickname, Pageable pageable);
 
 	Page<User> findAllByGender(Gender gender, Pageable pageable);
 
