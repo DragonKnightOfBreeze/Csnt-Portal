@@ -4,15 +4,15 @@ package com.windea.demo.csntportal.enums;
  * 用户身份的枚举。
  */
 public enum Role {
-	VISITOR, STUDENT, TEACHER, ADMIN;
+	ROLE_VISITOR, ROLE_STUDENT, ROLE_TEACHER, ROLE_ADMIN;
 
 	@Override
 	public String toString() {
 		return switch(this) {
-			case VISITOR -> "游客";
-			case STUDENT -> "学生";
-			case TEACHER -> "教师";
-			case ADMIN -> "管理员";
+			case ROLE_VISITOR -> "游客";
+			case ROLE_STUDENT -> "学生";
+			case ROLE_TEACHER -> "教师";
+			case ROLE_ADMIN -> "管理员";
 		};
 	}
 }

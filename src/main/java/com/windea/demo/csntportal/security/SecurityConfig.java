@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			//NOTE 在这里配置路径权限规则
 			.antMatchers("/account/**").authenticated()
 			.antMatchers("/study-column/**").authenticated()
-			.antMatchers("/admin/**").hasRole(Role.ADMIN.toString())
+			.antMatchers("/admin/**").hasRole(Role.ROLE_ADMIN.toString())
 			.anyRequest().permitAll()
 			//登录：转发到`/login`。使用默认配置
 			//记住登录：指定一个checkbox的name为`remember-me`。使用默认配置

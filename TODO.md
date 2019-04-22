@@ -59,10 +59,10 @@
 
 # 功能实现
 
-- [ ] 配置文件
+- [X] 配置文件
     * @PropertySource,@Value只能与properties文件配套使用，而非yaml
     * @ConfigurationProperties可以实现自动注入，但是需要使用@EnableConfigurationProperties包含该组件类/Bean类
-- [ ] 实体类 domain
+- [X] 实体类 domain
     * **［注意事项］**
         * 添加必要的Jpa注解
             * 对于@Id，添加@GeneratedValue(strategy = GenerationType.AUTO)
@@ -131,10 +131,11 @@
         * 使用@Valid指定需要验证的输入数据，使用紧随的bindingResult得到可能的验证错误
         * 使用MultipleFile file得到传入的文件数据
         * 整合Spring Security和Jwt
-    * **［API参考］**
-        * `/index`,`/login`,`/logout`,`/register`,`/reset-password`
-        * `/account`,/`account/{username}`,`/account/{username}/dynamic`,`/account/{username}/settings`
-        * `/dynamic`,`/dynamic/{id}`,`/dynamic/list`
-        * `/admin`,`/admin/user/{id}`,`/admin/user/list`
+        * 为方法加上`@PreAuthorize("hasRole('ADMIN')")`以开启权限限制，注意数据库中存储的应该是`ROLE_ADMIN`
 
-        
+# API参考
+
+* `/index`,`/login`,`/logout`,`/register`,`/reset-password`
+* `/account`,/`account/{username}`,`/account/{username}/dynamic`,`/account/{username}/settings`
+* `/dynamic`,`/dynamic/{id}`,`/dynamic/list`
+* `/admin`,`/admin/user/{id}`,`/admin/user/list`   

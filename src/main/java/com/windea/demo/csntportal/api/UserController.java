@@ -41,11 +41,14 @@ public class UserController {
 		this.authenticationManager = authenticationManager;
 	}
 
+
 	/**
 	 * 注册用户。适用参数验证。
 	 */
 	@PostMapping("/register")
-	public ResponseEntity register(@Valid @RequestBody User user, BindingResult bindingResult) {
+	public ResponseEntity register(
+		@Valid @RequestBody User user, BindingResult bindingResult
+	) {
 		//首先处理已判定的验证错误，然后调用服务层，捕获异常分别处理
 		if(bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(bindingResult);
@@ -65,7 +68,9 @@ public class UserController {
 	 * 登录用户。使用参数验证。
 	 */
 	@PostMapping("/login")
-	public ResponseEntity login(@Valid @RequestBody UserLoginVo vo, BindingResult bindingResult) {
+	public ResponseEntity login(
+		@Valid @RequestBody UserLoginVo vo, BindingResult bindingResult
+	) {
 		if(bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(bindingResult);
 		}
@@ -91,8 +96,10 @@ public class UserController {
 	 * 修改用户信息。适用参数验证和权限认证。
 	 */
 	@PutMapping("/account")
-	public ResponseEntity update(@Valid @RequestBody User user, BindingResult bindingResult,
-		Principal principal) {
+	public ResponseEntity update(
+		@Valid @RequestBody User user, BindingResult bindingResult,
+		Principal principal
+	) {
 		if(bindingResult.hasErrors()) {
 			return ResponseEntity.badRequest().body(bindingResult);
 		}
@@ -112,7 +119,10 @@ public class UserController {
 	 * 重置用户密码。适用参数验证。
 	 */
 	@PutMapping("/reset-password")
-	public ResponseEntity resetPassword(@Valid @RequestBody UserResetPasswordVo vo, BindingResult bindingResult) {
+	public ResponseEntity resetPassword(
+		@Valid @RequestBody UserResetPasswordVo vo, BindingResult bindingResult,
+		Principal principal
+	) {
 		throw new NotImplementedException();
 	}
 
@@ -121,7 +131,10 @@ public class UserController {
 	 * 得到用户的账户信息。适用权限认证。
 	 */
 	@GetMapping("/account/{username}")
-	public ResponseEntity<User> getAccountInfo(@PathVariable("username") String username, Principal principal) {
+	public ResponseEntity<User> getAccountInfo(
+		@PathVariable String username,
+		Principal principal
+	) {
 		try {
 			//一般情况下，principal.name返回的是用户详情实体类用于验证的字段，这里是userDetails.username
 			var authenticated = Objects.equals(username, principal.getName());
@@ -136,8 +149,10 @@ public class UserController {
 	/**
 	 * 得到用户信息。
 	 */
-	@GetMapping("/admin/user/{id}")
-	public ResponseEntity<User> get(@PathVariable("id") Integer id) {
+	@GetMapping(value = "/user/{id}", params = "admin")
+	public ResponseEntity<User> get(
+		@PathVariable Integer id
+	) {
 		try {
 			var result = service.findById(id);
 			return ResponseEntity.ok(result);
@@ -148,11 +163,13 @@ public class UserController {
 
 
 	/**
-	 * 查询所有用户。
+	 * 查询所有用户信息。
 	 */
-	@GetMapping("/admin/user/list")
+	@GetMapping(value = "/user/list", params = "admin")
 	public ResponseEntity<Page<User>> list(
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
+	) {
 		try {
 			var pageable = PageRequest.of(page - 1, size);
 			var resultPage = service.findAll(pageable);
@@ -163,11 +180,14 @@ public class UserController {
 	}
 
 	/**
-	 * 根据昵称查询用户。
+	 * 根据昵称查询用户信息。
 	 */
-	@GetMapping("/admin/user/search")
-	public ResponseEntity<Page<User>> searchByNickname(@RequestParam String nickname,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
+	@GetMapping(value = "/user/search", params = "admin")
+	public ResponseEntity<Page<User>> searchByNickname(
+		@RequestParam String nickname,
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
+	) {
 		try {
 			var pageable = PageRequest.of(page - 1, size);
 			var resultPage = service.findAllByNicknameContaining(nickname, pageable);
