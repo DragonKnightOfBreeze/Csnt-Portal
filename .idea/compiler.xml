@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="12">
-      <module name="Csnt Portal" target="12" />
+      <module name="Csnt Portal" target="12(Preview)" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

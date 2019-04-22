@@ -104,8 +104,8 @@
         <configuration>
           <compilerArgument>--enable-preview</compilerArgument>
           <testCompilerArgument>--enable-preview</testCompilerArgument>
-          <source>12</source>
-          <target>12</target>
+          <source>12(Preview)</source>
+          <target>12(Preview)</target>
         </configuration>
       </plugin>
       <plugin>
