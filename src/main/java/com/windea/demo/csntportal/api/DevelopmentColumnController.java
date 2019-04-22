@@ -5,6 +5,7 @@ import com.windea.demo.csntportal.service.DevelopmentColumnService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ public class DevelopmentColumnController {
 	/**
 	 * 新建专业发展专栏信息。
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/create", params = "admin")
 	public ResponseEntity create(
 		@Valid @RequestBody DevelopmentColumn column, BindingResult bindingResult
@@ -42,6 +44,7 @@ public class DevelopmentColumnController {
 	/**
 	 * 删除专业发展专栏信息。
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping(value = "/{id}", params = "admin")
 	public ResponseEntity delete(
 		@PathVariable Integer id
@@ -53,6 +56,7 @@ public class DevelopmentColumnController {
 	/**
 	 * 更新专业发展专栏信息。
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping(value = "/update", params = "admin")
 	public ResponseEntity update(
 		@Valid @RequestBody DevelopmentColumn column, BindingResult bindingResult

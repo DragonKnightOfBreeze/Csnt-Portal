@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -149,6 +150,7 @@ public class UserController {
 	/**
 	 * 得到用户信息。
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/user/{id}", params = "admin")
 	public ResponseEntity<User> get(
 		@PathVariable Integer id
@@ -161,10 +163,10 @@ public class UserController {
 		}
 	}
 
-
 	/**
 	 * 查询所有用户信息。
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/user/list", params = "admin")
 	public ResponseEntity<Page<User>> list(
 		@RequestParam(defaultValue = "1") Integer page,
@@ -182,6 +184,7 @@ public class UserController {
 	/**
 	 * 根据昵称查询用户信息。
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/user/search", params = "admin")
 	public ResponseEntity<Page<User>> searchByNickname(
 		@RequestParam String nickname,
