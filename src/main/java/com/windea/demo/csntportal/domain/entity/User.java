@@ -2,7 +2,6 @@ package com.windea.demo.csntportal.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.commons.base.template.TBean;
-import com.windea.demo.csntportal.GlobalConsts;
 import com.windea.demo.csntportal.enums.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,7 +27,7 @@ public class User extends TBean implements UserDetails {
 
 	/** 用户名。 */
 	@NotEmpty(message = "{user.username.notEmpty}")
-	@Pattern(regexp = GlobalConsts.RE_USERNAME, message = "{user.username.pattern}")
+	@Pattern(regexp = RegexConsts.USERNAME, message = "{user.username.pattern}")
 	@Column(unique = true, nullable = false, length = 12)
 	private String username;
 
@@ -36,7 +35,7 @@ public class User extends TBean implements UserDetails {
 	//密码需要被忽略掉，尽管是加密后的，并且不要限制行的长度
 	@JsonIgnore
 	@NotEmpty(message = "{user.password.notEmpty}")
-	@Pattern(regexp = GlobalConsts.RE_PASSWORD, message = "{user.password.pattern}")
+	@Pattern(regexp = RegexConsts.PASSWORD, message = "{user.password.pattern}")
 	@Column(nullable = false)
 	private String password;
 

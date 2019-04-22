@@ -16,7 +16,7 @@ import java.util.Date;
  * Jwt提供器的组件。
  */
 @Component
-//使用这个注解从application.yml中的对应前缀的属性注入到对应的字段
+//使用这个注解从application.yml中的对应前缀的属性注入到对应的字段，必须是组件类或者已经显示声明
 @ConfigurationProperties("com.windea.security")
 public class JwtProvider {
 	private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);

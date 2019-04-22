@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.domain.vo;
 
-import com.windea.demo.csntportal.GlobalConsts;
+import com.windea.demo.csntportal.enums.RegexConsts;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 public class UserResetPasswordVo {
 	/** 密码。 */
 	@NotEmpty(message = "{user.password.notEmpty}")
-	@Pattern(regexp = GlobalConsts.RE_PASSWORD, message = "{user.password.pattern}")
+	@Pattern(regexp = RegexConsts.PASSWORD, message = "{user.password.pattern}")
 	private String password;
 
 
