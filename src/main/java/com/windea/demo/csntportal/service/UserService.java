@@ -21,8 +21,6 @@ public interface UserService extends UserDetailsService, UserDetailsPasswordServ
 
 	User findByUsername(String username);
 
-	User findByUsernameAndPassword(String username, String password);
-
 
 	Page<User> findAll(Pageable pageable);
 

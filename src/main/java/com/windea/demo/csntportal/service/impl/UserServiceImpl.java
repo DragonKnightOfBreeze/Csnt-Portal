@@ -64,13 +64,6 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
-	@Override
-	public User findByUsernameAndPassword(String username, String password) {
-		var result = repository.findByUsernameAndPassword(username, password);
-		Assert.notNull(result, () -> {throw new UserNotFoundException();});
-		return result;
-	}
-
 
 	@Override
 	public Page<User> findAll(Pageable pageable) {

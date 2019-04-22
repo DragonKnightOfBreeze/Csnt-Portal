@@ -17,7 +17,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -82,11 +81,10 @@ public class UserController {
 			SecurityContextHolder.getContext().setAuthentication(fullAuth);
 			//生成jwt口令并据此找到用户详情实体类对象
 			String jwt = jwtProvider.generate(fullAuth);
-			var userDetails = (UserDetails) fullAuth.getPrincipal();
 			//根据用户详情实体类对象中的用户名字段，从数据库进行查找
 			//NOTE 没有必要在服务层编写根据用户名和密码查找用户的方法，数据库中的密码已加密
-			var user = service.findByUsername(userDetails.getUsername());
-
+			var user = (User) fullAuth.getPrincipal();
+			//NOTE 返回的包含jwt令牌的jwt响应视图对象
 			var result = new JwtResponseVo(jwt, user.getUsername(), user.getRole());
 			return ResponseEntity.ok(result);
 		} catch(Exception e) {
