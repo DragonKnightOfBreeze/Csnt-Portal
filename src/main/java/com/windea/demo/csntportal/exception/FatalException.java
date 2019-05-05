@@ -5,7 +5,7 @@ import com.windea.demo.csntportal.enums.ResultState;
 /**
  * 致命异常。
  */
-public class FatalException extends Exception {
+public class FatalException extends BaseException {
 	private static final long serialVersionUID = 8383347505896659664L;
 
 	public FatalException() {
@@ -14,13 +14,5 @@ public class FatalException extends Exception {
 
 	public FatalException(String message) {
 		super(message);
-	}
-
-	public FatalException(Throwable throwable) {
-		super(throwable);
-	}
-
-	public FatalException(String message, Throwable throwable) {
-		super(message, throwable);
 	}
 }

@@ -1,9 +1,8 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.demo.csntportal.domain.entity.Introduce;
-import com.windea.demo.csntportal.exception.ValidateException;
+import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.service.IntroduceService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -34,7 +33,7 @@ public class IntroduceController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidateException();});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
 		var result = service.save(introduce);
 		return result;
@@ -45,11 +44,10 @@ public class IntroduceController {
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping(value = "/{id}", params = "role=admin")
-	public ResponseEntity delete(
+	public void delete(
 		@PathVariable Integer id
 	) {
 		service.deleteById(id);
-		return ResponseEntity.ok().build();
 	}
 
 	/**
@@ -62,7 +60,7 @@ public class IntroduceController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidateException();});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
 		var result = service.update(introduce);
 		return result;

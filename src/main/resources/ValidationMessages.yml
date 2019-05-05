@@ -2,7 +2,7 @@
 
 # **Validation特殊语法**
 
-# 通过`{propName}`引用`classpath:ValidationMessages.{properties,yml}`的对应属性的值。`propName`是相对于配置文件的全路径。
+# 通过`{propName}`引用`classpath:ValidationMessages.properties的对应属性的值。`propName`是相对于配置文件的全路径。
 # 通过`{propName}`引用注解中的其他属性的值。
 # 通过`${validatedValue}`引用要验证的字段的值，附带`.length()`等方法。
 

@@ -15,12 +15,4 @@ public class ResultNotFoundException extends BaseException {
 	public ResultNotFoundException(String message) {
 		super(message);
 	}
-
-	public ResultNotFoundException(Throwable throwable) {
-		super(throwable);
-	}
-
-	public ResultNotFoundException(String message, Throwable throwable) {
-		super(message, throwable);
-	}
 }

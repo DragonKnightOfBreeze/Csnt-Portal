@@ -10,8 +10,8 @@ public enum ResultState implements IEnumWithText {
 	VALIDATE_ERROR("错误：验证错误！"),
 	RESULT_EMPTY("错误：查询结果为空！"),
 	RESULT_NOT_FOUND("错误：查询结果不存在！"),
-	USER_DUPLICATE("错误：用户重复！"),
 	USER_NOT_ACCEPTED("错误：用户不被接受！"),
+	USER_DUPLICATE("错误：用户重复！"),
 	USER_NOT_FOUND("错误：用户不存在！"),
 	FATAL_ERROR("错误：致命错误！");
 

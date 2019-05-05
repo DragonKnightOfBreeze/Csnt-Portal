@@ -47,6 +47,18 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
+	//TESTED 参数验证错误
+	@WithMockUser("abc")
+	@Test
+	public void createTest4() throws Exception {
+		var dynamic = new Dynamic("", DynamicCategory.CHAT, "没有内容");
+		var jsonStr = JSONObject.toJSONString(dynamic);
+
+		mockMvc.perform(post("/dynamic/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
+			.andExpect(status().isBadRequest())
+			.andDo(print());
+	}
+
 	//TESTED notAcceptable
 	@WithMockUser("noob")
 	@Test
@@ -86,11 +98,6 @@ public class DynamicControllerTests {
 		mockMvc.perform(delete("/dynamic/4").param("role", "admin"))
 			.andExpect(status().isOk())
 			.andDo(print());
-	}
-
-	@Test
-	public void deleteByUserTest() {
-
 	}
 
 	//TESTED
@@ -136,7 +143,7 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
-	//TESTED
+	//TESTED noContent
 	@Test
 	public void searchByBySubjectTest2() throws Exception {
 		mockMvc.perform(get("/dynamic/search").param("method", "subject").param("subject", "XXX"))

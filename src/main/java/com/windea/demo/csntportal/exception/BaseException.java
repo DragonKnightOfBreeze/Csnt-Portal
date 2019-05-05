@@ -13,12 +13,4 @@ public abstract class BaseException extends RuntimeException {
 	public BaseException(String message) {
 		super(message);
 	}
-
-	public BaseException(Throwable throwable) {
-		super(throwable);
-	}
-
-	public BaseException(String message, Throwable throwable) {
-		super(message, throwable);
-	}
 }

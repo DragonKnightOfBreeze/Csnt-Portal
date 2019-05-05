@@ -2,7 +2,8 @@ package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.enums.*;
-import com.windea.demo.csntportal.exception.*;
+import com.windea.demo.csntportal.exception.ResultEmptyException;
+import com.windea.demo.csntportal.exception.ResultNotFoundException;
 import com.windea.demo.csntportal.repository.UserRepository;
 import com.windea.demo.csntportal.service.UserService;
 import org.springframework.cache.annotation.*;
@@ -32,9 +33,6 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public User save(User user) {
-		//不允许重复用户名、邮箱和电话号码的新注册用户
-		var exists = exists(user.getUsername(), user.getEmail(), user.getPhoneNum());
-		Assert.isTrue(exists, () -> {throw new UserDuplicateException();});
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return repository.save(user);
 	}

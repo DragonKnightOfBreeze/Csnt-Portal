@@ -36,7 +36,7 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Dynamic saveBySponsorUsername(Dynamic dynamic, String username) {
 		var user = userRepository.findByUsername(username);
-		Assert.notNull(user, () -> {throw new UserNotAcceptedException();});
+		Assert.notNull(user, () -> {throw new UserNotAcceptableException();});
 		dynamic.setSponsorUser(user);
 		return repository.save(dynamic);
 	}
@@ -55,7 +55,7 @@ public class DynamicServiceImpl implements DynamicService {
 		//需要检查发起用户的用户名是否与当前的用户名相一致
 		var user = repository.findSponsorUserById(id).getSponsorUser();
 		var matches = Objects.equals(username, user.getUsername());
-		Assert.isTrue(matches, () -> {throw new UserNotAcceptedException();});
+		Assert.isTrue(matches, () -> {throw new UserNotAcceptableException();});
 		repository.deleteById(id);
 	}
 

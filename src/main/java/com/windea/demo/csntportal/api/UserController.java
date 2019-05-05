@@ -4,13 +4,11 @@ import com.windea.commons.base.exception.NotImplementedException;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.UserLoginVo;
 import com.windea.demo.csntportal.domain.vo.UserResetPasswordVo;
-import com.windea.demo.csntportal.exception.UserNotAcceptedException;
-import com.windea.demo.csntportal.exception.ValidateException;
+import com.windea.demo.csntportal.exception.*;
 import com.windea.demo.csntportal.security.*;
 import com.windea.demo.csntportal.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,16 +44,20 @@ public class UserController {
 	 * 注册用户。适用参数验证。
 	 */
 	@PostMapping("/register")
-	public ResponseEntity register(
+	public User register(
 		@Valid @RequestBody User user,
 		BindingResult bindingResult
 	) {
 		//首先处理已判定的验证错误，然后调用服务层，异常处理交由全局异常处理器
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidateException();});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+
+		//不允许重复用户名、邮箱和电话号码的新注册用户
+		var exists = service.exists(user.getUsername(), user.getEmail(), user.getPhoneNum());
+		Assert.isTrue(exists, () -> {throw new UserDuplicateException();});
 
 		var result = service.save(user);
-		return ResponseEntity.ok(result);
+		return result;
 	}
 
 	/**
@@ -67,7 +69,7 @@ public class UserController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidateException();});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
 		//创建验证令牌，然后进行验证，然后保存到SecurityContextHolder中
 		var auth = new UsernamePasswordAuthenticationToken(vo.getUsername(), vo.getPassword());
@@ -96,11 +98,11 @@ public class UserController {
 		Principal principal
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidateException();});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
 		//一般情况下，principal.name返回的是用户详情实体类用于验证的字段，这里是userDetails.username
 		var authenticated = Objects.equals(user.getUsername(), principal.getName());
-		Assert.isTrue(authenticated, () -> {throw new UserNotAcceptedException();});
+		Assert.isTrue(authenticated, () -> {throw new UserNotAcceptableException();});
 
 		var result = service.update(user);
 		return result;
@@ -111,7 +113,7 @@ public class UserController {
 	 * 重置用户密码。适用参数验证。
 	 */
 	@PutMapping("/reset-password")
-	public ResponseEntity resetPassword(
+	public void resetPassword(
 		@Valid @RequestBody UserResetPasswordVo vo,
 		BindingResult bindingResult,
 		Principal principal
@@ -130,7 +132,7 @@ public class UserController {
 	) {
 		//一般情况下，principal.name返回的是用户详情实体类用于验证的字段，这里是userDetails.username
 		var authenticated = Objects.equals(username, principal.getName());
-		Assert.isTrue(authenticated, () -> {throw new UserNotAcceptedException();});
+		Assert.isTrue(authenticated, () -> {throw new UserNotAcceptableException();});
 
 		var result = service.findByUsername(username);
 		return result;

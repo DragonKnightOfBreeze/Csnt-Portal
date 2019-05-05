@@ -155,7 +155,15 @@
         * 第二种方式：
         * 定义一个控制器，实现ErrorController，然后在里面定义数个注有`@ExceptionHandler(YourException.class)`的方法
         * 将这些方法的返回值设为`ResponseEntity<T>`，即可当其他映射方法发生异常时，返回对应异常的处理方法返回的`ResponseEntity<T>`。
-        
+
+# 测试
+
+- [X] 控制层的一般数据库操作功能测试
+- [X] 一般的错误处理
+- [X] 参数验证功能
+- [ ] 参数验证消息的正确显示
+- [ ] 权限验证功能（次要功能，@PreAuthorize不知为何在控制层不起效）
+
 # API参考
 
 * 指定查询类型：添加参数`method=title`,`method=nickname`

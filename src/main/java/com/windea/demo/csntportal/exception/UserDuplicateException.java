@@ -5,7 +5,7 @@ import com.windea.demo.csntportal.enums.ResultState;
 /**
  * 用户重复时的异常。
  */
-public class UserDuplicateException extends RuntimeException {
+public class UserDuplicateException extends BaseException {
 	private static final long serialVersionUID = 7043120389926838859L;
 
 	public UserDuplicateException() {
@@ -14,13 +14,5 @@ public class UserDuplicateException extends RuntimeException {
 
 	public UserDuplicateException(String message) {
 		super(message);
-	}
-
-	public UserDuplicateException(Throwable throwable) {
-		super(throwable);
-	}
-
-	public UserDuplicateException(String message, Throwable throwable) {
-		super(message, throwable);
 	}
 }

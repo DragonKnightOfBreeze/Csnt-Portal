@@ -5,7 +5,6 @@ import com.windea.demo.csntportal.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -16,58 +15,52 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice(basePackages = "com.windea.demo.csntportal.api")
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(FatalException.class)
-	ResponseEntity<?> handleFatalException(Exception e) {
+	ResponseEntity<?> handleFatalException(FatalException e) {
 		e.printStackTrace();
 		return ResponseEntity.badRequest().build();
 	}
 
 	@ExceptionHandler(ResultEmptyException.class)
-	ResponseEntity<?> handleResultEmptyException(Exception e) {
+	ResponseEntity<?> handleResultEmptyException(ResultEmptyException e) {
 		e.printStackTrace();
 		return ResponseEntity.noContent().build();
 	}
 
 	@ExceptionHandler(ResultNotFoundException.class)
-	ResponseEntity<?> handleResultNotFoundException(Exception e) {
+	ResponseEntity<?> handleResultNotFoundException(ResultNotFoundException e) {
 		e.printStackTrace();
 		return ResponseEntity.notFound().build();
 	}
 
-	@ExceptionHandler(UserDuplicateException.class)
-	ResponseEntity<?> handleUserDuplicateException(Exception e, BindingResult bindingResult) {
-		e.printStackTrace();
-		bindingResult.reject("user.duplicate");
-		return ResponseEntity.badRequest().body(bindingResult);
-	}
-
-	@ExceptionHandler(UserNotAcceptedException.class)
-	ResponseEntity<?> handleUserNotAcceptedException(Exception e) {
+	@ExceptionHandler(UserNotAcceptableException.class)
+	ResponseEntity<?> handleUserNotAcceptableException(UserNotAcceptableException e) {
 		e.printStackTrace();
 		return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
 	}
 
-	@ExceptionHandler(ValidateException.class)
-	ResponseEntity<?> handleValidateException(Exception e, BindingResult bindingResult) {
+	@ExceptionHandler(ValidationException.class)
+	ResponseEntity<?> handleValidationException(ValidationException e) {
 		e.printStackTrace();
-		return ResponseEntity.badRequest().body(bindingResult);
+		return ResponseEntity.badRequest().body(e);
 	}
 
-	/**
-	 * 处理安全验证异常。
-	 */
+	@ExceptionHandler(UserDuplicateException.class)
+	ResponseEntity<?> handleUserDuplicateException(UserDuplicateException e) {
+		e.printStackTrace();
+		return ResponseEntity.badRequest().body(e);
+	}
+
+
 	@ExceptionHandler(AuthenticationException.class)
-	ResponseEntity<?> handleAuthException(Exception e) {
+	ResponseEntity<?> handleAuthException(AuthenticationException e) {
 		e.printStackTrace();
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 
-	/**
-	 * 处理其他异常。<br>
-	 * NOTE 可以通过该方法处理其他未明确的异常，但是优先级高于`@ResponseStatus`。
-	 */
+	//NOTE 可以通过该方法处理其他未明确的异常，但是优先级高于`@ResponseStatus`。
 	@ExceptionHandler(Exception.class)
 	ResponseEntity<?> handleOtherException(Exception e) {
 		e.printStackTrace();
-		return ResponseEntity.badRequest().body("Fatal Exception!");
+		return ResponseEntity.badRequest().body(e);
 	}
 }

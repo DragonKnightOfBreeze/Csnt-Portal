@@ -4,11 +4,10 @@ import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
-import com.windea.demo.csntportal.exception.ValidateException;
+import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.service.DynamicService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -41,7 +40,7 @@ public class DynamicController {
 		Principal principal
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidateException();});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
 		var username = principal.getName();
 		var result = service.saveBySponsorUsername(dynamic, username);
@@ -53,11 +52,10 @@ public class DynamicController {
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping(value = "/{id}", params = "role=admin")
-	public ResponseEntity delete(
+	public void delete(
 		@PathVariable Integer id
 	) {
 		service.deleteById(id);
-		return ResponseEntity.ok().build();
 	}
 
 	/**
@@ -65,13 +63,12 @@ public class DynamicController {
 	 */
 	@PreAuthorize("hasAnyRole('STUDENT','TEACHER','VISITOR')")
 	@DeleteMapping(value = "/{id}", params = "role=nonAdmin")
-	public ResponseEntity deleteByUser(
+	public void deleteByUser(
 		@PathVariable Integer id,
 		Principal principal
 	) {
 		var username = principal.getName();
 		service.deleteByIdAndSponsorUsername(id, username);
-		return ResponseEntity.ok().build();
 	}
 
 
