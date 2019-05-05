@@ -90,7 +90,8 @@ public class TeacherTeamController {
 	 */
 	@GetMapping("/list")
 	public Page<TeacherTeam> list(
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAll(pageable);
@@ -103,7 +104,8 @@ public class TeacherTeamController {
 	@GetMapping(value = "/search", params = "method=name")
 	public Page<TeacherTeam> searchByName(
 		@RequestParam String name,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByName(name, pageable);
@@ -116,7 +118,8 @@ public class TeacherTeamController {
 	@GetMapping(value = "/search", params = "method=professionLevel")
 	public Page<TeacherTeam> searchByProfessionLevel(
 		@RequestParam Set<ProfessionLevel> levelSet,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByProfessionLevel(levelSet, pageable);
@@ -130,7 +133,8 @@ public class TeacherTeamController {
 	public Page<TeacherTeam> searchByTeacherCount(
 		@RequestParam Integer min,
 		@RequestParam Integer max,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByTeacherCount(min, max, pageable);
@@ -142,8 +146,9 @@ public class TeacherTeamController {
 	 */
 	@GetMapping("/advanceSearch")
 	public Page<TeacherTeam> advanceSearch(
-		@RequestParam TeacherTeamSearchVo vo,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestBody TeacherTeamSearchVo vo,
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByConditions(vo, pageable);

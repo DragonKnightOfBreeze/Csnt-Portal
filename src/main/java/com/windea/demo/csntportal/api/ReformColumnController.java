@@ -24,6 +24,7 @@ public class ReformColumnController {
 
 	public ReformColumnController(ReformColumnService service) {this.service = service;}
 
+
 	/**
 	 * 新建教学改革专栏信息。
 	 */
@@ -86,7 +87,8 @@ public class ReformColumnController {
 	 */
 	@GetMapping("/list")
 	public Page<ReformColumn> list(
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAll(pageable);
@@ -99,10 +101,9 @@ public class ReformColumnController {
 	@GetMapping(value = "/search", params = "method=title")
 	public Page<ReformColumn> searchByTitle(
 		@RequestParam String title,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
-
-
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByTitle(title, pageable);
 		return resultPage;

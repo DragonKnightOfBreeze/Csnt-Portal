@@ -53,11 +53,10 @@ public class Dynamic extends TBean {
 
 	public Dynamic() {}
 
-	public Dynamic(String subject, DynamicCategory category, String content, User sponsorUser) {
+	public Dynamic(String subject, DynamicCategory category, String content) {
 		this.subject = subject;
 		this.category = category;
 		this.content = content;
-		this.sponsorUser = sponsorUser;
 	}
 
 

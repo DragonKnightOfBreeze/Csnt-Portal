@@ -3,7 +3,6 @@ package com.windea.demo.csntportal.api;
 import com.windea.demo.csntportal.domain.entity.Introduce;
 import com.windea.demo.csntportal.exception.ValidateException;
 import com.windea.demo.csntportal.service.IntroduceService;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
@@ -86,10 +85,7 @@ public class IntroduceController {
 	 * 查询所有专业特色介绍信息。
 	 */
 	@GetMapping("/list")
-	public List<Introduce> list(
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
-	) {
-		var pageable = PageRequest.of(page - 1, size);
+	public List<Introduce> list() {
 		var resultList = service.findAll();
 		return resultList;
 	}

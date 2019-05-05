@@ -47,7 +47,8 @@ public class UserController {
 	 */
 	@PostMapping("/register")
 	public ResponseEntity register(
-		@Valid @RequestBody User user, BindingResult bindingResult
+		@Valid @RequestBody User user,
+		BindingResult bindingResult
 	) {
 		//首先处理已判定的验证错误，然后调用服务层，异常处理交由全局异常处理器
 		var validated = !bindingResult.hasErrors();
@@ -62,7 +63,8 @@ public class UserController {
 	 */
 	@PostMapping("/login")
 	public JwtResponseVo login(
-		@Valid @RequestBody UserLoginVo vo, BindingResult bindingResult
+		@Valid @RequestBody UserLoginVo vo,
+		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
 		Assert.isTrue(validated, () -> {throw new ValidateException();});
@@ -89,7 +91,8 @@ public class UserController {
 	 */
 	@PutMapping("/account")
 	public User update(
-		@Valid @RequestBody User user, BindingResult bindingResult,
+		@Valid @RequestBody User user,
+		BindingResult bindingResult,
 		Principal principal
 	) {
 		var validated = !bindingResult.hasErrors();
@@ -109,7 +112,8 @@ public class UserController {
 	 */
 	@PutMapping("/reset-password")
 	public ResponseEntity resetPassword(
-		@Valid @RequestBody UserResetPasswordVo vo, BindingResult bindingResult,
+		@Valid @RequestBody UserResetPasswordVo vo,
+		BindingResult bindingResult,
 		Principal principal
 	) {
 		throw new NotImplementedException();
@@ -150,7 +154,8 @@ public class UserController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping(value = "/user/list", params = "role=admin")
 	public Page<User> list(
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAll(pageable);
@@ -164,7 +169,8 @@ public class UserController {
 	@GetMapping(value = "/user/search", params = {"role=admin", "method=nickname"})
 	public Page<User> searchByNickname(
 		@RequestParam String nickname,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByNickname(nickname, pageable);

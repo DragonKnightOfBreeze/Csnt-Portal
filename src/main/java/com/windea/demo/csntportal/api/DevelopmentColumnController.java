@@ -87,7 +87,8 @@ public class DevelopmentColumnController {
 	 */
 	@GetMapping("/list")
 	public Page<DevelopmentColumn> list(
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAll(pageable);
@@ -100,7 +101,8 @@ public class DevelopmentColumnController {
 	@GetMapping(value = "/search", params = "method=title")
 	public Page<DevelopmentColumn> searchByTitle(
 		@RequestParam String title,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByTitle(title, pageable);

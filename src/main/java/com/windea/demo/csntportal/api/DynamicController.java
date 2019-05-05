@@ -103,7 +103,8 @@ public class DynamicController {
 	 */
 	@GetMapping("/list")
 	public Page<Dynamic> list(
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAll(pageable);
@@ -116,7 +117,8 @@ public class DynamicController {
 	@GetMapping(value = "/search", params = "method=subject")
 	public Page<Dynamic> searchBySubject(
 		@RequestParam String subject,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllBySubject(subject, pageable);
@@ -129,7 +131,8 @@ public class DynamicController {
 	@GetMapping(value = "/search", params = "method=sponsorUsername")
 	public Page<Dynamic> searchBySponsorUsername(
 		@RequestParam String sponsorUsername,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllBySponsorUsername(sponsorUsername, pageable);
@@ -139,10 +142,11 @@ public class DynamicController {
 	/**
 	 * 根据分类查询动态信息。
 	 */
-	@GetMapping(value = "/search", params = "method=dynamicCategory")
-	public Page<Dynamic> searchBySubject(
+	@GetMapping(value = "/search", params = "method=category")
+	public Page<Dynamic> searchByCategory(
 		@RequestParam Set<DynamicCategory> categorySet,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByCategory(categorySet, pageable);
@@ -152,10 +156,11 @@ public class DynamicController {
 	/**
 	 * 根据高级查询查询动态信息。
 	 */
-	@GetMapping(value = "/advanceSearch")
+	@GetMapping("/advanceSearch")
 	public Page<Dynamic> advanceSearch(
-		@RequestParam DynamicSearchVo vo,
-		@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size
+		@RequestBody DynamicSearchVo vo,
+		@RequestParam(defaultValue = "1") Integer page,
+		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
 		var resultPage = service.findAllByConditions(vo, pageable);

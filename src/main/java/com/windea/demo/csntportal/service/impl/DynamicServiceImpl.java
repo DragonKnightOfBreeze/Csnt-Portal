@@ -36,7 +36,7 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Dynamic saveBySponsorUsername(Dynamic dynamic, String username) {
 		var user = userRepository.findByUsername(username);
-		Assert.notNull(user, () -> {throw new ResultNotFoundException();});
+		Assert.notNull(user, () -> {throw new UserNotAcceptedException();});
 		dynamic.setSponsorUser(user);
 		return repository.save(dynamic);
 	}
