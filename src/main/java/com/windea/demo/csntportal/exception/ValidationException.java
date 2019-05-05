@@ -9,6 +9,12 @@ import org.springframework.validation.BindingResult;
 public class ValidationException extends BaseException {
 	private static final long serialVersionUID = 7640466193309767723L;
 
+	protected BindingResult bindingResult;
+
+	public BindingResult getBindingResult() {
+		return bindingResult;
+	}
+
 	public ValidationException() {
 		super(ResultState.VALIDATE_ERROR.text());
 	}
@@ -18,6 +24,7 @@ public class ValidationException extends BaseException {
 	}
 
 	public ValidationException(BindingResult bindingResult) {
-		super(bindingResult.getAllErrors().get(0).toString());
+		super(ResultState.VALIDATE_ERROR.text());
+		this.bindingResult = bindingResult;
 	}
 }

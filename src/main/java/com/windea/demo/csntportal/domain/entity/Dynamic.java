@@ -23,8 +23,8 @@ public class Dynamic extends TBean {
 	private Integer id;
 
 	/** 主题。 */
-	@NotEmpty(message = "{validation.dynamic.subject.notEmpty}")
-	@Size(min = 1, max = 32, message = "{validation.dynamic.subject.size}")
+	@NotEmpty(message = "validation.dynamic.subject.notEmpty")
+	@Size(min = 1, max = 32, message = "validation.dynamic.subject.size")
 	@Column(nullable = false, length = 32, columnDefinition = "varchar default '请输入主体'")
 	private String subject;
 
@@ -33,7 +33,7 @@ public class Dynamic extends TBean {
 	private DynamicCategory category;
 
 	/** 内容。 */
-	@NotEmpty(message = "{validation.dynamic.content.notEmpty}")
+	@NotEmpty(message = "validation.dynamic.content.notEmpty")
 	@Column(nullable = false, columnDefinition = "text default '请输入内容'")
 	private String content;
 

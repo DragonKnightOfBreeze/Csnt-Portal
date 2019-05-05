@@ -41,13 +41,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(ValidationException.class)
 	ResponseEntity<?> handleValidationException(ValidationException e) {
 		e.printStackTrace();
-		return ResponseEntity.badRequest().body(e);
-	}
-
-	@ExceptionHandler(UserDuplicateException.class)
-	ResponseEntity<?> handleUserDuplicateException(UserDuplicateException e) {
-		e.printStackTrace();
-		return ResponseEntity.badRequest().body(e);
+		return ResponseEntity.badRequest().body(e.getBindingResult());
 	}
 
 

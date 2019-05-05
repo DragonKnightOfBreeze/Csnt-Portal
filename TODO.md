@@ -160,14 +160,13 @@
 
 - [X] 控制层的一般数据库操作功能测试
 - [X] 一般的错误处理
-- [X] 参数验证功能
-- [X] 参数验证消息的正确显示
-- [ ] 权限验证功能（次要功能，@PreAuthorize不知为何在控制层不起效）
+- [X] 参数验证功能（验证出错时返回BindingResult）
+- [X] 参数验证消息的正确显示（IDE已能够正确地解析属性）
+- [ ] 权限验证功能（次要功能，@PreAuthorize不知为何在控制层测试不起效）
 
 # API参考
 
 * 指定查询类型：添加参数`method=title`,`method=nickname`
-* 
 * `/index`,`/login`,`/logout`,`/register`,`/reset-password`
 * `/account`,/`account/{username}`,~~`/account/{username}/dynamic`~~,~~`/account/{username}/settings`~~
 * `/dynamic`,`/dynamic/{id}`,`/dynamic/list`,`/dynamic/search?method=xxx`,`/dynamic/advanceSearch``

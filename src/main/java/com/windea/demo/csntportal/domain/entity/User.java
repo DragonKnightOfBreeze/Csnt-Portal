@@ -26,34 +26,34 @@ public class User extends TBean implements UserDetails {
 	private Integer id;
 
 	/** 用户名。 */
-	@NotEmpty(message = "{validation.user.username.notEmpty}")
-	@Pattern(regexp = RegexConsts.USERNAME, message = "{validation.user.username.pattern}")
+	@NotEmpty(message = "validation.user.username.notEmpty")
+	@Pattern(regexp = RegexConsts.USERNAME, message = "validation.user.username.pattern")
 	@Column(unique = true, nullable = false, length = 12)
 	private String username;
 
 	/** 密码。 */
 	//密码需要被忽略掉，尽管是加密后的，并且不要限制行的长度
 	@JsonIgnore
-	@NotEmpty(message = "{validation.user.password.notEmpty}")
-	@Pattern(regexp = RegexConsts.PASSWORD, message = "{validation.user.password.pattern}")
+	@NotEmpty(message = "validation.user.password.notEmpty")
+	@Pattern(regexp = RegexConsts.PASSWORD, message = "validation.user.password.pattern")
 	@Column(nullable = false)
 	private String password;
 
 	/** 电话号码。 */
-	@NotEmpty(message = "{validation.user.phoneNum.notEmpty}")
-	@Size(min = 11, max = 11, message = "{validation.user.phoneNum.size}")
+	@NotEmpty(message = "validation.user.phoneNum.notEmpty")
+	@Size(min = 11, max = 11, message = "validation.user.phoneNum.size")
 	@Column(unique = true, nullable = false, length = 11)
 	private String phoneNum;
 
 	/** 邮箱地址。 */
-	@NotEmpty(message = "{validation.user.email.notEmpty}")
-	@Email(message = "{validation.user.email.email}")
+	@NotEmpty(message = "validation.user.email.notEmpty")
+	@Email(message = "validation.user.email.email")
 	@Column(unique = true, nullable = false)
 	private String email;
 
 	/** 昵称。 */
-	@NotEmpty(message = "{validation.user.nickname.notEmpty}")
-	@Size(min = 1, max = 32, message = "{validation.user.nickname.size}")
+	@NotEmpty(message = "validation.user.nickname.notEmpty")
+	@Size(min = 1, max = 32, message = "validation.user.nickname.size")
 	@Column(nullable = false, length = 32)
 	private String nickname;
 
