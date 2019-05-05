@@ -119,6 +119,20 @@ README.md       # 说明文档
 
 ## 如何整合前后端
 
-* 后端直接使用@RestController，绑定Rest风格的url，收发json数据。（仍然需要为参数添加必要的@RequestParam）
+* 后端直接使用`@RestController`，绑定Rest风格的url，收发json数据。
+* 仍然需要添加必要的`@PathVariable`，为GET请求添加必要的`@RequestParam`，为其他请求添加必要的`@RequestBody`
 * 前端直接通过http请求，指定对应数据类型的泛型，以对应的url和http头为参数，收发json数据。
 * 后端不需要配置视图解析器，跳过模版引擎。
+
+```typescript
+//添加英雄的前端方法，参数为实体类数据，返回值为实体类数据的可观察对象
+addHero (hero: Hero): Observable<Hero> {
+  //发送http请求，请求类型为POST，泛型为实体类，参数为api地址、请求参数/请求体、http选项
+  return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
+	//tap()方法用于处理得到的数据，可选参数为响应体对应的数据
+    tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+	//catch()方法用于处理错误，可选参数为http状态码
+    catchError(this.handleError<Hero>('addHero'))
+  );
+}
+```
