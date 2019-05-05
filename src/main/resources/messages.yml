@@ -1,3 +1,0 @@
-# message.{yml,properties}用于存储本地化信息
-# 默认的前缀是`spring.messages`
-# NOTE 未测试yml文件是否同样可用

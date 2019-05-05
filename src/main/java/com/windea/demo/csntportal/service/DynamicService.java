@@ -17,8 +17,7 @@ public interface DynamicService {
 
 	void deleteById(Integer id);
 
-	void deleteByIdAndSponsorUsername(Integer id, String username);
-
+	void deleteByIdAndUsername(Integer id, String username);
 
 	Dynamic findById(Integer id);
 

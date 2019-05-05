@@ -59,7 +59,7 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
-	//TESTED notAcceptable
+	//TESTED notFound
 	@WithMockUser("noob")
 	@Test
 	public void createTest2() throws Exception {
@@ -67,12 +67,12 @@ public class DynamicControllerTests {
 		var jsonStr = JSONObject.toJSONString(dynamic);
 
 		mockMvc.perform(post("/dynamic/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
-			.andExpect(status().isNotAcceptable())
+			.andExpect(status().isNotFound())
 			.andDo(print());
 	}
 
-	//@PreAuthorize为什么没有起效？
-	@WithMockUser(roles = "ADMIN")
+	//BUG @PreAuthorize为什么没有起效？
+	@WithMockUser(roles = "STUDENT")
 	@Test
 	public void createTest3() throws Exception {
 		var dynamic = new Dynamic("动态1", DynamicCategory.CHAT, "没有内容");
@@ -83,6 +83,7 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
+	//BUG
 	@WithMockUser(roles = "STUDENT")
 	@Test
 	public void deleteTest1() throws Exception {
@@ -91,7 +92,7 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
-	//TESTED
+	//BUG
 	@WithMockUser(roles = "ADMIN")
 	@Test
 	public void deleteTest2() throws Exception {
@@ -175,6 +176,15 @@ public class DynamicControllerTests {
 		mockMvc.perform(get("/dynamic/advanceSearch").param("page", "1").param("size", "4")
 			.contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
 			.andExpect(status().isOk())
+			.andDo(print());
+	}
+
+
+	@WithMockUser("abc")
+	@Test
+	public void listUserTest() throws Exception {
+		mockMvc.perform(get("/user/list").param("role", "admin"))
+			.andExpect(status().isUnauthorized())
 			.andDo(print());
 	}
 }

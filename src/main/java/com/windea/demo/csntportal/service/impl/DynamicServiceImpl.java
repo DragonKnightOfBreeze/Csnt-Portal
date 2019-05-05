@@ -30,13 +30,13 @@ public class DynamicServiceImpl implements DynamicService {
 		this.userRepository = userRepository;
 	}
 
-
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
 	public Dynamic saveBySponsorUsername(Dynamic dynamic, String username) {
 		var user = userRepository.findByUsername(username);
 		Assert.notNull(user, () -> {throw new UserNotAcceptableException();});
+
 		dynamic.setSponsorUser(user);
 		return repository.save(dynamic);
 	}
@@ -51,14 +51,12 @@ public class DynamicServiceImpl implements DynamicService {
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public void deleteByIdAndSponsorUsername(Integer id, String username) {
-		//需要检查发起用户的用户名是否与当前的用户名相一致
-		var user = repository.findSponsorUserById(id).getSponsorUser();
-		var matches = Objects.equals(username, user.getUsername());
-		Assert.isTrue(matches, () -> {throw new UserNotAcceptableException();});
+	public void deleteByIdAndUsername(Integer id, String username) {
+		var sponsorUser = repository.findSponsorUserById(id).getSponsorUser();
+		var matched = Objects.equals(username, sponsorUser.getUsername());
+		Assert.isTrue(matched, () -> {throw new UserNotAcceptableException();});
 		repository.deleteById(id);
 	}
-
 
 	@Cacheable
 	@Override

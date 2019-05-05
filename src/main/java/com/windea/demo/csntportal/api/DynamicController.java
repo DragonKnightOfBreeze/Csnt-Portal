@@ -26,7 +26,9 @@ import java.util.Set;
 public class DynamicController {
 	private final DynamicService service;
 
-	public DynamicController(DynamicService service) {this.service = service;}
+	public DynamicController(DynamicService service) {
+		this.service = service;
+	}
 
 
 	/**
@@ -63,12 +65,12 @@ public class DynamicController {
 	 */
 	@PreAuthorize("hasAnyRole('STUDENT','TEACHER','VISITOR')")
 	@DeleteMapping(value = "/{id}", params = "role=nonAdmin")
-	public void deleteByUser(
+	public void deleteByUsername(
 		@PathVariable Integer id,
 		Principal principal
 	) {
 		var username = principal.getName();
-		service.deleteByIdAndSponsorUsername(id, username);
+		service.deleteByIdAndUsername(id, username);
 	}
 
 
