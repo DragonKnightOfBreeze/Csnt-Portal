@@ -5,7 +5,8 @@ import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.UserLoginVo;
 import com.windea.demo.csntportal.domain.vo.UserResetPasswordVo;
 import com.windea.demo.csntportal.exception.*;
-import com.windea.demo.csntportal.security.*;
+import com.windea.demo.csntportal.security.JwtProvider;
+import com.windea.demo.csntportal.security.JwtResponseVo;
 import com.windea.demo.csntportal.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +43,44 @@ public class UserController {
 
 
 	/**
+	 * 登录用户。使用参数验证。
+	 */
+	@PostMapping("/login")
+	public JwtResponseVo login(
+		@Valid @RequestBody UserLoginVo vo,
+		BindingResult bindingResult
+	) {
+		var validated = !bindingResult.hasErrors();
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+
+		//创建验证令牌，然后进行验证，然后保存到SecurityContextHolder中
+		var auth = new UsernamePasswordAuthenticationToken(vo.getUsername(), vo.getPassword());
+		var validAuth = authenticationManager.authenticate(auth);
+		SecurityContextHolder.getContext().setAuthentication(validAuth);
+		//不需要从数据库中查找，principal就是userDetails实现类
+		//NOTE 没有必要在服务层编写根据用户名和密码查找用户的方法，数据库中的密码已加密
+		var userDetails = (UserDetails) validAuth.getPrincipal();
+
+		//NOTE 返回的是包含jwt令牌的jwt响应视图对象
+		String jwt = jwtProvider.generate(validAuth);
+		var role = userDetails.getAuthorities().toArray()[0].toString();
+		var result = new JwtResponseVo(jwt, userDetails.getUsername(), role);
+		return result;
+	}
+
+	/**
+	 * 重置用户密码。适用参数验证。
+	 */
+	@PutMapping("/reset-password")
+	public void resetPassword(
+		@Valid @RequestBody UserResetPasswordVo vo,
+		BindingResult bindingResult
+	) {
+		throw new NotImplementedException();
+	}
+
+
+	/**
 	 * 注册用户。适用参数验证。
 	 */
 	@PostMapping("/register")
@@ -59,34 +99,6 @@ public class UserController {
 		var result = service.save(user);
 		return result;
 	}
-
-	/**
-	 * 登录用户。使用参数验证。
-	 */
-	@PostMapping("/login")
-	public JwtResponseVo login(
-		@Valid @RequestBody UserLoginVo vo,
-		BindingResult bindingResult
-	) {
-		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
-
-		//创建验证令牌，然后进行验证，然后保存到SecurityContextHolder中
-		var auth = new UsernamePasswordAuthenticationToken(vo.getUsername(), vo.getPassword());
-		var validAuth = authenticationManager.authenticate(auth);
-		SecurityContextHolder.getContext().setAuthentication(validAuth);
-		//生成jwt口令并据此找到用户详情实体类对象
-		String jwt = jwtProvider.generate(validAuth);
-
-		//根据用户详情实体类对象中的用户名字段，从数据库进行查找
-		//NOTE 没有必要在服务层编写根据用户名和密码查找用户的方法，数据库中的密码已加密
-		var userDetails = (JwtUserDetails) validAuth.getPrincipal();
-		//NOTE 返回的是包含jwt令牌的jwt响应视图对象
-		var role = userDetails.getAuthorities().toArray()[0].toString();
-		var result = new JwtResponseVo(jwt, userDetails.getUsername(), role);
-		return result;
-	}
-
 
 	/**
 	 * 修改用户信息。适用参数验证和权限认证。
@@ -110,19 +122,6 @@ public class UserController {
 
 
 	/**
-	 * 重置用户密码。适用参数验证。
-	 */
-	@PutMapping("/reset-password")
-	public void resetPassword(
-		@Valid @RequestBody UserResetPasswordVo vo,
-		BindingResult bindingResult,
-		Principal principal
-	) {
-		throw new NotImplementedException();
-	}
-
-
-	/**
 	 * 得到用户的账户信息。适用权限认证。
 	 */
 	@GetMapping("/account/{username}")
@@ -137,6 +136,7 @@ public class UserController {
 		var result = service.findByUsername(username);
 		return result;
 	}
+
 
 	/**
 	 * 得到用户信息。

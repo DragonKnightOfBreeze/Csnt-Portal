@@ -4,7 +4,6 @@ package com.windea.demo.csntportal;
 import com.windea.demo.csntportal.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -41,15 +40,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(ValidationException.class)
 	ResponseEntity<?> handleValidationException(ValidationException e) {
 		e.printStackTrace();
-		return ResponseEntity.badRequest().body(e.getBindingResult());
+		return ResponseEntity.badRequest().body(e);
 	}
 
-
-	@ExceptionHandler(AuthenticationException.class)
-	ResponseEntity<?> handleAuthException(AuthenticationException e) {
-		e.printStackTrace();
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-	}
 
 	//NOTE 可以通过该方法处理其他未明确的异常，但是优先级高于`@ResponseStatus`。
 	@ExceptionHandler(Exception.class)

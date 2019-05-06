@@ -21,12 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 	private final JwtFilter jwtFilter;
 	private final JwtEntryPoint jwtEntryPoint;
 	private final JwtUserDetailsServiceImpl service;
 
-	public SecurityConfig(JwtFilter jwtFilter, JwtEntryPoint jwtEntryPoint, JwtUserDetailsServiceImpl service) {
+	public JwtSecurityConfig(JwtFilter jwtFilter, JwtEntryPoint jwtEntryPoint, JwtUserDetailsServiceImpl service) {
 		this.jwtFilter = jwtFilter;
 		this.jwtEntryPoint = jwtEntryPoint;
 		this.service = service;
@@ -46,30 +46,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		//禁用CSRF（跨站点请求伪造）防护（因为使用了Jwt），允许跨域
-		httpSecurity.csrf().disable().cors().and()
+		httpSecurity.cors().and().csrf().disable()
 			//因为基于令牌，所以不需要启用会话
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
 			.authorizeRequests()
 			//NOTE 在这里配置路径权限规则
 			.antMatchers("/account/**").authenticated()
 			.antMatchers("/study-column/**").authenticated()
 			.antMatchers("/admin/**").hasRole(Role.ADMIN.toString())
-			// 对于获取token的rest api要允许匿名访问
+			//对于获取token的rest api要允许匿名访问
 			.antMatchers("/auth/**").permitAll()
 			.antMatchers("/druid/**").permitAll()
+			//其他请求全部允许访问
 			.anyRequest().permitAll()
 			//登录：转发到`/login`。使用默认配置
 			//记住登录：指定一个checkbox的name为`remember-me`。使用默认配置
 			//退出登录：转发到`/logout`。使用默认配置
 			.and()
+			//添加Jwt过滤器到用户密码验证过滤器之前
+			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 			//配置异常处理器
 			.exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-			.and();
-
-		//添加Jwt过滤器到用户密码验证过滤器之前
-		httpSecurity.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-		//禁用缓存
-		httpSecurity.headers().cacheControl();
+			.and()
+			//禁用缓存
+			.headers().cacheControl();
 	}
 
 

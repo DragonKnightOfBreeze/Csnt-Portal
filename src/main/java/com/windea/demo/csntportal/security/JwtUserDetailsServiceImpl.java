@@ -1,8 +1,10 @@
 package com.windea.demo.csntportal.security;
 
+import com.windea.demo.csntportal.enums.ResultState;
 import com.windea.demo.csntportal.repository.UserRepository;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService, UserDetailsPasswordService {
@@ -18,6 +20,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService, UserDetail
 	@Override
 	public UserDetails loadUserByUsername(String username) {
 		var result = repository.findByUsername(username);
+		Assert.notNull(result, () -> {throw new UsernameNotFoundException(ResultState.USER_NOT_FOUND.text());});
 		return result;
 	}
 
@@ -28,6 +31,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService, UserDetail
 	@Override
 	public UserDetails updatePassword(UserDetails user, String newPassword) {
 		var origin = repository.findByUsername(user.getUsername());
+		Assert.notNull(origin, () -> {throw new UsernameNotFoundException(ResultState.USER_NOT_FOUND.text());});
 		origin.setPassword(user.getPassword());
 		return repository.save(origin);
 	}

@@ -11,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -71,15 +74,15 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
-	//BUG @PreAuthorize为什么没有起效？
-	@WithMockUser(roles = "STUDENT")
+	//BUG @PreAuthorize为什么没有起效？ 过滤器链认为是any request
+	@WithMockUser(roles = "ADMIN")
 	@Test
 	public void createTest3() throws Exception {
 		var dynamic = new Dynamic("动态1", DynamicCategory.CHAT, "没有内容");
 		var jsonStr = JSONObject.toJSONString(dynamic);
 
 		mockMvc.perform(post("/dynamic/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
-			.andExpect(status().isUnauthorized())
+			.andExpect(status().isForbidden())
 			.andDo(print());
 	}
 
@@ -88,7 +91,7 @@ public class DynamicControllerTests {
 	@Test
 	public void deleteTest1() throws Exception {
 		mockMvc.perform(delete("/dynamic/5").param("role", "admin"))
-			.andExpect(status().isUnauthorized())
+			.andExpect(status().isForbidden())
 			.andDo(print());
 	}
 
@@ -180,10 +183,24 @@ public class DynamicControllerTests {
 	}
 
 
+	//BUG 过滤器链认为是any request
 	@WithMockUser("abc")
 	@Test
 	public void listUserTest() throws Exception {
+		var auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth);
+		var role = new ArrayList<GrantedAuthority>(auth.getAuthorities()).get(0).getAuthority();
+		System.out.println(role);
+
 		mockMvc.perform(get("/user/list").param("role", "admin"))
+			.andExpect(status().isForbidden())
+			.andDo(print());
+	}
+
+	//TESTED unauthorized
+	@Test
+	public void getStudyColumnTest() throws Exception {
+		mockMvc.perform(get("/study-column/1"))
 			.andExpect(status().isUnauthorized())
 			.andDo(print());
 	}
