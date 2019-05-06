@@ -9,7 +9,8 @@ import java.util.Set;
 /**
  * 实时动态的查询表单的视图对象。
  */
-public class DynamicSearchVo {
+public class
+DynamicSearchVo {
 	/** 主题。 */
 	private String subject;
 

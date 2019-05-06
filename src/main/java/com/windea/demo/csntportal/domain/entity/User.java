@@ -41,7 +41,7 @@ public class User extends TBean implements UserDetails {
 
 	/** 电话号码。 */
 	@NotEmpty(message = "validation.user.phoneNum.notEmpty")
-	@Size(min = 11, max = 11, message = "validation.user.phoneNum.size")
+	@Pattern(regexp = RegexConsts.PHONE_NUM, message = "validation.user.phoneNum.pattern")
 	@Column(unique = true, nullable = false, length = 11)
 	private String phoneNum;
 
@@ -73,7 +73,7 @@ public class User extends TBean implements UserDetails {
 	/** 注册时间。 */
 	//当字段表示数据的创建时间时需要加上这个注解，修改时间类同。
 	@CreationTimestamp
-	private LocalDateTime signUpTime;
+	private LocalDateTime registerTime;
 
 	/** 关联的动态集合。 */
 	//表示一对多关系
@@ -169,12 +169,12 @@ public class User extends TBean implements UserDetails {
 		this.profession = profession;
 	}
 
-	public LocalDateTime getSignUpTime() {
-		return signUpTime;
+	public LocalDateTime getRegisterTime() {
+		return registerTime;
 	}
 
-	public void setSignUpTime(LocalDateTime signUpTime) {
-		this.signUpTime = signUpTime;
+	public void setRegisterTime(LocalDateTime signUpTime) {
+		this.registerTime = signUpTime;
 	}
 
 	public List<Dynamic> getDynamicList() {

@@ -10,6 +10,7 @@ public enum ResultState implements IEnumWithText {
 	FATAL_ERROR("错误：致命错误！"),
 	NO_CONTENT("错误：查询结果为空！"),
 	NOT_FOUND("错误：查询结果不存在！"),
+	USER_NOT_FOUND("错误：用户不存在！"),
 	USER_NOT_MATCHED("错误：用户不匹配！"),
 	VALIDATION_ERROR("错误：验证错误！");
 

@@ -124,7 +124,7 @@ README.md       # 说明文档
 * 前端直接通过http请求，指定对应数据类型的泛型，以对应的url和http头为参数，收发json数据。
 * 后端不需要配置视图解析器，跳过模版引擎。
 
-```typescript
+```
 //添加英雄的前端方法，参数为实体类数据，返回值为实体类数据的可观察对象
 addHero (hero: Hero): Observable<Hero> {
   //发送http请求，请求类型为POST，泛型为实体类，参数为api地址、请求参数/请求体、http选项

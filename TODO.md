@@ -17,7 +17,6 @@
 * 用户主页
     * ［需要登录］修改账户信息
     * ［需要登录］查看用户动态
-
 * 专业特色介绍（文章，允许切换分页）
     * 单一数据展示
     * 所有数据展示
@@ -167,8 +166,9 @@
 # API参考
 
 * 指定查询类型：添加参数`method=title`,`method=nickname`
+* 指定权限：添加参数`role=admin`,`role=nonAdmin`
 * `/index`,`/login`,`/logout`,`/register`,`/reset-password`
 * `/account`,/`account/{username}`,~~`/account/{username}/dynamic`~~,~~`/account/{username}/settings`~~
-* `/dynamic`,`/dynamic/{id}`,`/dynamic/list`,`/dynamic/search?method=xxx`,`/dynamic/advanceSearch``
+* `/dynamic`,`/dynamic/{id}`,`/dynamic/list`,`/dynamic/search?method=xxx`,`/dynamic/advanceSearch`
 * `/dynamic/{id}/sponsor-user`
 
