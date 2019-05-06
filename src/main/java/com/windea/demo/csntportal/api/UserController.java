@@ -94,7 +94,10 @@ public class UserController {
 
 		//不允许重复用户名、邮箱和电话号码的新注册用户
 		var exists = service.exists(user.getUsername(), user.getEmail(), user.getPhoneNum());
-		Assert.isTrue(exists, () -> {throw new UserDuplicateException();});
+		Assert.isTrue(exists, () -> {
+			bindingResult.reject("validation.user.duplicate");
+			throw new ValidationException(bindingResult);
+		});
 
 		var result = service.save(user);
 		return result;
@@ -114,7 +117,7 @@ public class UserController {
 
 		//一般情况下，principal.name返回的是用户详情实体类用于验证的字段，这里是userDetails.username
 		var authenticated = Objects.equals(user.getUsername(), principal.getName());
-		Assert.isTrue(authenticated, () -> {throw new UserNotAcceptableException();});
+		Assert.isTrue(authenticated, () -> {throw new UserNotMatchedException();});
 
 		var result = service.update(user);
 		return result;
@@ -131,7 +134,7 @@ public class UserController {
 	) {
 		//一般情况下，principal.name返回的是用户详情实体类用于验证的字段，这里是userDetails.username
 		var authenticated = Objects.equals(username, principal.getName());
-		Assert.isTrue(authenticated, () -> {throw new UserNotAcceptableException();});
+		Assert.isTrue(authenticated, () -> {throw new UserNotMatchedException();});
 
 		var result = service.findByUsername(username);
 		return result;

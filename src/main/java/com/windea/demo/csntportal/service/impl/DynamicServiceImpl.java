@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -35,8 +34,6 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Dynamic saveBySponsorUsername(Dynamic dynamic, String username) {
 		var user = userRepository.findByUsername(username);
-		Assert.notNull(user, () -> {throw new UserNotAcceptableException();});
-
 		dynamic.setSponsorUser(user);
 		return repository.save(dynamic);
 	}
@@ -48,20 +45,11 @@ public class DynamicServiceImpl implements DynamicService {
 		repository.deleteById(id);
 	}
 
-	@CacheEvict(allEntries = true)
-	@Transactional
-	@Override
-	public void deleteByIdAndUsername(Integer id, String username) {
-		var sponsorUser = repository.findSponsorUserById(id).getSponsorUser();
-		var matched = Objects.equals(username, sponsorUser.getUsername());
-		Assert.isTrue(matched, () -> {throw new UserNotAcceptableException();});
-		repository.deleteById(id);
-	}
 
 	@Cacheable
 	@Override
 	public Dynamic findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
+		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
 
@@ -70,7 +58,7 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Page<Dynamic> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -79,7 +67,7 @@ public class DynamicServiceImpl implements DynamicService {
 	public Page<Dynamic> findAllBySubject(String subject, Pageable pageable) {
 		subject = subject.strip();
 		var resultPage = repository.findAllBySubjectContainingIgnoreCase(subject, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -87,7 +75,7 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Page<Dynamic> findAllByCategory(Set<DynamicCategory> categorySet, Pageable pageable) {
 		var resultPage = repository.findAllByCategoryIn(categorySet, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -95,7 +83,7 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Page<Dynamic> findAllBySponsorUsername(String username, Pageable pageable) {
 		var resultPage = repository.findAllBySponsorUsername(username, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -106,7 +94,7 @@ public class DynamicServiceImpl implements DynamicService {
 		var page2 = repository.findAllByCategoryIn(vo.getCategorySet(), pageable);
 		var page3 = repository.findAllBySponsorUsername(vo.getSponsorUsername(), pageable);
 		var resultPage = PageUtils.concat(pageable, page1, page2, page3);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 

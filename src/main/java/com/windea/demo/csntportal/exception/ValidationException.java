@@ -16,7 +16,7 @@ public class ValidationException extends BaseException {
 	}
 
 	public ValidationException() {
-		super(ResultState.VALIDATE_ERROR.text());
+		super(ResultState.VALIDATION_ERROR.text());
 	}
 
 	public ValidationException(String message) {
@@ -24,7 +24,7 @@ public class ValidationException extends BaseException {
 	}
 
 	public ValidationException(BindingResult bindingResult) {
-		super(ResultState.VALIDATE_ERROR.text());
+		super(ResultState.VALIDATION_ERROR.text());
 		this.bindingResult = bindingResult;
 	}
 }

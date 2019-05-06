@@ -1,8 +1,8 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.StudyColumn;
-import com.windea.demo.csntportal.exception.ResultEmptyException;
-import com.windea.demo.csntportal.exception.ResultNotFoundException;
+import com.windea.demo.csntportal.exception.NoContentException;
+import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.StudyColumnRepository;
 import com.windea.demo.csntportal.service.StudyColumnService;
 import org.springframework.cache.annotation.*;
@@ -49,7 +49,7 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 	@Cacheable
 	@Override
 	public StudyColumn findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
+		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
 
@@ -60,7 +60,7 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
 		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -68,7 +68,7 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 	@Override
 	public Page<StudyColumn> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 }

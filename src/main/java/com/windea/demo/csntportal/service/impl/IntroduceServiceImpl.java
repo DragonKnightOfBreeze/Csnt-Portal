@@ -1,8 +1,8 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.Introduce;
-import com.windea.demo.csntportal.exception.ResultEmptyException;
-import com.windea.demo.csntportal.exception.ResultNotFoundException;
+import com.windea.demo.csntportal.exception.NoContentException;
+import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.IntroduceRepository;
 import com.windea.demo.csntportal.service.IntroduceService;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ public class IntroduceServiceImpl implements IntroduceService {
 
 	@Override
 	public Introduce findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
+		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
 
@@ -51,7 +51,7 @@ public class IntroduceServiceImpl implements IntroduceService {
 	@Override
 	public List<Introduce> findAll() {
 		var resultList = repository.findAll();
-		Assert.notEmpty(resultList, () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultList, () -> {throw new NoContentException();});
 		return resultList;
 	}
 }

@@ -4,17 +4,20 @@ import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
+import com.windea.demo.csntportal.exception.UserNotMatchedException;
 import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.service.DynamicService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -70,7 +73,11 @@ public class DynamicController {
 		Principal principal
 	) {
 		var username = principal.getName();
-		service.deleteByIdAndUsername(id, username);
+		var sponsorUsername = service.findSponsorUserById(id).getUsername();
+		var matched = Objects.equals(username,sponsorUsername);
+		Assert.isTrue(matched,()->{throw new UserNotMatchedException();});
+
+		service.deleteById(id);
 	}
 
 

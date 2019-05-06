@@ -1,10 +1,10 @@
 package com.windea.demo.csntportal.security;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -26,13 +26,13 @@ public class JwtProvider {
 	private int jwtExpiration;
 
 	/**
-	 * 生成口令。
+	 * 生成令牌。
 	 */
 	public String generate(Authentication authentication) {
 		//得到用户信息
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		//得到过期时间
-		Date expiryDate = new Date(new Date().getTime() + jwtExpiration * 1000);
+		Date expiryDate = new Date(System.currentTimeMillis() + jwtExpiration * 1000);
 
 		//配置用于验证的字段，起始时间，过期时间，加密方法和加密字符串
 		return Jwts.builder()
@@ -44,7 +44,7 @@ public class JwtProvider {
 	}
 
 	/**
-	 * 验证口令。
+	 * 验证令牌。
 	 */
 	public boolean validate(String token) {
 		try {
@@ -52,15 +52,21 @@ public class JwtProvider {
 			return true;
 		} catch(Exception e) {
 			logger.error("JWT Authentication Failed.");
+			return false;
 		}
-		return false;
 	}
 
+
 	/**
-	 * 通过口令得到用户名。
+	 * 得到用户名。
 	 */
 	public String getUsername(String token) {
-		var claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-		return claims.getSubject();
+		try {
+			var claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+			var username = claims.getSubject();
+			return username;
+		} catch(Exception e) {
+			return null;
+		}
 	}
 }

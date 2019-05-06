@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class JwtResponseVo implements Serializable {
 	private static final long serialVersionUID = -2582893279697162978L;
 
-	/** Jwt口令。 */
+	/** Jwt令牌。 */
 	private String token;
 
 	/** Jwt类型 */

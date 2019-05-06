@@ -1,6 +1,5 @@
 package com.windea.demo.csntportal;
 
-
 import com.windea.demo.csntportal.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,35 +18,34 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.badRequest().build();
 	}
 
-	@ExceptionHandler(ResultEmptyException.class)
-	ResponseEntity<?> handleResultEmptyException(ResultEmptyException e) {
+	@ExceptionHandler(NoContentException.class)
+	ResponseEntity<?> handleNoContentException(NoContentException e) {
 		e.printStackTrace();
 		return ResponseEntity.noContent().build();
 	}
 
-	@ExceptionHandler(ResultNotFoundException.class)
-	ResponseEntity<?> handleResultNotFoundException(ResultNotFoundException e) {
+	@ExceptionHandler(NotFoundException.class)
+	ResponseEntity<?> handleNotFoundException(NotFoundException e) {
 		e.printStackTrace();
 		return ResponseEntity.notFound().build();
 	}
 
-	@ExceptionHandler(UserNotAcceptableException.class)
-	ResponseEntity<?> handleUserNotAcceptableException(UserNotAcceptableException e) {
+	@ExceptionHandler(UserNotMatchedException.class)
+	ResponseEntity<?> handleUserNotMatchedException(UserNotMatchedException e) {
 		e.printStackTrace();
-		return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 	}
 
 	@ExceptionHandler(ValidationException.class)
 	ResponseEntity<?> handleValidationException(ValidationException e) {
 		e.printStackTrace();
-		return ResponseEntity.badRequest().body(e);
+		return ResponseEntity.badRequest().body(e.getBindingResult());
 	}
 
-
-	//NOTE 可以通过该方法处理其他未明确的异常，但是优先级高于`@ResponseStatus`。
-	@ExceptionHandler(Exception.class)
-	ResponseEntity<?> handleOtherException(Exception e) {
-		e.printStackTrace();
-		return ResponseEntity.badRequest().body(e);
-	}
+	//可以通过该方法处理其他未明确的异常，但是优先级高于`@ResponseStatus`，高于@PreAuthorize。
+	//@ExceptionHandler(Exception.class)
+	//ResponseEntity<?> handleOtherException(Exception e) {
+	//	e.printStackTrace();
+	//	return ResponseEntity.badRequest().body(e);
+	//}
 }

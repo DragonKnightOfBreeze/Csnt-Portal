@@ -34,6 +34,7 @@ public class DynamicControllerTests {
 	@Autowired DynamicService dynamicService;
 	@Autowired JwtUserDetailsServiceImpl jwtUserDetailsService;
 
+
 	//TESTED 基本需求，添加当前用户
 	//必须传入principal，并且对参数进行验证
 	//通过@WithMockUser可以非常方便地模拟用户权限
@@ -74,7 +75,7 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
-	//BUG @PreAuthorize为什么没有起效？ 过滤器链认为是any request
+	//TESTED 明确注上@EnableGlobalMethodSecurity(prePostEnabled = true)
 	@WithMockUser(roles = "ADMIN")
 	@Test
 	public void createTest3() throws Exception {
@@ -86,7 +87,7 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
-	//BUG
+	//TESTED 明确注上@EnableGlobalMethodSecurity(prePostEnabled = true)
 	@WithMockUser(roles = "STUDENT")
 	@Test
 	public void deleteTest1() throws Exception {
@@ -95,7 +96,7 @@ public class DynamicControllerTests {
 			.andDo(print());
 	}
 
-	//BUG
+	//TESTED 明确注上@EnableGlobalMethodSecurity(prePostEnabled = true)
 	@WithMockUser(roles = "ADMIN")
 	@Test
 	public void deleteTest2() throws Exception {
@@ -183,7 +184,7 @@ public class DynamicControllerTests {
 	}
 
 
-	//BUG 过滤器链认为是any request
+	//TESTED 明确注上@EnableGlobalMethodSecurity(prePostEnabled = true)
 	@WithMockUser("abc")
 	@Test
 	public void listUserTest() throws Exception {

@@ -2,8 +2,8 @@ package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.enums.*;
-import com.windea.demo.csntportal.exception.ResultEmptyException;
-import com.windea.demo.csntportal.exception.ResultNotFoundException;
+import com.windea.demo.csntportal.exception.NoContentException;
+import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.UserRepository;
 import com.windea.demo.csntportal.service.UserService;
 import org.springframework.cache.annotation.*;
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 	@Cacheable
 	@Override
 	public User findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new ResultNotFoundException();});
+		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
 
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUsername(String username) {
 		var result = repository.findByUsername(username);
-		Assert.notNull(result, () -> {throw new ResultNotFoundException();});
+		Assert.notNull(result, () -> {throw new NotFoundException();});
 		return result;
 	}
 
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<User> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 		//如果搜索域为空，则查询所有数据
 		nickname = nickname.strip();
 		var resultPage = repository.findAllByNicknameContainingIgnoreCase(nickname, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<User> findAllByGender(Gender gender, Pageable pageable) {
 		var resultPage = repository.findAllByGender(gender, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -98,14 +98,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<User> findAllByRole(Role role, Pageable pageable) {
 		var resultPage = repository.findAllByRole(role, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
 	@Override
 	public Page<User> findAllByProfession(Profession profession, Pageable pageable) {
 		var resultPage = repository.findAllByProfession(profession, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new ResultEmptyException();});
+		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
