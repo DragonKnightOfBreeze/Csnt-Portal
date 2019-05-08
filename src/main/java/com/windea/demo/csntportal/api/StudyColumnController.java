@@ -28,7 +28,7 @@ public class StudyColumnController {
 	 * 新建学习专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "/create", params = "role=admin")
+	@PostMapping(value = "/create")
 	public StudyColumn create(
 		@Valid @RequestBody StudyColumn column,
 		BindingResult bindingResult
@@ -44,7 +44,7 @@ public class StudyColumnController {
 	 * 删除学习专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping(value = "/{id}", params = "role=admin")
+	@DeleteMapping(value = "/{id}")
 	public void delete(
 		@PathVariable Integer id
 	) {
@@ -55,7 +55,7 @@ public class StudyColumnController {
 	 * 更新学习专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update", params = "role=admin")
+	@PutMapping(value = "/update")
 	public StudyColumn update(
 		@Valid @RequestBody StudyColumn column,
 		BindingResult bindingResult

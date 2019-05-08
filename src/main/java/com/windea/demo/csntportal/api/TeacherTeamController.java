@@ -31,7 +31,7 @@ public class TeacherTeamController {
 	 * 新建教师队伍信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "/create", params = "role=admin")
+	@PostMapping(value = "/create")
 	public TeacherTeam create(
 		@Valid @RequestBody TeacherTeam teacherTeam,
 		BindingResult bindingResult
@@ -47,7 +47,7 @@ public class TeacherTeamController {
 	 * 删除教师队伍信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping(value = "/{id}", params = "role=admin")
+	@DeleteMapping(value = "/{id}")
 	public void delete(
 		@PathVariable Integer id
 	) {
@@ -58,7 +58,7 @@ public class TeacherTeamController {
 	 * 更新教师队伍信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update", params = "role=admin")
+	@PutMapping(value = "/update")
 	public TeacherTeam update(
 		@Valid @RequestBody TeacherTeam teacherTeam,
 		BindingResult bindingResult
@@ -142,7 +142,7 @@ public class TeacherTeamController {
 	/**
 	 * 通过高级查询查询教师队伍信息。
 	 */
-	@GetMapping("/advanceSearch")
+	@PostMapping("/advanceSearch")
 	public Page<TeacherTeam> advanceSearch(
 		@RequestBody TeacherTeamSearchVo vo,
 		@RequestParam(defaultValue = "1") Integer page,

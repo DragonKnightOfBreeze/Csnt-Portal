@@ -27,7 +27,7 @@ public class IntroduceController {
 	 * 新建专业特色介绍信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "/create", params = "role=admin")
+	@PostMapping(value = "/create")
 	public Introduce create(
 		@Valid @RequestBody Introduce introduce,
 		BindingResult bindingResult
@@ -43,7 +43,7 @@ public class IntroduceController {
 	 * 删除专业特色介绍信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping(value = "/{id}", params = "role=admin")
+	@DeleteMapping(value = "/{id}")
 	public void delete(
 		@PathVariable Integer id
 	) {
@@ -54,7 +54,7 @@ public class IntroduceController {
 	 * 更新专业特色介绍信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update", params = "role=admin")
+	@PutMapping(value = "/update")
 	public Introduce update(
 		@Valid @RequestBody Introduce introduce,
 		BindingResult bindingResult

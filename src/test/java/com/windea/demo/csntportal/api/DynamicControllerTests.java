@@ -91,7 +91,7 @@ public class DynamicControllerTests {
 	@WithMockUser(roles = "STUDENT")
 	@Test
 	public void deleteTest1() throws Exception {
-		mockMvc.perform(delete("/dynamic/5").param("role", "admin"))
+		mockMvc.perform(delete("/dynamic/5"))
 			.andExpect(status().isForbidden())
 			.andDo(print());
 	}
@@ -100,7 +100,7 @@ public class DynamicControllerTests {
 	@WithMockUser(roles = "ADMIN")
 	@Test
 	public void deleteTest2() throws Exception {
-		mockMvc.perform(delete("/dynamic/4").param("role", "admin"))
+		mockMvc.perform(delete("/dynamic/4"))
 			.andExpect(status().isOk())
 			.andDo(print());
 	}
@@ -177,7 +177,7 @@ public class DynamicControllerTests {
 	public void advanceSearchTest() throws Exception {
 		var jsonStr = JSONObject.toJSONString(Map.of("subject", "主题", "category", "CHAT", "sponsorUsername", "123"));
 
-		mockMvc.perform(get("/dynamic/advanceSearch").param("page", "1").param("size", "4")
+		mockMvc.perform(post("/dynamic/advanceSearch").param("page", "1").param("size", "4")
 			.contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
 			.andExpect(status().isOk())
 			.andDo(print());
@@ -193,7 +193,7 @@ public class DynamicControllerTests {
 		var role = new ArrayList<GrantedAuthority>(auth.getAuthorities()).get(0).getAuthority();
 		System.out.println(role);
 
-		mockMvc.perform(get("/user/list").param("role", "admin"))
+		mockMvc.perform(get("/user/list"))
 			.andExpect(status().isForbidden())
 			.andDo(print());
 	}

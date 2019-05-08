@@ -4,7 +4,8 @@ import com.windea.commons.base.exception.NotImplementedException;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.UserLoginVo;
 import com.windea.demo.csntportal.domain.vo.UserResetPasswordVo;
-import com.windea.demo.csntportal.exception.*;
+import com.windea.demo.csntportal.exception.UserNotMatchedException;
+import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.security.JwtProvider;
 import com.windea.demo.csntportal.security.JwtResponseVo;
 import com.windea.demo.csntportal.service.UserService;
@@ -145,7 +146,7 @@ public class UserController {
 	 * 得到用户信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping(value = "/user/{id}", params = "role=admin")
+	@GetMapping(value = "/user/{id}")
 	public User get(
 		@PathVariable Integer id
 	) {
@@ -157,7 +158,7 @@ public class UserController {
 	 * 查询所有用户信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping(value = "/user/list", params = "role=admin")
+	@GetMapping(value = "/user/list")
 	public Page<User> list(
 		@RequestParam(defaultValue = "1") Integer page,
 		@RequestParam(defaultValue = "10") Integer size

@@ -28,7 +28,7 @@ public class DevelopmentColumnController {
 	 * 新建专业发展专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "/create", params = "role=admin")
+	@PostMapping(value = "/create")
 	public DevelopmentColumn create(
 		@Valid @RequestBody DevelopmentColumn column,
 		BindingResult bindingResult
@@ -44,7 +44,7 @@ public class DevelopmentColumnController {
 	 * 删除专业发展专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping(value = "/{id}", params = "role=admin")
+	@DeleteMapping(value = "/{id}")
 	public void delete(
 		@PathVariable Integer id
 	) {
@@ -55,7 +55,7 @@ public class DevelopmentColumnController {
 	 * 更新专业发展专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update", params = "role=admin")
+	@PutMapping(value = "/update")
 	public DevelopmentColumn update(
 		@Valid @RequestBody DevelopmentColumn column,
 		BindingResult bindingResult

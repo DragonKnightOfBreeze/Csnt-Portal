@@ -28,7 +28,7 @@ public class ReformColumnController {
 	 * 新建教学改革专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping(value = "/create", params = "role=admin")
+	@PostMapping(value = "/create")
 	public ReformColumn create(
 		@Valid @RequestBody ReformColumn column,
 		BindingResult bindingResult
@@ -44,7 +44,7 @@ public class ReformColumnController {
 	 * 删除教学改革专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping(value = "/{id}", params = "role=admin")
+	@DeleteMapping(value = "/{id}")
 	public void delete(
 		@PathVariable Integer id
 	) {
@@ -55,7 +55,7 @@ public class ReformColumnController {
 	 * 更新教学改革专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update", params = "role=admin")
+	@PutMapping(value = "/update")
 	public ReformColumn update(
 		@Valid @RequestBody ReformColumn column,
 		BindingResult bindingResult

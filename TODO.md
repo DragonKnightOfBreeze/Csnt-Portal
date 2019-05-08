@@ -166,7 +166,7 @@
 # API参考
 
 * 指定查询类型：添加参数`method=title`,`method=nickname`
-* 指定权限：添加参数`role=admin`,`role=nonAdmin`
+* ~~指定权限：添加参数`role=admin`,`role=nonAdmin`~~
 * `/index`,`/login`,`/logout`,`/register`,`/reset-password`
 * `/account`,/`account/{username}`,~~`/account/{username}/dynamic`~~,~~`/account/{username}/settings`~~
 * `/dynamic`,`/dynamic/{id}`,`/dynamic/list`,`/dynamic/search?method=xxx`,`/dynamic/advanceSearch`

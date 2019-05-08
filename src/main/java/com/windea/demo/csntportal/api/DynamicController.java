@@ -10,7 +10,7 @@ import com.windea.demo.csntportal.service.DynamicService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -55,31 +55,22 @@ public class DynamicController {
 	/**
 	 * 删除动态信息。
 	 */
-	@PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping(value = "/{id}", params = "role=admin")
+	@PreAuthorize("isAuthenticated()")
+	@DeleteMapping(value = "/{id}")
 	public void delete(
-		@PathVariable Integer id
-	) {
-		service.deleteById(id);
-	}
-
-	/**
-	 * 删除用户的动态信息。
-	 */
-	@PreAuthorize("hasAnyRole('STUDENT','TEACHER','VISITOR')")
-	@DeleteMapping(value = "/{id}", params = "role=nonAdmin")
-	public void deleteByUsername(
 		@PathVariable Integer id,
 		Principal principal
 	) {
-		var username = principal.getName();
-		var sponsorUsername = service.findSponsorUserById(id).getUsername();
-		var matched = Objects.equals(username,sponsorUsername);
-		Assert.isTrue(matched,()->{throw new UserNotMatchedException();});
-
+		//判断当前用户是否是管理员
+		var role = ((UserDetails) principal).getAuthorities().toArray()[0].toString();
+		if(!Objects.equals(role, "ROLE_ADMIN")) {
+			var username = principal.getName();
+			var sponsorUsername = service.findSponsorUserById(id).getUsername();
+			var matched = Objects.equals(username, sponsorUsername);
+			Assert.isTrue(matched, () -> {throw new UserNotMatchedException();});
+		}
 		service.deleteById(id);
 	}
-
 
 	/**
 	 * 得到动态信息。
@@ -102,7 +93,6 @@ public class DynamicController {
 		var result = service.findSponsorUserById(id);
 		return result;
 	}
-
 
 	/**
 	 * 查询所有动态信息。
@@ -162,7 +152,7 @@ public class DynamicController {
 	/**
 	 * 根据高级查询查询动态信息。
 	 */
-	@GetMapping("/advanceSearch")
+	@PostMapping("/advanceSearch")
 	public Page<Dynamic> advanceSearch(
 		@RequestBody DynamicSearchVo vo,
 		@RequestParam(defaultValue = "1") Integer page,
