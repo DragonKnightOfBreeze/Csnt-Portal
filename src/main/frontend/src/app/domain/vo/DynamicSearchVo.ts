@@ -1,6 +1,6 @@
 import {DynamicCategory} from "../../enums/DynamicCategory";
 
-export interface DynamicSearchVo {
+export class DynamicSearchVo {
   subject:string;
   categorySet:DynamicCategory[];
   sponsorUsername:string;

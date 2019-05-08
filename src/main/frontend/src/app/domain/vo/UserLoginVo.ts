@@ -1,4 +1,4 @@
-export interface UserLoginVo {
+export class UserLoginVo {
   username:string;
   password:string;
 }

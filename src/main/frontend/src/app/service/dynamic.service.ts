@@ -5,20 +5,20 @@ import {Observable, of} from "rxjs";
 import {apiUrl} from "../../environments/environment.prod";
 import {User} from "../domain/entity/User";
 import {DynamicSearchVo} from "../domain/vo/DynamicSearchVo";
-import {StringUtils} from "../utils/StringUtils";
 import {catchError} from "rxjs/operators";
+import {Page} from "../domain/interface/Page";
+import {DynamicCategory} from "../enums/DynamicCategory";
 
 /**
- * 动态的服务。
+ * 实时动态的服务类。
  */
 @Injectable()
 export class DynamicService {
   constructor(private http: HttpClient) {
   }
 
-  //NOTE
-  //错误处理规则：统一调用私有的handleError()方法。
-  //create方法返回新的对象，update方法返回原本的对象，delete方法返回null，get方法返回null，list方法返回[]。
+
+  //NOTE 错误处理规则：统一调用私有的handleError()方法。
 
   create(dynamic: Dynamic): Observable<Dynamic> {
     const url = `${apiUrl}/dynamic/create`;
@@ -42,49 +42,51 @@ export class DynamicService {
   }
 
   getSponsorUser(id: number): Observable<User> {
-    const url = `${apiUrl}/dynamic/${id}`;
-    return this.http.get<User>(url).pipe(
+    const url = `${apiUrl}/dynamic/${id}/sponsor-user`;
+    return this.http.get<User>(url,).pipe(
         catchError(this.handleError("getSponsorUser", null))
     );
   }
 
-  list(page?: number, size?: number): Observable<Dynamic[]> {
-    const params = StringUtils.toUrlParams(["page", page], ["size", size]);
-    const url = `${apiUrl}/dynamic/list?${params}}`;
-    return this.http.get<Dynamic[]>(url).pipe(
-        catchError(this.handleError("list", []))
+  //NOTE 返回的不是Dynamic[]，而是Page<Dynamic>，其中Page是匹配的接口
+
+  list(page = 1, size = 10): Observable<Page<Dynamic>> {
+    const url = `${apiUrl}/dynamic/list`;
+    const params = {page: page + "", size: size + ""};
+    return this.http.get<Page<Dynamic>>(url, {params: params}).pipe(
+        catchError(this.handleError("list", null))
     );
   }
 
-  searchBySubject(subject: string, page = 1, size = 10): Observable<Dynamic[]> {
-    const params = StringUtils.toUrlParams(["subject", subject], ["page", page], ["size", size]);
-    const url = `${apiUrl}/dynamic/list?${params}`;
-    return this.http.get<Dynamic[]>(url).pipe(
-        catchError(this.handleError("searchBySubject", []))
+  searchBySubject(subject: string, page = 1, size = 10): Observable<Page<Dynamic>> {
+    const url = `${apiUrl}/dynamic/search`;
+    const params = {method: "subject", subject: subject, page: page + "", size: size + ""};
+    return this.http.get<Page<Dynamic>>(url, {params: params}).pipe(
+        catchError(this.handleError("searchBySubject", null))
     );
   }
 
-  searchBySponsorUsername(sponsorUsername: string, page = 1, size = 10): Observable<Dynamic[]> {
-    const params = StringUtils.toUrlParams(["sponsorUsername", sponsorUsername], ["page", page], ["size", size]);
-    const url = `${apiUrl}/dynamic/list?${params}`;
-    return this.http.get<Dynamic[]>(url).pipe(
-        catchError(this.handleError("searchBySponsorUsername", []))
+  searchBySponsorUsername(sponsorUsername: string, page = 1, size = 10): Observable<Page<Dynamic>> {
+    const url = `${apiUrl}/dynamic/search`;
+    const params = {method: "sponsorUsername", sponsorUsername: sponsorUsername, page: page + "", size: size + ""};
+    return this.http.get<Page<Dynamic>>(url, {params: params}).pipe(
+        catchError(this.handleError("searchBySponsorUsername", null))
     );
   }
 
-  searchByCategory(category: string[], page = 1, size = 10): Observable<Dynamic[]> {
-    const params = StringUtils.toUrlParams(["category", category], ["page", page], ["size", size]);
-    const url = `${apiUrl}/dynamic/list?${params}`;
-    return this.http.get<Dynamic[]>(url).pipe(
-        catchError(this.handleError("searchByCategory", []))
+  searchByCategory(category: DynamicCategory[], page = 1, size = 10): Observable<Page<Dynamic>> {
+    const url = `${apiUrl}/dynamic/search`;
+    const params = {method: "category", category: category, page: page + "", size: size + ""};
+    return this.http.get<Page<Dynamic>>(url, {params: params}).pipe(
+        catchError(this.handleError("searchByCategory", null))
     );
   }
 
-  advanceSearch(vo: DynamicSearchVo, page = 1, size = 10): Observable<Dynamic[]> {
-    const params = StringUtils.toUrlParams(["page", page], ["size", size]);
-    const url = `${apiUrl}/dynamic/advanceSearch?${params}`;
-    return this.http.post<Dynamic[]>(url, vo).pipe(
-        catchError(this.handleError("advanceSearch", []))
+  advanceSearch(vo: DynamicSearchVo, page = 1, size = 10): Observable<Page<Dynamic>> {
+    const url = `${apiUrl}/dynamic/advanceSearch`;
+    const params = {page: page + "", size: size + ""};
+    return this.http.post<Page<Dynamic>>(url, vo, {params: params}).pipe(
+        catchError(this.handleError("advanceSearch", null))
     );
   }
 

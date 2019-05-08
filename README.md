@@ -4,9 +4,7 @@
 
 介绍专业特色、实时动态、教师队伍、专业发展、教学改革和学习专栏等。
 
-# 参考
-
-## 参考链接
+# 参考连接
 
 * Angular教程
 	* [Angular - 什么是 Angular？](https://www.angular.cn/docs)
@@ -67,11 +65,9 @@
 	* Redis
 	* MySQL
 	
-# 目录概述
+# 目录结构
 
-## 目录结构
-
-```文档
+```
 [documents]     # 全局文档目录
   [common]          # 一般文档目录（文档，doc/ppt/uml）
   [notes]           # 笔记文档目录
@@ -93,7 +89,7 @@ README.md       # 说明文档
 ...
 ```
 
-## 需要注意的地方
+**需要注意的地方**
 
 * 忽略`src/frontend/node_modules`目录。
     * 在`src/frontend`目录下打开控制台，自行使用`cnpm install`命令下载Npm依赖包。
@@ -127,7 +123,7 @@ README.md       # 说明文档
 ```
 //添加英雄的前端方法，参数为实体类数据，返回值为实体类数据的可观察对象
 addHero (hero: Hero): Observable<Hero> {
-  //发送http请求，请求类型为POST，泛型为实体类，参数为api地址、请求参数/请求体、http选项
+  //发送http请求，请求类型为POST，泛型为实体类，参数为api地址、请求体、http选项
   return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
 	//tap()方法用于处理得到的数据，可选参数为响应体对应的数据
     tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),

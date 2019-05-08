@@ -1,6 +1,6 @@
 import {ProfessionLevel} from "../../enums/ProfessionLevel";
 
-export interface TeacherTeamSearchVo {
+export class TeacherTeamSearchVo {
   name:string;
   levelSet:ProfessionLevel[];
   min:number;

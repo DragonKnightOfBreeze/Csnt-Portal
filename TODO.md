@@ -68,9 +68,31 @@
 
 # 功能实现
 
+## 前端功能实现
+
+- [ ] 主页相关
+- [ ] 页面组件 component
+- [ ] 自定义指令 directive
+- [X] 实体类 domain
+    - [X] 后台数据实体类
+    - [X] 后台类型接口
+    - [X] 视图对象实体类
+- [X] 枚举 enums
+- [ ] 页面 page
+- [ ] 自定义管道 pipe
+- [ ] 安全 security
+- [ ] 服务 service
+    - [X] 创建类
+    - [X] 基本的操作方法
+    - [X] 基本的错误处理方法
+    - [ ] 完善其他细节
+
+## 后台功能实现
+
 - [X] 配置文件
-    * @PropertySource,@Value只能与properties文件配套使用，而非yaml
-    * @ConfigurationProperties可以实现自动注入，但是需要使用@EnableConfigurationProperties包含该组件类/Bean类
+    * **［注意事项］**
+        * @PropertySource,@Value只能与properties文件配套使用，而非yaml
+        * @ConfigurationProperties可以实现自动注入，但是需要使用@EnableConfigurationProperties包含该组件类/Bean类
 - [X] 实体类 domain
     * **［添加必要的Jpa注解］**
         * 对于@Id，添加@GeneratedValue(strategy = GenerationType.AUTO)
@@ -97,7 +119,7 @@
 - [X] 异常类 exception
     * **［注意事项］**
         * 存在基础异常，同时所有自定义异常都是运行时异常
-- [X] Spring Security security
+- [X] 安全 security
     * **［注意事项］**
         * 路径权限规则需要自行在配置类中配置，也可以使用@PreAuthorize指定方法级别的权限规则
         * 登录用户、记住密码、登出用户等功能，直接使用默认配置即可
@@ -156,6 +178,12 @@
         * 将这些方法的返回值设为`ResponseEntity<T>`，即可当其他映射方法发生异常时，返回对应异常的处理方法返回的`ResponseEntity<T>`。
 
 # 测试
+
+## 整合测试
+
+## 前端测试
+
+## 后台测试
 
 - [X] 控制层的一般数据库操作功能测试
 - [X] 一般的错误处理

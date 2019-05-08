@@ -15,7 +15,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(FatalException.class)
 	ResponseEntity<?> handleFatalException(FatalException e) {
 		e.printStackTrace();
-		return ResponseEntity.badRequest().build();
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 
 	@ExceptionHandler(NoContentException.class)

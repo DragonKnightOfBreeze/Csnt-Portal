@@ -108,7 +108,7 @@ public class UserController {
 	 * 修改用户信息。适用参数验证和权限认证。
 	 */
 	@PutMapping("/account")
-	public User update(
+	public User updateAccountInfo(
 		@Valid @RequestBody User user,
 		BindingResult bindingResult,
 		Principal principal
@@ -172,7 +172,7 @@ public class UserController {
 	 * 根据昵称查询用户信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping(value = "/user/search", params = {"role=admin", "method=nickname"})
+	@GetMapping(value = "/user/search", params = "method=nickname")
 	public Page<User> searchByNickname(
 		@RequestParam String nickname,
 		@RequestParam(defaultValue = "1") Integer page,
