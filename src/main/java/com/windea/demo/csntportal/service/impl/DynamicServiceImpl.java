@@ -5,7 +5,8 @@ import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
-import com.windea.demo.csntportal.exception.*;
+import com.windea.demo.csntportal.exception.NoContentException;
+import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.DynamicRepository;
 import com.windea.demo.csntportal.repository.UserRepository;
 import com.windea.demo.csntportal.service.DynamicService;
@@ -45,14 +46,21 @@ public class DynamicServiceImpl implements DynamicService {
 		repository.deleteById(id);
 	}
 
-
 	@Cacheable
 	@Override
 	public Dynamic findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
+		var result = repository.findById(id)
+			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
 
+	@Cacheable
+	@Override
+	public User findSponsorUserById(Integer id) {
+		var result = repository.findSponsorUserById(id).getSponsorUser();
+		Assert.notNull(result, () -> {throw new NotFoundException();});
+		return result;
+	}
 
 	@Cacheable
 	@Override
@@ -96,12 +104,5 @@ public class DynamicServiceImpl implements DynamicService {
 		var resultPage = PageUtils.concat(pageable, page1, page2, page3);
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
-	}
-
-	@Cacheable
-	@Override
-	public User findSponsorUserById(Integer id) {
-		var result = repository.findSponsorUserById(id).getSponsorUser();
-		return result;
 	}
 }

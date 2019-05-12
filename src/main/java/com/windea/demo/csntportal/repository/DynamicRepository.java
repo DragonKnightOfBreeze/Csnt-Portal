@@ -7,27 +7,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
- * 实时动态的持久接口。<br>
+ * 实时动态的持久接口。
  */
-@RepositoryRestResource
 public interface DynamicRepository extends JpaRepository<Dynamic, Integer> {
+	@Query("select d.sponsorUser as sponsorUser from Dynamic d where d.id=:id")
+	DynamicPr findSponsorUserById(Integer id);
+
 	Page<Dynamic> findAllBySubjectContainingIgnoreCase(String subject, Pageable pageable);
 
 	Page<Dynamic> findAllByCategoryIn(Set<DynamicCategory> categorySet, Pageable pageable);
 
-	@Query("select d from Dynamic d where d.sponsorUser.username=:username")
+	@Query("from Dynamic d where d.sponsorUser.username=:username")
 	Page<Dynamic> findAllBySponsorUsername(String username, Pageable pageable);
 
-	//TODO
 	Page<Dynamic> findAllBySponsorTimeBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);
-
-
-	@Query("select u as sponsorUser from Dynamic d join d.sponsorUser u where d.id=:id")
-	DynamicPr findSponsorUserById(Integer id);
 }

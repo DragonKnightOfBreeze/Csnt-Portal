@@ -3,12 +3,9 @@
  * 另见：{@code org.springframework.data.domain.Page}
  */
 
-export interface Page<T> extends Slice<T> {
+export interface Page<T> {
   totalPages: number;
   totalElements: number;
-}
-
-interface Slice<T>{
   empty: boolean;
   number: number;
   size: number;
@@ -19,7 +16,6 @@ interface Slice<T>{
   last: boolean;
   pageable: Pageable;
 }
-
 
 /**
  * 排序器的接口。<br>

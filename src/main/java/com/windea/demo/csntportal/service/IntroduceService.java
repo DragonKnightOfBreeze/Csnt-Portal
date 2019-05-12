@@ -14,9 +14,7 @@ public interface IntroduceService {
 
 	Introduce update(Introduce introduce);
 
-
 	Introduce findById(Integer id);
-
 
 	List<Introduce> findAll();
 }

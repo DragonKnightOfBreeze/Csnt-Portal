@@ -14,9 +14,7 @@ public interface DevelopmentColumnService {
 
 	DevelopmentColumn update(DevelopmentColumn column);
 
-
 	DevelopmentColumn findById(Integer id);
-
 
 	Page<DevelopmentColumn> findAll(Pageable pageable);
 

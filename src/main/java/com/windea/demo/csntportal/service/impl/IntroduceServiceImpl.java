@@ -40,13 +40,12 @@ public class IntroduceServiceImpl implements IntroduceService {
 		return repository.save(origin);
 	}
 
-
 	@Override
 	public Introduce findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
+		var result = repository.findById(id)
+			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
-
 
 	@Override
 	public List<Introduce> findAll() {

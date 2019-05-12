@@ -45,14 +45,13 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 		return repository.save(origin);
 	}
 
-
 	@Cacheable
 	@Override
 	public DevelopmentColumn findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
+		var result = repository.findById(id)
+			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
-
 
 	@Cacheable
 	@Override

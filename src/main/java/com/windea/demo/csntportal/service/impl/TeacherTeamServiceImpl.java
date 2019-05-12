@@ -52,14 +52,13 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 		return repository.save(origin);
 	}
 
-
 	@Cacheable
 	@Override
 	public TeacherTeam findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
+		var result = repository.findById(id)
+			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
-
 
 	@Cacheable
 	@Override

@@ -38,7 +38,7 @@ public class DynamicController {
 	 * 新建动态信息。
 	 */
 	@PreAuthorize("hasAnyRole('STUDENT','TEACHER','VISITOR')")
-	@PostMapping(value = "/create")
+	@PostMapping("/create")
 	public Dynamic create(
 		@Valid @RequestBody Dynamic dynamic,
 		BindingResult bindingResult,
@@ -56,7 +56,7 @@ public class DynamicController {
 	 * 删除动态信息。
 	 */
 	@PreAuthorize("isAuthenticated()")
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping("/{id}")
 	public void delete(
 		@PathVariable Integer id,
 		Principal principal

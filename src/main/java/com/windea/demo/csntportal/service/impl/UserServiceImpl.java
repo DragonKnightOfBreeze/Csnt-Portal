@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
 		return repository.save(user);
 	}
 
-
 	@CachePut
 	@Transactional
 	@Override
@@ -51,11 +50,11 @@ public class UserServiceImpl implements UserService {
 		return repository.save(origin);
 	}
 
-
 	@Cacheable
 	@Override
 	public User findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
+		var result = repository.findById(id)
+			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
 
@@ -66,7 +65,6 @@ public class UserServiceImpl implements UserService {
 		Assert.notNull(result, () -> {throw new NotFoundException();});
 		return result;
 	}
-
 
 	@Cacheable
 	@Override
@@ -108,7 +106,6 @@ public class UserServiceImpl implements UserService {
 		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
-
 
 	@Override
 	public boolean exists(String username, String email, String phoneNum) {

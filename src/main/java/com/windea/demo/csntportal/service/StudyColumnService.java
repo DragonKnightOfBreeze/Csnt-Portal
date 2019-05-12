@@ -14,9 +14,7 @@ public interface StudyColumnService {
 
 	StudyColumn update(StudyColumn column);
 
-
 	StudyColumn findById(Integer id);
-
 
 	Page<StudyColumn> findAll(Pageable pageable);
 

@@ -14,9 +14,7 @@ public interface ReformColumnService {
 
 	ReformColumn update(ReformColumn column);
 
-
 	ReformColumn findById(Integer id);
-
 
 	Page<ReformColumn> findAll(Pageable pageable);
 

@@ -2,12 +2,10 @@ package com.windea.demo.csntportal.api;
 
 import com.windea.commons.base.exception.NotImplementedException;
 import com.windea.demo.csntportal.domain.entity.User;
-import com.windea.demo.csntportal.domain.vo.UserLoginVo;
-import com.windea.demo.csntportal.domain.vo.UserResetPasswordVo;
+import com.windea.demo.csntportal.domain.vo.*;
 import com.windea.demo.csntportal.exception.UserNotMatchedException;
 import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.security.JwtProvider;
-import com.windea.demo.csntportal.security.JwtResponseVo;
 import com.windea.demo.csntportal.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -107,7 +105,7 @@ public class UserController {
 	/**
 	 * 修改用户信息。适用参数验证和权限认证。
 	 */
-	@PutMapping("/account")
+	@PutMapping("/account/update")
 	public User updateAccountInfo(
 		@Valid @RequestBody User user,
 		BindingResult bindingResult,

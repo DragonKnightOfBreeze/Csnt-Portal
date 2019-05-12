@@ -1,9 +1,9 @@
 package com.windea.demo.csntportal.security;
 
 import com.windea.demo.csntportal.enums.Role;
+import com.windea.demo.csntportal.service.impl.JwtUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -58,6 +58,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 			//NOTE 在这里配置路径权限规则
 			.antMatchers("/account/**").authenticated()
 			.antMatchers("/study-column/**").authenticated()
+			.antMatchers("/user/**").hasRole(Role.ADMIN.toString())
 			.antMatchers("/admin/**").hasRole(Role.ADMIN.toString())
 			//对于获取token的rest api要允许匿名访问
 			.antMatchers("/auth/**").permitAll()

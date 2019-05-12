@@ -20,6 +20,8 @@ public class UserLoginVo {
 	@Pattern(regexp = RegexConsts.PASSWORD, message = "{user.password.pattern}")
 	private String password;
 
+	/** 记住登录。 */
+	private boolean rememberMe;
 
 	public String getUsername() {
 		return username;
@@ -35,5 +37,13 @@ public class UserLoginVo {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isRememberMe() {
+		return rememberMe;
+	}
+
+	public void setRememberMe(boolean rememberMe) {
+		this.rememberMe = rememberMe;
 	}
 }

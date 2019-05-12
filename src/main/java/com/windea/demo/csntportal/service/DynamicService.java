@@ -19,6 +19,7 @@ public interface DynamicService {
 
 	Dynamic findById(Integer id);
 
+	User findSponsorUserById(Integer id);
 
 	Page<Dynamic> findAll(Pageable pageable);
 
@@ -29,7 +30,4 @@ public interface DynamicService {
 	Page<Dynamic> findAllBySponsorUsername(String username, Pageable pageable);
 
 	Page<Dynamic> findAllByConditions(DynamicSearchVo vo, Pageable pageable);
-
-
-	User findSponsorUserById(Integer id);
 }

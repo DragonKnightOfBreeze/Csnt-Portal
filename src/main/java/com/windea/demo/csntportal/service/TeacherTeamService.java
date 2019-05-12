@@ -18,9 +18,7 @@ public interface TeacherTeamService {
 
 	TeacherTeam update(TeacherTeam teacherTeam);
 
-
 	TeacherTeam findById(Integer id);
-
 
 	Page<TeacherTeam> findAll(Pageable pageable);
 

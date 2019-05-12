@@ -45,14 +45,13 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 		return repository.save(origin);
 	}
 
-
 	@Cacheable
 	@Override
 	public StudyColumn findById(Integer id) {
-		var result = repository.findById(id).orElseThrow(() -> {throw new NotFoundException();});
+		var result = repository.findById(id)
+			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
-
 
 	@Cacheable
 	@Override
