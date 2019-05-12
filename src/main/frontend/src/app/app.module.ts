@@ -40,6 +40,7 @@ import {TeacherInfoEditComponent} from "./page/teacher-info/teacher-info-edit/te
 @NgModule({
   declarations: [
     AppComponent,
+
     PaginationComponent,
     NavigationComponent,
     RegisterComponent,
