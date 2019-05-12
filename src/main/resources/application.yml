@@ -7,8 +7,8 @@
 
 # 将配置文件的数据绑定到实体类：
 # 为启动类注上`@EnableConfigurationProperties({ConfigBean.class})`，以指定需要配置的实体类，或者为其指定@Component。
-# 为实体类注上`@ConfigurationProperties(prefix :  "com.md")`，以指明前缀。
-# 为实体类注上`@PropertySource("classpath:test.properties")`，以指明绑定的配置文件，默认为`application.{properties,yml}`。
+# 为实体类注上`@ConfigurationProperties(prefix: "com.md")`，以指明前缀。
+# 为实体类注上`@PropertySource("classpath:test.properties")`，以指明绑定的配置文件，默认为`application.properties`，不能使用yaml。
 
 server:
   tomcat:
@@ -19,7 +19,7 @@ server:
     basedir: target/tomcat
   servlet:
     # 指定服务器的内容根路径
-    context-path: /csnt-portal
+    context-path: /csnt-portal/api
 
 spring:
   jpa:
