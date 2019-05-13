@@ -37,35 +37,36 @@
 	* Xml
 	* Json
 	* Yaml
-	* Maven
 	* Git
 	* Docker？
-	* Spring Security
-	* JWT Authentication
 * 前端
 	* Html5
 	* Css3
-	* JavaScript(ES6)
+	* Javascript(ES6)
 	* Npm
 	* Bootstrap4
 	* Font Awesome
-	* TypeScript
+	* Typescript
 	* Sass
 	* Angular7
 	* Angular Cli
-	* H2？
 * 后台
 	* Java
-	* Spring
 	* Spring Boot
+	* Spring
 	* Spring Web Mvc
-	* Spring Data Jba
+	* Spring Data Jpa
+	* Spring Security
+	* JWT Authentication
 	* ~~Lombok？~~
 	* Swagger？
 	* Redis
 	* MySQL
-	
-# 目录结构
+	* Maven
+
+# 目录说明
+
+## 目录结构
 
 ```
 [documents]     # 全局文档目录
@@ -89,7 +90,7 @@ README.md       # 说明文档
 ...
 ```
 
-**需要注意的地方**
+## 需要注意的地方
 
 * 忽略`src/frontend/node_modules`目录。
     * 在`src/frontend`目录下打开控制台，自行使用`cnpm install`命令下载Npm依赖包。
@@ -131,4 +132,18 @@ addHero (hero: Hero): Observable<Hero> {
     catchError(this.handleError<Hero>('addHero'))
   );
 }
+```
+
+## 如何运行项目
+
+首先运行后台的SpringBoot项目，然后运行前端的Angular项目即可。
+
+```bash
+cd $project-dir$
+mvn install
+mvn spring-boot:run
+cd src/main/frontend
+npm install
+ng build --prod
+ng serve
 ```

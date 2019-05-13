@@ -10,7 +10,7 @@ import {UserService} from "../../service/api/user.service";
 @Component({
   selector: "app-navigation",
   templateUrl: "./navigation.component.html",
-  styleUrls: ["./navigation.component.sass"]
+  styleUrls: ["./navigation.component.scss"]
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   /**当前用户对象，可从中得到用户名、角色等信息。*/

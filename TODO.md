@@ -4,8 +4,11 @@
 
 * 整合SpringBoot和Angular
 * Restful风格的url
-* 全局异常管理（使用Spring异常处理器）
-* 全局缓存管理（使用Redis）
+* 分页功能
+* 参数验证（前端使用h5参数验证，后台使用java validation验证）
+* 安全验证（使用jwt和spring security）
+* 全局异常管理（后台配置Spring异常处理器，返回http状态码）
+* 缓存管理（后台使用Redis）
 
 ## 具体的功能
 
@@ -197,13 +200,4 @@
 - [X] 参数验证功能（验证出错时返回bindingResult）
 - [X] 参数验证消息的正确显示（IDE已能够正确地解析属性）
 - [X] 权限验证功能（返回了正确的状态码）
-
-# API参考
-
-* 指定查询类型：添加参数`method=title`,`method=nickname`
-* ~~指定权限：添加参数`role=admin`,`role=nonAdmin`~~
-* `/index`,`/login`,`/logout`,`/register`,`/reset-password`
-* `/account`,/`account/{username}`,~~`/account/{username}/dynamic`~~,~~`/account/{username}/settings`~~
-* `/dynamic`,`/dynamic/{id}`,`/dynamic/list`,`/dynamic/search?method=xxx`,`/dynamic/advanceSearch`
-* `/dynamic/{id}/sponsor-user`
 

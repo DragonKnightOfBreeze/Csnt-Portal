@@ -1,11 +1,11 @@
 <div class="col-md-12 column">
-  <!--Page接口中的页面数最小为0，而传参时最小为1-->
+  <!--Page接口中的页面数最小为0，而传参时最小为1，显示时最小也为1-->
   <ul class="pagination justify-content-end">
     <!--如果当前页是第一页，则启用上一页，并传入查询参数，否则禁用-->
     <li class="page-item"
         [class.disabled]="currentPage?.first">
       <a class="page-link"
-         [routerLink]="['./']"
+         [routerLink]="'./'"
          [queryParams]="{page: currentPage?.number, size: currentPage?.size}">
         上一页
       </a>
@@ -17,7 +17,7 @@
       <li class="page-item"
           [class.active]="currentPage?.number == i">
         <a class="page-link"
-           [routerLink]="['./']"
+           [routerLink]="'./'"
            [queryParams]="{page: i + 1, size: currentPage?.size}">
           第{{i + 1}}页
         </a>
@@ -28,7 +28,7 @@
     <li class="page-item"
         [class.disabled]="currentPage?.last">
       <a class="page-link"
-         [routerLink]="['./']"
+         [routerLink]="'./'"
          [queryParams]="{page: currentPage?.number + 2, size: currentPage?.size}">
         下一页
       </a>
