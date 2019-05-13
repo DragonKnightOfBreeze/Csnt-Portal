@@ -24,6 +24,7 @@ import java.util.Set;
 public class TeacherTeamController {
 	private final TeacherTeamService service;
 
+
 	public TeacherTeamController(TeacherTeamService service) {this.service = service;}
 
 
@@ -58,8 +59,9 @@ public class TeacherTeamController {
 	 * 更新教师队伍信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update")
+	@PutMapping(value = "/{id}")
 	public TeacherTeam update(
+		@PathVariable Integer id,
 		@Valid @RequestBody TeacherTeam teacherTeam,
 		BindingResult bindingResult
 	) {
@@ -69,7 +71,6 @@ public class TeacherTeamController {
 		var result = service.update(teacherTeam);
 		return result;
 	}
-
 
 	/**
 	 * 得到教师队伍信息。
@@ -81,7 +82,6 @@ public class TeacherTeamController {
 		var result = service.findById(id);
 		return result;
 	}
-
 
 	/**
 	 * 查询所有教师队伍信息。

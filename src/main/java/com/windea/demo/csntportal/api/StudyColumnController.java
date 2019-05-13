@@ -21,6 +21,7 @@ import javax.validation.Valid;
 public class StudyColumnController {
 	private final StudyColumnService service;
 
+
 	public StudyColumnController(StudyColumnService service) {this.service = service;}
 
 
@@ -55,8 +56,9 @@ public class StudyColumnController {
 	 * 更新学习专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update")
+	@PutMapping(value = "/{id}")
 	public StudyColumn update(
+		@PathVariable Integer id,
 		@Valid @RequestBody StudyColumn column,
 		BindingResult bindingResult
 	) {
@@ -66,7 +68,6 @@ public class StudyColumnController {
 		var result = service.update(column);
 		return result;
 	}
-
 
 	/**
 	 * 得到学习专栏信息。
@@ -78,7 +79,6 @@ public class StudyColumnController {
 		var result = service.findById(id);
 		return result;
 	}
-
 
 	/**
 	 * 查询所有学习专栏信息。

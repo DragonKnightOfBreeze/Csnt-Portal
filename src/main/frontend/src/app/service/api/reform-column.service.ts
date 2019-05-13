@@ -30,7 +30,7 @@ export class ReformColumnService {
   }
 
   update(column: ReformColumn): Observable<ReformColumn> {
-    const url = `${apiUrl}/reform-column/update`;
+    const url = `${apiUrl}/reform-column/${column.id}`;
     return this.http.put<ReformColumn>(url, column).pipe(
         catchError(this.handleError("update", column))
     );

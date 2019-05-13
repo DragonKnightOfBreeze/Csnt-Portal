@@ -30,7 +30,7 @@ export class DevelopmentColumnService {
   }
 
   update(column: DevelopmentColumn): Observable<DevelopmentColumn> {
-    const url = `${apiUrl}/development-column/update`;
+    const url = `${apiUrl}/development-column/${column.id}`;
     return this.http.put<DevelopmentColumn>(url, column).pipe(
         catchError(this.handleError("update", column))
     );

@@ -28,10 +28,10 @@ export class IntroduceService {
     );
   }
 
-  update(column: Introduce): Observable<Introduce> {
-    const url = `${apiUrl}/introduce/update`;
-    return this.http.put<Introduce>(url, column).pipe(
-        catchError(this.handleError("update", column))
+  update(introduce: Introduce): Observable<Introduce> {
+    const url = `${apiUrl}/introduce/${introduce.id}`;
+    return this.http.put<Introduce>(url, introduce).pipe(
+        catchError(this.handleError("update", introduce))
     );
   }
 

@@ -20,6 +20,7 @@ import java.util.List;
 public class IntroduceController {
 	private final IntroduceService service;
 
+
 	public IntroduceController(IntroduceService service) {this.service = service;}
 
 
@@ -54,8 +55,9 @@ public class IntroduceController {
 	 * 更新专业特色介绍信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update")
+	@PutMapping(value = "/{id}")
 	public Introduce update(
+		@PathVariable Integer id,
 		@Valid @RequestBody Introduce introduce,
 		BindingResult bindingResult
 	) {
@@ -65,7 +67,6 @@ public class IntroduceController {
 		var result = service.update(introduce);
 		return result;
 	}
-
 
 	/**
 	 * 得到专业特色介绍信息。
@@ -77,7 +78,6 @@ public class IntroduceController {
 		var result = service.findById(id);
 		return result;
 	}
-
 
 	/**
 	 * 查询所有专业特色介绍信息。

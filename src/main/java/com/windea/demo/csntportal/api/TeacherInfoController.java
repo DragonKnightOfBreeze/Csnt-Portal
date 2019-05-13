@@ -20,6 +20,7 @@ import javax.validation.Valid;
 public class TeacherInfoController {
 	private final TeacherInfoService service;
 
+
 	public TeacherInfoController(TeacherInfoService service) {this.service = service;}
 
 
@@ -53,8 +54,9 @@ public class TeacherInfoController {
 	 * 更新教师信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update")
+	@PutMapping(value = "/{id}")
 	public TeacherInfo update(
+		@PathVariable Integer id,
 		@Valid @RequestBody TeacherInfo teacherInfo,
 		BindingResult bindingResult
 	) {

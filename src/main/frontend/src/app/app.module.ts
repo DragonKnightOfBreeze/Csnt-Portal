@@ -5,34 +5,30 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from "./app-route.module";
 import {FormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {PaginationComponent} from "./component/pagination/pagination.component";
-import {NavigationComponent} from "./component/navigation/navigation.component";
-import {LoginComponent} from "./component/login/login.component";
-import {RegisterComponent} from "./component/register/register.component";
 import {CookieService} from "ngx-cookie-service";
 import {JwtInterceptor} from "./service/interceptor/jwt-interceptor.service";
 import {ErrorInterceptor} from "./service/interceptor/error-interceptor.service";
-import {AccountDetailComponent} from "./page/account/account-detail/account-detail.component";
-import {DevelopmentColumnEditComponent} from "./page/development-column/development-column-edit/development-column-edit.component";
-import {DevelopmentColumnDetailComponent} from "./page/development-column/development-column-detail/development-column-detail.component";
-import {DynamicDetailComponent} from "./page/dynamic/dynamic-detail/dynamic-detail.component";
-import {DynamicListComponent} from "./page/dynamic/dynamic-list/dynamic-list.component";
-import {DevelopmentColumnListComponent} from "./page/development-column/development-column-list/development-column-list.component";
-import {IntroduceEditComponent} from "./page/introduce/introduce-edit/introduce-edit.component";
-import {IntroduceDetailComponent} from "./page/introduce/introduce-detail/introduce-detail.component";
-import {IntroduceListComponent} from "./page/introduce/introduce-list/introduce-list.component";
-import {ReformColumnEditComponent} from "./page/reform-column/reform-column-edit/reform-column-edit.component";
-import {ReformColumnDetailComponent} from "./page/reform-column/reform-column-detail/reform-column-detail.component";
-import {ReformColumnListComponent} from "./page/reform-column/reform-column-list/reform-column-list.component";
-import {StudyColumnEditComponent} from "./page/study-column/study-column-edit/study-column-edit.component";
-import {StudyColumnDetailComponent} from "./page/study-column/study-column-detail/study-column-detail.component";
-import {StudyColumnListComponent} from "./page/study-column/study-column-list/study-column-list.component";
-import {TeacherTeamEditComponent} from "./page/teacher-team/teacher-team-edit/teacher-team-edit.component";
-import {TeacherTeamDetailComponent} from "./page/teacher-team/teacher-team-detail/teacher-team-detail.component";
-import {TeacherTeamListComponent} from "./page/teacher-team/teacher-team-list/teacher-team-list.component";
-import {LogoutComponent} from "./component/logout/logout.component";
-import {TeacherInfoDetailComponent} from "./page/teacher-info/teacher-info-detail/teacher-info-detail.component";
-import {TeacherInfoEditComponent} from "./page/teacher-info/teacher-info-edit/teacher-info-edit.component";
+import {LoginComponent} from "./part/login/login.component";
+import {LogoutComponent} from "./part/logout/logout.component";
+import {NavigationComponent} from "./part/navigation/navigation.component";
+import {PaginationComponent} from "./part/pagination/pagination.component";
+import {DevelopmentColumnDetailComponent} from "./page/development-column-detail/development-column-detail.component";
+import {RegisterComponent} from "./part/register/register.component";
+import {DynamicComponent} from "./page/dynamic/dynamic.component";
+import {IntroduceComponent} from "./page/introduce/introduce.component";
+import {AccountComponent} from "./page/account/account.component";
+import {DevelopmentColumnComponent} from "./page/development-column/development-column.component";
+import {UserDetailComponent} from "./page/user-detail/user-detail.component";
+import {StudyColumnComponent} from "./page/study-column/study-column.component";
+import {ReformColumnComponent} from "./page/reform-column/reform-column.component";
+import {UserComponent} from "./page/user/user.component";
+import {TeacherTeamComponent} from "./page/teacher-team/teacher-team.component";
+import {DynamicDetailComponent} from "./page/dynamic-detail/dynamic-detail.component";
+import {IntroduceDetailComponent} from "./page/introduce-detail/introduce-detail.component";
+import {ReformColumnDetailComponent} from "./page/reform-column-detail/reform-column-detail.component";
+import {StudyColumnDetailComponent} from "./page/study-column-detail/study-column-detail.component";
+import {TeacherTeamDetailComponent} from "./page/teacher-team-detail/teacher-team-detail.component";
+import {TeacherInfoDetailComponent} from "./page/teacher-info-detail/teacher-info-detail.component";
 
 /**
  * 项目的主模块。
@@ -41,39 +37,28 @@ import {TeacherInfoEditComponent} from "./page/teacher-info/teacher-info-edit/te
   declarations: [
     AppComponent,
 
-    PaginationComponent,
-    NavigationComponent,
-    RegisterComponent,
     LoginComponent,
     LogoutComponent,
+    NavigationComponent,
+    PaginationComponent,
+    RegisterComponent,
 
-    AccountDetailComponent,
-
+    AccountComponent,
+    DevelopmentColumnComponent,
     DevelopmentColumnDetailComponent,
-    DevelopmentColumnEditComponent,
-    DevelopmentColumnListComponent,
-
+    DynamicComponent,
     DynamicDetailComponent,
-    DynamicListComponent,
-
+    IntroduceComponent,
     IntroduceDetailComponent,
-    IntroduceEditComponent,
-    IntroduceListComponent,
-
-    ReformColumnEditComponent,
+    ReformColumnComponent,
     ReformColumnDetailComponent,
-    ReformColumnListComponent,
-
+    StudyColumnComponent,
     StudyColumnDetailComponent,
-    StudyColumnEditComponent,
-    StudyColumnListComponent,
-
+    TeacherTeamComponent,
     TeacherTeamDetailComponent,
-    TeacherTeamEditComponent,
-    TeacherTeamListComponent,
-
     TeacherInfoDetailComponent,
-    TeacherInfoEditComponent
+    UserComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

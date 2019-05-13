@@ -29,7 +29,7 @@ export class TeacherInfoService {
   }
 
   update(teacherInfo: TeacherInfo): Observable<TeacherInfo> {
-    const url = `${apiUrl}/teacher-info/update`;
+    const url = `${apiUrl}/teacher-info/${teacherInfo.id}`;
     return this.http.put<TeacherInfo>(url, teacherInfo).pipe(
         catchError(this.handleError("update", teacherInfo))
     );

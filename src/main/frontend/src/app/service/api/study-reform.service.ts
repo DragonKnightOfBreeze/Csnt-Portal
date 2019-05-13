@@ -30,7 +30,7 @@ export class StudyColumnService {
   }
 
   update(column: StudyColumn): Observable<StudyColumn> {
-    const url = `${apiUrl}/study-column/update`;
+    const url = `${apiUrl}/study-column/${column.id}`;
     return this.http.put<StudyColumn>(url, column).pipe(
         catchError(this.handleError("update", column))
     );
