@@ -10,7 +10,13 @@ import {Page} from "../../domain/interface/Page";
 })
 export class DevelopmentColumnComponent implements OnInit {
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
-  page: Page<DevelopmentColumn>;
+  columnPage: Page<DevelopmentColumn>;
+
+  /**增加数据表单的模型对象。*/
+  newColumn = new DevelopmentColumn();
+
+  /**是否通过后台表单参数验证。*/
+  isValidForCreate = true;
 
 
   constructor(private service: DevelopmentColumnService) {
@@ -22,33 +28,42 @@ export class DevelopmentColumnComponent implements OnInit {
   }
 
   /**
-   * 增加数据，传入表单模型。如果操作成功，则弹出提示框。
+   * 增加数据，传入表单模型数据。
    * 可能抛出：400 参数错误
    */
-  create(column: DevelopmentColumn) {
-    this.service.create(column).subscribe(() => window.alert("添加成功！"));
+  create() {
+    this.service.create(this.newColumn).subscribe(column => {
+      this.columnPage.content.push(column);
+      this.columnPage.content.slice(0, 10);
+      this.isValidForCreate = true;
+    },()=>this.isValidForCreate = false);
   }
 
   /**
    * 删除数据，传入数据id。如果操作成功，则弹出提示框。
+   * 可能抛出：403 权限错误
    */
   delete(id: number) {
-    this.service.delete(id).subscribe(() => window.alert("删除成功！"));
+    window.alert("删除成功！");
+    this.columnPage.content.filter(e => e.id !== id);
+    this.service.delete(id).subscribe();
   }
 
   /**
    * 列出所有数据，在组件初始化时调用。
-   * 可能抛出：204 没有内容
    */
-  list() {
-    this.service.list().subscribe(page => this.page = page);
+  list(page = 1,size = 10) {
+    this.service.list(page,size).subscribe(columnPage => {
+      this.columnPage = columnPage;
+    });
   }
 
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
-   * 可能抛出：204 没有内容
    */
-  searchByTitle(title: string) {
-    this.service.searchByTitle(title).subscribe(page => this.page = page);
+  searchByTitle(title: string, page = 1, size = 10) {
+    this.service.searchByTitle(title,page,size).subscribe(columnPage => {
+      this.columnPage = columnPage;
+    });
   }
 }

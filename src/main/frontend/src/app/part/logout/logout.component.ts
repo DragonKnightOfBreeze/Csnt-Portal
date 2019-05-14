@@ -16,8 +16,11 @@ export class LogoutComponent implements OnInit {
   }
 
 
-  //在初始化时就调用服务中的相关方法
   ngOnInit() {
+    this.logout();
+  }
+
+  private logout() {
     this.userService.logout();
     this.router.navigateByUrl("/");
   }

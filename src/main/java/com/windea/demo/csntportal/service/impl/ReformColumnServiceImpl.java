@@ -1,7 +1,6 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.ReformColumn;
-import com.windea.demo.csntportal.exception.NoContentException;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.ReformColumnRepository;
 import com.windea.demo.csntportal.service.ReformColumnService;
@@ -10,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 @Service
 @CacheConfig(cacheNames = "reformColumnCache")
@@ -59,7 +57,6 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
 		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -67,7 +64,6 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 	@Override
 	public Page<ReformColumn> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 }

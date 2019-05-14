@@ -1,13 +1,11 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.Introduce;
-import com.windea.demo.csntportal.exception.NoContentException;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.IntroduceRepository;
 import com.windea.demo.csntportal.service.IntroduceService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -50,7 +48,6 @@ public class IntroduceServiceImpl implements IntroduceService {
 	@Override
 	public List<Introduce> findAll() {
 		var resultList = repository.findAll();
-		Assert.notEmpty(resultList, () -> {throw new NoContentException();});
 		return resultList;
 	}
 }

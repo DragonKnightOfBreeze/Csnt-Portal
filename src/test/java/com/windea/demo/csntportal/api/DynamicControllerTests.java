@@ -2,6 +2,7 @@ package com.windea.demo.csntportal.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.windea.demo.csntportal.domain.entity.Dynamic;
+import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import com.windea.demo.csntportal.service.DynamicService;
 import com.windea.demo.csntportal.service.impl.JwtUserDetailsServiceImpl;
@@ -17,8 +18,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -143,41 +143,31 @@ public class DynamicControllerTests {
 	//TESTED
 	@Test
 	public void searchBySubjectTest1() throws Exception {
-		mockMvc.perform(get("/dynamic/search").param("method", "subject").param("subject", "主题"))
+		mockMvc.perform(get("/dynamic/search").param("subject", "主题"))
 			.andExpect(status().isOk())
 			.andDo(print());
 	}
 
-	//TESTED noContent
-	@Test
-	public void searchByBySubjectTest2() throws Exception {
-		mockMvc.perform(get("/dynamic/search").param("method", "subject").param("subject", "XXX"))
-			.andExpect(status().isNoContent())
-			.andDo(print());
-	}
 
 	//TESTED
 	@Test
 	public void searchByCategoryTest1() throws Exception {
-		mockMvc.perform(get("/dynamic/search").param("method", "category").param("categorySet", "CHAT"))
+		mockMvc.perform(get("/dynamic/search").param("categorySet", "CHAT"))
 			.andExpect(status().isOk())
 			.andDo(print());
 	}
 
-	//TESTED
-	@Test
-	public void searchByCategoryTest2() throws Exception {
-		mockMvc.perform(get("/dynamic/search").param("method", "category").param("categorySet", "NOTICE"))
-			.andExpect(status().isNoContent())
-			.andDo(print());
-	}
 
 	//TESTED 需要指定contentType为application/json，指定content为json字符串，可以和param同时使用
 	@Test
 	public void advanceSearchTest() throws Exception {
-		var jsonStr = JSONObject.toJSONString(Map.of("subject", "主题", "category", "CHAT", "sponsorUsername", "123"));
+		var vo = new DynamicSearchVo();
+		vo.setSubject("主题");
+		vo.setCategorySet(Set.of(DynamicCategory.CHAT));
+		vo.setSponsorUsername("123");
+		var jsonStr = JSONObject.toJSONString(vo);
 
-		mockMvc.perform(post("/dynamic/advanceSearch").param("page", "1").param("size", "4")
+		mockMvc.perform(post("/dynamic/advanceSearch").param("columnPage", "1").param("size", "4")
 			.contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
 			.andExpect(status().isOk())
 			.andDo(print());

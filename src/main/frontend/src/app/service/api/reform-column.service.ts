@@ -43,7 +43,7 @@ export class ReformColumnService {
     );
   }
 
-  list(page = 1, size = 10): Observable<Page<ReformColumn>> {
+  list(page: number, size: number): Observable<Page<ReformColumn>> {
     const url = `${apiUrl}/reform-column/list`;
     const params = {page: page + "", size: size + ""};
     return this.http.get<Page<ReformColumn>>(url, {params: params}).pipe(
@@ -51,9 +51,9 @@ export class ReformColumnService {
     );
   }
 
-  searchByTitle(title: string, page = 1, size = 10): Observable<Page<ReformColumn>> {
+  searchByTitle(title: string, page: number, size: number): Observable<Page<ReformColumn>> {
     const url = `${apiUrl}/reform-column/search`;
-    const params = {method: "title", title: title, page: page + "", size: size + ""};
+    const params = {title: title, page: page + "", size: size + ""};
     return this.http.get<Page<ReformColumn>>(url, {params: params}).pipe(
         catchError(this.handleError("searchByTitle", null))
     );

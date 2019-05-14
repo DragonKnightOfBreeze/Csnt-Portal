@@ -1,8 +1,8 @@
 import {Role} from "../../enums/Role";
 
-export class JwtResponseVo {
-  token: string = "";
-  type: string = "";
+export class JwtUserResponse {
   username: string = "";
   role: string = Role.Visitor;
+  token: string = "";
+  type: string = "Bearer";
 }

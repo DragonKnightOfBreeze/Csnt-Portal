@@ -43,7 +43,7 @@ export class DevelopmentColumnService {
     );
   }
 
-  list(page = 1, size = 10): Observable<Page<DevelopmentColumn>> {
+  list(page: number, size: number): Observable<Page<DevelopmentColumn>> {
     const url = `${apiUrl}/development-column/list`;
     const params = {page: page + "", size: size + ""};
     return this.http.get<Page<DevelopmentColumn>>(url, {params: params}).pipe(
@@ -51,9 +51,9 @@ export class DevelopmentColumnService {
     );
   }
 
-  searchByTitle(title: string, page = 1, size = 10): Observable<Page<DevelopmentColumn>> {
+  searchByTitle(title: string, page: number, size: number): Observable<Page<DevelopmentColumn>> {
     const url = `${apiUrl}/development-column/search`;
-    const params = {method: "title", title: title, page: page + "", size: size + ""};
+    const params = {title: title, page: page + "", size: size + ""};
     return this.http.get<Page<DevelopmentColumn>>(url, {params: params}).pipe(
         catchError(this.handleError("searchByTitle", null))
     );

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../domain/entity/User";
 import {UserService} from "../../service/api/user.service";
+import {ActivatedRoute} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-account',
@@ -8,10 +10,16 @@ import {UserService} from "../../service/api/user.service";
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
+  /**当前数据对象。包含更多的用户信息。*/
   user: User;
 
+  /**是否通过后台表单参数验证。*/
+  isValidForUpdate = true;
 
-  constructor(private service: UserService) {
+
+  constructor(private service: UserService,
+              private route: ActivatedRoute,
+              private location: Location) {
   }
 
   //NOTE
@@ -27,17 +35,29 @@ export class AccountComponent implements OnInit {
    * 可能抛出：404 未找到
    */
   get() {
-    //TODO
-    let username = "Windea";
-    this.service.getAccountInfo(username).subscribe(user => this.user = user);
+    //从路由地址中得到路由参数
+    let username = this.route.snapshot.paramMap.get("username");
+    this.service.getAccountInfo(username).subscribe(user => {
+      this.user = user;
+    });
   }
 
   /**
-   * 更新数据，传入表单模型。如果操作成功，则弹出提示框。
+   * 更新数据，传入表单模型。
    * 只有管理员可以调用。
    * 可能抛出：400 参数错误，403 用户不匹配
    */
-  update(updatedUser: User) {
-    this.service.updateAccountInfo(updatedUser).subscribe(() => window.alert("更新成功！"));
+  update() {
+    this.service.updateAccountInfo(this.user).subscribe(updatedUser => {
+      this.user = updatedUser;
+      this.isValidForUpdate = true;
+    }, () => this.isValidForUpdate = false);
+  }
+
+  /**
+   * 返回到上一页。
+   */
+  goBack() {
+    this.location.back();
   }
 }

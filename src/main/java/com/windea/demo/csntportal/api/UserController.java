@@ -1,6 +1,7 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.commons.base.exception.NotImplementedException;
+import com.windea.demo.csntportal.domain.entity.JwtUserResponse;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.*;
 import com.windea.demo.csntportal.exception.UserNotMatchedException;
@@ -46,7 +47,7 @@ public class UserController {
 	 * 登录用户。使用参数验证。
 	 */
 	@PostMapping("/login")
-	public JwtResponseVo login(
+	public JwtUserResponse login(
 		@Valid @RequestBody UserLoginVo vo,
 		BindingResult bindingResult
 	) {
@@ -64,7 +65,7 @@ public class UserController {
 		//NOTE 返回的是包含jwt令牌的jwt响应视图对象
 		String jwt = jwtProvider.generate(validAuth);
 		var role = userDetails.getAuthorities().toArray()[0].toString();
-		var result = new JwtResponseVo(jwt, userDetails.getUsername(), role);
+		var result = new JwtUserResponse(jwt, userDetails.getUsername(), role);
 		return result;
 	}
 
@@ -169,7 +170,7 @@ public class UserController {
 	 * 根据昵称查询用户信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping(value = "/user/search", params = "method=nickname")
+	@GetMapping(value = "/user/search", params = "nickname")
 	public Page<User> searchByNickname(
 		@RequestParam String nickname,
 		@RequestParam(defaultValue = "1") Integer page,

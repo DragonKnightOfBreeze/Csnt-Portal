@@ -111,7 +111,7 @@ public class DynamicController {
 	/**
 	 * 根据主题查询动态信息。
 	 */
-	@GetMapping(value = "/search", params = "method=subject")
+	@GetMapping(value = "/search", params = "subject")
 	public Page<Dynamic> searchBySubject(
 		@RequestParam String subject,
 		@RequestParam(defaultValue = "1") Integer page,
@@ -125,7 +125,7 @@ public class DynamicController {
 	/**
 	 * 根据发起用户的用户名查询动态信息。
 	 */
-	@GetMapping(value = "/search", params = "method=sponsorUsername")
+	@GetMapping(value = "/search", params = "sponsorUsername")
 	public Page<Dynamic> searchBySponsorUsername(
 		@RequestParam String sponsorUsername,
 		@RequestParam(defaultValue = "1") Integer page,
@@ -139,7 +139,7 @@ public class DynamicController {
 	/**
 	 * 根据分类查询动态信息。
 	 */
-	@GetMapping(value = "/search", params = "method=category")
+	@GetMapping(value = "/search", params = "categorySet")
 	public Page<Dynamic> searchByCategory(
 		@RequestParam Set<DynamicCategory> categorySet,
 		@RequestParam(defaultValue = "1") Integer page,

@@ -99,7 +99,7 @@ public class TeacherTeamController {
 	/**
 	 * 根据名字查询教师队伍信息。
 	 */
-	@GetMapping(value = "/search", params = "method=name")
+	@GetMapping(value = "/search", params = "name")
 	public Page<TeacherTeam> searchByName(
 		@RequestParam String name,
 		@RequestParam(defaultValue = "1") Integer page,
@@ -113,7 +113,7 @@ public class TeacherTeamController {
 	/**
 	 * 根据专业级别查询教师队伍信息。
 	 */
-	@GetMapping(value = "/search", params = "method=professionLevel")
+	@GetMapping(value = "/search", params = "professionLevel")
 	public Page<TeacherTeam> searchByProfessionLevel(
 		@RequestParam Set<ProfessionLevel> levelSet,
 		@RequestParam(defaultValue = "1") Integer page,
@@ -127,7 +127,7 @@ public class TeacherTeamController {
 	/**
 	 * 根据人数查询教师队伍信息。
 	 */
-	@GetMapping(value = "/search", params = "method=teacherCount")
+	@GetMapping(value = "/search", params = {"min", "max"})
 	public Page<TeacherTeam> searchByTeacherCount(
 		@RequestParam Integer min,
 		@RequestParam Integer max,
