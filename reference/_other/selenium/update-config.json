@@ -1,0 +1,14 @@
+{
+  "standalone": {
+    "last": "D:\\Program Files\\nodejs\\node_modules\\protractor\\node_modules\\webdriver-manager\\selenium\\selenium-server-standalone-3.141.59.jar",
+    "all": [
+      "D:\\Program Files\\nodejs\\node_modules\\protractor\\node_modules\\webdriver-manager\\selenium\\selenium-server-standalone-3.141.59.jar"
+
+    ]
+  }, "chrome": {
+  "last": "D:\\Program Files\\nodejs\\node_modules\\protractor\\node_modules\\webdriver-manager\\selenium\\chromedriver_74.0.3729.6.exe",
+  "all": [
+    "D:\\Program Files\\nodejs\\node_modules\\protractor\\node_modules\\webdriver-manager\\selenium\\chromedriver_74.0.3729.6.exe"
+  ]
+}
+}

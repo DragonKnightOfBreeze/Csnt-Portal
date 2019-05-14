@@ -9,6 +9,7 @@
 * Angular教程
 	* [Angular - 什么是 Angular？](https://www.angular.cn/docs)
 * SpringBoot教程
+    * [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
 	* [Spring Boot 中文导航](http://springboot.fun/)
 * Demo参考
 	* [Angular-SpringBoot-REST-JWT](https://github.com/mrin9/Angular-SpringBoot-REST-JWT)
@@ -93,8 +94,7 @@ README.md       # 说明文档
 ## 需要注意的地方
 
 * 忽略`src/frontend/node_modules`目录。
-    * 在`src/frontend`目录下打开控制台，自行使用`cnpm install`命令下载Npm依赖包。
-    * 可能会出一些问题……
+    * 在`src/frontend`目录下打开控制台，自行使用`npm install`命令下载ppm依赖包。考虑翻墙或配置淘宝镜像。
 * 不包含Jar依赖包。
     * 建立Maven本地仓库，在Idea中自行启用自动导入功能。
 * 忽略`target`目录。
@@ -139,11 +139,35 @@ addHero (hero: Hero): Observable<Hero> {
 首先运行后台的SpringBoot项目，然后运行前端的Angular项目即可。
 
 ```bash
-cd $project-dir$
+# 准备并运行后台程序
+cd project-dir
 mvn install
 mvn spring-boot:run
+# 准备并运行前端程序
 cd src/main/frontend
 npm install
 ng build --prod
 ng serve
 ```
+
+## 如何运行Angular端对端测试
+
+[Angular E2E 测试之路一](https://segmentfault.com/a/1190000002454789)
+
+```bash
+npm install -g protractor
+# 大概率会报超时错误，请尝试配置淘宝镜像或翻墙，
+# 或者直接将项目的reference/_other/selenium目录下的文件，
+# 移动到npm全局或者项目前端的node_modules\protractor\node_modules\webdriver-manager目录下。
+webdriver-manager update --gecko false --alternate_cdn
+webdriver-manager start
+ng build
+ng serve
+ng e2e
+```
+
+## 如何让方滨兴教授加倍去世
+
+[淘宝 NPM 镜像使用](https://segmentfault.com/a/1190000002558754)
+
+

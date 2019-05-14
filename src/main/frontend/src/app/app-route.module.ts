@@ -20,12 +20,12 @@ import {TeacherTeamDetailComponent} from "./page/teacher-team-detail/teacher-tea
 import {TeacherTeamComponent} from "./page/teacher-team/teacher-team.component";
 import {UserComponent} from "./page/user/user.component";
 import {UserDetailComponent} from "./page/user-detail/user-detail.component";
+import {AdminGuard} from "./service/guard/admin-guard.service";
 
 //项目的路由数组
-//NOTE
-//因为后台已经使用了Spring Security，前端是否仍有必要严格限定canActive？
-//增加、删除、查找操作默认合并在XxxComponent里面
-//修改操作未确定是否要在XxxDetailComponent里面
+//NOTE 因为后台已经使用了Spring Security，前端是否仍有必要严格限定canActive？
+//NOTE 增加、删除、查找操作默认合并在XxxComponent里面
+//NOTE 修改操作未确定是否要在XxxDetailComponent里面
 const routes: Routes = [
   {path: "index", redirectTo: ""},
   {path: "home", redirectTo: ""},
@@ -55,8 +55,8 @@ const routes: Routes = [
 
   {path: "teacher-info/:id", component: TeacherInfoDetailComponent},
 
-  {path: "user", component: UserComponent},
-  {path: "user/:id", component: UserDetailComponent}
+  {path: "user", component: UserComponent, canActivate: [AdminGuard]},
+  {path: "user/:id", component: UserDetailComponent, canActivate: [AdminGuard]}
 ];
 
 /**

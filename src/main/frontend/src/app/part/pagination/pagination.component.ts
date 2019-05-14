@@ -7,7 +7,7 @@ import {Page} from "../../domain/interface/Page";
 @Component({
   selector: "app-pagination",
   templateUrl: "./pagination.component.html",
-  styleUrls: ["./pagination.component.css"]
+  styleUrls: ["./pagination.component.scss"]
 })
 export class PaginationComponent implements OnInit {
   /** 当前页。可从中获得当前页数据、当前页数、总页数等。需要传入。 */
