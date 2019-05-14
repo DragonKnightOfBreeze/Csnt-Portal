@@ -29,6 +29,8 @@ import {ReformColumnDetailComponent} from "./page/reform-column-detail/reform-co
 import {StudyColumnDetailComponent} from "./page/study-column-detail/study-column-detail.component";
 import {TeacherTeamDetailComponent} from "./page/teacher-team-detail/teacher-team-detail.component";
 import {TeacherInfoDetailComponent} from "./page/teacher-info-detail/teacher-info-detail.component";
+import {HomeComponent} from './page/home/home.component';
+import {FooterComponent} from './part/footer/footer.component';
 
 /**
  * 项目的主模块。
@@ -64,7 +66,9 @@ import {TeacherInfoDetailComponent} from "./page/teacher-info-detail/teacher-inf
     TeacherTeamDetailComponent,
     TeacherInfoDetailComponent,
     UserComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    HomeComponent,
+    FooterComponent
   ],
   providers: [
     //带有@Injectable({provideIn:"root"})的服务，不需要在这里声明

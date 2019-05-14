@@ -21,14 +21,16 @@ import {TeacherTeamComponent} from "./page/teacher-team/teacher-team.component";
 import {UserComponent} from "./page/user/user.component";
 import {UserDetailComponent} from "./page/user-detail/user-detail.component";
 import {AdminGuard} from "./service/guard/admin-guard.service";
+import {HomeComponent} from "./page/home/home.component";
 
 //项目的路由数组
 //NOTE 因为后台已经使用了Spring Security，前端是否仍有必要严格限定canActive？
 //NOTE 增加、删除、查找操作默认合并在XxxComponent里面
 //NOTE 修改操作未确定是否要在XxxDetailComponent里面
 const routes: Routes = [
-  {path: "index", redirectTo: ""},
-  {path: "home", redirectTo: ""},
+  {path: "", redirectTo: "home", pathMatch: "full"},
+  {path: "home", component: HomeComponent},
+
   {path: "register", component: RegisterComponent},
   {path: "login", component: LoginComponent},
   {path: "logout", component: LogoutComponent},
