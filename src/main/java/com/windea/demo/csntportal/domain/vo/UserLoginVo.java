@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 /**
- * 用户登录/修改密码表单的视图对象。<br>
+ * 用户登录表单的视图对象。<br>
  * TODO 适配多种登录方式，但本质上还是用户名登录。
  */
 public class UserLoginVo {

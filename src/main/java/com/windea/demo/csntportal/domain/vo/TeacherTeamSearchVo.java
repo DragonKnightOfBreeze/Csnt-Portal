@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 教师队伍的查询表单的视图对象。
+ * 教师队伍高级查询表单的视图对象。
  */
 public class TeacherTeamSearchVo {
 

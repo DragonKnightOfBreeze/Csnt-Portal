@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 实时动态的查询表单的视图对象。
+ * 实时动态高级查询表单的视图对象。
  */
 public class
 DynamicSearchVo {

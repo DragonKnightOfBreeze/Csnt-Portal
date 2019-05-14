@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {User} from "../../domain/entity/User";
 import {UserService} from "../../service/api/user.service";
 import {Router} from "@angular/router";
@@ -11,25 +11,27 @@ import {Router} from "@angular/router";
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.scss"]
 })
-export class RegisterComponent {
-  valid = true;
+export class RegisterComponent implements OnInit {
+  /**用户注册表单的模型对象。*/
   user = new User();
+
+  /**是否通过后台表单参数验证。*/
+  isValid = true;
+
 
   constructor(private userService: UserService,
               private router: Router) {
   }
 
-  /**
-   * 提交表单数据。
-   */
-  onSubmit() {
-    this.userService.register(this.user).subscribe(user => {
-      //如果注册成功，则跳转到登录页，否则记为输入不合法
-      if (user) {
-        this.router.navigateByUrl("/login");
-      } else {
-        this.valid = false;
-      }
-    })
+
+  ngOnInit(): void {
+  }
+
+  register() {
+    this.userService.register(this.user).subscribe(() => {
+      //如果注册成功，则跳转到登录页
+      this.router.navigateByUrl("/login");
+      this.isValid = true;
+    }, () => this.isValid = false)
   }
 }

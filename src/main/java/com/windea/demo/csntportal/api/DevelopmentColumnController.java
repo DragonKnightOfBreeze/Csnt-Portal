@@ -96,7 +96,7 @@ public class DevelopmentColumnController {
 	/**
 	 * 根据标题查询专业发展专栏信息。
 	 */
-	@GetMapping(value = "/search", params = "method=title")
+	@GetMapping(value = "/search", params = "title")
 	public Page<DevelopmentColumn> searchByTitle(
 		@RequestParam String title,
 		@RequestParam(defaultValue = "1") Integer page,

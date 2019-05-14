@@ -34,6 +34,12 @@ import {TeacherInfoDetailComponent} from "./page/teacher-info-detail/teacher-inf
  * 项目的主模块。
  */
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
+  ],
   declarations: [
     AppComponent,
 
@@ -59,12 +65,6 @@ import {TeacherInfoDetailComponent} from "./page/teacher-info-detail/teacher-inf
     TeacherInfoDetailComponent,
     UserComponent,
     UserDetailComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
   ],
   providers: [
     //带有@Injectable({provideIn:"root"})的服务，不需要在这里声明

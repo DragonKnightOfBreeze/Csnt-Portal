@@ -43,7 +43,7 @@ export class StudyColumnService {
     );
   }
 
-  list(page = 1, size = 10): Observable<Page<StudyColumn>> {
+  list(page: number, size: number): Observable<Page<StudyColumn>> {
     const url = `${apiUrl}/study-column/list`;
     const params = {page: page + "", size: size + ""};
     return this.http.get<Page<StudyColumn>>(url, {params: params}).pipe(
@@ -51,9 +51,9 @@ export class StudyColumnService {
     );
   }
 
-  searchByTitle(title: string, page = 1, size = 10): Observable<Page<StudyColumn>> {
+  searchByTitle(title: string, page: number, size: number): Observable<Page<StudyColumn>> {
     const url = `${apiUrl}/study-column/search`;
-    const params = {method: "title", title: title, page: page + "", size: size + ""};
+    const params = {title: title, page: page + "", size: size + ""};
     return this.http.get<Page<StudyColumn>>(url, {params: params}).pipe(
         catchError(this.handleError("searchByTitle", null))
     );

@@ -45,7 +45,7 @@ export class TeacherTeamService {
     );
   }
 
-  list(page = 1, size = 10): Observable<Page<TeacherTeam>> {
+  list(page: number, size: number): Observable<Page<TeacherTeam>> {
     const url = `${apiUrl}/teacher-team/list`;
     const params = {page: page + "", size: size + ""};
     return this.http.get<Page<TeacherTeam>>(url, {params: params}).pipe(
@@ -53,31 +53,31 @@ export class TeacherTeamService {
     );
   }
 
-  searchByName(name: string, page = 1, size = 10): Observable<Page<TeacherTeam>> {
+  searchByName(name: string, page: number, size: number): Observable<Page<TeacherTeam>> {
     const url = `${apiUrl}/teacher-team/search`;
-    const params = {method: "name", name: name, page: page + "", size: size + ""};
+    const params = {name: name, page: page + "", size: size + ""};
     return this.http.get<Page<TeacherTeam>>(url, {params: params}).pipe(
         catchError(this.handleError("searchByName", null))
     );
   }
 
-  searchByProfessionLevel(professionLevel: ProfessionLevel, page = 1, size = 10): Observable<Page<TeacherTeam>> {
+  searchByProfessionLevel(levelSet: ProfessionLevel[], page: number, size: number): Observable<Page<TeacherTeam>> {
     const url = `${apiUrl}/teacher-team/search`;
-    const params = {method: "professionLevel", professionLevel: professionLevel, page: page + "", size: size + ""};
+    const params = {levelSet: levelSet, page: page + "", size: size + ""};
     return this.http.get<Page<TeacherTeam>>(url, {params: params}).pipe(
         catchError(this.handleError("searchByProfessionLevel", null))
     );
   }
 
-  searchByTeacherCount(min: number, max: number, page = 1, size = 10): Observable<Page<TeacherTeam>> {
+  searchByTeacherCount(min: number, max: number, page: number, size: number): Observable<Page<TeacherTeam>> {
     const url = `${apiUrl}/teacher-team/search`;
-    const params = {method: "teacherCount", min: min + "", max: max + "", page: page + "", size: size + ""};
+    const params = {min: min + "", max: max + "", page: page + "", size: size + ""};
     return this.http.get<Page<TeacherTeam>>(url, {params: params}).pipe(
         catchError(this.handleError("searchByTeacherCount", null))
     );
   }
 
-  advanceSearch(vo: TeacherTeamSearchVo, page = 1, size = 10): Observable<Page<TeacherTeam>> {
+  advanceSearch(vo: TeacherTeamSearchVo, page: number, size: number): Observable<Page<TeacherTeam>> {
     const url = `${apiUrl}/dynamic/advanceSearch`;
     const params = {page: page + "", size: size + ""};
     return this.http.post<Page<TeacherTeam>>(url, vo, {params: params}).pipe(

@@ -1,14 +1,14 @@
 import {Injectable, OnInit} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../domain/entity/User";
-import {BehaviorSubject, Observable, of, Subject} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
 import {catchError, tap} from "rxjs/operators";
 import {CookieService} from 'ngx-cookie-service';
 import {Page} from "../../domain/interface/Page";
 import {UserLoginVo} from "../../domain/vo/UserLoginVo";
 import {UserResetPasswordVo} from "../../domain/vo/UserResetPasswordVo";
-import {JwtResponseVo} from "../../domain/vo/JwtResponseVo";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 
 /**
  * 用户的服务类。
@@ -17,10 +17,10 @@ import {JwtResponseVo} from "../../domain/vo/JwtResponseVo";
 //http拦截器之类仍然需要进行特殊声明
 @Injectable({providedIn: "root"})
 export class UserService implements OnInit {
-  public nameSubject = new Subject<String>();
-  public name$ = this.nameSubject.asObservable();
-  public currentUserSubject: BehaviorSubject<JwtResponseVo>;
-  public currentUser$ = this.currentUserSubject.asObservable();
+  /** 当前用户信息的可观察流对象。当前用户是不固定的，因此需要使用可观察流对象。 */
+  public currentUserSubject: BehaviorSubject<JwtUserResponse>;
+  /**当前用户信息的可观察对象。*/
+  public currentUser$: Observable<JwtUserResponse>;
 
 
   constructor(private http: HttpClient,
@@ -31,15 +31,19 @@ export class UserService implements OnInit {
   ngOnInit(): void {
     //尝试从localStorage中得到当前用户
     const memo = localStorage.getItem("currentUser");
-    //创建当前用户的BehaviorSubject对象以及对应的可观察对象
-    this.currentUserSubject = new BehaviorSubject<JwtResponseVo>(JSON.parse(memo));
-    //将得到的当前用户存储到cookie中去
-    this.cookieService.set("currentUser", memo);
+    //如果存在，则得到当前用户的可观察对象
+    if (memo) {
+      //创建当前用户的BehaviorSubject对象以及对应的可观察对象
+      this.currentUserSubject = new BehaviorSubject<JwtUserResponse>(JSON.parse(memo));
+      this.currentUser$ = this.currentUserSubject.asObservable();
+      //将得到的当前用户存储到cookie中去
+      this.cookieService.set("currentUser", memo);
+    }
   }
 
-  login(vo: UserLoginVo): Observable<JwtResponseVo> {
+  login(vo: UserLoginVo): Observable<JwtUserResponse> {
     const url = `${apiUrl}/login`;
-    return this.http.post<JwtResponseVo>(url, vo).pipe(
+    return this.http.post<JwtUserResponse>(url, vo).pipe(
         tap(currentUser => {
           console.log("登录成功！");
           //如果用户和用户令牌存在，则存储到cookie中
@@ -49,9 +53,8 @@ export class UserService implements OnInit {
             if (vo.rememberMe) {
               localStorage.setItem("currentUser", JSON.stringify(currentUser));
             }
-            //NOTE 这里有什么作用？
+            //将当前用户信息推送到对应的可观察流对象中
             this.currentUserSubject.next(currentUser);
-            this.nameSubject.next(currentUser.username);
           }
         }),
         catchError(this.handleError("login", null))
@@ -59,10 +62,9 @@ export class UserService implements OnInit {
   }
 
   logout() {
-    //NOTE 这里有什么作用？
-    this.nameSubject.next(null);
-    this.currentUserSubject.next(null);
     console.log("登出成功！");
+    //清空当前用户信息可观察流对象的值
+    this.currentUserSubject.next(null);
     //从cookie和本地存储中删除当前用户
     this.cookieService.delete("currentUser");
     localStorage.removeItem("currentUser");
@@ -105,7 +107,7 @@ export class UserService implements OnInit {
     );
   }
 
-  list(page = 1, size = 10): Observable<Page<User>> {
+  list(page: number, size: number): Observable<Page<User>> {
     const url = `${apiUrl}/user/list`;
     const params = {page: page + "", size: size + ""};
     return this.http.get<Page<User>>(url, {params: params}).pipe(
@@ -113,9 +115,9 @@ export class UserService implements OnInit {
     );
   }
 
-  searchByNickname(nickname: string, page = 1, size = 10): Observable<Page<User>> {
+  searchByNickname(nickname: string, page: number, size: number): Observable<Page<User>> {
     const url = `${apiUrl}/user/search`;
-    const params = {method: "nickname", nickname: nickname, page: page + "", size: size + ""};
+    const params = {nickname: nickname, page: page + "", size: size + ""};
     return this.http.get<Page<User>>(url, {params: params}).pipe(
         catchError(this.handleError("searchByNickname", null))
     );

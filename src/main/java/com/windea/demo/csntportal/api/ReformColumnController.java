@@ -96,7 +96,7 @@ public class ReformColumnController {
 	/**
 	 * 根据标题查询教学改革专栏信息。
 	 */
-	@GetMapping(value = "/search", params = "method=title")
+	@GetMapping(value = "/search", params = "title")
 	public Page<ReformColumn> searchByTitle(
 		@RequestParam String title,
 		@RequestParam(defaultValue = "1") Integer page,

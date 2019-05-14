@@ -96,7 +96,7 @@ public class StudyColumnController {
 	/**
 	 * 根据标题查询学习专栏信息。
 	 */
-	@GetMapping(value = "/search", params = "method=title")
+	@GetMapping(value = "/search", params = "title")
 	public Page<StudyColumn> searchByTitle(
 		@RequestParam String title,
 		@RequestParam(defaultValue = "1") Integer page,

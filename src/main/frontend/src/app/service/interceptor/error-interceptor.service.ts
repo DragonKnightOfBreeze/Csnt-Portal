@@ -20,6 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       switch (err.status) {
         case 400:
           //400 Bad request 一般为参数验证错误，接收错误信息或者设置布尔值
+          window.alert("参数错误！");
           break;
         case 401:
           //401	Unauthorized 未验证，需要登录
