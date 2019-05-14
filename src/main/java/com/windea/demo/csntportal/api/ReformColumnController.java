@@ -21,6 +21,7 @@ import javax.validation.Valid;
 public class ReformColumnController {
 	private final ReformColumnService service;
 
+
 	public ReformColumnController(ReformColumnService service) {this.service = service;}
 
 
@@ -55,8 +56,9 @@ public class ReformColumnController {
 	 * 更新教学改革专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update")
+	@PutMapping(value = "/{id}")
 	public ReformColumn update(
+		@PathVariable Integer id,
 		@Valid @RequestBody ReformColumn column,
 		BindingResult bindingResult
 	) {
@@ -66,7 +68,6 @@ public class ReformColumnController {
 		var result = service.update(column);
 		return result;
 	}
-
 
 	/**
 	 * 得到教学改革专栏信息。
@@ -78,7 +79,6 @@ public class ReformColumnController {
 		var result = service.findById(id);
 		return result;
 	}
-
 
 	/**
 	 * 查询所有教学改革专栏信息。

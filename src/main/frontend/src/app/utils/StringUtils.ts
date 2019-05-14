@@ -29,8 +29,6 @@ export class StringUtils {
 
   /**
    * 根据指定的名字和值数组，得到格式化后的Http Get参数字符串。
-   * @param name
-   * @param value
    */
   static joinMultiUrlParam(name: string, value: any[]) {
     let result = value.map(s => `${name}=${s.toString()}`).reduce((a, b) => `${a}&${b}`);

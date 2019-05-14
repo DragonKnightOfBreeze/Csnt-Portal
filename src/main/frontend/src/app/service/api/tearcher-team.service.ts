@@ -32,7 +32,7 @@ export class TeacherTeamService {
   }
 
   update(teacherTeam: TeacherTeam): Observable<TeacherTeam> {
-    const url = `${apiUrl}/teacher-team/update`;
+    const url = `${apiUrl}/teacher-team/${teacherTeam.id}`;
     return this.http.put<TeacherTeam>(url, teacherTeam).pipe(
         catchError(this.handleError("update", teacherTeam))
     );

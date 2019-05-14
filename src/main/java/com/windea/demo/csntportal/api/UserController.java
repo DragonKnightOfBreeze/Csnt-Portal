@@ -34,6 +34,7 @@ public class UserController {
 	private final JwtProvider jwtProvider;
 	private final AuthenticationManager authenticationManager;
 
+
 	public UserController(UserService service, JwtProvider jwtProvider, AuthenticationManager authenticationManager) {
 		this.service = service;
 		this.jwtProvider = jwtProvider;
@@ -78,7 +79,6 @@ public class UserController {
 		throw new NotImplementedException();
 	}
 
-
 	/**
 	 * 注册用户。适用参数验证。
 	 */
@@ -105,23 +105,23 @@ public class UserController {
 	/**
 	 * 修改用户信息。适用参数验证和权限认证。
 	 */
-	@PutMapping("/account/update")
+	@PutMapping("/account/{username}")
 	public User updateAccountInfo(
+		@PathVariable String username,
 		@Valid @RequestBody User user,
 		BindingResult bindingResult,
 		Principal principal
 	) {
+		//一般情况下，principal.name返回的是用户详情实体类用于验证的字段，这里是userDetails.username
+		var authenticated = Objects.equals(username, principal.getName());
+		Assert.isTrue(authenticated, () -> {throw new UserNotMatchedException();});
+
 		var validated = !bindingResult.hasErrors();
 		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
-
-		//一般情况下，principal.name返回的是用户详情实体类用于验证的字段，这里是userDetails.username
-		var authenticated = Objects.equals(user.getUsername(), principal.getName());
-		Assert.isTrue(authenticated, () -> {throw new UserNotMatchedException();});
 
 		var result = service.update(user);
 		return result;
 	}
-
 
 	/**
 	 * 得到用户的账户信息。适用权限认证。
@@ -138,7 +138,6 @@ public class UserController {
 		var result = service.findByUsername(username);
 		return result;
 	}
-
 
 	/**
 	 * 得到用户信息。

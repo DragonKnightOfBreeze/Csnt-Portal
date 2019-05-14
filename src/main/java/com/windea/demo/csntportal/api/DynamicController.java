@@ -29,6 +29,7 @@ import java.util.Set;
 public class DynamicController {
 	private final DynamicService service;
 
+
 	public DynamicController(DynamicService service) {
 		this.service = service;
 	}
@@ -37,7 +38,7 @@ public class DynamicController {
 	/**
 	 * 新建动态信息。
 	 */
-	@PreAuthorize("hasAnyRole('STUDENT','TEACHER','VISITOR')")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create")
 	public Dynamic create(
 		@Valid @RequestBody Dynamic dynamic,
@@ -61,7 +62,7 @@ public class DynamicController {
 		@PathVariable Integer id,
 		Principal principal
 	) {
-		//判断当前用户是否是管理员
+		//判断当前用户是否是管理员，如果不是，则只能删除自己发布的动态
 		var role = ((UserDetails) principal).getAuthorities().toArray()[0].toString();
 		if(!Objects.equals(role, "ROLE_ADMIN")) {
 			var username = principal.getName();

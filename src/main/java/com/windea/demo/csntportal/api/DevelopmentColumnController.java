@@ -21,6 +21,7 @@ import javax.validation.Valid;
 public class DevelopmentColumnController {
 	private final DevelopmentColumnService service;
 
+
 	public DevelopmentColumnController(DevelopmentColumnService service) {this.service = service;}
 
 
@@ -55,8 +56,9 @@ public class DevelopmentColumnController {
 	 * 更新专业发展专栏信息。
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping(value = "/update")
+	@PutMapping(value = "/{id}")
 	public DevelopmentColumn update(
+		@PathVariable Integer id,
 		@Valid @RequestBody DevelopmentColumn column,
 		BindingResult bindingResult
 	) {
@@ -66,7 +68,6 @@ public class DevelopmentColumnController {
 		var result = service.update(column);
 		return result;
 	}
-
 
 	/**
 	 * 得到专业发展专栏信息。
@@ -78,7 +79,6 @@ public class DevelopmentColumnController {
 		var result = service.findById(id);
 		return result;
 	}
-
 
 	/**
 	 * 查询所有专业发展专栏信息。

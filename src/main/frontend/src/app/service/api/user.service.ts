@@ -85,7 +85,7 @@ export class UserService implements OnInit {
   }
 
   updateAccountInfo(user: User): Observable<User> {
-    const url = `${apiUrl}/account`;
+    const url = `${apiUrl}/account${user.username}`;
     return this.http.put<User>(url, user).pipe(
         catchError(this.handleError("updateAccountInfo", user))
     );
