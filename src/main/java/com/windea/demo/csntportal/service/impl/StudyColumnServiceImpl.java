@@ -1,7 +1,6 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.StudyColumn;
-import com.windea.demo.csntportal.exception.NoContentException;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.StudyColumnRepository;
 import com.windea.demo.csntportal.service.StudyColumnService;
@@ -10,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 @Service
 @CacheConfig(cacheNames = "studyColumnCache")
@@ -59,7 +57,6 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
 		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -67,7 +64,6 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 	@Override
 	public Page<StudyColumn> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 }

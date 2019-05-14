@@ -4,7 +4,6 @@ import com.windea.commons.springboot.utils.PageUtils;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
 import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
-import com.windea.demo.csntportal.exception.NoContentException;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.TeacherTeamRepository;
 import com.windea.demo.csntportal.service.TeacherTeamService;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.Set;
 
@@ -64,7 +62,6 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 	@Override
 	public Page<TeacherTeam> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -72,7 +69,6 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 	@Override
 	public Page<TeacherTeam> findAllByName(String name, Pageable pageable) {
 		var resultPage = repository.findAllByNameContainingIgnoreCase(name, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -80,7 +76,6 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 	@Override
 	public Page<TeacherTeam> findAllByProfessionLevel(Set<ProfessionLevel> levelSet, Pageable pageable) {
 		var resultPage = repository.findAllByProfessionLevelIn(levelSet, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -88,7 +83,6 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 	@Override
 	public Page<TeacherTeam> findAllByTeacherCount(Integer min, Integer max, Pageable pageable) {
 		var resultPage = repository.findAllByTeacherCountBetween(min, max, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -99,7 +93,6 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 		var page2 = repository.findAllByProfessionLevelIn(vo.getLevelSet(), pageable);
 		var page3 = repository.findAllByTeacherCountBetween(vo.getMin(), vo.getMax(), pageable);
 		var resultPage = PageUtils.concat(pageable, page1, page2, page3);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 }

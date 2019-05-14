@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../domain/entity/User";
 import {UserService} from "../../service/api/user.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-account',
@@ -11,7 +12,8 @@ export class AccountComponent implements OnInit {
   user: User;
 
 
-  constructor(private service: UserService) {
+  constructor(private service: UserService,
+              private route: ActivatedRoute) {
   }
 
   //NOTE
@@ -27,8 +29,8 @@ export class AccountComponent implements OnInit {
    * 可能抛出：404 未找到
    */
   get() {
-    //TODO
-    let username = "Windea";
+    //从路由地址中得到路由参数
+    let username = this.route.snapshot.paramMap.get("username");
     this.service.getAccountInfo(username).subscribe(user => this.user = user);
   }
 

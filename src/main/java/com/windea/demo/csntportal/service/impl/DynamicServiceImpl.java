@@ -5,7 +5,6 @@ import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
-import com.windea.demo.csntportal.exception.NoContentException;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.DynamicRepository;
 import com.windea.demo.csntportal.repository.UserRepository;
@@ -66,7 +65,6 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Page<Dynamic> findAll(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -75,7 +73,6 @@ public class DynamicServiceImpl implements DynamicService {
 	public Page<Dynamic> findAllBySubject(String subject, Pageable pageable) {
 		subject = subject.strip();
 		var resultPage = repository.findAllBySubjectContainingIgnoreCase(subject, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -83,7 +80,6 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Page<Dynamic> findAllByCategory(Set<DynamicCategory> categorySet, Pageable pageable) {
 		var resultPage = repository.findAllByCategoryIn(categorySet, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -91,7 +87,6 @@ public class DynamicServiceImpl implements DynamicService {
 	@Override
 	public Page<Dynamic> findAllBySponsorUsername(String username, Pageable pageable) {
 		var resultPage = repository.findAllBySponsorUsername(username, pageable);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 
@@ -102,7 +97,6 @@ public class DynamicServiceImpl implements DynamicService {
 		var page2 = repository.findAllByCategoryIn(vo.getCategorySet(), pageable);
 		var page3 = repository.findAllBySponsorUsername(vo.getSponsorUsername(), pageable);
 		var resultPage = PageUtils.concat(pageable, page1, page2, page3);
-		Assert.notEmpty(resultPage.getContent(), () -> {throw new NoContentException();});
 		return resultPage;
 	}
 }

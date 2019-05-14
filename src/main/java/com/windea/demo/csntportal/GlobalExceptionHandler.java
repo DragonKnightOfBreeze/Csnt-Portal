@@ -1,5 +1,6 @@
 package com.windea.demo.csntportal;
 
+import com.windea.commons.base.exception.NotImplementedException;
 import com.windea.demo.csntportal.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 
-	@ExceptionHandler(NoContentException.class)
-	ResponseEntity<?> handleNoContentException(NoContentException e) {
+	@ExceptionHandler(NotImplementedException.class)
+	ResponseEntity<?> handleNotImplementedException(NotImplementedException e) {
 		e.printStackTrace();
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
 	}
 
 	@ExceptionHandler(NotFoundException.class)

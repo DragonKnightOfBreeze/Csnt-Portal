@@ -38,7 +38,6 @@ export class DevelopmentColumnComponent implements OnInit {
 
   /**
    * 列出所有数据，在组件初始化时调用。
-   * 可能抛出：204 没有内容
    */
   list() {
     this.service.list().subscribe(page => this.page = page);
@@ -46,7 +45,6 @@ export class DevelopmentColumnComponent implements OnInit {
 
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
-   * 可能抛出：204 没有内容
    */
   searchByTitle(title: string) {
     this.service.searchByTitle(title).subscribe(page => this.page = page);

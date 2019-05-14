@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DevelopmentColumn} from "../../domain/entity/DevelopmentColumn";
 import {DevelopmentColumnService} from "../../service/api/development-column.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-development-column-detail',
@@ -11,7 +12,8 @@ export class DevelopmentColumnDetailComponent implements OnInit {
   column: DevelopmentColumn;
 
 
-  constructor(private service: DevelopmentColumnService) {
+  constructor(private service: DevelopmentColumnService,
+              private route: ActivatedRoute) {
   }
 
 
@@ -24,8 +26,8 @@ export class DevelopmentColumnDetailComponent implements OnInit {
    * 可能抛出：404 未找到
    */
   get() {
-    //TODO
-    let id = 1;
+    //从路由地址中得到路由参数
+    let id = parseInt(this.route.snapshot.paramMap.get("id"));
     this.service.get(id).subscribe(column => this.column = column);
   }
 
