@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
-import {Subscription} from "rxjs";
+import {Component, OnInit} from "@angular/core";
 import {JwtResponseVo} from "../../domain/vo/JwtResponseVo";
 import {UserService} from "../../service/api/user.service";
 
@@ -12,10 +11,9 @@ import {UserService} from "../../service/api/user.service";
   templateUrl: "./navigation.component.html",
   styleUrls: ["./navigation.component.scss"]
 })
-export class NavigationComponent implements OnInit, OnDestroy {
+export class NavigationComponent implements OnInit {
   /**当前用户对象，可从中得到用户名、角色等信息。*/
   currentUser: JwtResponseVo;
-  currentUserSub: Subscription;
 
 
   constructor(private userService: UserService) {
@@ -23,12 +21,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.currentUserSub = this.userService.currentUser$.subscribe(user => {
-      this.currentUser = user;
-    })
+    this.userService.currentUser$.subscribe(user => this.currentUser = user)
   }
 
-  ngOnDestroy(): void {
-    this.currentUserSub.unsubscribe();
-  }
 }
