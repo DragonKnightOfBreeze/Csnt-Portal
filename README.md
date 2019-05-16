@@ -102,17 +102,18 @@ README.md       # 说明文档
 
 # 注意事项
 
-## 特殊注释
-
-* 标有`TODO`的注释：有待完成的代码。
-* 标有`NOTE`的注释：需要特别配置或者特别注意的代码。
-
 ## 数据库连接出错
 
 * 对于Idea的数据库连接，打开配置，在参数`URL`后面加上`?GMT%2B8`。
 * 如果运行时出错，在`application.yml`中的`spring.datasource.url`后面也要加上，或者特别配置`serverTimezone: GMT-8`。
 * 解决关闭数据池时报错SSLException问题：特别配置`useSSL: false`
 * 解决内存溢出问题：在tomcat的配置文件`context.xml`中配置Resource.closeMethod=close
+
+## 后台异常解决
+
+* RequestRejectedException
+    * 解决方案：将请求链接写成`http://localhost:8080/csnt-portal/api`的形式。
+    * 参考链接：[Stack Overflow](https://stackoverflow.com/questions/48453980/spring-5-0-3-requestrejectedexception-the-request-was-rejected-because-the-url)
 
 ## 如何整合前后端
 

@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Page} from "../../domain/interface/Page";
-import {DevelopmentColumn} from "../../domain/entity/DevelopmentColumn";
-import {DevelopmentColumnService} from "../../service/api/development-column.service";
 import {StudyColumn} from "../../domain/entity/StudyColumn";
 import {StudyColumnService} from "../../service/api/study-reform.service";
 

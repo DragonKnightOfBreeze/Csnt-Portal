@@ -16,6 +16,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
+      console.log(err.status);
+      console.log(err);
       //根据错误状态码，分别跳转到不同的错误页面
       switch (err.status) {
         case 400:

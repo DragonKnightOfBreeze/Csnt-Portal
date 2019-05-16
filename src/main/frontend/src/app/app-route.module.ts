@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LogoutComponent} from "./part/logout/logout.component";
+import {LogoutComponent} from "./page/logout/logout.component";
 import {LoginGuard} from "./service/guard/login-guard.service";
-import {RegisterComponent} from "./part/register/register.component";
-import {LoginComponent} from "./part/login/login.component";
+import {RegisterComponent} from "./page/register/register.component";
+import {LoginComponent} from "./page/login/login.component";
 import {AccountComponent} from "./page/account/account.component";
 import {DynamicComponent} from "./page/dynamic/dynamic.component";
 import {IntroduceDetailComponent} from "./page/introduce-detail/introduce-detail.component";

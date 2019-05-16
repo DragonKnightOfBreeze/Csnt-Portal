@@ -18,7 +18,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -109,7 +110,7 @@ public class DynamicControllerTests {
 	@Test
 	public void getTest() throws Exception {
 		//通过参数发送请求，例如：get(),post(),param(),params()
-		mockMvc.perform(get("/dynamic/1"))
+		mockMvc.perform(get("/dynamic/2"))
 			//通过参数进行断言，例如：status(),content()
 			.andExpect(status().isOk())
 			//通过参数进行处理，例如：log(),print()
