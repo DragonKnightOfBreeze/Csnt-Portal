@@ -13,7 +13,6 @@ export class PaginationComponent implements OnInit {
   /** 当前页。可从中获得当前页数据、当前页数、总页数等。需要传入。 */
   @Input() currentPage: Page<any>;
 
-
   constructor() {
   }
 

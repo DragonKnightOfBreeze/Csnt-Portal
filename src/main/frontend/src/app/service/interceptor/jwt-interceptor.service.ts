@@ -14,13 +14,20 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     //如果可行，添加jwt令牌到验证头中
     const currentUser = this.userService.currentUserSubject.value;
+    //没有必要指定内容类型为json
     if (currentUser && currentUser.token) {
       request = request.clone({
         setHeaders: {
           Authorization: `${currentUser.type}${currentUser.token}`,
-          "Content-Type": "application/json"
+          // "Content-Type": "application/json"
         }
-      })
+      });
+    } else {
+      // request = request.clone({
+      //   setHeaders: {
+      //     "Content-Type": "application/json"
+      //   }
+      // });
     }
     return next.handle(request);
   }

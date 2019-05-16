@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {DevelopmentColumn} from "../../domain/entity/DevelopmentColumn";
-import {DevelopmentColumnService} from "../../service/api/development-column.service";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {StudyColumn} from "../../domain/entity/StudyColumn";

@@ -25,20 +25,23 @@ export class UserService implements OnInit {
 
   constructor(private http: HttpClient,
               private cookieService: CookieService) {
+    //NOTE 这个方法一定要写到构造函数中，否则报错undefined
+    this.getCurrentUser();
   }
 
 
   ngOnInit(): void {
+  }
+
+  private getCurrentUser() {
     //尝试从localStorage中得到当前用户
     const memo = localStorage.getItem("currentUser");
-    //如果存在，则得到当前用户的可观察对象
-    if (memo) {
-      //创建当前用户的BehaviorSubject对象以及对应的可观察对象
-      this.currentUserSubject = new BehaviorSubject<JwtUserResponse>(JSON.parse(memo));
-      this.currentUser$ = this.currentUserSubject.asObservable();
-      //将得到的当前用户存储到cookie中去
-      this.cookieService.set("currentUser", memo);
-    }
+    //NOTE 不论是否存在，都要得到当前用户的可观察对象，否则报错undefined
+    //创建当前用户的BehaviorSubject对象以及对应的可观察对象
+    this.currentUserSubject = new BehaviorSubject<JwtUserResponse>(JSON.parse(memo));
+    this.currentUser$ = this.currentUserSubject.asObservable();
+    //将得到的当前用户存储到cookie中去
+    this.cookieService.set("currentUser", memo);
   }
 
   login(vo: UserLoginVo): Observable<JwtUserResponse> {

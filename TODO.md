@@ -75,27 +75,28 @@
 
 ## 前端功能实现
 
-- [ ] 公共配置
-    - [X] 项目的路由
-- [ ] 页面组件 page
+- [X] 公共配置
+    - [X] 路由
+    - [X] 环境配置
+- [ ] 分页组件 page
     - [ ] html
-    - [ ] sass
-    - [ ] ts
-- [ ] 公共组件 component
+    - [ ] scss
+    - [X] ts
+- [ ] 页面组成组件 part
     - [ ] html
-    - [ ] sass
-    - [ ] ts
-- [X] ~~自定义指令 directive~~~~
+    - [ ] scss
+    - [X] ts
 - [X] 实体类 domain
     - [X] 后台数据实体类 entity
     - [X] 后台类型接口 interface
     - [X] 视图对象实体类 vo
 - [X] 枚举 enums
-- [X] ~~~~自定义管道 pipe~~~~
 - [X] 服务 service
     - [X] 后台api服务 api
     - [X] 权限守卫 guard
     - [X] http拦截器 interceptor
+- [X] ~~自定义指令 directive~~~~
+- [X] ~~~~自定义管道 pipe~~~~
 
 ## 后台功能实现
 
@@ -191,10 +192,16 @@
 
 ## 整合测试
 
+- [X] 前端发送GET请求得到后台数据
+
 ## 前端测试
+
+- [X] 成功启动前端项目
+- [X] 应用全局样式（bootstrap和font-awesome）
 
 ## 后台测试
 
+- [X] 成功启动后台项目
 - [X] 控制层的一般数据库操作功能测试
 - [X] 一般的错误处理（定义全局异常处理器）
 - [X] 参数验证功能（验证出错时返回bindingResult）

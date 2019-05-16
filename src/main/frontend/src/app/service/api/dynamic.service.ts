@@ -99,6 +99,7 @@ export class DynamicService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       //打印错误信息
+      console.log(error.status);
       console.log(error);
       //通过返回一个空结果让程序得以继续运行
       return of(result as T);
