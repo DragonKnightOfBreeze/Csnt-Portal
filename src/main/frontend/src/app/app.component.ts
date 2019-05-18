@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {DynamicService} from "./service/api/dynamic.service";
+import {Component, forwardRef, OnInit} from '@angular/core';
+import {JwtUserResponse} from "./domain/entity/JwtUserResponse";
+import {UserService} from "./service/api/user.service";
 
 /**
  * 项目的主组件。
@@ -9,14 +10,14 @@ import {DynamicService} from "./service/api/dynamic.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'Csnt Portal';
-  testText: string;
+export class AppComponent  implements OnInit {
+  title = '计算机科学与技术门户网站';
 
-  constructor(private dynamicService: DynamicService) {
+
+  constructor() {
   }
 
+
   ngOnInit(): void {
-    this.dynamicService.get(1).subscribe(dynamic => this.testText = dynamic.subject);
   }
 }

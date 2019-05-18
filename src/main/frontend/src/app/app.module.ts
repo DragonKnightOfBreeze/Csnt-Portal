@@ -31,6 +31,11 @@ import {TeacherTeamDetailComponent} from "./page/teacher-team-detail/teacher-tea
 import {TeacherInfoDetailComponent} from "./page/teacher-info-detail/teacher-info-detail.component";
 import {HomeComponent} from './page/home/home.component';
 import {FooterComponent} from './part/footer/footer.component';
+import {Error403Component} from './error-page/error403/error403.component';
+import {Error404Component} from './error-page/error404/error404.component';
+import {Error500Component} from './error-page/error500/error500.component';
+import {Error501Component} from './error-page/error501/error501.component';
+import {ErrorComponent} from "./error-page/error/error.component";
 
 /**
  * 项目的主模块。
@@ -68,7 +73,13 @@ import {FooterComponent} from './part/footer/footer.component';
     UserComponent,
     UserDetailComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+
+    ErrorComponent,
+    Error403Component,
+    Error404Component,
+    Error500Component,
+    Error501Component,
   ],
   providers: [
     //带有@Injectable({provideIn:"root"})的服务，不需要在这里声明

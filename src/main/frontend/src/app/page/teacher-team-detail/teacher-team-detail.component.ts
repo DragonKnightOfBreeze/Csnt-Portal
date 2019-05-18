@@ -3,6 +3,8 @@ import {TeacherTeam} from "../../domain/entity/TeacherTeam";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {TeacherTeamService} from "../../service/api/tearcher-team.service";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 
 @Component({
   selector: 'app-teacher-team-detail',
@@ -10,6 +12,8 @@ import {TeacherTeamService} from "../../service/api/tearcher-team.service";
   styleUrls: ['./teacher-team-detail.component.scss']
 })
 export class TeacherTeamDetailComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /**当前数据对象。*/
   teacherTeam: TeacherTeam;
 
@@ -17,13 +21,15 @@ export class TeacherTeamDetailComponent implements OnInit {
   isValidForCreate = true;
 
 
-  constructor(private service: TeacherTeamService,
+  constructor(private userService: UserService,
+              private service: TeacherTeamService,
               private route: ActivatedRoute,
               private location: Location) {
   }
 
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserSubject.value;
     this.get();
   }
 
@@ -56,7 +62,7 @@ export class TeacherTeamDetailComponent implements OnInit {
     this.service.update(this.teacherTeam).subscribe(updatedTeacherTeam => {
       this.teacherTeam = updatedTeacherTeam;
       this.isValidForCreate = true;
-    },()=>this.isValidForCreate = false);
+    }, () => this.isValidForCreate = false);
   }
 
   /**

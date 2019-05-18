@@ -2,6 +2,9 @@ import {Component, OnInit} from "@angular/core";
 import {User} from "../../domain/entity/User";
 import {UserService} from "../../service/api/user.service";
 import {Router} from "@angular/router";
+import {Role, RoleText} from "../../enums/Role";
+import {Gender, GenderText} from "../../enums/Gender";
+import {Profession, ProfessionText} from "../../enums/Profession";
 
 /**
  * 项目的注册组件。
@@ -18,11 +21,13 @@ export class RegisterComponent implements OnInit {
   /**是否通过后台表单参数验证。*/
   isValid = true;
 
+  enums = {gender: Gender, role: Role, profession: Profession};
+
+  enumTexts = {gender: GenderText, role: RoleText, profession: ProfessionText};
 
   constructor(private userService: UserService,
               private router: Router) {
   }
-
 
   ngOnInit(): void {
   }

@@ -3,6 +3,8 @@ import {TeacherInfo} from "../../domain/entity/TeacherInfo";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {TeacherInfoService} from "../../service/api/teacher-info.service";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 
 @Component({
   selector: 'app-teacher-info-detail',
@@ -10,6 +12,8 @@ import {TeacherInfoService} from "../../service/api/teacher-info.service";
   styleUrls: ['./teacher-info-detail.component.scss']
 })
 export class TeacherInfoDetailComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /**当前数据对象。*/
   teacherInfo: TeacherInfo;
 
@@ -17,13 +21,15 @@ export class TeacherInfoDetailComponent implements OnInit {
   isValidForUpdate = true;
 
 
-  constructor(private service: TeacherInfoService,
+  constructor(private userService: UserService,
+              private service: TeacherInfoService,
               private route: ActivatedRoute,
               private location: Location) {
   }
 
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserSubject.value;
     this.get();
   }
 
