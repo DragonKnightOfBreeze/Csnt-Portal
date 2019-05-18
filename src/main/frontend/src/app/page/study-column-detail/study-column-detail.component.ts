@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {StudyColumn} from "../../domain/entity/StudyColumn";
 import {StudyColumnService} from "../../service/api/study-reform.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {UserService} from "../../service/api/user.service";
 
 @Component({
   selector: 'app-study-column-detail',
@@ -10,6 +12,8 @@ import {StudyColumnService} from "../../service/api/study-reform.service";
   styleUrls: ['./study-column-detail.component.scss']
 })
 export class StudyColumnDetailComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /**当前数据对象。*/
   column: StudyColumn;
 
@@ -17,13 +21,15 @@ export class StudyColumnDetailComponent implements OnInit {
   isValidForUpdate = true;
 
 
-  constructor(private service: StudyColumnService,
+  constructor(private userService: UserService,
+              private service: StudyColumnService,
               private route: ActivatedRoute,
               private location: Location) {
   }
 
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserSubject.value;
     this.get();
   }
 

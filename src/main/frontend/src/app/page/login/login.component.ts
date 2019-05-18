@@ -11,13 +11,15 @@ import {Router} from "@angular/router";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"]
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   /**用户登录表单的模型对象。*/
   userLoginVo = new UserLoginVo();
 
   /**是否通过后台表单参数验证。*/
   isValid = true;
 
+  /**登录后跳转到的地址。*/
+  returnUrl = '/';
 
   constructor(private userService: UserService,
               private router: Router) {
@@ -29,10 +31,9 @@ export class LoginComponent implements OnInit{
 
   login() {
     this.userService.login(this.userLoginVo).subscribe(() => {
-      //如果登录成功，无论用户角色如何，都跳转到首页
-      this.router.navigateByUrl("/");
+      //如果登录成功，无论用户角色如何，都跳转到对应页面
+      this.router.navigateByUrl(this.returnUrl);
       this.isValid = true;
     }, () => this.isValid = false);
   }
-
 }

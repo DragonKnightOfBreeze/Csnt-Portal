@@ -3,6 +3,8 @@ import {DevelopmentColumn} from "../../domain/entity/DevelopmentColumn";
 import {DevelopmentColumnService} from "../../service/api/development-column.service";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 
 @Component({
   selector: 'app-development-column-detail',
@@ -10,6 +12,8 @@ import {Location} from "@angular/common";
   styleUrls: ['./development-column-detail.component.scss']
 })
 export class DevelopmentColumnDetailComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /**当前数据对象。*/
   column: DevelopmentColumn;
 
@@ -17,13 +21,15 @@ export class DevelopmentColumnDetailComponent implements OnInit {
   isValidForUpdate = true;
 
 
-  constructor(private service: DevelopmentColumnService,
+  constructor(private userService: UserService,
+              private service: DevelopmentColumnService,
               private route: ActivatedRoute,
               private location: Location) {
   }
 
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserSubject.value;
     this.get();
   }
 
@@ -56,7 +62,7 @@ export class DevelopmentColumnDetailComponent implements OnInit {
     this.service.update(this.column).subscribe(updatedColumn => {
       this.column = updatedColumn;
       this.isValidForUpdate = true;
-    },()=>this.isValidForUpdate = false);
+    }, () => this.isValidForUpdate = false);
   }
 
   /**

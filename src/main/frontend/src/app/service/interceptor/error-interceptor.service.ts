@@ -31,19 +31,19 @@ export class ErrorInterceptor implements HttpInterceptor {
           break;
         case 403:
           //403 Forbidden 权限错误
-          //this.router.navigateByUrl("/error/403");
+          this.router.navigateByUrl("/error/403");
           break;
         case 404:
           //404 Not Found 页面未找到
-          //this.router.navigateByUrl("/error/404");
+          this.router.navigateByUrl("/error/404");
           break;
         case 500:
           //500	Internal Server Error 内部错误，不处理
-          //this.router.navigateByUrl("/error/500");
+          this.router.navigateByUrl("/error/500");
           break;
         case 501:
           //501	Not Implemented 功能未实现，不处理
-          //this.router.navigateByUrl("/error/501");
+          this.router.navigateByUrl("/error/501");
           break;
         default:
           break;

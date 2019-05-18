@@ -2,8 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Page} from "../../domain/interface/Page";
 import {TeacherTeam} from "../../domain/entity/TeacherTeam";
 import {TeacherTeamService} from "../../service/api/tearcher-team.service";
-import {ProfessionLevel} from "../../enums/ProfessionLevel";
 import {TeacherTeamSearchVo} from "../../domain/vo/TeacherTeamSearchVo";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {UserService} from "../../service/api/user.service";
+import {SearchParams} from "../../domain/vo/SearchParams";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-teacher-team',
@@ -11,6 +14,8 @@ import {TeacherTeamSearchVo} from "../../domain/vo/TeacherTeamSearchVo";
   styleUrls: ['./teacher-team.component.scss']
 })
 export class TeacherTeamComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
   teacherTeamPage: Page<TeacherTeam>;
 
@@ -20,19 +25,22 @@ export class TeacherTeamComponent implements OnInit {
   /**是否通过后台表单参数验证。*/
   isValidForCreate = true;
 
-  /**查询表单的模型对象。*/
-  searchVo = new TeacherTeamSearchVo();
+  /**查询参数的封装对象。*/
+  searchParams = new SearchParams<TeacherTeamSearchVo>();
 
   /**是否通过后台表单参数验证。*/
   isValidForSearch = true;
 
 
-  constructor(private service: TeacherTeamService) {
+  constructor(private userService: UserService,
+              private service: TeacherTeamService,
+              private route: ActivatedRoute) {
   }
 
 
   ngOnInit() {
-    this.list();
+    this.currentUser = this.userService.currentUserSubject.value;
+    this.show();
   }
 
   /**
@@ -44,7 +52,7 @@ export class TeacherTeamComponent implements OnInit {
       this.teacherTeamPage.content.push(teacherTeam);
       this.teacherTeamPage.content.slice(0, 10);
       this.isValidForCreate = true;
-    },()=>this.isValidForCreate = false);
+    }, () => this.isValidForCreate = false);
   }
 
   /**
@@ -58,10 +66,33 @@ export class TeacherTeamComponent implements OnInit {
   }
 
   /**
+   * 根据不同的查询类型和可能的分页参数，列出数据。
+   */
+  private show() {
+    this.searchParams.type = this.route.snapshot.queryParamMap.get("type") || "All";
+    this.searchParams.field = JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new TeacherTeamSearchVo();
+    this.searchParams.page = +this.route.snapshot.queryParamMap.get("page") || 1;
+    this.searchParams.size = +this.route.snapshot.queryParamMap.get("size") || 10;
+
+    if (this.searchParams.type === "ByName") {
+      this.searchByName();
+    } else if (this.searchParams.type === "ByProfessionLevel") {
+      this.searchByProfessionLevel();
+    } else if (this.searchParams.type === "ByTeacherCount") {
+      this.searchByTeacherCount();
+    } else if (this.searchParams.type === "Advance") {
+      this.advanceSearch();
+    } else {
+      this.list();
+    }
+  }
+
+  /**
    * 列出所有数据，在组件初始化时调用。
    */
-  list(page = 1, size = 10) {
-    this.service.list(page, size).subscribe(teacherTeamPage => {
+  list() {
+    this.searchParams.type = "All";
+    this.service.list(this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
       this.teacherTeamPage = teacherTeamPage;
     });
   }
@@ -69,8 +100,10 @@ export class TeacherTeamComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByTitle(name: string, page = 1, size = 10) {
-    this.service.searchByName(name, page, size).subscribe(teacherTeamPage => {
+  searchByName() {
+    this.searchParams.type = "ByName";
+    const name = this.searchParams.field.name;
+    this.service.searchByName(name, this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
       this.teacherTeamPage = teacherTeamPage;
     });
   }
@@ -78,8 +111,10 @@ export class TeacherTeamComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByProfessionLevel(levelSet: ProfessionLevel[], page = 1, size = 10) {
-    this.service.searchByProfessionLevel(levelSet, page, size).subscribe(teacherTeamPage => {
+  searchByProfessionLevel() {
+    this.searchParams.type = "ByProfessionLevel";
+    const levelSet = this.searchParams.field.levelSet;
+    this.service.searchByProfessionLevel(levelSet, this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
       this.teacherTeamPage = teacherTeamPage;
     });
   }
@@ -87,8 +122,11 @@ export class TeacherTeamComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByTeacherCount(min:number,max:number, page = 1, size = 10) {
-    this.service.searchByTeacherCount(min,max, page, size).subscribe(teacherTeamPage => {
+  searchByTeacherCount() {
+    this.searchParams.type = "ByTeacherCount";
+    const min = this.searchParams.field.min;
+    const max = this.searchParams.field.max;
+    this.service.searchByTeacherCount(min, max, this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
       this.teacherTeamPage = teacherTeamPage;
     });
   }
@@ -97,10 +135,12 @@ export class TeacherTeamComponent implements OnInit {
    * 高级查询，传入表单模型数据，调用后会刷新当前显示的数据。
    * 可能抛出：400 参数错误
    */
-  advanceSearch(page = 1, size = 10) {
-    this.service.advanceSearch(this.searchVo, page, size).subscribe(teacherTeamPage => {
+  advanceSearch() {
+    this.searchParams.type = "Advance";
+    const searchVo = this.searchParams.field;
+    this.service.advanceSearch(searchVo, this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
       this.teacherTeamPage = teacherTeamPage;
       this.isValidForSearch = true;
-    },()=>this.isValidForSearch = false);
+    }, () => this.isValidForSearch = false);
   }
 }

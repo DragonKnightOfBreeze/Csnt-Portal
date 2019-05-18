@@ -1,3 +1,5 @@
+import {JwtUserResponse} from "../app/domain/entity/JwtUserResponse";
+
 export const environment = {
   production: true
 };

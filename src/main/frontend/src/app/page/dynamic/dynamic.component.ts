@@ -2,7 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Dynamic} from "../../domain/entity/Dynamic";
 import {DynamicService} from "../../service/api/dynamic.service";
 import {Page} from "../../domain/interface/Page";
-import {DynamicCategory} from "../../enums/DynamicCategory";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {ActivatedRoute} from "@angular/router";
+import {SearchParams} from "../../domain/vo/SearchParams";
 import {DynamicSearchVo} from "../../domain/vo/DynamicSearchVo";
 
 @Component({
@@ -11,6 +14,8 @@ import {DynamicSearchVo} from "../../domain/vo/DynamicSearchVo";
   styleUrls: ['./dynamic.component.scss']
 })
 export class DynamicComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
   dynamicPage: Page<Dynamic>;
 
@@ -20,19 +25,22 @@ export class DynamicComponent implements OnInit {
   /**是否通过后台表单参数验证。*/
   isValidForCreate = true;
 
-  /**查询表单的模型对象。*/
-  searchVo = new DynamicSearchVo();
+  /**查询参数的封装对象。*/
+  searchParams = new SearchParams<DynamicSearchVo>();
 
-  /**是否通过后台表单参数验证。*/
+  /**查询表单是否通过后台表单参数验证。*/
   isValidForSearch = true;
 
 
-  constructor(private service: DynamicService) {
+  constructor(private userService: UserService,
+              private service: DynamicService,
+              private route: ActivatedRoute) {
   }
 
 
   ngOnInit() {
-    this.list();
+    this.currentUser = this.userService.currentUserSubject.value;
+    this.show();
   }
 
   /**
@@ -70,10 +78,33 @@ export class DynamicComponent implements OnInit {
   }
 
   /**
+   * 根据不同的查询类型和可能的分页参数，列出数据。
+   */
+  private show() {
+    this.searchParams.type = this.route.snapshot.queryParamMap.get("type") || "All";
+    this.searchParams.field = JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new DynamicSearchVo();
+    this.searchParams.page = +this.route.snapshot.queryParamMap.get("page") || 1;
+    this.searchParams.size = +this.route.snapshot.queryParamMap.get("size") || 10;
+
+    if (this.searchParams.type === "BySubject") {
+      this.searchBySubject();
+    } else if (this.searchParams.type === "ByCategory") {
+      this.searchByCategory();
+    } else if (this.searchParams.type === "BySponsorUsername") {
+      this.searchBySponsorUsername();
+    } else if (this.searchParams.type === "Advance") {
+      this.advanceSearch();
+    } else {
+      this.list();
+    }
+  }
+
+  /**
    * 列出所有数据，在组件初始化时调用。
    */
-  list(page = 1, size = 10) {
-    this.service.list(page, size).subscribe(dynamicPage => {
+  list() {
+    this.searchParams.type = "All";
+    this.service.list(this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.dynamicPage = dynamicPage;
     });
     this.getAllSponsorUser();
@@ -82,8 +113,10 @@ export class DynamicComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchBySubject(subject: string, page = 1, size = 10) {
-    this.service.searchBySubject(subject, page, size).subscribe(dynamicPage => {
+  searchBySubject(page = 1, size = 10) {
+    this.searchParams.type = "BySubject";
+    const subject = this.searchParams.field.subject;
+    this.service.searchBySubject(subject, this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.dynamicPage = dynamicPage;
     });
     this.getAllSponsorUser();
@@ -92,8 +125,10 @@ export class DynamicComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchBySponsorUsername(sponsorUsername: string, page = 1, size = 10) {
-    this.service.searchBySponsorUsername(sponsorUsername, page, size).subscribe(dynamicPage => {
+  searchBySponsorUsername() {
+    this.searchParams.type = "BySponsorUsername";
+    const sponsorUsername = this.searchParams.field.sponsorUsername;
+    this.service.searchBySponsorUsername(sponsorUsername, this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.dynamicPage = dynamicPage;
     });
     this.getAllSponsorUser();
@@ -102,8 +137,10 @@ export class DynamicComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByCategory(category: DynamicCategory[], page = 1, size = 10) {
-    this.service.searchByCategory(category, page, size).subscribe(dynamicPage => {
+  searchByCategory() {
+    this.searchParams.type = "ByCategory";
+    const categorySet = this.searchParams.field.categorySet;
+    this.service.searchByCategory(categorySet, this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.dynamicPage = dynamicPage;
     });
     this.getAllSponsorUser();
@@ -113,8 +150,10 @@ export class DynamicComponent implements OnInit {
    * 高级查询，传入表单模型数据，调用后会刷新当前显示的数据。
    * 可能抛出：400 参数错误
    */
-  advanceSearch(page = 1, size = 10) {
-    this.service.advanceSearch(this.searchVo, page, size).subscribe(dynamicPage => {
+  advanceSearch() {
+    this.searchParams.type = "Advance";
+    const searchVo = this.searchParams.field;
+    this.service.advanceSearch(searchVo, this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.dynamicPage = dynamicPage;
       this.isValidForSearch = true;
     }, () => this.isValidForSearch = false);

@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Page} from "../../domain/interface/Page";
 import {StudyColumn} from "../../domain/entity/StudyColumn";
 import {StudyColumnService} from "../../service/api/study-reform.service";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {SearchParams} from "../../domain/vo/SearchParams";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-study-column',
@@ -9,6 +13,8 @@ import {StudyColumnService} from "../../service/api/study-reform.service";
   styleUrls: ['./study-column.component.scss']
 })
 export class StudyColumnComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
   columnPage: Page<StudyColumn>;
 
@@ -18,13 +24,19 @@ export class StudyColumnComponent implements OnInit {
   /**是否通过后台表单参数验证。*/
   isValidForCreate = true;
 
+  /**查询参数的封装对象。*/
+  searchParams = new SearchParams<string>();
 
-  constructor(private service: StudyColumnService) {
+
+  constructor(private userService: UserService,
+              private service: StudyColumnService,
+              private route: ActivatedRoute) {
   }
 
 
   ngOnInit() {
-    this.list();
+    this.currentUser = this.userService.currentUserSubject.value;
+    this.show();
   }
 
   /**
@@ -36,7 +48,7 @@ export class StudyColumnComponent implements OnInit {
       this.columnPage.content.push(column);
       this.columnPage.content.slice(0, 10);
       this.isValidForCreate = true;
-    },()=>this.isValidForCreate = false);
+    }, () => this.isValidForCreate = false);
   }
 
   /**
@@ -50,10 +62,27 @@ export class StudyColumnComponent implements OnInit {
   }
 
   /**
+   * 根据不同的查询类型和可能的分页参数，列出数据。
+   */
+  private show() {
+    this.searchParams.type = this.route.snapshot.queryParamMap.get("type") || "All";
+    this.searchParams.field = this.route.snapshot.queryParamMap.get("field") || "";
+    this.searchParams.page = +this.route.snapshot.queryParamMap.get("page") || 1;
+    this.searchParams.size = +this.route.snapshot.queryParamMap.get("size") || 10;
+
+    if (this.searchParams.type == "ByTitle") {
+      this.searchByTitle();
+    } else {
+      this.list();
+    }
+  }
+
+  /**
    * 列出所有数据，在组件初始化时调用。
    */
-  list(page = 1, size = 10) {
-    this.service.list(page, size).subscribe(columnPage => {
+  list() {
+    this.searchParams.type = "All";
+    this.service.list(this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
       this.columnPage = columnPage;
     });
   }
@@ -61,8 +90,10 @@ export class StudyColumnComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByTitle(title: string, page = 1, size = 10) {
-    this.service.searchByTitle(title, page, size).subscribe(columnPage => {
+  searchByTitle(page = 1, size = 10) {
+    this.searchParams.type = "ByTitle";
+    const title = this.searchParams.field;
+    this.service.searchByTitle(title, this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
       this.columnPage = columnPage;
     });
   }

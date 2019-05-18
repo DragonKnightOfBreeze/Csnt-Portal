@@ -1,0 +1,47 @@
+/* 轮播图样式 */
+.carousel-inner img {
+  width: 100%;
+  height: 400px;
+}
+
+/* mid样式 */
+#mid {
+  position: relative;
+}
+
+#mid-items {
+  left: 10%;
+  position: absolute;
+  width: 80%;
+  top: -10px;
+}
+
+p.small {
+  line-height: 90%
+}
+
+.list-group a {
+  padding: 6px;
+}
+
+.card p {
+  text-decoration: underline
+}
+
+.card-title {
+  padding: 10px;
+  color: rgb(60, 90, 117)
+}
+
+.card-title a {
+  color: rgb(47, 106, 158)
+}
+
+.card-title span {
+
+  font-size: 9px;
+}
+
+.card-text a {
+  color: rgb(75, 70, 70);
+}

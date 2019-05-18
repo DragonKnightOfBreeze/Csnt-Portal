@@ -11,8 +11,7 @@ import {Router} from "@angular/router";
   styleUrls: ["./logout.component.scss"]
 })
 export class LogoutComponent implements OnInit {
-  constructor(private userService: UserService,
-              private router: Router) {
+  constructor(private userService: UserService) {
   }
 
 
@@ -22,6 +21,5 @@ export class LogoutComponent implements OnInit {
 
   private logout() {
     this.userService.logout();
-    this.router.navigateByUrl("/");
   }
 }

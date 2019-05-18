@@ -1,3 +1,39 @@
-<p>
-  development-column works!
-</p>
+<div class="container" id="mid">
+  <!--标题-->
+  <h1 class="text-center">专业发展专栏</h1>
+
+  <!--搜索栏-->
+  <!--TODO-->
+
+  <!--卡片组-->
+  <div class="card-group" *ngFor="let column of columnPage.content">
+    <div class="card mx-auto m-3">
+      <div class="card-body">
+        <h2 class="card-title">
+          {{column.title}}
+        </h2>
+
+        <p class="card-subtitle">
+          <span class="badge badge-info">{{column.id}}</span>
+          <span class="badge badge-primary">作者：{{column.author}}</span>
+          <span class="badge badge-primary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+          <span class="badge badge-primary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+        </p>
+
+        <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{column.content}}</p>
+
+        <div class="card-link text-center mx-auto">
+          <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">添加</button>
+          <a class="btn btn-info" routerLink="/development-column/:{{column.id}}">详情</a>
+          <button class="btn btn-danger" (click)="delete(column.id)" *ngIf="currentUser.role=='ADMIN'">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--分页-->
+  <app-pagination [currentPage]="columnPage" [type]="searchParams.type" [field]="searchParams.field"></app-pagination>
+</div>
+
+<!--增加数据模态框-->
+<!--TODO （可以搁置）-->

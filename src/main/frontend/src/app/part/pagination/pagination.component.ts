@@ -10,8 +10,15 @@ import {Page} from "../../domain/interface/Page";
   styleUrls: ["./pagination.component.scss"]
 })
 export class PaginationComponent implements OnInit {
+  /**查询类型。*/
+  @Input() type: string;
+
+  /**查询域。*/
+  @Input() field: any;
+
   /** 当前页。可从中获得当前页数据、当前页数、总页数等。需要传入。 */
   @Input() currentPage: Page<any>;
+
 
   constructor() {
   }

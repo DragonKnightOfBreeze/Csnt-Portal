@@ -3,6 +3,8 @@ import {Dynamic} from "../../domain/entity/Dynamic";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {DynamicService} from "../../service/api/dynamic.service";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 
 @Component({
   selector: 'app-dynamic-detail',
@@ -10,17 +12,21 @@ import {DynamicService} from "../../service/api/dynamic.service";
   styleUrls: ['./dynamic-detail.component.scss']
 })
 export class DynamicDetailComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /**当前数据对象。*/
-  dynamic:Dynamic;
+  dynamic: Dynamic;
 
 
-  constructor(private service: DynamicService,
+  constructor(private userService: UserService,
+              private service: DynamicService,
               private route: ActivatedRoute,
               private location: Location) {
   }
 
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserSubject.value;
     this.get();
   }
 

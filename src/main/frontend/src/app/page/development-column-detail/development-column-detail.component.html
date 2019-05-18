@@ -1,3 +1,31 @@
-<p>
-  development-column-detail works!
-</p>
+<div class="container" id="mid">
+  <!--标题-->
+  <h1 class="text-center">专业发展专栏</h1>
+
+  <!--详情卡片-->
+  <div class="card mx-auto m-3">
+    <div class="card-body">
+      <h2 class="card-title">
+        {{column.title}}
+      </h2>
+      <hr>
+      <p class="card-text">
+        id：{{column.id}}<br>
+        作者：{{column.author}}<br>
+        发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}<br>
+        更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}
+      </p>
+      <hr>
+      <p class="card-text">{{column.content}}</p>
+
+      <div class="card-link text-center mx-auto">
+        <button class="btn btn-info" (click)="goBack()">返回</button>
+        <button class="btn btn-danger" *ngIf="currentUser.role=='ADMIN'">编辑</button>
+        <button class="btn btn-danger" (click)="delete()" *ngIf="currentUser.role=='ADMIN'">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--编辑数据模态框-->
+<!--TODO （可以搁置）-->

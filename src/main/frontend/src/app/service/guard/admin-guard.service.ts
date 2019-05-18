@@ -19,7 +19,7 @@ export class AdminGuard implements CanActivate {
       return true;
     }
     console.log("权限错误！");
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/error/403");
     return false;
   }
 }

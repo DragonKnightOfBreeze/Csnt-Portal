@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {Introduce} from "../../domain/entity/Introduce";
 import {IntroduceService} from "../../service/api/introduce.service";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 
 @Component({
   selector: 'app-introduce-detail',
@@ -10,6 +12,8 @@ import {IntroduceService} from "../../service/api/introduce.service";
   styleUrls: ['./introduce-detail.component.scss']
 })
 export class IntroduceDetailComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /**当前数据对象。*/
   introduce: Introduce;
 
@@ -17,13 +21,15 @@ export class IntroduceDetailComponent implements OnInit {
   isValidForUpdate = true;
 
 
-  constructor(private service: IntroduceService,
+  constructor(private userService:UserService,
+      private service: IntroduceService,
               private route: ActivatedRoute,
               private location: Location) {
   }
 
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserSubject.value;
     this.get();
   }
 

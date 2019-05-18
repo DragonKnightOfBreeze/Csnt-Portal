@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {ReformColumnService} from "../../service/api/reform-column.service";
 import {ReformColumn} from "../../domain/entity/ReformColumn";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 
 @Component({
   selector: 'app-reform-column-detail',
@@ -10,6 +12,8 @@ import {ReformColumn} from "../../domain/entity/ReformColumn";
   styleUrls: ['./reform-column-detail.component.scss']
 })
 export class ReformColumnDetailComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /**当前数据对象。*/
   column: ReformColumn;
 
@@ -17,13 +21,15 @@ export class ReformColumnDetailComponent implements OnInit {
   isValidForUpdate = true;
 
 
-  constructor(private service: ReformColumnService,
+  constructor(private userService: UserService,
+              private service: ReformColumnService,
               private route: ActivatedRoute,
               private location: Location) {
   }
 
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserSubject.value;
     this.get();
   }
 
@@ -56,7 +62,7 @@ export class ReformColumnDetailComponent implements OnInit {
     this.service.update(this.column).subscribe(updatedColumn => {
       this.column = updatedColumn;
       this.isValidForUpdate = true;
-    },()=>this.isValidForUpdate = false);
+    }, () => this.isValidForUpdate = false);
   }
 
   /**

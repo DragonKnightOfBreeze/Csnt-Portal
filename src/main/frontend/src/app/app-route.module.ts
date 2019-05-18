@@ -22,6 +22,10 @@ import {UserComponent} from "./page/user/user.component";
 import {UserDetailComponent} from "./page/user-detail/user-detail.component";
 import {AdminGuard} from "./service/guard/admin-guard.service";
 import {HomeComponent} from "./page/home/home.component";
+import {Error403Component} from "./error-page/error403/error403.component";
+import {Error500Component} from "./error-page/error500/error500.component";
+import {Error404Component} from "./error-page/error404/error404.component";
+import {Error501Component} from "./error-page/error501/error501.component";
 
 //项目的路由数组
 //NOTE 因为后台已经使用了Spring Security，前端是否仍有必要严格限定canActive？
@@ -36,29 +40,27 @@ const routes: Routes = [
   {path: "logout", component: LogoutComponent},
 
   {path: "account/:username", component: AccountComponent, canActivate: [LoginGuard]},
-
   {path: "development-column", component: DevelopmentColumnComponent},
   {path: "development-column/:id", component: DevelopmentColumnDetailComponent},
-
   {path: "dynamic", component: DynamicComponent},
   {path: "dynamic/:id", component: DynamicDetailComponent},
-
   {path: "introduce", component: IntroduceComponent},
   {path: "introduce/:id", component: IntroduceDetailComponent},
-
   {path: "reform-column", component: ReformColumnComponent},
   {path: "reform-column/:id", component: ReformColumnDetailComponent},
-
   {path: "study-column", component: StudyColumnComponent, canActivate: [LoginGuard]},
   {path: "study-column/:id", component: StudyColumnDetailComponent, canActivate: [LoginGuard]},
-
   {path: "teacher-team", component: TeacherTeamComponent},
   {path: "teacher-team/:id", component: TeacherTeamDetailComponent},
-
   {path: "teacher-info/:id", component: TeacherInfoDetailComponent},
-
   {path: "user", component: UserComponent, canActivate: [AdminGuard]},
-  {path: "user/:id", component: UserDetailComponent, canActivate: [AdminGuard]}
+  {path: "user/:id", component: UserDetailComponent, canActivate: [AdminGuard]},
+
+  {path: "error", component: Error403Component},
+  {path: "error/403", component: Error403Component},
+  {path: "error/404", component: Error404Component},
+  {path: "error/500", component: Error500Component},
+  {path: "error/501", component: Error501Component}
 ];
 
 /**

@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Page} from "../../domain/interface/Page";
 import {ReformColumn} from "../../domain/entity/ReformColumn";
 import {ReformColumnService} from "../../service/api/reform-column.service";
+import {UserService} from "../../service/api/user.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {ActivatedRoute} from "@angular/router";
+import {SearchParams} from "../../domain/vo/SearchParams";
 
 @Component({
   selector: 'app-reform-column',
@@ -9,6 +13,8 @@ import {ReformColumnService} from "../../service/api/reform-column.service";
   styleUrls: ['./reform-column.component.scss']
 })
 export class ReformColumnComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
   columnPage: Page<ReformColumn>;
 
@@ -18,13 +24,19 @@ export class ReformColumnComponent implements OnInit {
   /**是否通过后台表单参数验证。*/
   isValidForCreate = true;
 
+  /**查询参数的封装对象。*/
+  searchParams = new SearchParams<string>();
 
-  constructor(private service: ReformColumnService) {
+
+  constructor(private userService: UserService,
+              private service: ReformColumnService,
+              private route: ActivatedRoute) {
   }
 
 
   ngOnInit() {
-    this.list();
+    this.currentUser = this.userService.currentUserSubject.value;
+    this.show();
   }
 
   /**
@@ -36,7 +48,7 @@ export class ReformColumnComponent implements OnInit {
       this.columnPage.content.push(column);
       this.columnPage.content.slice(0, 10);
       this.isValidForCreate = true;
-    },()=>this.isValidForCreate = false);
+    }, () => this.isValidForCreate = false);
   }
 
   /**
@@ -50,20 +62,38 @@ export class ReformColumnComponent implements OnInit {
   }
 
   /**
+   * 根据不同的查询类型和可能的分页参数，列出数据。
+   */
+  private show() {
+    this.searchParams.type = this.route.snapshot.queryParamMap.get("type") || "All";
+    this.searchParams.field = this.route.snapshot.queryParamMap.get("field") || "";
+    this.searchParams.page = +this.route.snapshot.queryParamMap.get("page") || 1;
+    this.searchParams.size = +this.route.snapshot.queryParamMap.get("size") || 10;
+
+    if (this.searchParams.type == "ByTitle") {
+      this.searchByTitle();
+    } else {
+      this.list();
+    }
+  }
+
+  /**
    * 列出所有数据，在组件初始化时调用。
    */
-  list(page = 1, size = 10) {
-    this.service.list(page, size).subscribe(columnPage => {
+  list() {
+    this.searchParams.type = "All";
+    this.service.list(this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
       this.columnPage = columnPage;
     });
   }
 
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
-   * 可考虑通过引入titleTeams: Subject<String>来实现动态搜索结果显示。
    */
-  searchByTitle(title: string, page = 1, size = 10) {
-    this.service.searchByTitle(title, page, size).subscribe(columnPage => {
+  searchByTitle(page = 1, size = 10) {
+    this.searchParams.type = "ByTitle";
+    const title = this.searchParams.field;
+    this.service.searchByTitle(title, this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
       this.columnPage = columnPage;
     });
   }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Introduce} from "../../domain/entity/Introduce";
 import {IntroduceService} from "../../service/api/introduce.service";
+import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {UserService} from "../../service/api/user.service";
 
 @Component({
   selector: 'app-introduce',
@@ -8,6 +10,8 @@ import {IntroduceService} from "../../service/api/introduce.service";
   styleUrls: ['./introduce.component.scss']
 })
 export class IntroduceComponent implements OnInit {
+  currentUser: JwtUserResponse;
+
   /** 当前数据的列表对象。*/
   introduceList: Introduce[];
 
@@ -18,11 +22,13 @@ export class IntroduceComponent implements OnInit {
   isValidForCreate = true;
 
 
-  constructor(private service: IntroduceService) {
+  constructor(private userService: UserService,
+              private service: IntroduceService) {
   }
 
 
   ngOnInit() {
+    this.currentUser = this.userService.currentUserSubject.value;
     this.list();
   }
 
@@ -34,7 +40,7 @@ export class IntroduceComponent implements OnInit {
     this.service.create(this.newIntroduce).subscribe(introduce => {
       this.introduceList.push(introduce);
       this.isValidForCreate = true;
-    },()=>this.isValidForCreate = false);
+    }, () => this.isValidForCreate = false);
   }
 
   /**
