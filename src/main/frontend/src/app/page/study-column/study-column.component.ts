@@ -6,6 +6,8 @@ import {UserService} from "../../service/api/user.service";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 import {SearchParams} from "../../domain/vo/SearchParams";
 import {ActivatedRoute} from "@angular/router";
+import {Profession, ProfessionText} from "../../enums/Profession";
+import {DifficultyLevel, DifficutyLevelText} from "../../enums/DifficultyLevel";
 
 @Component({
   selector: 'app-study-column',
@@ -26,6 +28,12 @@ export class StudyColumnComponent implements OnInit {
 
   /**查询参数的封装对象。*/
   searchParams = new SearchParams<string>();
+
+  /**枚举引用。*/
+  enums = {profession: Profession, difficultyLevel: DifficultyLevel};
+
+  /**枚举文本引用。*/
+  enumTexts = {profession: ProfessionText, difficultyLevel: DifficutyLevelText};
 
 
   constructor(private userService: UserService,
@@ -90,7 +98,7 @@ export class StudyColumnComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByTitle(page = 1, size = 10) {
+  searchByTitle() {
     this.searchParams.type = "ByTitle";
     const title = this.searchParams.field;
     this.service.searchByTitle(title, this.searchParams.page, this.searchParams.size).subscribe(columnPage => {

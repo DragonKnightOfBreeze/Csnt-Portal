@@ -8,19 +8,21 @@
       <h2 class="card-title">
         {{column.title}}
       </h2>
-      <hr>
-      <p class="card-text">
-        id：{{column.id}}<br>
-        作者：{{column.author}}<br>
-        发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}<br>
-        更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}
+
+      <p class="card-subtitle">
+        <small>
+          <span class="text-secondary">#{{column.id}}</span>&emsp;
+          <span class="text-secondary">作者：{{column.author}}</span>&emsp;
+          <span class="text-secondary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>&emsp;
+          <span class="text-secondary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+        </small>
       </p>
-      <hr>
+
       <p class="card-text">{{column.content}}</p>
 
       <div class="card-link text-center mx-auto">
-        <button class="btn btn-info" (click)="goBack()">返回</button>
         <button class="btn btn-danger" *ngIf="currentUser.role=='ADMIN'">编辑</button>
+        <button class="btn btn-info" (click)="goBack()">返回</button>
         <button class="btn btn-danger" (click)="delete()" *ngIf="currentUser.role=='ADMIN'">删除</button>
       </div>
     </div>

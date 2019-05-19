@@ -14,10 +14,12 @@
         </h2>
 
         <p class="card-subtitle">
-          <span class="badge badge-info">{{column.id}}</span>
-          <span class="badge badge-primary">作者：{{column.author}}</span>
-          <span class="badge badge-primary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-          <span class="badge badge-primary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+          <small>
+            <span class="badge badge-secondary">#{{column.id}}</span>
+            <span class="badge badge-secondary">作者：{{column.author}}</span>
+            <span class="badge badge-secondary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+            <span class="badge badge-secondary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+          </small>
         </p>
 
         <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{column.content}}</p>
@@ -32,7 +34,7 @@
   </div>
 
   <!--分页-->
-  <app-pagination [currentPage]="columnPage" [type]="searchParams.type" [field]="searchParams.field"></app-pagination>
+  <app-pagination [type]="searchParams.type" [field]="searchParams.field" [currentPage]="columnPage"></app-pagination>
 </div>
 
 <!--增加数据模态框-->

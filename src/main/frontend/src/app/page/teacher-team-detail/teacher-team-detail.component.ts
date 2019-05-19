@@ -5,6 +5,7 @@ import {Location} from "@angular/common";
 import {TeacherTeamService} from "../../service/api/tearcher-team.service";
 import {UserService} from "../../service/api/user.service";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {ProfessionLevel, ProfessionLevelText} from "../../enums/ProfessionLevel";
 
 @Component({
   selector: 'app-teacher-team-detail',
@@ -19,6 +20,12 @@ export class TeacherTeamDetailComponent implements OnInit {
 
   /**是否通过后台表单参数验证。*/
   isValidForCreate = true;
+
+  /**枚举引用。*/
+  enums = {professionLevel: ProfessionLevel};
+
+  /**枚举文本引用。*/
+  enumTexts = {professionLevel: ProfessionLevelText};
 
 
   constructor(private userService: UserService,

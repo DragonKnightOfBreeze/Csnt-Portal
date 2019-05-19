@@ -5,6 +5,8 @@ import {StudyColumn} from "../../domain/entity/StudyColumn";
 import {StudyColumnService} from "../../service/api/study-reform.service";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 import {UserService} from "../../service/api/user.service";
+import {Profession, ProfessionText} from "../../enums/Profession";
+import {DifficultyLevel, DifficutyLevelText} from "../../enums/DifficultyLevel";
 
 @Component({
   selector: 'app-study-column-detail',
@@ -19,6 +21,12 @@ export class StudyColumnDetailComponent implements OnInit {
 
   /**是否通过后台表单参数验证。*/
   isValidForUpdate = true;
+
+  /**枚举引用。*/
+  enums = {profession: Profession, difficultyLevel: DifficultyLevel};
+
+  /**枚举文本引用。*/
+  enumTexts = {profession: ProfessionText, difficultyLevel: DifficutyLevelText};
 
 
   constructor(private userService: UserService,

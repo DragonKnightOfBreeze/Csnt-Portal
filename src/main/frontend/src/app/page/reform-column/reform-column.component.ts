@@ -90,7 +90,7 @@ export class ReformColumnComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByTitle(page = 1, size = 10) {
+  searchByTitle() {
     this.searchParams.type = "ByTitle";
     const title = this.searchParams.field;
     this.service.searchByTitle(title, this.searchParams.page, this.searchParams.size).subscribe(columnPage => {

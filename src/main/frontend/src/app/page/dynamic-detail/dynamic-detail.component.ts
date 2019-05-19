@@ -5,6 +5,7 @@ import {Location} from "@angular/common";
 import {DynamicService} from "../../service/api/dynamic.service";
 import {UserService} from "../../service/api/user.service";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {DynamicCategory, DynamicCategoryText} from "../../enums/DynamicCategory";
 
 @Component({
   selector: 'app-dynamic-detail',
@@ -16,6 +17,12 @@ export class DynamicDetailComponent implements OnInit {
 
   /**当前数据对象。*/
   dynamic: Dynamic;
+
+  /**枚举引用。*/
+  enums = {category: DynamicCategory};
+
+  /**枚举文本引用。*/
+  enumTexts = {category: DynamicCategoryText};
 
 
   constructor(private userService: UserService,

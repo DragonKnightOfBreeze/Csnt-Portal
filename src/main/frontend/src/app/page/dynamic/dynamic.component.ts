@@ -7,6 +7,7 @@ import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 import {ActivatedRoute} from "@angular/router";
 import {SearchParams} from "../../domain/vo/SearchParams";
 import {DynamicSearchVo} from "../../domain/vo/DynamicSearchVo";
+import {DynamicCategory, DynamicCategoryText} from "../../enums/DynamicCategory";
 
 @Component({
   selector: 'app-dynamic',
@@ -30,6 +31,12 @@ export class DynamicComponent implements OnInit {
 
   /**查询表单是否通过后台表单参数验证。*/
   isValidForSearch = true;
+
+  /**枚举引用。*/
+  enums = {category: DynamicCategory};
+
+  /**枚举文本引用。*/
+  enumTexts = {category: DynamicCategoryText};
 
 
   constructor(private userService: UserService,
@@ -113,7 +120,7 @@ export class DynamicComponent implements OnInit {
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchBySubject(page = 1, size = 10) {
+  searchBySubject() {
     this.searchParams.type = "BySubject";
     const subject = this.searchParams.field.subject;
     this.service.searchBySubject(subject, this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
