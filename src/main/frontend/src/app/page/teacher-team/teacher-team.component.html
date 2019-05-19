@@ -13,16 +13,9 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown">
               分类<span class="caret"></span>
             </a>
-            <!--TODO 如何更好地遍历枚举值和枚举文本？-->
-            <div class="dropdown-menu">
-              <button class="dropdown-item" (click)="searchByProfessionLevel(enums.professionLevel.Normal)">
-                {{enumTexts.professionLevel.Normal}}
-              </button>
-              <button class="dropdown-item" (click)="searchByProfessionLevel(enums.professionLevel.Professional)">
-                {{enumTexts.professionLevel.Professional}}
-              </button>
-              <button class="dropdown-item" (click)="searchByProfessionLevel(enums.professionLevel.VeryProfessional)">
-                {{enumTexts.professionLevel.VeryProfessional}}
+            <div class="dropdown-menu" *ngFor="let professionLevel of ProfessionLevel | enumConsts">
+              <button class="dropdown-item" (click)="searchByProfessionLevel(professionLevel)">
+                {{professionLevel | enumText:"ProfessionLevel"}}
               </button>
             </div>
           </li>
@@ -74,7 +67,9 @@
           <p class="card-subtitle">
             <small>
               <span class="badge badge-secondary">#{{teacherTeam.id}}</span>
-              <span class="badge badge-secondary">专业级别：{{teacherTeam.professionLevel}}</span>
+              <span class="badge badge-secondary">
+                专业级别：{{teacherTeam.professionLevel |enumText:"ProfessionLevel"}}
+              </span>
               <span class="badge badge-secondary">创建时间：{{teacherTeam.createTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
             </small>
           </p>
@@ -136,8 +131,8 @@
             <select class="form-control" id="professionLevel" multiple
                     required
                     [(ngModel)]="searchParams.field.levelSet" name="professionLevel">
-              <ng-container *ngFor="let professionLevel of enums.professionLevel | keyvalue">
-                <option [value]="professionLevel.value">{{enumTexts.professionLevel[professionLevel.key]}}</option>
+              <ng-container *ngFor="let professionLevel of ProfessionLevel | enumConsts">
+                <option [value]="professionLevel">{{professionLevel | enumText:"ProfessionLevel"}}</option>
               </ng-container>
             </select>
           </div>

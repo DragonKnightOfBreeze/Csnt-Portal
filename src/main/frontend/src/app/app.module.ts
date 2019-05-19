@@ -36,6 +36,8 @@ import {Error404Component} from './error-page/error404/error404.component';
 import {Error500Component} from './error-page/error500/error500.component';
 import {Error501Component} from './error-page/error501/error501.component';
 import {ErrorComponent} from "./error-page/error/error.component";
+import {EnumTextPipe} from './pipe/enum-text.pipe';
+import {EnumConstsPipe} from "./pipe/enum-consts.pipe";
 
 /**
  * 项目的主模块。
@@ -80,6 +82,8 @@ import {ErrorComponent} from "./error-page/error/error.component";
     Error404Component,
     Error500Component,
     Error501Component,
+    EnumConstsPipe,
+    EnumTextPipe,
   ],
   providers: [
     //带有@Injectable({provideIn:"root"})的服务，不需要在这里声明

@@ -7,7 +7,7 @@ import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 import {ActivatedRoute} from "@angular/router";
 import {SearchParams} from "../../domain/vo/SearchParams";
 import {DynamicSearchVo} from "../../domain/vo/DynamicSearchVo";
-import {DynamicCategory, DynamicCategoryText} from "../../enums/DynamicCategory";
+import {DynamicCategory} from "../../enums/DynamicCategory";
 
 @Component({
   selector: 'app-dynamic',
@@ -32,11 +32,7 @@ export class DynamicComponent implements OnInit {
   /**查询表单是否通过后台表单参数验证。*/
   isValidForSearch = true;
 
-  /**枚举引用。*/
-  enums = {category: DynamicCategory};
-
-  /**枚举文本引用。*/
-  enumTexts = {category: DynamicCategoryText};
+  DynamicCategory = DynamicCategory;
 
 
   constructor(private userService: UserService,

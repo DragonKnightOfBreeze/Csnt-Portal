@@ -15,8 +15,8 @@
         <p class="card-subtitle">
           <small>
             <span class="text-secondary">#{{teacherInfo.id}}</span>&emsp;
-            <span class="text-secondary">{{teacherInfo.gender}}</span>&emsp;
-            <span class="text-secondary">专业：{{teacherInfo.profession}}</span>
+            <span class="text-secondary">{{teacherInfo.gender | enumText:"Gender"}}</span>&emsp;
+            <span class="text-secondary">专业：{{teacherInfo.profession | enumText:"Profession"}}</span>
           </small>
         </p>
 

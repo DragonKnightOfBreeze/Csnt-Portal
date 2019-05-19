@@ -15,7 +15,7 @@
         <p class="card-subtitle">
           <small>
             <span class="text-secondary">#{{teacherTeam.id}}</span>&emsp;
-            <span class="text-secondary">专业级别：{{teacherTeam.professionLevel}}</span>e
+            <span class="text-secondary">专业级别：{{teacherTeam.professionLevel | enumText:"ProfessionLevel"}}</span>&emsp;
             <span class="text-secondary">创建时间：{{teacherTeam.createTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
           </small>
         </p>
@@ -36,8 +36,8 @@
           <tr>
             <td>{{teacherInfo.id}}</td>
             <td>{{teacherInfo.name}}</td>
-            <td>{{teacherInfo.gender}}</td>
-            <td>{{teacherInfo.profession}}</td>
+            <td>{{teacherInfo.gender | enumText:"Gender"}}</td>
+            <td>{{teacherInfo.profession | enumText:"Profession"}}</td>
           </tr>
           </tbody>
         </table>

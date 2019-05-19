@@ -5,8 +5,8 @@ import {Location} from "@angular/common";
 import {TeacherInfoService} from "../../service/api/teacher-info.service";
 import {UserService} from "../../service/api/user.service";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
-import {Profession, ProfessionText} from "../../enums/Profession";
-import {Gender, GenderText} from "../../enums/Gender";
+import {Profession} from "../../enums/Profession";
+import {Gender} from "../../enums/Gender";
 
 @Component({
   selector: 'app-teacher-info-detail',
@@ -28,11 +28,8 @@ export class TeacherInfoDetailComponent implements OnInit {
   /**是否通过后台表单参数验证。*/
   isValidForCreate = true;
 
-  /**枚举引用。*/
-  enums = {gender: Gender, profession: Profession};
-
-  /**枚举文本引用。*/
-  enumTexts = {gender: GenderText, profession: ProfessionText};
+  Gender = Gender;
+  Profession = Profession;
 
 
   constructor(private userService: UserService,
