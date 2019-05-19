@@ -24,7 +24,7 @@
 
         <!--当为管理员时才能添加、编辑和删除-->
         <div class="card-link text-center mx-auto">
-          <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">添加</button>
+          <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">创建</button>
           <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">编辑</button>
           <button class="btn btn-info" (click)="goBack()">返回</button>
           <button class="btn btn-danger" (click)="delete()" *ngIf="currentUser.role=='ADMIN'">删除</button>

@@ -82,9 +82,11 @@
 
           <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{dynamic.content}}</p>
 
-          <!--当为管理员或者发起用户时才能删除-->
+          <!--当已登录时才能添加当为管理员或者发起用户时才能删除-->
           <div class="card-link text-center mx-auto">
-            <button class="btn btn-success">添加</button>
+            <button class="btn btn-success" data-toggle="modal" data-target="#createModal"
+                    *ngIf="currentUser">创建
+            </button>
             <a class="btn btn-info" routerLink="/dynamic/{{dynamic.id}}">详情</a>
             <button class="btn btn-danger" (click)="delete(dynamic.id)"
                     *ngIf="currentUser.role=='ADMIN'||currentUser.username==dynamic.sponsorUser.username">删除
@@ -108,6 +110,10 @@
       </div>
       <div class="modal-body">
         <form (ngSubmit)="advanceSearch()" #advanceSearchForm="ngForm">
+          <div class="alert alert-danger" [hidden]="isValidForSearch">
+            参数有误！
+          </div>
+
           <div class="form-group">
             <label for="subject">主题：</label>
             <input type="text" class="form-control bg-light" id="subject" placeholder="请输入主题"
@@ -143,4 +149,48 @@
 </div>
 
 <!--增加数据模态框-->
-<!--TODO （可以搁置）-->
+<div class="modal fade in" id="createModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header mx-auto text-center">
+        <h3 class="modal-title">高级搜索</h3>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="create()" #advanceSearchForm="ngForm">
+          <div class="alert alert-danger" [hidden]="isValidForSearch">
+            参数有误！
+          </div>
+
+          <div class="form-group">
+            <label for="newSubject">主题：</label>
+            <input type="text" class="form-control bg-light" id="newSubject" placeholder="请输入主题"
+                   required
+                   [(ngModel)]="newDynamic.subject" name="subject">
+          </div>
+
+          <div class="form-group">
+            <label for="newCategory">分类：</label>
+            <select class="form-control" id="newCategory"
+                    required
+                    [(ngModel)]="newDynamic.category" name="category">
+              <ng-container *ngFor="let category of enums.category | keyvalue">
+                <option [value]="category.value">{{enumTexts.category[category.key]}}</option>
+              </ng-container>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="newContent">内容：</label>
+            <textarea class="form-control bg-light" id="newContent" placeholder="请输入内容" rows="5"
+                      required
+                      [(ngModel)]="newDynamic.content" name="content"></textarea>
+          </div>
+
+          <div class="form-group text-center mx-auto">
+            <button type="submit" class="btn btn-primary" [disabled]="advanceSearchForm.form.invalid">创建</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

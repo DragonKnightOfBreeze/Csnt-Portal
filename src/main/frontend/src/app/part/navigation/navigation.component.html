@@ -71,7 +71,7 @@
     <!--导航栏菜单：我的账户/注销，当用户已登录时显示-->
     <ul class="navbar-nav navbar-right" id="nav-account" *ngIf="currentUser">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/account">
+        <a class="nav-link" routerLink="/account/{{currentUser.username}}">
           <span class="fa fa-user"></span>
           {{currentUser.username}}
         </a>
