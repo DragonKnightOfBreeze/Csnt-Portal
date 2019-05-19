@@ -35,19 +35,19 @@
           </tr>
           <tr>
             <td>性别</td>
-            <td>{{user.gender}}</td>
+            <td>{{user.gender | enumText:"Gender"}}</td>
           </tr>
           <tr>
             <td>身份</td>
-            <td>{{user.role}}</td>
+            <td>{{user.role | enumText: "Role"}}</td>
           </tr>
           <tr>
             <td>专业</td>
-            <td>{{user.profession}}</td>
+            <td>{{user.profession | enumText:"Profession"}}</td>
           </tr>
           <tr>
             <td>注册时间</td>
-            <td>{{user.registerTime}}</td>
+            <td>{{user.registerTime | date:"yyyy-MM-dd hh:mm:ss"}}</td>
           </tr>
         </table>
         <hr>
@@ -65,8 +65,8 @@
           <tr>
             <td>{{dynamic.id}}</td>
             <td>{{dynamic.subject}}</td>
-            <td>{{dynamic.category}}</td>
-            <td>{{dynamic.sponsorTime}}</td>
+            <td>{{dynamic.category | enumText:"Profession"}}</td>
+            <td>{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</td>
           </tr>
           </tbody>
         </table>

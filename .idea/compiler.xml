@@ -19,4 +19,12 @@
       <module name="Csnt Portal" options="-parameters" />
     </option>
   </component>
+  <component name="TypeScriptCompiler">
+    <option name="nodeInterpreterTextField" value="node" />
+    <option name="recompileOnChanges" value="true" />
+    <option name="typeScriptCompilerParams" value="--sourceMap true" />
+    <option name="typeScriptServiceDirectory" value="$USER_HOME$/AppData/Roaming/npm/node_modules/typescript" />
+    <option name="useConfig" value="true" />
+    <option name="versionType" value="SERVICE_DIRECTORY" />
+  </component>
 </project>

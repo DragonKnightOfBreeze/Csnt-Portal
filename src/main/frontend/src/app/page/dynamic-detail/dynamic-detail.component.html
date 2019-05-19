@@ -14,7 +14,7 @@
       <p class="card-subtitle">
         <small>
           <span class="text-secondary">#{{dynamic.id}}</span>&emsp;
-          <span class="text-secondary">分类：{{dynamic.category}}</span>&emsp;
+          <span class="text-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>&emsp;
           <span class="text-secondary">发起用户：{{dynamic.sponsorUser.username}}</span>&emsp;
           <span class="text-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
         </small>

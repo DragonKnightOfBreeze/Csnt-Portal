@@ -64,13 +64,13 @@
 
       <div class="form-group">
         <!--遍历枚举，默认选中第一个-->
-        <ng-container *ngFor="let gender of enums.gender | keyvalue;first as isFirst">
+        <ng-container *ngFor="let gender of Gender | enumConsts;first as isFirst">
           <div class="form-check-inline">
             <label class="form-check-label">
               <input type="radio" class="form-check-input"
                      required
-                     [(ngModel)]="user.gender" name="gender" [value]="gender.value" [checked]="isFirst">
-              {{enumTexts.gender[gender.key]}}
+                     [(ngModel)]="user.gender" name="gender" [value]="gender" [checked]="isFirst">
+              {{gender | enumText:"Gender"}}
             </label>
           </div>
         </ng-container>
@@ -78,13 +78,13 @@
 
       <div class="form-group">
         <!--遍历枚举，但不包括管理员，默认选中第一个-->
-        <ng-container *ngFor="let role of enums.role | keyvalue;first as isFirst">
-          <div class="form-check-inline" *ngIf="role.value!=enums.role.Admin">
+        <ng-container *ngFor="let role of Role | enumConsts;first as isFirst">
+          <div class="form-check-inline" *ngIf="role!=Role.Admin">
             <label class="form-check-label">
               <input type="radio" class="form-check-input"
                      required
-                     [(ngModel)]="user.role" name="role" [value]="role.value" [checked]="isFirst">
-              {{enumTexts.role[role.key]}}
+                     [(ngModel)]="user.role" name="role" [value]="role" [checked]="isFirst">
+              {{role | enumText:"Role"}}
             </label>
           </div>
         </ng-container>
@@ -96,9 +96,9 @@
         <select class="form-control" id="profession"
                 required
                 [(ngModel)]="user.profession" name="profession">
-          <ng-container *ngFor="let profession of enums.profession | keyvalue;first as isFirst">
-            <option [value]="profession.value" [selected]="isFirst">
-              {{enumTexts.profession[profession.key]}}
+          <ng-container *ngFor="let profession of Profession | enumConsts;first as isFirst">
+            <option [value]="profession" [selected]="isFirst">
+              {{profession | enumText:"Profession"}}
             </option>
           </ng-container>
         </select>

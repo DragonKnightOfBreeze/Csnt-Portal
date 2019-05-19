@@ -13,19 +13,9 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown">
               分类<span class="caret"></span>
             </a>
-            <!--TODO 如何更好地遍历枚举值和枚举文本？-->
-            <div class="dropdown-menu">
-              <button class="dropdown-item" (click)="searchByCategory(enums.category.Chat)">
-                {{enumTexts.category.Chat}}
-              </button>
-              <button class="dropdown-item" (click)="searchByCategory(enums.category.Discuss)">
-                {{enumTexts.category.Discuss}}
-              </button>
-              <button class="dropdown-item" (click)="searchByCategory(enums.category.Notice)">
-                {{enumTexts.category.Notice}}
-              </button>
-              <button class="dropdown-item" (click)="searchByCategory(enums.category.SeekHelp)">
-                {{enumTexts.category.SeekHelp}}
+            <div class="dropdown-menu" *ngFor="let category of DynamicCategory | enumConsts">
+              <button class="dropdown-item" (click)="searchByCategory(category)">
+                {{category | enumText:"DynamicCategory"}}
               </button>
             </div>
           </li>
@@ -74,7 +64,7 @@
           <p class="card-subtitle">
             <small>
               <span class="badge badge-secondary">#{{dynamic.id}}</span>
-              <span class="badge badge-secondary">分类：{{dynamic.category}}</span>
+              <span class="badge badge-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>
               <span class="badge badge-secondary">发起用户：{{dynamic.sponsorUser.username}}</span>
               <span class="badge badge-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
             </small>
@@ -122,19 +112,19 @@
           </div>
 
           <div class="form-group">
-            <label for="sponsorUsername">发起用户：</label>
-            <input type="text" class="form-control bg-light" id="sponsorUsername" placeholder="请输入发起用户"
+            <label for="sponsorUsername">发起用户名：</label>
+            <input type="text" class="form-control bg-light" id="sponsorUsername" placeholder="请输入发起用户名"
                    required
                    [(ngModel)]="searchParams.field.sponsorUsername" name="sponsorUsername">
           </div>
 
           <div class="form-group">
-            <label for="profession">分类：</label>
-            <select class="form-control" id="profession" multiple
+            <label for="category">分类：</label>
+            <select class="form-control" id="category" multiple
                     required
                     [(ngModel)]="searchParams.field.categorySet" name="profession">
-              <ng-container *ngFor="let category of enums.category | keyvalue">
-                <option [value]="category.value">{{enumTexts.category[category.key]}}</option>
+              <ng-container *ngFor="let category of DynamicCategory | enumConsts">
+                <option [value]="category">{{category | enumText:"DynamicCategory"}}</option>
               </ng-container>
             </select>
           </div>
@@ -153,7 +143,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header mx-auto text-center">
-        <h3 class="modal-title">高级搜索</h3>
+        <h3 class="modal-title">创建动态</h3>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="create()" #advanceSearchForm="ngForm">
@@ -170,11 +160,11 @@
 
           <div class="form-group">
             <label for="newCategory">分类：</label>
-            <select class="form-control" id="newCategory"
+            <select class="form-control" id="newCategory" multiple
                     required
-                    [(ngModel)]="newDynamic.category" name="category">
-              <ng-container *ngFor="let category of enums.category | keyvalue">
-                <option [value]="category.value">{{enumTexts.category[category.key]}}</option>
+                    [(ngModel)]="searchParams.field.categorySet" name="profession">
+              <ng-container *ngFor="let category of DynamicCategory | enumConsts">
+                <option [value]="category">{{category | enumText:"DynamicCategory"}}</option>
               </ng-container>
             </select>
           </div>

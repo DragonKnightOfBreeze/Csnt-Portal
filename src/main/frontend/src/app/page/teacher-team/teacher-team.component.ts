@@ -7,7 +7,7 @@ import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 import {UserService} from "../../service/api/user.service";
 import {SearchParams} from "../../domain/vo/SearchParams";
 import {ActivatedRoute} from "@angular/router";
-import {ProfessionLevel, ProfessionLevelText} from "../../enums/ProfessionLevel";
+import {ProfessionLevel} from "../../enums/ProfessionLevel";
 
 @Component({
   selector: 'app-teacher-team',
@@ -32,11 +32,7 @@ export class TeacherTeamComponent implements OnInit {
   /**是否通过后台表单参数验证。*/
   isValidForSearch = true;
 
-  /**枚举引用。*/
-  enums = {professionLevel: ProfessionLevel};
-
-  /**枚举文本引用。*/
-  enumTexts = {professionLevel: ProfessionLevelText};
+  ProfessionLevel = ProfessionLevel;
 
 
   constructor(private userService: UserService,

@@ -3,9 +3,3 @@ export enum Gender {
   Female = "FEMALE",
   Alien = "ALIEN"
 }
-
-export enum GenderText {
-  Male = "男性",
-  Female = "女性",
-  Alien = "外星人"
-}

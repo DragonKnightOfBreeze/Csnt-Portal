@@ -81,17 +81,17 @@
 
             <div class="form-group">
               <label for="gender">性别：</label>
-              <div class="form-text" id="gender">{{user.gender}}</div>
+              <div class="form-text" id="gender">{{user.gender | enumText:"Gender"}}</div>
             </div>
 
             <div class="form-group">
               <label for="role">身份：</label>
-              <div class="form-text" id="role">{{user.role}}</div>
+              <div class="form-text" id="role">{{user.role | enumText:"Role"}}</div>
             </div>
 
             <div class="form-group">
               <label for="profession">专业：</label>
-              <div class="form-text" id="profession">{{user.profession}}</div>
+              <div class="form-text" id="profession">{{user.profession | enumText:"Profession"}}</div>
             </div>
 
             <div class="form-group">
@@ -107,3 +107,4 @@
       </div>
     </div>
   </div>
+</div>
