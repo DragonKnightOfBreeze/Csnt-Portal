@@ -1,1 +1,151 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>教师队伍</h1>
+  </div>
+
+  <!--搜索栏-->
+  <div class="container m-2 cp-search-bar">
+    <div class="row">
+      <div class="col-4">
+        <ul class="nav nav-tabs">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+              分类<span class="caret"></span>
+            </a>
+            <!--TODO 如何更好地遍历枚举值和枚举文本？-->
+            <div class="dropdown-menu">
+              <button class="dropdown-item" (click)="searchByProfessionLevel(enums.professionLevel.Normal)">
+                {{enumTexts.professionLevel.Normal}}
+              </button>
+              <button class="dropdown-item" (click)="searchByProfessionLevel(enums.professionLevel.Professional)">
+                {{enumTexts.professionLevel.Professional}}
+              </button>
+              <button class="dropdown-item" (click)="searchByProfessionLevel(enums.professionLevel.VeryProfessional)">
+                {{enumTexts.professionLevel.VeryProfessional}}
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-3">
+        <form class="form-inline" (ngSubmit)="searchByName()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入名字"
+                   required
+                   [(ngModel)]="searchParams.field.name" name="subject">
+          </div>
+          <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
+        </form>
+      </div>
+
+      <div class="col-3">
+        <form class="form-inline" (ngSubmit)="searchByTeacherCount()">
+          <div class="form-group">
+            <input type="text" class="form-control w-25" placeholder="最小人数"
+                   required
+                   [(ngModel)]="searchParams.field.min" name="min">
+            <input type="text" class="form-control w-25" placeholder="最大人数"
+                   required
+                   [(ngModel)]="searchParams.field.max" name="max">
+            <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#advanceSearchModal">
+          <span class="fa fa-star"></span>高级搜索
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--卡片组-->
+  <div class="container m-2 cp-data-list">
+    <div class="card-group mx-auto" *ngFor="let teacherTeam of currentPage.content">
+      <div class="card mx-auto m-1">
+        <div class="card-body">
+          <h2 class="card-title">
+            {{teacherTeam.name}}
+          </h2>
+
+          <p class="card-subtitle">
+            <small>
+              <span class="badge badge-secondary">#{{teacherTeam.id}}</span>
+              <span class="badge badge-secondary">专业级别：{{teacherTeam.professionLevel}}</span>
+              <span class="badge badge-secondary">创建时间：{{teacherTeam.createTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+            </small>
+          </p>
+
+          <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{teacherTeam.introduce}}</p>
+
+          <!--当为管理员时才能添加和删除-->
+          <div class="card-link text-center mx-auto">
+            <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">添加</button>
+            <a class="btn btn-info" routerLink="/teacher-team/{{teacherTeam.id}}">详情</a>
+            <button class="btn btn-danger" (click)="delete(teacherTeam.id)" *ngIf="currentUser.role=='ADMIN'">删除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--分页-->
+  <app-pagination [type]="searchParams.type" [field]="searchParams.field" [currentPage]="currentPage"></app-pagination>
+</div>
+
+<!--高级搜索模态框-->
+<div class="modal fade in" id="advanceSearchModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header mx-auto text-center">
+        <h3 class="modal-title">高级搜索</h3>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="advanceSearch()" #advanceSearchForm="ngForm">
+          <div class="form-group">
+            <label for="name">名字：</label>
+            <input type="text" class="form-control bg-light" id="name" placeholder="请输入名字"
+                   required
+                   [(ngModel)]="searchParams.field.name" name="name">
+          </div>
+
+          <div class="form-group">
+            <label for="min">最小人数：</label>
+            <input type="number" class="form-control bg-light" id="min" placeholder="请输入最小人数"
+                   required
+                   [(ngModel)]="searchParams.field.min" name="min">
+          </div>
+
+          <div class="form-group">
+            <label for="max">最大人数：</label>
+            <input type="number" class="form-control bg-light" id="max" placeholder="请输入最大人数"
+                   required
+                   [(ngModel)]="searchParams.field.max" name="max">
+          </div>
+
+          <div class="form-group">
+            <label for="professionLevel">专业级别：</label>
+            <select class="form-control" id="professionLevel" multiple
+                    required
+                    [(ngModel)]="searchParams.field.levelSet" name="professionLevel">
+              <ng-container *ngFor="let professionLevel of enums.professionLevel | keyvalue">
+                <option [value]="professionLevel.value">{{enumTexts.professionLevel[professionLevel.key]}}</option>
+              </ng-container>
+            </select>
+          </div>
+
+          <div class="form-group text-center mx-auto">
+            <button type="submit" class="btn btn-primary" [disabled]="advanceSearchForm.form.invalid">搜索</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--增加数据模态框-->
+<!--TODO （可以搁置）-->

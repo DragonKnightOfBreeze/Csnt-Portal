@@ -1,1 +1,38 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>实时动态详情</h1>
+  </div>
+
+  <!--详情卡片-->
+  <div class="container m-2 cp-data-detail">
+    <div class="card mx-auto m-1">
+      <h2 class="card-title">
+        {{dynamic.subject}}
+      </h2>
+
+      <p class="card-subtitle">
+        <small>
+          <span class="text-secondary">#{{dynamic.id}}</span>&emsp;
+          <span class="text-secondary">分类：{{dynamic.category}}</span>&emsp;
+          <span class="text-secondary">发起用户：{{dynamic.sponsorUser.username}}</span>&emsp;
+          <span class="text-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+        </small>
+      </p>
+
+      <article class="card-text">{{dynamic.content}}</article>
+
+      <!--当为发起用户时才能编辑，当为管理员或发起用户时才能删除-->
+      <div class="card-link text-center mx-auto">
+        <button class="btn btn-danger" *ngIf="currentUser.username==dynamic.sponsorUser.username">编辑</button>
+        <button class="btn btn-info" (click)="goBack()">返回</button>
+        <button class="btn btn-danger" (click)="delete()"
+                *ngIf="currentUser.role=='ADMIN'||currentUser.username==dynamic.sponsorUser.username">删除
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--编辑数据模态框-->
+<!--TODO （可以搁置）-->

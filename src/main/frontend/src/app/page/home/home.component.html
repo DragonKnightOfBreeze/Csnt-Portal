@@ -1,135 +1,138 @@
-<!-- 轮播图部分 -->
-<div class="container" id="pic">
-  <div id="demo" class="carousel slide" data-ride="carousel">
-    <!-- 指示符 -->
-    <ul class="carousel-indicators">
-      <li data-target="#demo" data-slide-to="0" class="active"></li>
-      <li data-target="#demo" data-slide-to="1"></li>
-      <li data-target="#demo" data-slide-to="2"></li>
-    </ul>
+<div class="container m-3 p-3 cp-content">
+  <!-- 轮播图部分 -->
+  <div class="container m-2" id="pic">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+      <!-- 指示符 -->
+      <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+      </ul>
 
-    <!-- 轮播图 -->
-    <div class="carousel-inner">
-      <!-- 轮播图图片 -->
-      <div class="carousel-item active">
-        <a href="#"><img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg"></a>
-      </div>
-      <div class="carousel-item">
-        <a href="#"> <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg"></a>
-      </div>
-      <div class="carousel-item">
-        <a href="#"> <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg"></a>
-      </div>
-      <!-- 左右切换按钮 -->
-      <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="container" id="mid">
-  <!-- 第一行卡片 -->
-  <div class="row" style="margin-bottom:20px">
-    <!-- 新闻速递卡片 -->
-    <div class="col-md-6">
-      <div class="card border-right-0">
-        <div class="card-body">
-          <h4 class="card-title lead" style="background-color:rgb(159, 181, 192)">新闻速递
-            <span class="small float-md-right">
-              <a class="text-primary" routerLink="/dynamic">更多</a>
-            </span>
-          </h4>
-          <p class=" small card-text">
-            <a href="#">计算机学院师生收看纪念五四运动 100 周年大会并畅谈体会</a>
-            <span class="float-right badge badge-secondary">5-12</span>
-          </p>
-          <p class=" small card-text">
-            <a href="#">计算机科学技术学院第一期入党积极分子培训班开班</a>
-            <span class="float-right badge badge-secondary">5-10</span>
-          </p>
-          <p class=" small card-text">
-            <a href="#">计算机科学技术学院开展全民国家安全教育日主题活</a>
-            <span class="float-right badge badge-secondary">5-2</span>
-          </p>
+      <!-- 轮播图 -->
+      <div class="carousel-inner">
+        <!-- 轮播图图片 -->
+        <div class="carousel-item active">
+          <a href="#"><img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg"></a>
         </div>
-      </div>
-    </div>
-    <!-- 重要通知卡片 -->
-    <div class="col-md-6">
-      <div class="card border-right-0">
-        <div class="card-body ">
-          <h4 class="card-title lead" style="background-color:rgb(159, 181, 192)">重要通知
-            <span class="small float-md-right">
-              <a class="text-primary" routerLink="/dynamic">更多</a>
-            </span>
-          </h4>
-          <p class="small card-text">
-            <a href="#">2019 学年计算机科学技术学院研究生学年学业奖学金评定细则</a>
-            <span class="float-right badge badge-secondary">5-12</span>
-          </p>
-          <p class="small card-text">
-            <a href="#">计算机科学技术学院本科优秀学生奖学金名单（公示）</a>
-            <span class="float-right badge badge-secondary">5-2</span>
-          </p>
-          <p class="small card-text">
-            <a href="#">2019 年计算机科学技术学院优秀毕业生名单公示</a>
-            <span class="float-right badge badge-secondary">5-1</span>
-          </p>
+        <div class="carousel-item">
+          <a href="#"> <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg"></a>
         </div>
+        <div class="carousel-item">
+          <a href="#"> <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg"></a>
+        </div>
+        <!-- 左右切换按钮 -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
       </div>
     </div>
   </div>
-  <!-- 第二行卡片 -->
-  <div class="row">
-    <!-- 学生活动卡片 -->
-    <div class="col-md-6 ">
-      <div class="card border-right-0">
-        <div class="card-body">
-          <h5 class="card-title lead" style="background-color:rgb(159, 181, 192)">学生活动
-            <span class="small float-md-right">
+
+  <!-- 演示内容 -->
+  <div class="container m-2" id="mid">
+    <!-- 第一行卡片 -->
+    <div class="row" style="margin-bottom:20px">
+      <!-- 新闻速递卡片 -->
+      <div class="col-md-6">
+        <div class="card border-right-0">
+          <div class="card-body">
+            <h4 class="card-title lead" style="background-color:rgb(159, 181, 192)">新闻速递
+              <span class="small float-md-right">
               <a class="text-primary" routerLink="/dynamic">更多</a>
             </span>
-          </h5>
-          <p class=" small card-text">
-            <a href="#">计算机学院召开本学期第一次学生党支部书记联席会议</a>
-            <span class="float-right badge badge-secondary">5-11</span>
-          </p>
-          <p class=" small card-text">
-            <a href="#">计算机学院开展纪念五四运动 100 周年主题团日活动</a>
-            <span class="float-right badge badge-secondary">5-4</span>
-          </p>
-          <p class=" small card-text">
-            <a href="#">计算机学院第六届团员代表大会暨学生代表大会顺利召开</a>
-            <span class="float-right badge badge-secondary">4-3</span>
-          </p>
+            </h4>
+            <p class="small card-text">
+              <a href="#">计算机学院师生收看纪念五四运动 100 周年大会并畅谈体会</a>
+              <span class="float-right badge badge-secondary">5-12</span>
+            </p>
+            <p class="small card-text">
+              <a href="#">计算机科学技术学院第一期入党积极分子培训班开班</a>
+              <span class="float-right badge badge-secondary">5-10</span>
+            </p>
+            <p class="small card-text">
+              <a href="#">计算机科学技术学院开展全民国家安全教育日主题活</a>
+              <span class="float-right badge badge-secondary">5-2</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- 重要通知卡片 -->
+      <div class="col-md-6">
+        <div class="card border-right-0">
+          <div class="card-body">
+            <h4 class="card-title lead" style="background-color:rgb(159, 181, 192)">重要通知
+              <span class="small float-md-right">
+              <a class="text-primary" routerLink="/dynamic">更多</a>
+            </span>
+            </h4>
+            <p class="small card-text">
+              <a href="#">2019 学年计算机科学技术学院研究生学年学业奖学金评定细则</a>
+              <span class="float-right badge badge-secondary">5-12</span>
+            </p>
+            <p class="small card-text">
+              <a href="#">计算机科学技术学院本科优秀学生奖学金名单（公示）</a>
+              <span class="float-right badge badge-secondary">5-2</span>
+            </p>
+            <p class="small card-text">
+              <a href="#">2019 年计算机科学技术学院优秀毕业生名单公示</a>
+              <span class="float-right badge badge-secondary">5-1</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-    <!-- 讲座信息卡片 -->
-    <div class="col-md-6">
-      <div class="card border-right-0">
-        <div class="card-body">
-          <h4 class="card-title lead" style="background-color:rgb(159, 181, 192)">讲座信息
-            <span class="small float-md-right">
+    <!-- 第二行卡片 -->
+    <div class="row">
+      <!-- 学生活动卡片 -->
+      <div class="col-md-6">
+        <div class="card border-right-0">
+          <div class="card-body">
+            <h5 class="card-title lead" style="background-color:rgb(159, 181, 192)">学生活动
+              <span class="small float-md-right">
               <a class="text-primary" routerLink="/dynamic">更多</a>
             </span>
-          </h4>
-          <p class="small card-text">
-            <a href="#">基于硬件的程序追踪及其应用</a>
-            <span class="float-right badge badge-secondary">5-9</span>
-          </p>
-          <p class="small card-text">
-            <a href="#">抖音背后的那些黑科技</a>
-            <span class="float-right badge badge-secondary">5-3</span>
-          </p>
-          <p class="small card-text">
-            <a href="#">支持泛安全数据分析的可视分析技术</a>
-            <span class="float-right badge badge-secondary">5-1</span>
-          </p>
+            </h5>
+            <p class="small card-text">
+              <a href="#">计算机学院召开本学期第一次学生党支部书记联席会议</a>
+              <span class="float-right badge badge-secondary">5-11</span>
+            </p>
+            <p class="small card-text">
+              <a href="#">计算机学院开展纪念五四运动 100 周年主题团日活动</a>
+              <span class="float-right badge badge-secondary">5-4</span>
+            </p>
+            <p class="small card-text">
+              <a href="#">计算机学院第六届团员代表大会暨学生代表大会顺利召开</a>
+              <span class="float-right badge badge-secondary">4-3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- 讲座信息卡片 -->
+      <div class="col-md-6">
+        <div class="card border-right-0">
+          <div class="card-body">
+            <h4 class="card-title lead" style="background-color:rgb(159, 181, 192)">讲座信息
+              <span class="small float-md-right">
+              <a class="text-primary" routerLink="/dynamic">更多</a>
+            </span>
+            </h4>
+            <p class="small card-text">
+              <a href="#">基于硬件的程序追踪及其应用</a>
+              <span class="float-right badge badge-secondary">5-9</span>
+            </p>
+            <p class="small card-text">
+              <a href="#">抖音背后的那些黑科技</a>
+              <span class="float-right badge badge-secondary">5-3</span>
+            </p>
+            <p class="small card-text">
+              <a href="#">支持泛安全数据分析的可视分析技术</a>
+              <span class="float-right badge badge-secondary">5-1</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

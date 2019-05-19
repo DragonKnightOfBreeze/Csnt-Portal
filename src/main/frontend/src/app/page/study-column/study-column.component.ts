@@ -18,7 +18,7 @@ export class StudyColumnComponent implements OnInit {
   currentUser: JwtUserResponse;
 
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
-  columnPage: Page<StudyColumn>;
+  currentPage: Page<StudyColumn>;
 
   /**增加数据表单的模型对象。*/
   newColumn = new StudyColumn();
@@ -53,8 +53,8 @@ export class StudyColumnComponent implements OnInit {
    */
   create() {
     this.service.create(this.newColumn).subscribe(column => {
-      this.columnPage.content.push(column);
-      this.columnPage.content.slice(0, 10);
+      this.currentPage.content.push(column);
+      this.currentPage.content.slice(0, 10);
       this.isValidForCreate = true;
     }, () => this.isValidForCreate = false);
   }
@@ -65,7 +65,7 @@ export class StudyColumnComponent implements OnInit {
    */
   delete(id: number) {
     window.alert("删除成功！");
-    this.columnPage.content.filter(e => e.id !== id);
+    this.currentPage.content.filter(e => e.id !== id);
     this.service.delete(id).subscribe();
   }
 
@@ -91,7 +91,7 @@ export class StudyColumnComponent implements OnInit {
   list() {
     this.searchParams.type = "All";
     this.service.list(this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
-      this.columnPage = columnPage;
+      this.currentPage = columnPage;
     });
   }
 
@@ -102,7 +102,7 @@ export class StudyColumnComponent implements OnInit {
     this.searchParams.type = "ByTitle";
     const title = this.searchParams.field;
     this.service.searchByTitle(title, this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
-      this.columnPage = columnPage;
+      this.currentPage = columnPage;
     });
   }
 }

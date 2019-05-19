@@ -1,1 +1,40 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>学习专栏详情</h1>
+  </div>
+
+  <!--详情卡片-->
+  <div class="container m-2 cp-data-detail">
+    <div class="card mx-auto m-1">
+      <div class="card-body">
+        <h2 class="card-title">
+          {{column.title}}
+        </h2>
+
+        <p class="card-subtitle">
+          <small>
+            <span class="text-secondary">#{{column.id}}</span>&emsp;
+            <span class="text-secondary">作者：{{column.author}}</span>&emsp;
+            <span class="text-secondary">专业：{{column.profession}}</span>&emsp;
+            <span class="text-secondary">难度：{{column.difficultyLevel}}</span>&emsp;
+            <span class="text-secondary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>&emsp;
+            <span class="text-secondary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+          </small>
+        </p>
+
+        <article class="card-text">{{column.content}}</article>
+
+        <!--当为管理员时才能编辑和删除-->
+        <div class="card-link text-center mx-auto">
+          <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">编辑</button>
+          <button class="btn btn-info" (click)="goBack()">返回</button>
+          <button class="btn btn-danger" (click)="delete()" *ngIf="currentUser.role=='ADMIN'">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--编辑数据模态框-->
+<!--TODO （可以搁置）-->

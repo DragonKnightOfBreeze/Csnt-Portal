@@ -13,7 +13,7 @@ import {UserSearchVo} from "../../domain/vo/UserSearchVo";
 })
 export class UserComponent implements OnInit {
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
-  userPage: Page<User>;
+  currentPage: Page<User>;
 
   /**查询参数的封装对象。*/
   searchParams = new SearchParams<UserSearchVo>();
@@ -50,7 +50,7 @@ export class UserComponent implements OnInit {
   private list() {
     this.searchParams.type = "All";
     this.service.list(this.searchParams.page, this.searchParams.size).subscribe(userPage => {
-      this.userPage = userPage;
+      this.currentPage = userPage;
     });
   }
 
@@ -61,7 +61,7 @@ export class UserComponent implements OnInit {
     this.searchParams.type = "ByNickname";
     const nickname = this.searchParams.field.nickname;
     this.service.searchByNickname(nickname, this.searchParams.page, this.searchParams.size).subscribe(userPage => {
-      this.userPage = userPage;
+      this.currentPage = userPage;
     });
   }
 }

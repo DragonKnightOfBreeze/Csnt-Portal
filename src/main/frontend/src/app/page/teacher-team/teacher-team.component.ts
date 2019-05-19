@@ -18,7 +18,7 @@ export class TeacherTeamComponent implements OnInit {
   currentUser: JwtUserResponse;
 
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
-  teacherTeamPage: Page<TeacherTeam>;
+  currentPage: Page<TeacherTeam>;
 
   /**增加数据表单的模型对象。*/
   newTeacherTeam = new TeacherTeam();
@@ -56,8 +56,8 @@ export class TeacherTeamComponent implements OnInit {
    */
   create() {
     this.service.create(this.newTeacherTeam).subscribe(teacherTeam => {
-      this.teacherTeamPage.content.push(teacherTeam);
-      this.teacherTeamPage.content.slice(0, 10);
+      this.currentPage.content.push(teacherTeam);
+      this.currentPage.content.slice(0, 10);
       this.isValidForCreate = true;
     }, () => this.isValidForCreate = false);
   }
@@ -68,7 +68,7 @@ export class TeacherTeamComponent implements OnInit {
    */
   delete(id: number) {
     window.alert("删除成功！");
-    this.teacherTeamPage.content.filter(e => e.id !== id);
+    this.currentPage.content.filter(e => e.id !== id);
     this.service.delete(id).subscribe();
   }
 
@@ -84,7 +84,7 @@ export class TeacherTeamComponent implements OnInit {
     if (this.searchParams.type === "ByName") {
       this.searchByName();
     } else if (this.searchParams.type === "ByProfessionLevel") {
-      this.searchByProfessionLevel();
+      this.searchByProfessionLevel(this.searchParams.field.levelSet[0]);
     } else if (this.searchParams.type === "ByTeacherCount") {
       this.searchByTeacherCount();
     } else if (this.searchParams.type === "Advance") {
@@ -100,7 +100,7 @@ export class TeacherTeamComponent implements OnInit {
   list() {
     this.searchParams.type = "All";
     this.service.list(this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
-      this.teacherTeamPage = teacherTeamPage;
+      this.currentPage = teacherTeamPage;
     });
   }
 
@@ -111,18 +111,18 @@ export class TeacherTeamComponent implements OnInit {
     this.searchParams.type = "ByName";
     const name = this.searchParams.field.name;
     this.service.searchByName(name, this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
-      this.teacherTeamPage = teacherTeamPage;
+      this.currentPage = teacherTeamPage;
     });
   }
 
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByProfessionLevel() {
+  searchByProfessionLevel(professionLevel: ProfessionLevel) {
     this.searchParams.type = "ByProfessionLevel";
-    const levelSet = this.searchParams.field.levelSet;
-    this.service.searchByProfessionLevel(levelSet, this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
-      this.teacherTeamPage = teacherTeamPage;
+    this.searchParams.field.levelSet = [professionLevel];
+    this.service.searchByProfessionLevel([professionLevel], this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
+      this.currentPage = teacherTeamPage;
     });
   }
 
@@ -134,7 +134,7 @@ export class TeacherTeamComponent implements OnInit {
     const min = this.searchParams.field.min;
     const max = this.searchParams.field.max;
     this.service.searchByTeacherCount(min, max, this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
-      this.teacherTeamPage = teacherTeamPage;
+      this.currentPage = teacherTeamPage;
     });
   }
 
@@ -146,7 +146,7 @@ export class TeacherTeamComponent implements OnInit {
     this.searchParams.type = "Advance";
     const searchVo = this.searchParams.field;
     this.service.advanceSearch(searchVo, this.searchParams.page, this.searchParams.size).subscribe(teacherTeamPage => {
-      this.teacherTeamPage = teacherTeamPage;
+      this.currentPage = teacherTeamPage;
       this.isValidForSearch = true;
     }, () => this.isValidForSearch = false);
   }
