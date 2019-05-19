@@ -6,6 +6,8 @@ import {UserService} from "../../service/api/user.service";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 import {SearchParams} from "../../domain/vo/SearchParams";
 import {ActivatedRoute} from "@angular/router";
+import {Profession, ProfessionText} from "../../enums/Profession";
+import {DifficultyLevel, DifficutyLevelText} from "../../enums/DifficultyLevel";
 
 @Component({
   selector: 'app-study-column',
@@ -16,7 +18,7 @@ export class StudyColumnComponent implements OnInit {
   currentUser: JwtUserResponse;
 
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
-  columnPage: Page<StudyColumn>;
+  currentPage: Page<StudyColumn>;
 
   /**增加数据表单的模型对象。*/
   newColumn = new StudyColumn();
@@ -26,6 +28,12 @@ export class StudyColumnComponent implements OnInit {
 
   /**查询参数的封装对象。*/
   searchParams = new SearchParams<string>();
+
+  /**枚举引用。*/
+  enums = {profession: Profession, difficultyLevel: DifficultyLevel};
+
+  /**枚举文本引用。*/
+  enumTexts = {profession: ProfessionText, difficultyLevel: DifficutyLevelText};
 
 
   constructor(private userService: UserService,
@@ -45,8 +53,8 @@ export class StudyColumnComponent implements OnInit {
    */
   create() {
     this.service.create(this.newColumn).subscribe(column => {
-      this.columnPage.content.push(column);
-      this.columnPage.content.slice(0, 10);
+      this.currentPage.content.push(column);
+      this.currentPage.content.slice(0, 10);
       this.isValidForCreate = true;
     }, () => this.isValidForCreate = false);
   }
@@ -57,7 +65,7 @@ export class StudyColumnComponent implements OnInit {
    */
   delete(id: number) {
     window.alert("删除成功！");
-    this.columnPage.content.filter(e => e.id !== id);
+    this.currentPage.content.filter(e => e.id !== id);
     this.service.delete(id).subscribe();
   }
 
@@ -83,18 +91,18 @@ export class StudyColumnComponent implements OnInit {
   list() {
     this.searchParams.type = "All";
     this.service.list(this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
-      this.columnPage = columnPage;
+      this.currentPage = columnPage;
     });
   }
 
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByTitle(page = 1, size = 10) {
+  searchByTitle() {
     this.searchParams.type = "ByTitle";
     const title = this.searchParams.field;
     this.service.searchByTitle(title, this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
-      this.columnPage = columnPage;
+      this.currentPage = columnPage;
     });
   }
 }

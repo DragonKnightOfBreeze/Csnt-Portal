@@ -16,7 +16,7 @@ export class DevelopmentColumnComponent implements OnInit {
   currentUser: JwtUserResponse;
 
   /** 当前数据的页面对象，注意数据数组存储在content属性中。 */
-  columnPage: Page<DevelopmentColumn>;
+  currentPage: Page<DevelopmentColumn>;
 
   /**增加数据表单的模型对象。*/
   newColumn = new DevelopmentColumn();
@@ -45,8 +45,8 @@ export class DevelopmentColumnComponent implements OnInit {
    */
   create() {
     this.service.create(this.newColumn).subscribe(column => {
-      this.columnPage.content.push(column);
-      this.columnPage.content.slice(0, 10);
+      this.currentPage.content.push(column);
+      this.currentPage.content.slice(0, 10);
       this.isValidForCreate = true;
     }, () => this.isValidForCreate = false);
   }
@@ -57,7 +57,7 @@ export class DevelopmentColumnComponent implements OnInit {
    */
   delete(id: number) {
     window.alert("删除成功！");
-    this.columnPage.content.filter(e => e.id !== id);
+    this.currentPage.content.filter(e => e.id !== id);
     this.service.delete(id).subscribe();
   }
 
@@ -83,18 +83,18 @@ export class DevelopmentColumnComponent implements OnInit {
   list() {
     this.searchParams.type = "All";
     this.service.list(this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
-      this.columnPage = columnPage;
+      this.currentPage = columnPage;
     });
   }
 
   /**
    * 根据参数查询数据，调用后会刷新当前显示的数据。
    */
-  searchByTitle(page = 1, size = 10) {
+  searchByTitle() {
     this.searchParams.type = "ByTitle";
     const title = this.searchParams.field;
     this.service.searchByTitle(title, this.searchParams.page, this.searchParams.size).subscribe(columnPage => {
-      this.columnPage = columnPage;
+      this.currentPage = columnPage;
     });
   }
 }

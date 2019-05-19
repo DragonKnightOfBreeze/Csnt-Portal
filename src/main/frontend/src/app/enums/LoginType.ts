@@ -6,6 +6,6 @@ export enum LoginType {
 
 export enum LoginTypeText {
   ByUsername = "用户名登录",
-  ByPhoneNum = "电话号码登录",
+  ByPhoneNum = "手机号码登录",
   ByEmail = "邮箱地址登录"
 }

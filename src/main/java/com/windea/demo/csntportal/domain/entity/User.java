@@ -39,7 +39,7 @@ public class User extends TBean implements UserDetails {
 	@Column(nullable = false)
 	private String password;
 
-	/** 电话号码。 */
+	/** 手机号码。 */
 	@NotEmpty(message = "validation.user.phoneNum.notEmpty")
 	@Pattern(regexp = RegexConsts.PHONE_NUM, message = "validation.user.phoneNum.pattern")
 	@Column(unique = true, nullable = false, length = 11)

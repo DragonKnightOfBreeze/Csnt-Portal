@@ -1,1 +1,40 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>专业特色介绍</h1>
+  </div>
+
+  <!--卡片组-->
+  <div class="container m-2 cp-data-list">
+    <div class="card-group mx-auto" *ngFor="let introduce of currentList">
+      <div class="card mx-auto m-1">
+        <div class="card-body">
+          <h2 class="card-title">
+            {{introduce.title}}
+          </h2>
+
+          <p class="card-subtitle">
+            <small>
+              <span class="badge badge-secondary">#{{introduce.id}}</span>
+              <span class="badge badge-secondary">作者：{{introduce.author}}</span>
+              <span class="badge badge-secondary">发布时间：{{introduce.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+              <span class="badge badge-secondary">更新时间：{{introduce.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+            </small>
+          </p>
+
+          <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{introduce.content}}</p>
+
+          <!--当为管理员时才能添加和删除-->
+          <div class="card-link text-center mx-auto">
+            <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">创建</button>
+            <a class="btn btn-info" routerLink="/introduce/{{introduce.id}}">详情</a>
+            <button class="btn btn-danger" (click)="delete(introduce.id)" *ngIf="currentUser.role=='ADMIN'">删除</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--增加数据模态框-->
+<!--TODO （可以搁置）-->

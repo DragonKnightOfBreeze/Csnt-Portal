@@ -1,1 +1,41 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>教师信息详情</h1>
+  </div>
+
+  <!--详情卡片-->
+  <div class="container m-2 cp-data-detail">
+    <div class="card mx-auto m-1">
+      <div class="card-body">
+        <h2 class="card-title">
+          {{teacherInfo.name}}
+        </h2>
+
+        <p class="card-subtitle">
+          <small>
+            <span class="text-secondary">#{{teacherInfo.id}}</span>&emsp;
+            <span class="text-secondary">{{teacherInfo.gender}}</span>&emsp;
+            <span class="text-secondary">专业：{{teacherInfo.profession}}</span>
+          </small>
+        </p>
+
+        <article class="card-text">{{teacherInfo.introduce}}</article>
+
+        <!--当为管理员时才能添加、编辑和删除-->
+        <div class="card-link text-center mx-auto">
+          <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">创建</button>
+          <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">编辑</button>
+          <button class="btn btn-info" (click)="goBack()">返回</button>
+          <button class="btn btn-danger" (click)="delete()" *ngIf="currentUser.role=='ADMIN'">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--增加数据模态框-->
+<!--TODO （可以搁置）-->
+
+<!--编辑数据模态框-->
+<!--TODO （可以搁置）-->

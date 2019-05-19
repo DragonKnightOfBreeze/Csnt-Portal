@@ -3,7 +3,8 @@ package com.windea.demo.csntportal.api;
 import com.windea.commons.base.exception.NotImplementedException;
 import com.windea.demo.csntportal.domain.entity.JwtUserResponse;
 import com.windea.demo.csntportal.domain.entity.User;
-import com.windea.demo.csntportal.domain.vo.*;
+import com.windea.demo.csntportal.domain.vo.UserLoginVo;
+import com.windea.demo.csntportal.domain.vo.UserResetPasswordVo;
 import com.windea.demo.csntportal.exception.UserNotMatchedException;
 import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.security.JwtProvider;
@@ -92,7 +93,7 @@ public class UserController {
 		var validated = !bindingResult.hasErrors();
 		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
-		//不允许重复用户名、邮箱和电话号码的新注册用户
+		//不允许重复用户名、邮箱和手机号码的新注册用户
 		var exists = service.exists(user.getUsername(), user.getEmail(), user.getPhoneNum());
 		Assert.isTrue(exists, () -> {
 			bindingResult.reject("validation.user.duplicate");

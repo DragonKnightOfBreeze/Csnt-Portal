@@ -8,5 +8,4 @@ export class TeacherTeam {
   introduce: string;
   createTime: string;
   teacherInfoList: TeacherInfo[];
-
 }

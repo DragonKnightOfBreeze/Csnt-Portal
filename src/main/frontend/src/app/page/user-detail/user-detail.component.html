@@ -1,1 +1,84 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>教师队伍详情</h1>
+  </div>
+
+  <!--详情卡片-->
+  <div class="container m-2 cp-data-detail">
+    <div class="card mx-auto m-1">
+      <div class="card-body">
+        <h2 class="card-title">
+          {{user.username}}
+        </h2>
+
+        <table class="table">
+          <tr>
+            <td>id</td>
+            <td>{{user.id}}</td>
+          </tr>
+          <tr>
+            <td>用户名</td>
+            <td>{{user.username}}</td>
+          </tr>
+          <tr>
+            <td>手机号码</td>
+            <td>{{user.phoneNum}}</td>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td>{{user.email}}</td>
+          </tr>
+          <tr>
+            <td>昵称</td>
+            <td>{{user.nickname}}</td>
+          </tr>
+          <tr>
+            <td>性别</td>
+            <td>{{user.gender}}</td>
+          </tr>
+          <tr>
+            <td>身份</td>
+            <td>{{user.role}}</td>
+          </tr>
+          <tr>
+            <td>专业</td>
+            <td>{{user.profession}}</td>
+          </tr>
+          <tr>
+            <td>注册时间</td>
+            <td>{{user.registerTime}}</td>
+          </tr>
+        </table>
+        <hr>
+        <h3>动态一览</h3>
+        <table class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <td>id</td>
+            <td>主题</td>
+            <td>分类</td>
+            <td>发起时间</td>
+          </tr>
+          </thead>
+          <tbody *ngFor="let dynamic of user.dynamicList">
+          <tr>
+            <td>{{dynamic.id}}</td>
+            <td>{{dynamic.subject}}</td>
+            <td>{{dynamic.category}}</td>
+            <td>{{dynamic.sponsorTime}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!--默认用户为管理员-->
+        <div class="card-link text-center mx-auto">
+          <button class="btn btn-info" (click)="goBack()">返回</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--编辑数据模态框-->
+<!--TODO （可以搁置）-->

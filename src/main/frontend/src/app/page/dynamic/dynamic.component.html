@@ -1,1 +1,196 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>实时动态</h1>
+  </div>
+
+  <!--搜索栏-->
+  <div class="container m-2 cp-search-bar">
+    <div class="row">
+      <div class="col-4">
+        <ul class="nav nav-tabs">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown">
+              分类<span class="caret"></span>
+            </a>
+            <!--TODO 如何更好地遍历枚举值和枚举文本？-->
+            <div class="dropdown-menu">
+              <button class="dropdown-item" (click)="searchByCategory(enums.category.Chat)">
+                {{enumTexts.category.Chat}}
+              </button>
+              <button class="dropdown-item" (click)="searchByCategory(enums.category.Discuss)">
+                {{enumTexts.category.Discuss}}
+              </button>
+              <button class="dropdown-item" (click)="searchByCategory(enums.category.Notice)">
+                {{enumTexts.category.Notice}}
+              </button>
+              <button class="dropdown-item" (click)="searchByCategory(enums.category.SeekHelp)">
+                {{enumTexts.category.SeekHelp}}
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-3">
+        <form class="form-inline" (ngSubmit)="searchBySubject()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入主题"
+                   required
+                   [(ngModel)]="searchParams.field.subject" name="subject">
+          </div>
+          <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
+        </form>
+      </div>
+
+      <div class="col-3">
+        <form class="form-inline" (ngSubmit)="searchBySponsorUsername()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入发起用户名"
+                   required
+                   [(ngModel)]="searchParams.field.sponsorUsername" name="sponsorUsername">
+          </div>
+          <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
+        </form>
+      </div>
+
+      <div class="col-2">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#advanceSearchModal">
+          <span class="fa fa-star"></span>高级搜索
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--卡片组-->
+  <div class="container m-2 cp-data-list">
+    <div class="card-group mx-auto" *ngFor="let dynamic of currentPage.content">
+      <div class="card mx-auto m-1">
+        <div class="card-body">
+          <h2 class="card-title">
+            {{dynamic.subject}}
+          </h2>
+
+          <p class="card-subtitle">
+            <small>
+              <span class="badge badge-secondary">#{{dynamic.id}}</span>
+              <span class="badge badge-secondary">分类：{{dynamic.category}}</span>
+              <span class="badge badge-secondary">发起用户：{{dynamic.sponsorUser.username}}</span>
+              <span class="badge badge-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+            </small>
+          </p>
+
+          <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{dynamic.content}}</p>
+
+          <!--当已登录时才能添加当为管理员或者发起用户时才能删除-->
+          <div class="card-link text-center mx-auto">
+            <button class="btn btn-success" data-toggle="modal" data-target="#createModal"
+                    *ngIf="currentUser">创建
+            </button>
+            <a class="btn btn-info" routerLink="/dynamic/{{dynamic.id}}">详情</a>
+            <button class="btn btn-danger" (click)="delete(dynamic.id)"
+                    *ngIf="currentUser.role=='ADMIN'||currentUser.username==dynamic.sponsorUser.username">删除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--分页-->
+  <app-pagination [type]="searchParams.type" [field]="searchParams.field" [currentPage]="currentPage"></app-pagination>
+</div>
+
+<!--高级搜索模态框-->
+<div class="modal fade in" id="advanceSearchModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header mx-auto text-center">
+        <h3 class="modal-title">高级搜索</h3>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="advanceSearch()" #advanceSearchForm="ngForm">
+          <div class="alert alert-danger" [hidden]="isValidForSearch">
+            参数有误！
+          </div>
+
+          <div class="form-group">
+            <label for="subject">主题：</label>
+            <input type="text" class="form-control bg-light" id="subject" placeholder="请输入主题"
+                   required
+                   [(ngModel)]="searchParams.field.subject" name="subject">
+          </div>
+
+          <div class="form-group">
+            <label for="sponsorUsername">发起用户：</label>
+            <input type="text" class="form-control bg-light" id="sponsorUsername" placeholder="请输入发起用户"
+                   required
+                   [(ngModel)]="searchParams.field.sponsorUsername" name="sponsorUsername">
+          </div>
+
+          <div class="form-group">
+            <label for="profession">分类：</label>
+            <select class="form-control" id="profession" multiple
+                    required
+                    [(ngModel)]="searchParams.field.categorySet" name="profession">
+              <ng-container *ngFor="let category of enums.category | keyvalue">
+                <option [value]="category.value">{{enumTexts.category[category.key]}}</option>
+              </ng-container>
+            </select>
+          </div>
+
+          <div class="form-group text-center mx-auto">
+            <button type="submit" class="btn btn-primary" [disabled]="advanceSearchForm.form.invalid">搜索</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--增加数据模态框-->
+<div class="modal fade in" id="createModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header mx-auto text-center">
+        <h3 class="modal-title">高级搜索</h3>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="create()" #advanceSearchForm="ngForm">
+          <div class="alert alert-danger" [hidden]="isValidForSearch">
+            参数有误！
+          </div>
+
+          <div class="form-group">
+            <label for="newSubject">主题：</label>
+            <input type="text" class="form-control bg-light" id="newSubject" placeholder="请输入主题"
+                   required
+                   [(ngModel)]="newDynamic.subject" name="subject">
+          </div>
+
+          <div class="form-group">
+            <label for="newCategory">分类：</label>
+            <select class="form-control" id="newCategory"
+                    required
+                    [(ngModel)]="newDynamic.category" name="category">
+              <ng-container *ngFor="let category of enums.category | keyvalue">
+                <option [value]="category.value">{{enumTexts.category[category.key]}}</option>
+              </ng-container>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="newContent">内容：</label>
+            <textarea class="form-control bg-light" id="newContent" placeholder="请输入内容" rows="5"
+                      required
+                      [(ngModel)]="newDynamic.content" name="content"></textarea>
+          </div>
+
+          <div class="form-group text-center mx-auto">
+            <button type="submit" class="btn btn-primary" [disabled]="advanceSearchForm.form.invalid">创建</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

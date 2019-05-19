@@ -3,6 +3,9 @@ import {User} from "../../domain/entity/User";
 import {UserService} from "../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
+import {Gender, GenderText} from "../../enums/Gender";
+import {Role, RoleText} from "../../enums/Role";
+import {Profession, ProfessionText} from "../../enums/Profession";
 
 @Component({
   selector: 'app-account',
@@ -15,6 +18,10 @@ export class AccountComponent implements OnInit {
 
   /**是否通过后台表单参数验证。*/
   isValidForUpdate = true;
+
+  enums = {gender: Gender, role: Role, profession: Profession};
+
+  enumTexts = {gender: GenderText, role: RoleText, profession: ProfessionText};
 
 
   constructor(private service: UserService,

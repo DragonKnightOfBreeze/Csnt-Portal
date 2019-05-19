@@ -10,6 +10,6 @@ public class RegexConsts {
 	/** 密码规则：6-16位的字母、数字和下划线。 */
 	public static final String PASSWORD = "\\w{6,16}";
 
-	/** 电话号码规则：11位数字。 */
+	/** 手机号码规则：11位数字。 */
 	public static final String PHONE_NUM = "\\d{11}";
 }

@@ -13,7 +13,7 @@ export class IntroduceComponent implements OnInit {
   currentUser: JwtUserResponse;
 
   /** 当前数据的列表对象。*/
-  introduceList: Introduce[];
+  currentList: Introduce[];
 
   /**增加数据表单的模型对象。*/
   newIntroduce = new Introduce();
@@ -38,7 +38,7 @@ export class IntroduceComponent implements OnInit {
    */
   create() {
     this.service.create(this.newIntroduce).subscribe(introduce => {
-      this.introduceList.push(introduce);
+      this.currentList.push(introduce);
       this.isValidForCreate = true;
     }, () => this.isValidForCreate = false);
   }
@@ -49,7 +49,7 @@ export class IntroduceComponent implements OnInit {
    */
   delete(id: number) {
     window.alert("删除成功！");
-    this.introduceList.filter(e => e.id !== id);
+    this.currentList.filter(e => e.id !== id);
     this.service.delete(id).subscribe();
   }
 
@@ -58,7 +58,7 @@ export class IntroduceComponent implements OnInit {
    */
   list() {
     this.service.list().subscribe(introduceList => {
-      this.introduceList = introduceList;
+      this.currentList = introduceList;
     });
   }
 }

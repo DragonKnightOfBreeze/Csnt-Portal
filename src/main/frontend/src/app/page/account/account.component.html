@@ -1,1 +1,109 @@
-<!--TODO-->
+<!--我的账户页面，我的资料-->
+<div class="container m-3 p-3 bg-light cp-content" id="form">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>我的账户</h1>
+  </div>
+
+  <!--我的账户信息页面-->
+  <div class="container m-2 cp-information">
+    <div class="row">
+      <!--侧边栏-->
+      <div class="col-3">
+        <!--我的账户页面导航-->
+        <div class="container m-2 cp-information-nav">
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="./">我的资料</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!--主要内容页面-->
+      <div class="col-9">
+        <!--我的账户页面标题-->
+        <div class="container m-2 text-center cp-information-title">
+          <h2>我的资料</h2>
+        </div>
+
+        <!--更新资料表单-->
+        <div class="container m-2 cp-update-form">
+          <form (ngSubmit)="update()" #updateForm="ngForm">
+            <div class="alert alert-danger" [hidden]="isValidForUpdate">
+              参数有误！
+            </div>
+
+            <div class="form-group">
+              <label for="username">用户名：</label>
+              <input type="text" class="form-control bg-light" id="username" readonly
+                     [(ngModel)]="user.username" name="username">
+            </div>
+
+            <div class="form-group">
+              <label for="password">密码：</label>
+              <input type="password" class="form-control bg-light" id="password" required
+                     [(ngModel)]="user.password" name="password" #password="ngModel">
+              <div class="alert alert-danger" [hidden]="password.valid || password.pristine">
+                密码不能为空！
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phoneNum">手机号码：</label>
+              <input type="phone" class="form-control bg-light" id="phoneNum"
+                     required
+                     [(ngModel)]="user.phoneNum" name="phoneNum" #phoneNum="ngModel">
+              <div class="alert alert-danger" [hidden]="phoneNum.valid || phoneNum.pristine">
+                手机号码不能为空！
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">邮箱：</label>
+              <input type="email" class="form-control bg-light" id="email"
+                     required
+                     [(ngModel)]="user.email" name="email" #email="ngModel">
+              <div class="alert alert-danger" [hidden]="email.valid || email.pristine">
+                邮箱不能为空！
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="nickname">昵称：</label>
+              <input type="text" class="form-control bg-light" id="nickname"
+                     required
+                     [(ngModel)]="user.nickname" name="nickname" #nickname="ngModel">
+              <div class="alert alert-danger" [hidden]="nickname.valid || nickname.pristine">
+                昵称不能为空！
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="gender">性别：</label>
+              <div class="form-text" id="gender">{{user.gender}}</div>
+            </div>
+
+            <div class="form-group">
+              <label for="role">身份：</label>
+              <div class="form-text" id="role">{{user.role}}</div>
+            </div>
+
+            <div class="form-group">
+              <label for="profession">专业：</label>
+              <div class="form-text" id="profession">{{user.profession}}</div>
+            </div>
+
+            <div class="form-group">
+              <label for="registerTime">注册时间：</label>
+              <div class="form-text" id="registerTime">{{user.registerTime | date:"yyyy-MM-dd hh:mm:ss"}}</div>
+            </div>
+
+            <div class="form-group text-center mx-auto">
+              <button type="submit" class="btn btn-primary" [disabled]="updateForm.form.invalid">更新资料</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

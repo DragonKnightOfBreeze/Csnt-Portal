@@ -1,1 +1,57 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>教师队伍详情</h1>
+  </div>
+
+  <!--详情卡片-->
+  <div class="container m-2 cp-data-detail">
+    <div class="card mx-auto m-1">
+      <div class="card-body">
+        <h2 class="card-title">
+          {{teacherTeam.name}}
+        </h2>
+
+        <p class="card-subtitle">
+          <small>
+            <span class="text-secondary">#{{teacherTeam.id}}</span>&emsp;
+            <span class="text-secondary">专业级别：{{teacherTeam.professionLevel}}</span>e
+            <span class="text-secondary">创建时间：{{teacherTeam.createTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+          </small>
+        </p>
+
+        <article class="card-text">{{teacherTeam.introduce}}</article>
+        <hr>
+        <h3>教师信息一览</h3>
+        <table class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <td>id</td>
+            <td>名字</td>
+            <td>性别</td>
+            <td>专业</td>
+          </tr>
+          </thead>
+          <tbody *ngFor="let teacherInfo of teacherTeam.teacherInfoList">
+          <tr>
+            <td>{{teacherInfo.id}}</td>
+            <td>{{teacherInfo.name}}</td>
+            <td>{{teacherInfo.gender}}</td>
+            <td>{{teacherInfo.profession}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!--当为管理员时才能编辑和删除-->
+        <div class="card-link text-center mx-auto">
+          <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">编辑</button>
+          <button class="btn btn-info" (click)="goBack()">返回</button>
+          <button class="btn btn-danger" (click)="delete()" *ngIf="currentUser.role=='ADMIN'">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--编辑数据模态框-->
+<!--TODO （可以搁置）-->

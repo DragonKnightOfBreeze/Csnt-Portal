@@ -7,7 +7,7 @@ import com.windea.commons.base.template.IEnumWithText;
  */
 public enum LoginType implements IEnumWithText {
 	BY_USERNAME("用户名登录"),
-	BY_PHONE_NUM("电话号码登录"),
+	BY_PHONE_NUM("手机号码登录"),
 	BY_EMAIL("邮箱地址登录");
 
 

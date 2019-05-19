@@ -1,1 +1,62 @@
-<!--TODO-->
+<div class="container m-3 p-3 cp-content">
+  <!--标题-->
+  <div class="container m-2 text-center cp-title">
+    <h1>用户</h1>
+  </div>
+
+  <!--搜索栏-->
+  <div class="container m-2 cp-search-bar">
+    <div class="row">
+      <div class="col-3 offset-7">
+        <form class="form-inline" (ngSubmit)="searchByNickname()">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入昵称"
+                   required
+                   [(ngModel)]="searchParams.field.nickname" name="nickname">
+          </div>
+          <button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!--表格-->
+  <div class="container m-2 cp-data-table">
+    <table class="table table-bordered table-hover table-responsive">
+      <thead>
+      <tr>
+        <td>id</td>
+        <td>用户名</td>
+        <td>手机号码</td>
+        <td>邮箱</td>
+        <td>昵称</td>
+        <td>性别</td>
+        <td>身份</td>
+        <td>专业</td>
+        <td>注册时间</td>
+        <td>操作</td>
+      </tr>
+      </thead>
+      <tbody *ngFor="let user of currentPage.content">
+      <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.phoneNum}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.nickname}}</td>
+        <td>{{user.gender}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.profession}}</td>
+        <td>{{user.registerTime}}</td>
+        <td><a class="btn btn-info" routerLink="/user/{{user.id}}">详情</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--分页-->
+  <app-pagination [type]="searchParams.type" [field]="searchParams.field" [currentPage]="currentPage"></app-pagination>
+</div>
+
+<!--增加数据模态框-->
+<!--TODO （可以搁置）-->

@@ -5,6 +5,8 @@ import {Location} from "@angular/common";
 import {TeacherInfoService} from "../../service/api/teacher-info.service";
 import {UserService} from "../../service/api/user.service";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {Profession, ProfessionText} from "../../enums/Profession";
+import {Gender, GenderText} from "../../enums/Gender";
 
 @Component({
   selector: 'app-teacher-info-detail',
@@ -20,6 +22,18 @@ export class TeacherInfoDetailComponent implements OnInit {
   /**是否通过后台表单参数验证。*/
   isValidForUpdate = true;
 
+  /**增加数据表单的模型对象。*/
+  newTeacherInfo = new TeacherInfo();
+
+  /**是否通过后台表单参数验证。*/
+  isValidForCreate = true;
+
+  /**枚举引用。*/
+  enums = {gender: Gender, profession: Profession};
+
+  /**枚举文本引用。*/
+  enumTexts = {gender: GenderText, profession: ProfessionText};
+
 
   constructor(private userService: UserService,
               private service: TeacherInfoService,
@@ -34,13 +48,13 @@ export class TeacherInfoDetailComponent implements OnInit {
   }
 
   /**
-   * 得到当前数据。
-   * 可能抛出：404 未找到
+   * 增加数据，传入表单模型数据。
+   * 可能抛出：400 参数错误
    */
-  get() {
-    //从路由地址中得到路由参数
-    let id = +this.route.snapshot.paramMap.get("id");
-    this.service.get(id).subscribe(teacherInfo => this.teacherInfo = teacherInfo);
+  create() {
+    this.service.create(this.newTeacherInfo).subscribe(() => {
+      this.isValidForCreate = true;
+    }, () => this.isValidForCreate = false);
   }
 
   /**
@@ -62,7 +76,17 @@ export class TeacherInfoDetailComponent implements OnInit {
     this.service.update(this.teacherInfo).subscribe(updatedTeacherInfo => {
       this.teacherInfo = updatedTeacherInfo;
       this.isValidForUpdate = true;
-    },()=>this.isValidForUpdate = false);
+    }, () => this.isValidForUpdate = false);
+  }
+
+  /**
+   * 得到当前数据。
+   * 可能抛出：404 未找到
+   */
+  get() {
+    //从路由地址中得到路由参数
+    let id = +this.route.snapshot.paramMap.get("id");
+    this.service.get(id).subscribe(teacherInfo => this.teacherInfo = teacherInfo);
   }
 
   /**
