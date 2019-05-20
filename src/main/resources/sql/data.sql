@@ -1,3 +1,4 @@
+-- Generate By windea/utils/yaml_to_sql.py. Author: DragonKnightOfBreeze.
 use CsntPortal;
 
 insert into development_column (title, content, author, publish_time, update_time)
