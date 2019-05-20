@@ -1,17 +1,17 @@
 <!--我的账户页面，我的资料-->
-<div class="container m-3 p-3 bg-light cp-content" id="form">
+<div class="container m-auto p-3 bg-light cp-content" id="form">
   <!--标题-->
-  <div class="container m-2 text-center cp-title">
+  <div class="container m-auto p-2 text-center cp-title">
     <h1>我的账户</h1>
   </div>
 
   <!--我的账户信息页面-->
-  <div class="container m-2 cp-information">
+  <div class="container m-auto p-2 cp-information">
     <div class="row">
       <!--侧边栏-->
       <div class="col-3">
         <!--我的账户页面导航-->
-        <div class="container m-2 cp-information-nav">
+        <div class="container m-auto p-2 cp-information-nav">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
               <a class="nav-link" routerLink="./">我的资料</a>
@@ -23,12 +23,12 @@
       <!--主要内容页面-->
       <div class="col-9">
         <!--我的账户页面标题-->
-        <div class="container m-2 text-center cp-information-title">
+        <div class="container m-auto p-2 text-center cp-information-title">
           <h2>我的资料</h2>
         </div>
 
         <!--更新资料表单-->
-        <div class="container m-2 cp-update-form">
+        <div class="container m-auto p-2 cp-update-form">
           <form (ngSubmit)="update()" #updateForm="ngForm">
             <div class="alert alert-danger" [hidden]="isValidForUpdate">
               参数有误！

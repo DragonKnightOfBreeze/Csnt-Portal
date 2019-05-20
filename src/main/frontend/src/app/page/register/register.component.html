@@ -1,16 +1,12 @@
-<div class="container m-3 p-3 bg-light cp-go-home">
-  <a class="logo m-5" routerLink="/home">返回首页</a>
-</div>
-
 <!--注册页面-->
-<div class="container m-3 p-3 bg-light cp-form" id="form">
+<div class="container m-auto p-3 bg-light cp-form" id="form">
   <!--标题-->
-  <div class="container m-2 text-center cp-title">
+  <div class="container m-auto p-2 text-center cp-title">
     <h1>注册表单</h1>
   </div>
 
   <!--注册表单-->
-  <div class="container m-2 cp-form">
+  <div class="container m-auto p-2 mx-5 cp-form">
     <form (ngSubmit)="register()" #registerForm="ngForm">
       <div class="form-group">
         <label for="username">用户名：</label>

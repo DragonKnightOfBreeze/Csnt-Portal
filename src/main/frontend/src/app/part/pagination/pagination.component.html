@@ -1,7 +1,7 @@
 <!--分页栏-->
-<div class="container m-2 cp-pagination">
+<div class="container m-auto p-2 cp-pagination">
   <!--Page接口中的页面数最小为0，而传参时最小为1，显示时最小也为1-->
-  <ul class="pagination mx-auto">
+  <ul class="pagination m-auto">
     <!--如果当前页是第一页，则启用上一页，并传入查询参数，否则禁用-->
     <li class="page-item"
         [class.disabled]="currentPage?.first">

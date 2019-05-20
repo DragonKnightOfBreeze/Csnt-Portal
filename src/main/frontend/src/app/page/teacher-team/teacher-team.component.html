@@ -1,11 +1,11 @@
-<div class="container m-3 p-3 cp-content">
+<div class="container m-auto p-3 cp-content">
   <!--标题-->
-  <div class="container m-2 text-center cp-title">
+  <div class="container m-auto p-2 text-center cp-title">
     <h1>教师队伍</h1>
   </div>
 
   <!--搜索栏-->
-  <div class="container m-2 cp-search-bar">
+  <div class="container m-auto p-2 cp-search-bar">
     <div class="row">
       <div class="col-4">
         <ul class="nav nav-tabs">
@@ -56,9 +56,9 @@
   </div>
 
   <!--卡片组-->
-  <div class="container m-2 cp-data-list">
-    <div class="card-group mx-auto" *ngFor="let teacherTeam of currentPage.content">
-      <div class="card mx-auto m-1">
+  <div class="container m-auto p-2 cp-data-list">
+    <div class="card-group m-auto" *ngFor="let teacherTeam of currentPage.content">
+      <div class="card m-auto p-1">
         <div class="card-body">
           <h2 class="card-title">
             {{teacherTeam.name}}
@@ -78,9 +78,9 @@
 
           <!--当为管理员时才能添加和删除-->
           <div class="card-link text-center mx-auto">
-            <button class="btn btn-success" *ngIf="currentUser.role=='ADMIN'">创建</button>
+            <button class="btn btn-success" *ngIf="currentUser?.role=='ADMIN'">创建</button>
             <a class="btn btn-info" routerLink="/teacher-team/{{teacherTeam.id}}">详情</a>
-            <button class="btn btn-danger" (click)="delete(teacherTeam.id)" *ngIf="currentUser.role=='ADMIN'">删除
+            <button class="btn btn-danger" (click)="delete(teacherTeam.id)" *ngIf="currentUser?.role=='ADMIN'">删除
             </button>
           </div>
         </div>
