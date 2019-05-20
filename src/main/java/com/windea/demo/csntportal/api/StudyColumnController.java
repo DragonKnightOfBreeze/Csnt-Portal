@@ -36,7 +36,7 @@ public class StudyColumnController {
 		var validated = !bindingResult.hasErrors();
 		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
-		var result = service.save(column);
+		var result = service.create(column);
 		return result;
 	}
 
@@ -48,7 +48,7 @@ public class StudyColumnController {
 	public void delete(
 		@PathVariable Integer id
 	) {
-		service.deleteById(id);
+		service.delete(id);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class StudyColumnController {
 	public StudyColumn get(
 		@PathVariable Integer id
 	) {
-		var result = service.findById(id);
+		var result = service.get(id);
 		return result;
 	}
 
@@ -88,7 +88,7 @@ public class StudyColumnController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAll(pageable);
+		var resultPage = service.list(pageable);
 		return resultPage;
 	}
 
@@ -102,7 +102,7 @@ public class StudyColumnController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByTitle(title, pageable);
+		var resultPage = service.searchByTitle(title, pageable);
 		return resultPage;
 	}
 }

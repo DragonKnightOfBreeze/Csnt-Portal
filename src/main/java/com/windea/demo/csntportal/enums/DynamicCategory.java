@@ -9,7 +9,11 @@ public enum DynamicCategory implements IEnumWithText {
 	CHAT("闲聊"),
 	SEEK_HELP("求助"),
 	DISCUSS("讨论"),
-	NOTICE("通知");
+	NOTICE("通知"),
+	NEWS_FOCUS("新闻聚焦"),
+	CAMPUS_NEWS("校园要闻"),
+	MEDIA_REPORTS("媒体报道"),
+	ALUMNI_MIEN("校友风采");
 
 
 	private final String text;

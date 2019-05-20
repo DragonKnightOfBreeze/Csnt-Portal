@@ -27,7 +27,7 @@ public class ServiceTests {
 		vo.setCategorySet(Set.of(DynamicCategory.CHAT));
 		vo.setSponsorUsername("abc");
 		var pageable = PageRequest.of(0, 10);
-		var rs = dynamicService.findAllByConditions(vo, pageable).getContent();
+		var rs = dynamicService.advanceSearch(vo, pageable).getContent();
 		var user = rs.get(0).getSponsorUser();
 		System.out.println(rs);
 		System.out.println(user);
@@ -36,7 +36,7 @@ public class ServiceTests {
 	@Test
 	public void test2() {
 		var pageable = PageRequest.of(0, 10);
-		var rs = userService.findAll(pageable);
+		var rs = userService.list(pageable);
 		System.out.println(rs);
 	}
 }

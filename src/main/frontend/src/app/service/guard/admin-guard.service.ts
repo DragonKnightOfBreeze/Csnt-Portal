@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from "@angular/router";
 import {UserService} from "../api/user.service";
 import {Role} from "../../enums/Role";
 
@@ -7,7 +7,7 @@ import {Role} from "../../enums/Role";
  * 管理员权限的守卫的服务。要求用户角色为ADMIN。
  */
 @Injectable({providedIn: "root"})
-export class AdminGuard implements CanActivate {
+export class AdminGuard implements CanActivate, CanActivateChild {
   constructor(private router: Router,
               private userService: UserService) {
   }
@@ -21,5 +21,9 @@ export class AdminGuard implements CanActivate {
     console.log("权限错误！");
     this.router.navigateByUrl("/error/403");
     return false;
+  }
+
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.canActivate(childRoute, state);
   }
 }

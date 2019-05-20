@@ -12,19 +12,19 @@ import java.util.Set;
  * 实时动态的服务接口。
  */
 public interface DynamicService {
-	Dynamic saveBySponsorUsername(Dynamic dynamic, String username);
+	Dynamic createBySponsorUsername(Dynamic dynamic, String username);
 
-	void deleteById(Integer id);
+	void delete(Integer id);
 
-	Dynamic findById(Integer id);
+	Dynamic get(Integer id);
 
-	Page<Dynamic> findAll(Pageable pageable);
+	Page<Dynamic> list(Pageable pageable);
 
-	Page<Dynamic> findAllBySubject(String subject, Pageable pageable);
+	Page<Dynamic> searchBySubject(String subject, Pageable pageable);
 
-	Page<Dynamic> findAllByCategory(Set<DynamicCategory> categorySet, Pageable pageable);
+	Page<Dynamic> searchBySponsorUsername(String username, Pageable pageable);
 
-	Page<Dynamic> findAllBySponsorUsername(String username, Pageable pageable);
+	Page<Dynamic> searchByCategory(Set<DynamicCategory> categorySet, Pageable pageable);
 
-	Page<Dynamic> findAllByConditions(DynamicSearchVo vo, Pageable pageable);
+	Page<Dynamic> advanceSearch(DynamicSearchVo vo, Pageable pageable);
 }

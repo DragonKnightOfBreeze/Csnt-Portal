@@ -41,7 +41,7 @@ public class TeacherTeamController {
 		var validated = !bindingResult.hasErrors();
 		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
-		var result = service.save(teacherTeam);
+		var result = service.create(teacherTeam);
 		return result;
 	}
 
@@ -53,7 +53,7 @@ public class TeacherTeamController {
 	public void delete(
 		@PathVariable Integer id
 	) {
-		service.deleteById(id);
+		service.delete(id);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class TeacherTeamController {
 	public TeacherTeam get(
 		@PathVariable Integer id
 	) {
-		var result = service.findById(id);
+		var result = service.get(id);
 		return result;
 	}
 
@@ -91,7 +91,7 @@ public class TeacherTeamController {
 	public List<TeacherInfo> getTeacherInfoList(
 		@PathVariable Integer id
 	) {
-		var result = service.getTeacherInfoListById(id);
+		var result = service.getTeacherInfoList(id);
 		return result;
 	}
 
@@ -104,7 +104,7 @@ public class TeacherTeamController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAll(pageable);
+		var resultPage = service.list(pageable);
 		return resultPage;
 	}
 
@@ -118,7 +118,7 @@ public class TeacherTeamController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByName(name, pageable);
+		var resultPage = service.searchByName(name, pageable);
 		return resultPage;
 	}
 
@@ -132,7 +132,7 @@ public class TeacherTeamController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByProfessionLevel(levelSet, pageable);
+		var resultPage = service.searchByProfessionLevel(levelSet, pageable);
 		return resultPage;
 	}
 
@@ -147,7 +147,7 @@ public class TeacherTeamController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByTeacherCount(min, max, pageable);
+		var resultPage = service.searchByTeacherCount(min, max, pageable);
 		return resultPage;
 	}
 
@@ -161,7 +161,7 @@ public class TeacherTeamController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByConditions(vo, pageable);
+		var resultPage = service.advanceSearch(vo, pageable);
 		return resultPage;
 	}
 }

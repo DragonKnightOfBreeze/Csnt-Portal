@@ -4,6 +4,7 @@ import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.enums.*;
 import com.windea.demo.csntportal.exception.NotFoundException;
+import com.windea.demo.csntportal.repository.DynamicRepository;
 import com.windea.demo.csntportal.repository.UserRepository;
 import com.windea.demo.csntportal.service.UserService;
 import org.springframework.cache.annotation.*;
@@ -23,10 +24,13 @@ import java.util.List;
 @CacheConfig(cacheNames = "userCache")
 public class UserServiceImpl implements UserService {
 	private final UserRepository repository;
+	private final DynamicRepository dynamicRepository;
 	private final PasswordEncoder passwordEncoder;
 
-	public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {
+	public UserServiceImpl(UserRepository repository,
+		DynamicRepository dynamicRepository, PasswordEncoder passwordEncoder) {
 		this.repository = repository;
+		this.dynamicRepository = dynamicRepository;
 		this.passwordEncoder = passwordEncoder;
 	}
 
@@ -34,7 +38,7 @@ public class UserServiceImpl implements UserService {
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public User save(User user) {
+	public User register(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return repository.save(user);
 	}
@@ -45,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	public User update(User user) {
 		//得到原始的用户信息，然后更改必要的属性
 		//不允许修改密码
-		var origin = findById(user.getId());
+		var origin = get(user.getId());
 		origin.setPhoneNum(user.getPhoneNum());
 		origin.setEmail(user.getEmail());
 		origin.setNickname(user.getNickname());
@@ -54,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
 	@Cacheable
 	@Override
-	public User findById(Integer id) {
+	public User get(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
@@ -62,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
 	@Cacheable
 	@Override
-	public User findByUsername(String username) {
+	public User getByUsername(String username) {
 		var result = repository.findByUsername(username);
 		Assert.notNull(result, () -> {throw new NotFoundException();});
 		return result;
@@ -70,43 +74,43 @@ public class UserServiceImpl implements UserService {
 
 	@Cacheable
 	@Override
-	public List<Dynamic> getDynamicListById(Integer id) {
-		var resultList = repository.getDynamicListById(id).getDynamicList();
+	public List<Dynamic> getDynamicList(Integer id) {
+		var resultList = dynamicRepository.findAllBySponsorUser_Id(id);
 		return resultList;
 	}
 
 	@Cacheable
 	@Override
-	public Page<User> findAll(Pageable pageable) {
+	public Page<User> list(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<User> findAllByNickname(String nickname, Pageable pageable) {
+	public Page<User> searchByNickname(String nickname, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		nickname = nickname.strip();
-		var resultPage = repository.findAllByNicknameContainingIgnoreCase(nickname, pageable);
+		var resultPage = repository.findAllByNicknameContainsIgnoreCase(nickname, pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<User> findAllByGender(Gender gender, Pageable pageable) {
+	public Page<User> searchByGender(Gender gender, Pageable pageable) {
 		var resultPage = repository.findAllByGender(gender, pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<User> findAllByRole(Role role, Pageable pageable) {
+	public Page<User> searchByRole(Role role, Pageable pageable) {
 		var resultPage = repository.findAllByRole(role, pageable);
 		return resultPage;
 	}
 
 	@Override
-	public Page<User> findAllByProfession(Profession profession, Pageable pageable) {
+	public Page<User> searchByProfession(Profession profession, Pageable pageable) {
 		var resultPage = repository.findAllByProfession(profession, pageable);
 		return resultPage;
 	}

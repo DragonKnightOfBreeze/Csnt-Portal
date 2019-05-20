@@ -24,7 +24,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public TeacherInfo saveByTeacherTeamId(TeacherInfo teacherInfo, Integer teacherTeamId) {
+	public TeacherInfo createByTeacherTeamId(TeacherInfo teacherInfo, Integer teacherTeamId) {
 		var teacherTeam = teacherTeamRepository.findById(teacherTeamId)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		teacherInfo.setTeacherTeam(teacherTeam);
@@ -34,7 +34,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public void deleteById(Integer id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
@@ -42,7 +42,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	@Transactional
 	@Override
 	public TeacherInfo update(TeacherInfo teacherInfo) {
-		var origin = findById(teacherInfo.getId());
+		var origin = get(teacherInfo.getId());
 		origin.setGender(teacherInfo.getGender());
 		origin.setIntroduce(teacherInfo.getIntroduce());
 		origin.setName(teacherInfo.getName());
@@ -52,7 +52,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	}
 
 	@Override
-	public TeacherInfo findById(Integer id) {
+	public TeacherInfo get(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;

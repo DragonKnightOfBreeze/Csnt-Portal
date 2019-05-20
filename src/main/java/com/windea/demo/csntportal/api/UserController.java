@@ -99,7 +99,7 @@ public class UserController {
 			throw new ValidationException(bindingResult);
 		});
 
-		var result = service.save(user);
+		var result = service.register(user);
 		return result;
 	}
 
@@ -136,7 +136,7 @@ public class UserController {
 		var authenticated = Objects.equals(username, principal.getName());
 		Assert.isTrue(authenticated, () -> {throw new UserNotMatchedException();});
 
-		var result = service.findByUsername(username);
+		var result = service.getByUsername(username);
 		return result;
 	}
 
@@ -148,7 +148,7 @@ public class UserController {
 	public User get(
 		@PathVariable Integer id
 	) {
-		var result = service.findById(id);
+		var result = service.get(id);
 		return result;
 	}
 
@@ -159,7 +159,7 @@ public class UserController {
 	public List<Dynamic> getDynamicList(
 		@PathVariable Integer id
 	) {
-		var result = service.getDynamicListById(id);
+		var result = service.getDynamicList(id);
 		return result;
 	}
 
@@ -173,7 +173,7 @@ public class UserController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAll(pageable);
+		var resultPage = service.list(pageable);
 		return resultPage;
 	}
 
@@ -188,7 +188,7 @@ public class UserController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByNickname(nickname, pageable);
+		var resultPage = service.searchByNickname(nickname, pageable);
 		return resultPage;
 	}
 }

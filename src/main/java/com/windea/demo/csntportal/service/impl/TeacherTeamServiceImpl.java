@@ -1,11 +1,11 @@
 package com.windea.demo.csntportal.service.impl;
 
-import com.windea.commons.springboot.utils.PageUtils;
 import com.windea.demo.csntportal.domain.entity.TeacherInfo;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
 import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
 import com.windea.demo.csntportal.exception.NotFoundException;
+import com.windea.demo.csntportal.repository.TeacherInfoRepository;
 import com.windea.demo.csntportal.repository.TeacherTeamRepository;
 import com.windea.demo.csntportal.service.TeacherTeamService;
 import org.springframework.cache.annotation.*;
@@ -22,21 +22,26 @@ import java.util.Set;
 @CacheConfig(cacheNames = "teacherTeamCache")
 public class TeacherTeamServiceImpl implements TeacherTeamService {
 	private final TeacherTeamRepository repository;
+	private final TeacherInfoRepository teacherInfoRepository;
 
-	public TeacherTeamServiceImpl(TeacherTeamRepository repository) {this.repository = repository;}
+	public TeacherTeamServiceImpl(TeacherTeamRepository repository,
+		TeacherInfoRepository teacherInfoRepository) {
+		this.repository = repository;
+		this.teacherInfoRepository = teacherInfoRepository;
+	}
 
 
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public TeacherTeam save(TeacherTeam teacherTeam) {
+	public TeacherTeam create(TeacherTeam teacherTeam) {
 		return repository.save(teacherTeam);
 	}
 
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public void deleteById(Integer id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
@@ -44,7 +49,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 	@Transactional
 	@Override
 	public TeacherTeam update(TeacherTeam teacherTeam) {
-		var origin = findById(teacherTeam.getId());
+		var origin = get(teacherTeam.getId());
 		origin.setName(teacherTeam.getName());
 		origin.setProfessionLevel(teacherTeam.getProfessionLevel());
 		origin.setIntroduce(teacherTeam.getIntroduce());
@@ -54,7 +59,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 
 	@Cacheable
 	@Override
-	public TeacherTeam findById(Integer id) {
+	public TeacherTeam get(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
@@ -62,46 +67,45 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 
 	@Cacheable
 	@Override
-	public List<TeacherInfo> getTeacherInfoListById(Integer id) {
-		var resultList = repository.getTeacherInfoListById(id).getTeacherInfoList();
+	public List<TeacherInfo> getTeacherInfoList(Integer id) {
+		var resultList = teacherInfoRepository.findAllByTeacherTeam_Id(id);
 		return resultList;
 	}
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAll(Pageable pageable) {
+	public Page<TeacherTeam> list(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAllByName(String name, Pageable pageable) {
-		var resultPage = repository.findAllByNameContainingIgnoreCase(name, pageable);
+	public Page<TeacherTeam> searchByName(String name, Pageable pageable) {
+		var resultPage = repository.findAllByNameContainsIgnoreCase(name, pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAllByProfessionLevel(Set<ProfessionLevel> levelSet, Pageable pageable) {
+	public Page<TeacherTeam> searchByProfessionLevel(Set<ProfessionLevel> levelSet, Pageable pageable) {
 		var resultPage = repository.findAllByProfessionLevelIn(levelSet, pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAllByTeacherCount(Integer min, Integer max, Pageable pageable) {
+	public Page<TeacherTeam> searchByTeacherCount(Integer min, Integer max, Pageable pageable) {
 		var resultPage = repository.findAllByTeacherCountBetween(min, max, pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> findAllByConditions(TeacherTeamSearchVo vo, Pageable pageable) {
-		var page1 = repository.findAllByNameContainingIgnoreCase(vo.getName(), pageable);
-		var page2 = repository.findAllByProfessionLevelIn(vo.getLevelSet(), pageable);
-		var page3 = repository.findAllByTeacherCountBetween(vo.getMin(), vo.getMax(), pageable);
-		var resultPage = PageUtils.concat(pageable, page1, page2, page3);
+	public Page<TeacherTeam> advanceSearch(TeacherTeamSearchVo vo, Pageable pageable) {
+		var resultPage = repository.findAllByNameContainsAndTeacherCountBetweenAndProfessionLevelIn(
+			vo.getName(), vo.getMin(), vo.getMax(), vo.getLevelSet(), pageable
+		);
 		return resultPage;
 	}
 }

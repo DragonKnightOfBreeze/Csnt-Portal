@@ -14,24 +14,24 @@ import java.util.Set;
  * 教师队伍的服务接口。
  */
 public interface TeacherTeamService {
-	TeacherTeam save(TeacherTeam teacherTeam);
+	TeacherTeam create(TeacherTeam teacherTeam);
 
-	void deleteById(Integer id);
+	void delete(Integer id);
 
 	TeacherTeam update(TeacherTeam teacherTeam);
 
-	TeacherTeam findById(Integer id);
+	TeacherTeam get(Integer id);
 
-	List<TeacherInfo> getTeacherInfoListById(Integer id);
+	List<TeacherInfo> getTeacherInfoList(Integer id);
 
-	Page<TeacherTeam> findAll(Pageable pageable);
+	Page<TeacherTeam> list(Pageable pageable);
 
-	Page<TeacherTeam> findAllByName(String name, Pageable pageable);
+	Page<TeacherTeam> searchByName(String name, Pageable pageable);
 
-	Page<TeacherTeam> findAllByProfessionLevel(Set<ProfessionLevel> levelSet, Pageable pageable);
+	Page<TeacherTeam> searchByTeacherCount(Integer min, Integer max, Pageable pageable);
 
-	Page<TeacherTeam> findAllByTeacherCount(Integer min, Integer max, Pageable pageable);
+	Page<TeacherTeam> searchByProfessionLevel(Set<ProfessionLevel> levelSet, Pageable pageable);
 
-	Page<TeacherTeam> findAllByConditions(TeacherTeamSearchVo vo, Pageable pageable);
+	Page<TeacherTeam> advanceSearch(TeacherTeamSearchVo vo, Pageable pageable);
 
 }

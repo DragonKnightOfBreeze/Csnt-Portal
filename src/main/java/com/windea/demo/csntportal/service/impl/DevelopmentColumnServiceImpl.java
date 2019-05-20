@@ -21,14 +21,14 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public DevelopmentColumn save(DevelopmentColumn column) {
+	public DevelopmentColumn create(DevelopmentColumn column) {
 		return repository.save(column);
 	}
 
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public void deleteById(Integer id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
@@ -36,7 +36,7 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 	@Transactional
 	@Override
 	public DevelopmentColumn update(DevelopmentColumn column) {
-		var origin = findById(column.getId());
+		var origin = get(column.getId());
 		origin.setTitle(column.getTitle());
 		origin.setAuthor(column.getAuthor());
 		origin.setContent(column.getContent());
@@ -45,7 +45,7 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 
 	@Cacheable
 	@Override
-	public DevelopmentColumn findById(Integer id) {
+	public DevelopmentColumn get(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
@@ -53,14 +53,14 @@ public class DevelopmentColumnServiceImpl implements DevelopmentColumnService {
 
 	@Cacheable
 	@Override
-	public Page<DevelopmentColumn> findAll(Pageable pageable) {
+	public Page<DevelopmentColumn> list(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<DevelopmentColumn> findAllByTitle(String title, Pageable pageable) {
+	public Page<DevelopmentColumn> searchByTitle(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
 		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);

@@ -7,7 +7,7 @@
       <li class="page-item"
           [class.disabled]="currentPage?.first">
         <a class="page-link"
-           [routerLink]="'./'"
+           routerLink="'./page"
            [queryParams]="{type:type,field:JSON.stringify(field), page: currentPage?.number, size: currentPage?.size}">
           上一页
         </a>
@@ -19,7 +19,7 @@
         <li class="page-item"
             [class.active]="currentPage?.number == i">
           <a class="page-link"
-             [routerLink]="'./'"
+             routerLink="'./page"
              [queryParams]="{type:type,field:JSON.stringify(field), page: i + 1, size: currentPage?.size}">
             第{{i + 1}}页
           </a>
@@ -30,7 +30,7 @@
       <li class="page-item"
           [class.disabled]="currentPage?.last">
         <a class="page-link"
-           [routerLink]="'./'"
+           routerLink="'./page"
            [queryParams]="{type:type,field:JSON.stringify(field), page: currentPage?.number + 2, size: currentPage?.size}">
           下一页
         </a>

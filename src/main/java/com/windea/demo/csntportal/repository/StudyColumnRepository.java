@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 学习专栏的持久接口。
  */
 public interface StudyColumnRepository extends JpaRepository<StudyColumn, Integer> {
-	Page<StudyColumn> findAllByTitleContainingIgnoreCase(String title, Pageable pageable);
+	Page<StudyColumn> findAllByTitleContainsIgnoreCase(String title, Pageable pageable);
 }

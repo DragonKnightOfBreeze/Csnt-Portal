@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Page} from "../../domain/interface/Page";
+import {Router} from "@angular/router";
 
 /**
  * 项目的分页组件。
@@ -21,13 +22,12 @@ export class PaginationComponent implements OnInit {
 
   JSON = JSON;
 
-  constructor() {
+  constructor(router: Router) {
   }
 
 
   ngOnInit(): void {
   }
-
 
   /**
    * 得到指定范围内的连续整数数组（左闭右开）。

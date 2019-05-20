@@ -21,14 +21,14 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public ReformColumn save(ReformColumn column) {
+	public ReformColumn create(ReformColumn column) {
 		return repository.save(column);
 	}
 
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public void deleteById(Integer id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
@@ -36,7 +36,7 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 	@Transactional
 	@Override
 	public ReformColumn update(ReformColumn column) {
-		var origin = findById(column.getId());
+		var origin = get(column.getId());
 		origin.setTitle(column.getTitle());
 		origin.setAuthor(column.getAuthor());
 		origin.setContent(column.getContent());
@@ -45,7 +45,7 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 
 	@Cacheable
 	@Override
-	public ReformColumn findById(Integer id) {
+	public ReformColumn get(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
@@ -53,16 +53,16 @@ public class ReformColumnServiceImpl implements ReformColumnService {
 
 	@Cacheable
 	@Override
-	public Page<ReformColumn> findAllByTitle(String title, Pageable pageable) {
+	public Page<ReformColumn> searchByTitle(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
-		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
+		var resultPage = repository.findAllByTitleContainsIgnoreCase(title, pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<ReformColumn> findAll(Pageable pageable) {
+	public Page<ReformColumn> list(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
 		return resultPage;
 	}

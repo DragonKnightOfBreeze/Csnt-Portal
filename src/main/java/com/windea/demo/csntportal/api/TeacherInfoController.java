@@ -34,7 +34,7 @@ public class TeacherInfoController {
 		var validated = !bindingResult.hasErrors();
 		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
-		var result = service.saveByTeacherTeamId(teacherInfo, teacherTeamId);
+		var result = service.createByTeacherTeamId(teacherInfo, teacherTeamId);
 		return result;
 	}
 
@@ -45,7 +45,7 @@ public class TeacherInfoController {
 	public void delete(
 		@PathVariable Integer id
 	) {
-		service.deleteById(id);
+		service.delete(id);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class TeacherInfoController {
 	public TeacherInfo get(
 		@PathVariable Integer id
 	) {
-		var result = service.findById(id);
+		var result = service.get(id);
 		return result;
 	}
 }

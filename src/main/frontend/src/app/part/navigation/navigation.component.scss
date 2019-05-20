@@ -13,12 +13,12 @@
   font-size: 110%;
 }
 
-#nav ul {
-  color: hsla(0, 0%, 100%, .65);
-  background-image: linear-gradient(left, #293547, #37a4b3 25%, #377ccc 50%, #298096 75%, #132236);
-  background-size: 200% 100%;
-  animation: masked-animation 2s infinite linear;
-}
+//#nav ul {
+//  color: hsla(0, 0%, 100%, .65);
+//  background-image: linear-gradient(to left, #293547, #37a4b3 25%, #377ccc 50%, #298096 75%, #132236);
+//  background-size: 200% 100%;
+//  animation: masked-animation 2s infinite linear;
+//}
 
 @keyframes masked-animation {
   0% {

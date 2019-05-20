@@ -55,7 +55,7 @@ export class AccountComponent implements OnInit {
    */
   getAccountInfo() {
     //从路由地址中得到路由参数
-    let username = this.route.snapshot.paramMap.get("username");
+    let username = this.route.snapshot.queryParamMap.get("username");
     this.service.getAccountInfo(username).subscribe(user => {
       this.user = user;
     });

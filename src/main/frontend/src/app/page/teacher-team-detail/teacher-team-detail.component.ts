@@ -42,7 +42,7 @@ export class TeacherTeamDetailComponent implements OnInit {
    */
   private get() {
     //从路由地址中得到路由参数
-    let id = +this.route.snapshot.paramMap.get("id");
+    let id = +this.route.snapshot.queryParamMap.get("id");
     this.service.get(id).subscribe(
         teacherTeam => this.teacherTeam = teacherTeam,
         undefined,

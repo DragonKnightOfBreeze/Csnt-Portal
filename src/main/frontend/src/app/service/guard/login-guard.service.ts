@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from "@angular/router";
 import {UserService} from "../api/user.service";
 
 /**
  * 已登录的守卫的服务。要求用户已登录。
  */
 @Injectable({providedIn: "root"})
-export class LoginGuard implements CanActivate {
+export class LoginGuard implements CanActivate, CanActivateChild {
   constructor(private router: Router,
               private userService: UserService) {
   }
@@ -20,5 +20,9 @@ export class LoginGuard implements CanActivate {
     console.log("未验证！先请登录。");
     this.router.navigate(["/login"], {queryParams: {returnUrl: state.url}});
     return false;
+  }
+
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    return this.canActivate(childRoute, state);
   }
 }

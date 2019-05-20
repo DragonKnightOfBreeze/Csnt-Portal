@@ -26,7 +26,7 @@ public class RepositoryTests {
 	//TESTED 分页从0开始
 	@Test
 	public void test1() {
-		var result = dynamicRepository.findAllBySponsorUsername("abc", PageRequest.of(0, 10));
+		var result = dynamicRepository.findAllBySponsorUser_Username("abc", PageRequest.of(0, 10));
 		System.out.println(prefix + result.getContent());
 	}
 
@@ -43,11 +43,5 @@ public class RepositoryTests {
 	public void test4() {
 		var result = dynamicRepository.findById(1);
 		System.out.println(prefix + result.orElse(null));
-	}
-
-	@Test
-	public void test5() {
-		var result = userRepository.getDynamicListById(1).getDynamicList();
-		System.out.println(result);
 	}
 }

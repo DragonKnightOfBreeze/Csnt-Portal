@@ -8,15 +8,15 @@ import org.springframework.data.domain.Pageable;
  * 专业发展专栏的服务接口。
  */
 public interface DevelopmentColumnService {
-	DevelopmentColumn save(DevelopmentColumn column);
+	DevelopmentColumn create(DevelopmentColumn column);
 
-	void deleteById(Integer id);
+	void delete(Integer id);
 
 	DevelopmentColumn update(DevelopmentColumn column);
 
-	DevelopmentColumn findById(Integer id);
+	DevelopmentColumn get(Integer id);
 
-	Page<DevelopmentColumn> findAll(Pageable pageable);
+	Page<DevelopmentColumn> list(Pageable pageable);
 
-	Page<DevelopmentColumn> findAllByTitle(String title, Pageable pageable);
+	Page<DevelopmentColumn> searchByTitle(String title, Pageable pageable);
 }

@@ -18,20 +18,20 @@ public class IntroduceServiceImpl implements IntroduceService {
 
 	@Transactional
 	@Override
-	public Introduce save(Introduce introduce) {
+	public Introduce create(Introduce introduce) {
 		return repository.save(introduce);
 	}
 
 	@Transactional
 	@Override
-	public void deleteById(Integer id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
 	@Transactional
 	@Override
 	public Introduce update(Introduce introduce) {
-		var origin = findById(introduce.getId());
+		var origin = get(introduce.getId());
 		origin.setTitle(introduce.getTitle());
 		origin.setAuthor(introduce.getAuthor());
 		origin.setContent(introduce.getContent());
@@ -39,14 +39,14 @@ public class IntroduceServiceImpl implements IntroduceService {
 	}
 
 	@Override
-	public Introduce findById(Integer id) {
+	public Introduce get(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
 	}
 
 	@Override
-	public List<Introduce> findAll() {
+	public List<Introduce> list() {
 		var resultList = repository.findAll();
 		return resultList;
 	}

@@ -51,6 +51,9 @@ public class TeacherTeam extends TBean {
 	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "teacherTeam")
 	private List<TeacherInfo> teacherInfoList = new ArrayList<>();
 
+	@Column(nullable = false, columnDefinition = "int default 0")
+	private Integer teacherCount;
+
 
 	public TeacherTeam() {}
 
@@ -107,5 +110,14 @@ public class TeacherTeam extends TBean {
 
 	public void setTeacherInfoList(List<TeacherInfo> teacherInfoList) {
 		this.teacherInfoList = teacherInfoList;
+	}
+
+	public Integer getTeacherCount() {
+		teacherCount = teacherInfoList.size();
+		return teacherCount;
+	}
+
+	public void setTeacherCount(Integer teacherCount) {
+		this.teacherCount = teacherInfoList.size();
 	}
 }

@@ -47,7 +47,7 @@ public class DynamicController {
 		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
 		var username = principal.getName();
-		var result = service.saveBySponsorUsername(dynamic, username);
+		var result = service.createBySponsorUsername(dynamic, username);
 		return result;
 	}
 
@@ -64,11 +64,11 @@ public class DynamicController {
 		var role = ((UserDetails) principal).getAuthorities().toArray()[0].toString();
 		if(!Objects.equals(role, "ROLE_ADMIN")) {
 			var username = principal.getName();
-			var sponsorUsername = service.findById(id).getSponsorUser().getUsername();
+			var sponsorUsername = service.get(id).getSponsorUser().getUsername();
 			var matched = Objects.equals(username, sponsorUsername);
 			Assert.isTrue(matched, () -> {throw new UserNotMatchedException();});
 		}
-		service.deleteById(id);
+		service.delete(id);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class DynamicController {
 	public Dynamic get(
 		@PathVariable Integer id
 	) {
-		var result = service.findById(id);
+		var result = service.get(id);
 		return result;
 	}
 
@@ -91,7 +91,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAll(pageable);
+		var resultPage = service.list(pageable);
 		return resultPage;
 	}
 
@@ -105,7 +105,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllBySubject(subject, pageable);
+		var resultPage = service.searchBySubject(subject, pageable);
 		return resultPage;
 	}
 
@@ -119,7 +119,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllBySponsorUsername(sponsorUsername, pageable);
+		var resultPage = service.searchBySponsorUsername(sponsorUsername, pageable);
 		return resultPage;
 	}
 
@@ -133,7 +133,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByCategory(categorySet, pageable);
+		var resultPage = service.searchByCategory(categorySet, pageable);
 		return resultPage;
 	}
 
@@ -147,7 +147,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByConditions(vo, pageable);
+		var resultPage = service.advanceSearch(vo, pageable);
 		return resultPage;
 	}
 }
