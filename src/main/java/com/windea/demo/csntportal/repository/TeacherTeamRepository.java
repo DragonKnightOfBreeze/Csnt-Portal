@@ -22,6 +22,7 @@ public interface TeacherTeamRepository extends JpaRepository<TeacherTeam, Intege
 
 	Page<TeacherTeam> findAllByProfessionLevelIn(Set<ProfessionLevel> levelSet, Pageable pageable);
 
+	@Query("from TeacherTeam tt where tt.teacherInfoList.size between :min and :max")
 	Page<TeacherTeam> findAllByTeacherCountBetween(Integer min, Integer max, Pageable pageable);
 
 	Page<TeacherTeam> findAllByCreateTimeBetween(LocalDateTime start, LocalDateTime end, Pageable pageable);

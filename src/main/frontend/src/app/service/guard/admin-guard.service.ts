@@ -15,7 +15,7 @@ export class AdminGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const currentUser = this.userService.currentUserSubject.value;
     //如果当前用户角色为ADMIN，则通过守卫，否则转到首页或403
-    if (currentUser && currentUser?.role == Role.Admin) {
+    if (currentUser && currentUser.role == Role.Admin) {
       return true;
     }
     console.log("权限错误！");

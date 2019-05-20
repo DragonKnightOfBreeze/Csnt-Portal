@@ -25,7 +25,7 @@
       <div class="col-3">
         <form class="form-inline" (ngSubmit)="searchByName()">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="请输入名字"
+            <input type="text" class="form-control w-75" placeholder="请输入名字"
                    required
                    [(ngModel)]="searchParams.field.name" name="subject">
           </div>
@@ -36,10 +36,10 @@
       <div class="col-3">
         <form class="form-inline" (ngSubmit)="searchByTeacherCount()">
           <div class="form-group">
-            <input type="text" class="form-control w-25" placeholder="最小人数"
+            <input type="number" class="form-control w-25" placeholder="最小人数"
                    required
                    [(ngModel)]="searchParams.field.min" name="min">
-            <input type="text" class="form-control w-25" placeholder="最大人数"
+            <input type="number" class="form-control w-25" placeholder="最大人数"
                    required
                    [(ngModel)]="searchParams.field.max" name="max">
             <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>

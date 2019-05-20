@@ -47,7 +47,7 @@ export const enumTexts = {
     PROFESSIONAL: "专业",
     VERY_PROFESSIONAL: "非常专业"
   },
-  RoleText: {
+  Role: {
     VISITOR: "游客",
     STUDENT: "学生",
     TEACHER: "教师",

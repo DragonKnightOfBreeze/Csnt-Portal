@@ -108,8 +108,4 @@ public class TeacherTeam extends TBean {
 	public void setTeacherInfoList(List<TeacherInfo> teacherInfoList) {
 		this.teacherInfoList = teacherInfoList;
 	}
-
-	public Integer getTeacherCount() {
-		return teacherInfoList.size();
-	}
 }

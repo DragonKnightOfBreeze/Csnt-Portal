@@ -25,7 +25,7 @@
       <div class="col-3">
         <form class="form-inline" (ngSubmit)="searchBySubject()">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="请输入主题"
+            <input type="text" class="form-control w-75" placeholder="请输入主题"
                    required
                    [(ngModel)]="searchParams.field.subject" name="subject">
           </div>
@@ -36,7 +36,7 @@
       <div class="col-3">
         <form class="form-inline" (ngSubmit)="searchBySponsorUsername()">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="请输入发起用户名"
+            <input type="text" class="form-control w-75" placeholder="请输入发起用户名"
                    required
                    [(ngModel)]="searchParams.field.sponsorUsername" name="sponsorUsername">
           </div>
