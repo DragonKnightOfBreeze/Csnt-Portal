@@ -2,7 +2,6 @@ package com.windea.demo.csntportal.service.impl;
 
 import com.windea.commons.springboot.utils.PageUtils;
 import com.windea.demo.csntportal.domain.entity.Dynamic;
-import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import com.windea.demo.csntportal.exception.NotFoundException;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.Set;
 
@@ -28,6 +26,7 @@ public class DynamicServiceImpl implements DynamicService {
 		this.repository = repository;
 		this.userRepository = userRepository;
 	}
+
 
 	@CacheEvict(allEntries = true)
 	@Transactional
@@ -50,14 +49,6 @@ public class DynamicServiceImpl implements DynamicService {
 	public Dynamic findById(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
-		return result;
-	}
-
-	@Cacheable
-	@Override
-	public User findSponsorUserById(Integer id) {
-		var result = repository.findSponsorUserById(id).getSponsorUser();
-		Assert.notNull(result, () -> {throw new NotFoundException();});
 		return result;
 	}
 

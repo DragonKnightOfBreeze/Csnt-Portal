@@ -1,6 +1,7 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.commons.springboot.utils.PageUtils;
+import com.windea.demo.csntportal.domain.entity.TeacherInfo;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
 import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -56,6 +58,13 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
+	}
+
+	@Cacheable
+	@Override
+	public List<TeacherInfo> getTeacherInfoListById(Integer id) {
+		var resultList = repository.getTeacherInfoListById(id).getTeacherInfoList();
+		return resultList;
 	}
 
 	@Cacheable

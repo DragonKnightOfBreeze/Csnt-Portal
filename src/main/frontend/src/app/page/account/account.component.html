@@ -29,7 +29,7 @@
 
         <!--更新资料表单-->
         <div class="container m-auto p-2 cp-update-form">
-          <form (ngSubmit)="update()" #updateForm="ngForm">
+          <form (ngSubmit)="updateAccountInfo()" #updateForm="ngForm">
             <div class="alert alert-danger" [hidden]="isValidForUpdate">
               参数有误！
             </div>
@@ -96,7 +96,7 @@
 
             <div class="form-group">
               <label for="registerTime">注册时间：</label>
-              <div class="form-text" id="registerTime">{{user.registerTime | date:"yyyy-MM-dd hh:mm:ss"}}</div>
+              <div class="form-text" id="registerTime">{{user.registerTime}}</div>
             </div>
 
             <div class="form-group text-center mx-auto">

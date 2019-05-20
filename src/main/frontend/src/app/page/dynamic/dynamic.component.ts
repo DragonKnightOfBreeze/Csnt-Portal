@@ -70,17 +70,6 @@ export class DynamicComponent implements OnInit {
   }
 
   /**
-   * 得到所有动态的发起用户（json数据中不包含这个属性）。
-   */
-  private getAllSponsorUser() {
-    this.currentPage.content.forEach(e => {
-      this.service.getSponsorUser(e.id).subscribe(sponsorUser => {
-        e.sponsorUser = sponsorUser;
-      });
-    });
-  }
-
-  /**
    * 根据不同的查询类型和可能的分页参数，列出数据。
    */
   private show() {
@@ -110,7 +99,6 @@ export class DynamicComponent implements OnInit {
     this.service.list(this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.currentPage = dynamicPage;
     });
-    this.getAllSponsorUser();
   }
 
   /**
@@ -122,7 +110,6 @@ export class DynamicComponent implements OnInit {
     this.service.searchBySubject(subject, this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.currentPage = dynamicPage;
     });
-    this.getAllSponsorUser();
   }
 
   /**
@@ -134,7 +121,6 @@ export class DynamicComponent implements OnInit {
     this.service.searchBySponsorUsername(sponsorUsername, this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.currentPage = dynamicPage;
     });
-    this.getAllSponsorUser();
   }
 
   /**
@@ -146,7 +132,6 @@ export class DynamicComponent implements OnInit {
     this.service.searchByCategory([category], this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.currentPage = dynamicPage;
     });
-    this.getAllSponsorUser();
   }
 
   /**
@@ -160,6 +145,5 @@ export class DynamicComponent implements OnInit {
       this.currentPage = dynamicPage;
       this.isValidForSearch = true;
     }, () => this.isValidForSearch = false);
-    this.getAllSponsorUser();
   }
 }

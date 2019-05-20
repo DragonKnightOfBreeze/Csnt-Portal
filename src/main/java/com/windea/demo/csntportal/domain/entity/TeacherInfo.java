@@ -1,6 +1,5 @@
 package com.windea.demo.csntportal.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.enums.Gender;
 import com.windea.demo.csntportal.enums.Profession;
@@ -42,8 +41,7 @@ public class TeacherInfo extends TBean {
 	private String introduce;
 
 	/** 教师队伍。 */
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private TeacherTeam teacherTeam;
 
 

@@ -21,7 +21,6 @@ import javax.validation.Valid;
 public class DevelopmentColumnController {
 	private final DevelopmentColumnService service;
 
-
 	public DevelopmentColumnController(DevelopmentColumnService service) {this.service = service;}
 
 

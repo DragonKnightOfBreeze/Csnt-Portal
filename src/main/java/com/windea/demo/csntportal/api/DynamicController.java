@@ -1,7 +1,6 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
-import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import com.windea.demo.csntportal.exception.UserNotMatchedException;
@@ -28,7 +27,6 @@ import java.util.Set;
 @RequestMapping("/dynamic")
 public class DynamicController {
 	private final DynamicService service;
-
 
 	public DynamicController(DynamicService service) {
 		this.service = service;
@@ -66,7 +64,7 @@ public class DynamicController {
 		var role = ((UserDetails) principal).getAuthorities().toArray()[0].toString();
 		if(!Objects.equals(role, "ROLE_ADMIN")) {
 			var username = principal.getName();
-			var sponsorUsername = service.findSponsorUserById(id).getUsername();
+			var sponsorUsername = service.findById(id).getSponsorUser().getUsername();
 			var matched = Objects.equals(username, sponsorUsername);
 			Assert.isTrue(matched, () -> {throw new UserNotMatchedException();});
 		}
@@ -81,17 +79,6 @@ public class DynamicController {
 		@PathVariable Integer id
 	) {
 		var result = service.findById(id);
-		return result;
-	}
-
-	/**
-	 * 得到发起用户信息。
-	 */
-	@GetMapping("/{id}/sponsor-user")
-	public User getSponsorUser(
-		@PathVariable Integer id
-	) {
-		var result = service.findSponsorUserById(id);
 		return result;
 	}
 

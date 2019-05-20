@@ -13,11 +13,12 @@
         </h2>
 
         <p class="card-subtitle">
-          <small>
-            <span class="text-secondary">#{{teacherInfo.id}}</span>&emsp;
-            <span class="text-secondary">{{teacherInfo.gender | enumText:"Gender"}}</span>&emsp;
-            <span class="text-secondary">专业：{{teacherInfo.profession | enumText:"Profession"}}</span>
-          </small>
+          <span class="text-secondary">#{{teacherInfo.id}}</span>&emsp;
+          <span class="text-secondary">{{teacherInfo.gender | enumText:"Gender"}}</span>&emsp;
+          <span class="text-secondary">专业：{{teacherInfo.profession | enumText:"Profession"}}</span>
+          <span class="text-primary">
+            所属队伍：<a routerLink="/teacher-team/{{teacherInfo.teacherTeam?.id}}">{{teacherInfo.teacherTeam?.name}}</a>
+          </span>
         </p>
 
         <article class="card-text">{{teacherInfo.introduce}}</article>

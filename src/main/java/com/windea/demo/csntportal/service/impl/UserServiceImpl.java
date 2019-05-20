@@ -1,5 +1,6 @@
 package com.windea.demo.csntportal.service.impl;
 
+import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.enums.*;
 import com.windea.demo.csntportal.exception.NotFoundException;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 /**
  * 用户的服务类。
  */
@@ -20,13 +23,13 @@ import org.springframework.util.Assert;
 @CacheConfig(cacheNames = "userCache")
 public class UserServiceImpl implements UserService {
 	private final UserRepository repository;
-
 	private final PasswordEncoder passwordEncoder;
 
 	public UserServiceImpl(UserRepository repository, PasswordEncoder passwordEncoder) {
 		this.repository = repository;
 		this.passwordEncoder = passwordEncoder;
 	}
+
 
 	@CacheEvict(allEntries = true)
 	@Transactional
@@ -63,6 +66,13 @@ public class UserServiceImpl implements UserService {
 		var result = repository.findByUsername(username);
 		Assert.notNull(result, () -> {throw new NotFoundException();});
 		return result;
+	}
+
+	@Cacheable
+	@Override
+	public List<Dynamic> getDynamicListById(Integer id) {
+		var resultList = repository.getDynamicListById(id).getDynamicList();
+		return resultList;
 	}
 
 	@Cacheable

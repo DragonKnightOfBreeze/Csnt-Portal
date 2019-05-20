@@ -1,5 +1,6 @@
 package com.windea.demo.csntportal.api;
 
+import com.windea.demo.csntportal.domain.entity.TeacherInfo;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
 import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,7 +25,6 @@ import java.util.Set;
 @RequestMapping("/teacher-team")
 public class TeacherTeamController {
 	private final TeacherTeamService service;
-
 
 	public TeacherTeamController(TeacherTeamService service) {this.service = service;}
 
@@ -80,6 +81,17 @@ public class TeacherTeamController {
 		@PathVariable Integer id
 	) {
 		var result = service.findById(id);
+		return result;
+	}
+
+	/**
+	 * 得到教师队伍的教师信息列表。
+	 */
+	@GetMapping("/{id}/teacher-info-list")
+	public List<TeacherInfo> getTeacherInfoList(
+		@PathVariable Integer id
+	) {
+		var result = service.getTeacherInfoListById(id);
 		return result;
 	}
 

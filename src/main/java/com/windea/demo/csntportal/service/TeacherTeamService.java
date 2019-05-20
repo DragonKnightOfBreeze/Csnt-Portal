@@ -1,11 +1,13 @@
 package com.windea.demo.csntportal.service;
 
+import com.windea.demo.csntportal.domain.entity.TeacherInfo;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
 import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,6 +21,8 @@ public interface TeacherTeamService {
 	TeacherTeam update(TeacherTeam teacherTeam);
 
 	TeacherTeam findById(Integer id);
+
+	List<TeacherInfo> getTeacherInfoListById(Integer id);
 
 	Page<TeacherTeam> findAll(Pageable pageable);
 

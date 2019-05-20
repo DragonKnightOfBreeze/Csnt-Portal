@@ -1,7 +1,6 @@
 package com.windea.demo.csntportal.repository;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
-import com.windea.demo.csntportal.domain.projection.DynamicPr;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,9 +14,6 @@ import java.util.Set;
  * 实时动态的持久接口。
  */
 public interface DynamicRepository extends JpaRepository<Dynamic, Integer> {
-	@Query("select d.sponsorUser as sponsorUser from Dynamic d where d.id=:id")
-	DynamicPr findSponsorUserById(Integer id);
-
 	Page<Dynamic> findAllBySubjectContainingIgnoreCase(String subject, Pageable pageable);
 
 	Page<Dynamic> findAllByCategoryIn(Set<DynamicCategory> categorySet, Pageable pageable);

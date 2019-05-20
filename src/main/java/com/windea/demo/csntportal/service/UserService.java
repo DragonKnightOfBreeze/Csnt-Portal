@@ -1,9 +1,12 @@
 package com.windea.demo.csntportal.service;
 
+import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.enums.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * 用户的服务接口。
@@ -16,6 +19,8 @@ public interface UserService {
 	User findById(Integer id);
 
 	User findByUsername(String username);
+
+	List<Dynamic> getDynamicListById(Integer id);
 
 	Page<User> findAll(Pageable pageable);
 

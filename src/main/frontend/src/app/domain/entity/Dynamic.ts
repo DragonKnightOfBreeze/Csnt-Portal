@@ -6,6 +6,6 @@ export class Dynamic {
   subject: string;
   category: DynamicCategory;
   content: string;
-  sponsorUser: User;
+  sponsorUser: User | null;
   sponsorTime: string;
 }

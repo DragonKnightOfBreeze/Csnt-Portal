@@ -13,12 +13,10 @@
         </h2>
 
         <p class="card-subtitle">
-          <small>
-            <span class="text-secondary">#{{introduce.id}}</span>&emsp;
-            <span class="text-secondary">作者：{{introduce.author}}</span>&emsp;
-            <span class="text-secondary">发布时间：{{introduce.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>&emsp;
-            <span class="text-secondary">更新时间：{{introduce.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-          </small>
+          <span class="text-secondary">#{{introduce.id}}</span>&emsp;
+          <span class="text-secondary">作者：{{introduce.author}}</span>&emsp;
+          <span class="text-secondary">发布时间：{{introduce.publishTime}}</span>&emsp;
+          <span class="text-secondary">更新时间：{{introduce.updateTime}}</span>
         </p>
 
         <article class="card-text">{{introduce.content}}</article>

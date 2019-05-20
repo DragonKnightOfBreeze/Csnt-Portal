@@ -1,5 +1,6 @@
 import {Gender} from "../../enums/Gender";
 import {Profession} from "../../enums/Profession";
+import {TeacherTeam} from "./TeacherTeam";
 
 export class TeacherInfo {
   id: number;
@@ -7,4 +8,5 @@ export class TeacherInfo {
   gender: Gender;
   profession: Profession;
   introduce: string;
+  teacherTeam: TeacherTeam | null;
 }

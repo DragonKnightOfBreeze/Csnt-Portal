@@ -1,10 +1,12 @@
 package com.windea.demo.csntportal.repository;
 
 import com.windea.demo.csntportal.domain.entity.User;
+import com.windea.demo.csntportal.domain.projection.UserPr;
 import com.windea.demo.csntportal.enums.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /*
 用法参考：http://www.ityouknow.com/springboot/2016/08/20/spring-boot-jpa.html
@@ -38,6 +40,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 用户的持久接口。
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
+	@Query("select u.dynamicList from User u where u.id=:id")
+	UserPr getDynamicListById(Integer id);
+
 	User findByUsername(String username);
 
 	Page<User> findAllByNicknameContainingIgnoreCase(String nickname, Pageable pageable);

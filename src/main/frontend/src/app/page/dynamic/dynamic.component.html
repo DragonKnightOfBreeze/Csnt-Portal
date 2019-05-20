@@ -62,12 +62,10 @@
           </h2>
 
           <p class="card-subtitle">
-            <small>
-              <span class="badge badge-secondary">#{{dynamic.id}}</span>
-              <span class="badge badge-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>
-              <span class="badge badge-secondary">发起用户：{{dynamic.sponsorUser.username}}</span>
-              <span class="badge badge-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-            </small>
+            <span class="badge badge-secondary">#{{dynamic.id}}</span>
+            <span class="badge badge-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>
+            <span class="badge badge-primary">发起用户：{{dynamic.sponsorUser?.username || "未知"}}</span>
+            <span class="badge badge-secondary">发起时间：{{dynamic.sponsorTime}}</span>
           </p>
 
           <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{dynamic.content}}</p>
@@ -79,7 +77,7 @@
             </button>
             <a class="btn btn-info" routerLink="/dynamic/{{dynamic.id}}">详情</a>
             <button class="btn btn-danger" (click)="delete(dynamic.id)"
-                    *ngIf="currentUser?.role=='ADMIN'||currentUser?.username==dynamic.sponsorUser.username">删除
+                    *ngIf="currentUser?.role=='ADMIN'||currentUser?.username==dynamic.sponsorUser?.username">删除
             </button>
           </div>
         </div>

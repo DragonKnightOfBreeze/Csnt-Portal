@@ -30,12 +30,10 @@
           </h2>
 
           <p class="card-subtitle">
-            <small>
-              <span class="badge badge-secondary">#{{column.id}}</span>
-              <span class="badge badge-secondary">作者：{{column.author}}</span>
-              <span class="badge badge-secondary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-              <span class="badge badge-secondary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-            </small>
+            <span class="badge badge-secondary">#{{column.id}}</span>
+            <span class="badge badge-secondary">作者：{{column.author}}</span>
+            <span class="badge badge-secondary">发布时间：{{column.publishTime}}</span>
+            <span class="badge badge-secondary">更新时间：{{column.updateTime}}</span>
           </p>
 
           <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{column.content}}</p>

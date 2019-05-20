@@ -13,14 +13,12 @@
         </h2>
 
         <p class="card-subtitle">
-          <small>
-            <span class="text-secondary">#{{column.id}}</span>&emsp;
-            <span class="text-secondary">作者：{{column.author}}</span>&emsp;
-            <span class="text-secondary">专业：{{column.profession | enumText:"Profession"}}</span>&emsp;
-            <span class="text-secondary">难度：{{column.difficultyLevel | enumText:"DifficultyLevel"}}</span>&emsp;
-            <span class="text-secondary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>&emsp;
-            <span class="text-secondary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-          </small>
+          <span class="text-secondary">#{{column.id}}</span>&emsp;
+          <span class="text-secondary">作者：{{column.author}}</span>&emsp;
+          <span class="text-secondary">专业：{{column.profession | enumText:"Profession"}}</span>&emsp;
+          <span class="text-secondary">难度：{{column.difficultyLevel | enumText:"DifficultyLevel"}}</span>&emsp;
+          <span class="text-secondary">发布时间：{{column.publishTime}}</span>&emsp;
+          <span class="text-secondary">更新时间：{{column.updateTime}}</span>
         </p>
 
         <article class="card-text">{{column.content}}</article>

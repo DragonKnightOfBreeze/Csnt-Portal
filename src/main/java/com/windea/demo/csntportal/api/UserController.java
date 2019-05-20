@@ -1,8 +1,7 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.commons.base.exception.NotImplementedException;
-import com.windea.demo.csntportal.domain.entity.JwtUserResponse;
-import com.windea.demo.csntportal.domain.entity.User;
+import com.windea.demo.csntportal.domain.entity.*;
 import com.windea.demo.csntportal.domain.vo.UserLoginVo;
 import com.windea.demo.csntportal.domain.vo.UserResetPasswordVo;
 import com.windea.demo.csntportal.exception.UserNotMatchedException;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,7 +35,6 @@ public class UserController {
 	private final UserService service;
 	private final JwtProvider jwtProvider;
 	private final AuthenticationManager authenticationManager;
-
 
 	public UserController(UserService service, JwtProvider jwtProvider, AuthenticationManager authenticationManager) {
 		this.service = service;
@@ -150,6 +149,17 @@ public class UserController {
 		@PathVariable Integer id
 	) {
 		var result = service.findById(id);
+		return result;
+	}
+
+	/**
+	 * 得到用户的动态列表。
+	 */
+	@GetMapping("/{id}/dynamic-list")
+	public List<Dynamic> getDynamicList(
+		@PathVariable Integer id
+	) {
+		var result = service.getDynamicListById(id);
 		return result;
 	}
 

@@ -1,6 +1,7 @@
 package com.windea.demo.csntportal;
 
 import com.windea.demo.csntportal.repository.DynamicRepository;
+import com.windea.demo.csntportal.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class RepositoryTests {
 	@Autowired private DynamicRepository dynamicRepository;
+	@Autowired private UserRepository userRepository;
 
 	private static final String prefix = "*****************";
 
@@ -28,12 +30,6 @@ public class RepositoryTests {
 		System.out.println(prefix + result.getContent());
 	}
 
-	//TESTED 除了@Entity外，继续添加@Component和@Validated也是可以的
-	@Test
-	public void test2() {
-		var result = dynamicRepository.findSponsorUserById(1);
-		System.out.println(prefix + result.getSponsorUser().getUsername());
-	}
 
 	//TESTED
 	@Test
@@ -47,5 +43,11 @@ public class RepositoryTests {
 	public void test4() {
 		var result = dynamicRepository.findById(1);
 		System.out.println(prefix + result.orElse(null));
+	}
+
+	@Test
+	public void test5() {
+		var result = userRepository.getDynamicListById(1).getDynamicList();
+		System.out.println(result);
 	}
 }

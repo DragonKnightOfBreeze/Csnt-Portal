@@ -12,22 +12,20 @@
       </h2>
 
       <p class="card-subtitle">
-        <small>
-          <span class="text-secondary">#{{dynamic.id}}</span>&emsp;
-          <span class="text-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>&emsp;
-          <span class="text-secondary">发起用户：{{dynamic.sponsorUser.username}}</span>&emsp;
-          <span class="text-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-        </small>
+        <span class="text-secondary">#{{dynamic.id}}</span>&emsp;
+        <span class="text-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>&emsp;
+        <span class="text-secondary">发起用户：{{dynamic.sponsorUser?.username || "未知"}}</span>&emsp;
+        <span class="text-secondary">发起时间：{{dynamic.sponsorTime}}</span>
       </p>
 
       <article class="card-text">{{dynamic.content}}</article>
 
       <!--当为发起用户时才能编辑，当为管理员或发起用户时才能删除-->
       <div class="card-link text-center mx-auto">
-        <button class="btn btn-danger" *ngIf="currentUser?.username==dynamic.sponsorUser.username">编辑</button>
+        <button class="btn btn-danger" *ngIf="currentUser?.username==dynamic.sponsorUser?.username">编辑</button>
         <button class="btn btn-info" (click)="goBack()">返回</button>
         <button class="btn btn-danger" (click)="delete()"
-                *ngIf="currentUser?.role=='ADMIN'||currentUser?.username==dynamic.sponsorUser.username">删除
+                *ngIf="currentUser?.role=='ADMIN'||currentUser?.username==dynamic.sponsorUser?.username">删除
         </button>
       </div>
     </div>

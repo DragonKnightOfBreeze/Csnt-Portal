@@ -7,5 +7,6 @@ export class TeacherTeam {
   professionLevel: ProfessionLevel;
   introduce: string;
   createTime: string;
+  /**NOTE 需要手动调用特定服务获取数据。*/
   teacherInfoList: TeacherInfo[];
 }

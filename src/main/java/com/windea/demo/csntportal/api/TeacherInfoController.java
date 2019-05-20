@@ -1,7 +1,6 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.demo.csntportal.domain.entity.TeacherInfo;
-import com.windea.demo.csntportal.domain.entity.TeacherTeam;
 import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.service.TeacherInfoService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 @RequestMapping("/teacher-info")
 public class TeacherInfoController {
 	private final TeacherInfoService service;
-
 
 	public TeacherInfoController(TeacherInfoService service) {this.service = service;}
 
@@ -75,17 +73,6 @@ public class TeacherInfoController {
 		@PathVariable Integer id
 	) {
 		var result = service.findById(id);
-		return result;
-	}
-
-	/**
-	 * 得到教师所属的教师队伍。
-	 */
-	@GetMapping("/{id}/teacher-team")
-	public TeacherTeam getTeacherTeam(
-		@PathVariable Integer id
-	) {
-		var result = service.findTeacherTeamById(id);
 		return result;
 	}
 }

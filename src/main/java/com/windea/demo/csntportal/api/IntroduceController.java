@@ -20,7 +20,6 @@ import java.util.List;
 public class IntroduceController {
 	private final IntroduceService service;
 
-
 	public IntroduceController(IntroduceService service) {this.service = service;}
 
 

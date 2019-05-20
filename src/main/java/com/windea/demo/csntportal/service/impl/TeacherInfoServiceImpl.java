@@ -1,7 +1,6 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.TeacherInfo;
-import com.windea.demo.csntportal.domain.entity.TeacherTeam;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.TeacherInfoRepository;
 import com.windea.demo.csntportal.repository.TeacherTeamRepository;
@@ -9,7 +8,6 @@ import com.windea.demo.csntportal.service.TeacherInfoService;
 import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 @Service
 @CacheConfig(cacheNames = "teacherInfoCache")
@@ -21,6 +19,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 		this.repository = repository;
 		this.teacherTeamRepository = teacherTeamRepository;
 	}
+
 
 	@CacheEvict(allEntries = true)
 	@Transactional
@@ -56,13 +55,6 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
 	public TeacherInfo findById(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
-		return result;
-	}
-
-	@Override
-	public TeacherTeam findTeacherTeamById(Integer id) {
-		var result = repository.findTeacherTeamById(id).getTeacherTeam();
-		Assert.notNull(result, () -> {throw new NotFoundException();});
 		return result;
 	}
 }

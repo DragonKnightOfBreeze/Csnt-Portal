@@ -21,7 +21,6 @@ import javax.validation.Valid;
 public class ReformColumnController {
 	private final ReformColumnService service;
 
-
 	public ReformColumnController(ReformColumnService service) {this.service = service;}
 
 
