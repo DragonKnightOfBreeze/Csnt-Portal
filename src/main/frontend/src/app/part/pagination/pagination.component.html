@@ -1,14 +1,14 @@
 <!--分页栏-->
-<div class="container m-auto p-2 cp-pagination">
-  <div class="row m-auto">
+<div class="container mx-auto my-2 p-2 cp-pagination">
+  <div class="row mx-auto my-1 p-1">
     <!--Page接口中的页面数最小为0，而传参时最小为1，显示时最小也为1-->
-    <ul class="pagination m-auto">
+    <ul class="pagination mx-auto">
       <!--如果当前页是第一页，则启用上一页，并传入查询参数，否则禁用-->
       <li class="page-item"
           [class.disabled]="currentPage?.first">
         <a class="page-link"
-           routerLink="./"
-           [queryParams]="{type:type,field:field ,page: currentPage?.number, size: currentPage?.size}">
+           [routerLink]="'./'"
+           [queryParams]="{type:type,field:JSON.stringify(field), page: currentPage?.number, size: currentPage?.size}">
           上一页
         </a>
       </li>
@@ -19,8 +19,8 @@
         <li class="page-item"
             [class.active]="currentPage?.number == i">
           <a class="page-link"
-             routerLink="./"
-             [queryParams]="{type:type,field:field , page: i + 1, size: currentPage?.size}">
+             [routerLink]="'./'"
+             [queryParams]="{type:type,field:JSON.stringify(field), page: i + 1, size: currentPage?.size}">
             第{{i + 1}}页
           </a>
         </li>
@@ -30,8 +30,8 @@
       <li class="page-item"
           [class.disabled]="currentPage?.last">
         <a class="page-link"
-           routerLink="./"
-           [queryParams]="{type:type,field:field, page: currentPage?.number + 2, size: currentPage?.size}">
+           [routerLink]="'./'"
+           [queryParams]="{type:type,field:JSON.stringify(field), page: currentPage?.number + 2, size: currentPage?.size}">
           下一页
         </a>
       </li>

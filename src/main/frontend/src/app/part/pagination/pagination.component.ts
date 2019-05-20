@@ -19,6 +19,7 @@ export class PaginationComponent implements OnInit {
   /** 当前页。可从中获得当前页数据、当前页数、总页数等。需要传入。 */
   @Input() currentPage: Page<any>;
 
+  JSON = JSON;
 
   constructor() {
   }
@@ -26,6 +27,7 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
   /**
    * 得到指定范围内的连续整数数组（左闭右开）。

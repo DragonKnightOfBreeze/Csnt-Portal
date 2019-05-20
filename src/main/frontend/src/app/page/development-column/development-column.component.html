@@ -1,33 +1,33 @@
-<div class="container m-auto p-3 cp-content">
+<div class="container mx-auto my-3 p-3 cp-content">
   <!--标题-->
-  <div class="container m-auto p-2 text-center cp-title">
+  <div class="container mx-auto my-2 p-2 text-center w-75 cp-title">
     <h1>专业发展专栏</h1>
   </div>
 
   <!--搜索栏-->
-  <div class="container m-auto p-2 cp-search-bar">
+  <div class="container mx-auto my-2 p-2 cp-search-bar">
     <div class="row">
       <div class="col-3 offset-7">
         <form class="form-inline" (ngSubmit)="searchByTitle()">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="请输入标题"
+          <div class="form-group w-75">
+            <input type="text" class="form-control-sm" placeholder="请输入标题"
                    required
                    [(ngModel)]="searchParams.field" name="title">
           </div>
-          <button type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
+          <button type="submit" class="btn-sm btn-primary"><span class="fa fa-search"></span></button>
         </form>
       </div>
     </div>
   </div>
 
   <!--卡片组-->
-  <div class="container m-auto p-2 cp-data-list">
-    <div class="card-group m-auto" *ngFor="let column of currentPage.content">
-      <div class="card m-auto p-1">
+  <div class="container mx-auto my-2 p-2 w-75 cp-data-list">
+    <div class="card-group mx-auto" *ngFor="let column of currentPage.content">
+      <div class="card mx-auto my-1 p-1">
         <div class="card-body">
-          <h2 class="card-title">
+          <h3 class="card-title">
             {{column.title}}
-          </h2>
+          </h3>
 
           <p class="card-subtitle">
             <span class="badge badge-secondary">#{{column.id}}</span>
