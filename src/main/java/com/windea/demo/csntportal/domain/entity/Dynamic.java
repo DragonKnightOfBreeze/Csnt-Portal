@@ -33,7 +33,7 @@ public class Dynamic extends TBean {
 
 	/** 内容。 */
 	@NotEmpty(message = "validation.dynamic.content.notEmpty")
-	@Column(nullable = false, columnDefinition = "text default '请输入内容'")
+	@Column(nullable = false, columnDefinition = "text")
 	private String content;
 
 	/** 发起的用户。 */

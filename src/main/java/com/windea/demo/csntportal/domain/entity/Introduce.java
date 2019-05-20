@@ -29,7 +29,7 @@ public class Introduce extends TBean {
 
 	/** 内容。 */
 	@NotEmpty(message = "validation.column.content.notEmpty")
-	@Column(nullable = false, columnDefinition = "text default '请输入内容'")
+	@Column(nullable = false, columnDefinition = "text")
 	private String content;
 
 	/** 作者。 */
