@@ -37,7 +37,7 @@ public class TeacherInfo extends TBean {
 	/** 介绍。 */
 	@NotEmpty(message = "validation.teacherInfo.introduce.notEmpty")
 	@Size(min = 1, max = 256, message = "validation.teacherInfo.introduce.notEmpty")
-	@Column(nullable = false, length = 256)
+	@Column(nullable = false, columnDefinition = "text")
 	private String introduce;
 
 	/** 教师队伍。 */

@@ -37,7 +37,7 @@ public class TeacherTeam extends TBean {
 	/** 介绍。 */
 	@NotEmpty(message = "validation.teacherTeam.introduce.notEmpty")
 	@Size(min = 1, max = 256, message = "validation.teacherTeam.introduce.notEmpty")
-	@Column(nullable = false, length = 256)
+	@Column(nullable = false, columnDefinition = "text")
 	private String introduce;
 
 	/** 创建时间。 */
