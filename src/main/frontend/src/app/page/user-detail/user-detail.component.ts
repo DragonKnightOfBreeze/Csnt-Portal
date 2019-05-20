@@ -30,10 +30,20 @@ export class UserDetailComponent implements OnInit {
    */
   private get() {
     //从路由地址中得到路由参数
-    let id = +this.route.snapshot.paramMap.get("id");
-    this.service.get(id).subscribe(user => this.user = user);
+    let id = +this.route.snapshot.queryParamMap.get("id");
+    this.service.get(id).subscribe(
+        user => this.user = user,
+        undefined,
+        () => this.getDynamicList(id)
+    );
   }
 
+  /**
+   * 得到动态列表。
+   */
+  private getDynamicList(id: number) {
+    this.service.getDynamicList(id).subscribe(dynamicList => this.user.dynamicList = dynamicList);
+  }
 
   /**
    * 返回到上一页。

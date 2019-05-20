@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Page} from "../../domain/interface/Page";
+import {Router} from "@angular/router";
 
 /**
  * 项目的分页组件。
@@ -19,8 +20,9 @@ export class PaginationComponent implements OnInit {
   /** 当前页。可从中获得当前页数据、当前页数、总页数等。需要传入。 */
   @Input() currentPage: Page<any>;
 
+  JSON = JSON;
 
-  constructor() {
+  constructor(router: Router) {
   }
 
 

@@ -8,15 +8,15 @@ import org.springframework.data.domain.Pageable;
  * 教学改革专栏的服务接口。
  */
 public interface ReformColumnService {
-	ReformColumn save(ReformColumn column);
+	ReformColumn create(ReformColumn column);
 
-	void deleteById(Integer id);
+	void delete(Integer id);
 
 	ReformColumn update(ReformColumn column);
 
-	ReformColumn findById(Integer id);
+	ReformColumn get(Integer id);
 
-	Page<ReformColumn> findAll(Pageable pageable);
+	Page<ReformColumn> list(Pageable pageable);
 
-	Page<ReformColumn> findAllByTitle(String title, Pageable pageable);
+	Page<ReformColumn> searchByTitle(String title, Pageable pageable);
 }

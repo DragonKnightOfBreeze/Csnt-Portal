@@ -44,7 +44,7 @@ export class StudyColumnDetailComponent implements OnInit {
    */
   get() {
     //从路由地址中得到路由参数
-    let id = +this.route.snapshot.paramMap.get("id");
+    let id = +this.route.snapshot.queryParamMap.get("id");
     this.service.get(id).subscribe(column => this.column = column);
   }
 

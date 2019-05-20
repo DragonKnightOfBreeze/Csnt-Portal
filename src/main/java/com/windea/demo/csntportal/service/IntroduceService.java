@@ -8,13 +8,13 @@ import java.util.List;
  * 专业特色介绍的服务接口。
  */
 public interface IntroduceService {
-	Introduce save(Introduce introduce);
+	Introduce create(Introduce introduce);
 
-	void deleteById(Integer id);
+	void delete(Integer id);
 
 	Introduce update(Introduce introduce);
 
-	Introduce findById(Integer id);
+	Introduce get(Integer id);
 
-	List<Introduce> findAll();
+	List<Introduce> list();
 }

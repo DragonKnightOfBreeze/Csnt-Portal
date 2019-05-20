@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Introduce} from "../../domain/entity/Introduce";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
 import {catchError} from "rxjs/operators";
+import {handleError} from "../handler/error-handler";
 
 /**
  * 专业特色介绍的服务类。
@@ -17,28 +18,28 @@ export class IntroduceService {
   create(introduce: Introduce): Observable<Introduce> {
     const url = `${apiUrl}/introduce/create`;
     return this.http.post<Introduce>(url, introduce).pipe(
-        catchError(this.handleError("create", new Introduce()))
+        catchError(handleError("create", new Introduce()))
     );
   }
 
   delete(id: number) {
     const url = `${apiUrl}/introduce/${id}`;
     return this.http.delete(url).pipe(
-        catchError(this.handleError("delete", null))
+        catchError(handleError("delete", null))
     );
   }
 
   update(introduce: Introduce): Observable<Introduce> {
     const url = `${apiUrl}/introduce/${introduce.id}`;
     return this.http.put<Introduce>(url, introduce).pipe(
-        catchError(this.handleError("update", introduce))
+        catchError(handleError("update", introduce))
     );
   }
 
   get(id: number): Observable<Introduce> {
     const url = `${apiUrl}/introduce/${id}`;
     return this.http.get<Introduce>(url).pipe(
-        catchError(this.handleError("get", null))
+        catchError(handleError("get", null))
     );
   }
 
@@ -47,21 +48,7 @@ export class IntroduceService {
   list(): Observable<Introduce[]> {
     const url = `${apiUrl}/introduce/list`;
     return this.http.get<Introduce[]>(url).pipe(
-        catchError(this.handleError("list", []))
+        catchError(handleError("list", []))
     );
-  }
-
-  /**
-   * 处理Http操作错误，让程序继续运行。
-   * @param operation 失败的操作的名字
-   * @param result 需要返回的可观察对象结果
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      //打印错误信息
-      console.log(error);
-      //通过返回一个空结果让程序得以继续运行
-      return of(result as T);
-    };
   }
 }

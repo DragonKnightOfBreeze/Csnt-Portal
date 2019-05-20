@@ -1,6 +1,7 @@
 package com.windea.demo.csntportal;
 
 import com.windea.demo.csntportal.repository.DynamicRepository;
+import com.windea.demo.csntportal.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class RepositoryTests {
 	@Autowired private DynamicRepository dynamicRepository;
+	@Autowired private UserRepository userRepository;
 
 	private static final String prefix = "*****************";
 
@@ -24,16 +26,10 @@ public class RepositoryTests {
 	//TESTED 分页从0开始
 	@Test
 	public void test1() {
-		var result = dynamicRepository.findAllBySponsorUsername("abc", PageRequest.of(0, 10));
+		var result = dynamicRepository.findAllBySponsorUser_Username("abc", PageRequest.of(0, 10));
 		System.out.println(prefix + result.getContent());
 	}
 
-	//TESTED 除了@Entity外，继续添加@Component和@Validated也是可以的
-	@Test
-	public void test2() {
-		var result = dynamicRepository.findSponsorUserById(1);
-		System.out.println(prefix + result.getSponsorUser().getUsername());
-	}
 
 	//TESTED
 	@Test

@@ -40,10 +40,21 @@ export class TeacherTeamDetailComponent implements OnInit {
    * 得到当前数据。
    * 可能抛出：404 未找到
    */
-  get() {
+  private get() {
     //从路由地址中得到路由参数
-    let id = +this.route.snapshot.paramMap.get("id");
-    this.service.get(id).subscribe(teacherTeam => this.teacherTeam = teacherTeam);
+    let id = +this.route.snapshot.queryParamMap.get("id");
+    this.service.get(id).subscribe(
+        teacherTeam => this.teacherTeam = teacherTeam,
+        undefined,
+        () => this.getTeacherInfoList(id)
+    );
+  }
+
+  /**
+   * 得到教师信息列表。
+   */
+  private getTeacherInfoList(id: number) {
+    this.service.getTeacherInfoList(id).subscribe(teacherInfoList => this.teacherTeam.teacherInfoList = teacherInfoList);
   }
 
   /**

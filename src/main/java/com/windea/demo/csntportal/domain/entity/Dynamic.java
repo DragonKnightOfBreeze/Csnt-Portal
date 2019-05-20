@@ -1,6 +1,5 @@
 package com.windea.demo.csntportal.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,12 +37,10 @@ public class Dynamic extends TBean {
 	private String content;
 
 	/** 发起的用户。 */
-	//实体类或者集合属性可能需要加上这个注解
-	@JsonIgnore
 	//表示多对一关系
 	//fetch指定是否延迟加载，cascade指定级联级别，处理持久态与瞬时态的切换问题
 	//@JoinColumn注解可省略
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private User sponsorUser;
 
 	/** 发起的时间。 */

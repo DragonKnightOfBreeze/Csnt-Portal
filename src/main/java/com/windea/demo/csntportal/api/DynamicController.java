@@ -1,7 +1,6 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
-import com.windea.demo.csntportal.domain.entity.User;
 import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
 import com.windea.demo.csntportal.exception.UserNotMatchedException;
@@ -29,7 +28,6 @@ import java.util.Set;
 public class DynamicController {
 	private final DynamicService service;
 
-
 	public DynamicController(DynamicService service) {
 		this.service = service;
 	}
@@ -49,7 +47,7 @@ public class DynamicController {
 		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
 		var username = principal.getName();
-		var result = service.saveBySponsorUsername(dynamic, username);
+		var result = service.createBySponsorUsername(dynamic, username);
 		return result;
 	}
 
@@ -66,11 +64,11 @@ public class DynamicController {
 		var role = ((UserDetails) principal).getAuthorities().toArray()[0].toString();
 		if(!Objects.equals(role, "ROLE_ADMIN")) {
 			var username = principal.getName();
-			var sponsorUsername = service.findSponsorUserById(id).getUsername();
+			var sponsorUsername = service.get(id).getSponsorUser().getUsername();
 			var matched = Objects.equals(username, sponsorUsername);
 			Assert.isTrue(matched, () -> {throw new UserNotMatchedException();});
 		}
-		service.deleteById(id);
+		service.delete(id);
 	}
 
 	/**
@@ -80,18 +78,7 @@ public class DynamicController {
 	public Dynamic get(
 		@PathVariable Integer id
 	) {
-		var result = service.findById(id);
-		return result;
-	}
-
-	/**
-	 * 得到发起用户信息。
-	 */
-	@GetMapping("/{id}/sponsor-user")
-	public User getSponsorUser(
-		@PathVariable Integer id
-	) {
-		var result = service.findSponsorUserById(id);
+		var result = service.get(id);
 		return result;
 	}
 
@@ -104,7 +91,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAll(pageable);
+		var resultPage = service.list(pageable);
 		return resultPage;
 	}
 
@@ -118,7 +105,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllBySubject(subject, pageable);
+		var resultPage = service.searchBySubject(subject, pageable);
 		return resultPage;
 	}
 
@@ -132,7 +119,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllBySponsorUsername(sponsorUsername, pageable);
+		var resultPage = service.searchBySponsorUsername(sponsorUsername, pageable);
 		return resultPage;
 	}
 
@@ -146,7 +133,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByCategory(categorySet, pageable);
+		var resultPage = service.searchByCategory(categorySet, pageable);
 		return resultPage;
 	}
 
@@ -160,7 +147,7 @@ public class DynamicController {
 		@RequestParam(defaultValue = "10") Integer size
 	) {
 		var pageable = PageRequest.of(page - 1, size);
-		var resultPage = service.findAllByConditions(vo, pageable);
+		var resultPage = service.advanceSearch(vo, pageable);
 		return resultPage;
 	}
 }

@@ -1,7 +1,7 @@
 import {Injectable, OnInit} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../domain/entity/User";
-import {BehaviorSubject, Observable, of} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
 import {catchError, tap} from "rxjs/operators";
 import {CookieService} from 'ngx-cookie-service';
@@ -9,6 +9,8 @@ import {Page} from "../../domain/interface/Page";
 import {UserLoginVo} from "../../domain/vo/UserLoginVo";
 import {UserResetPasswordVo} from "../../domain/vo/UserResetPasswordVo";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {handleError} from "../handler/error-handler";
+import {Dynamic} from "../../domain/entity/Dynamic";
 
 /**
  * 用户的服务类。
@@ -60,7 +62,7 @@ export class UserService implements OnInit {
             this.currentUserSubject.next(currentUser);
           }
         }),
-        catchError(this.handleError("login", null))
+        catchError(handleError("login", null))
     );
   }
 
@@ -77,7 +79,7 @@ export class UserService implements OnInit {
     const url = `${apiUrl}/reset-password`;
     return this.http.put(url, vo).pipe(
         tap(_ => console.log("重置密码成功！")),
-        catchError(this.handleError("resetPassword", null))
+        catchError(handleError("resetPassword", null))
     );
   }
 
@@ -85,28 +87,35 @@ export class UserService implements OnInit {
     const url = `${apiUrl}/register`;
     return this.http.put<User>(url, user).pipe(
         tap(_ => console.log("注册成功！")),
-        catchError(this.handleError("register", null))
+        catchError(handleError("register", null))
     );
   }
 
   updateAccountInfo(user: User): Observable<User> {
     const url = `${apiUrl}/account${user.username}`;
     return this.http.put<User>(url, user).pipe(
-        catchError(this.handleError("updateAccountInfo", user))
+        catchError(handleError("updateAccountInfo", user))
     );
   }
 
   getAccountInfo(username: string): Observable<User> {
     const url = `${apiUrl}/account/${username}`;
     return this.http.get<User>(url).pipe(
-        catchError(this.handleError("getAccountInfo", null))
+        catchError(handleError("getAccountInfo", null))
     );
   }
 
   get(id: number): Observable<User> {
     const url = `${apiUrl}/user/${id}`;
     return this.http.get<User>(url).pipe(
-        catchError(this.handleError("get", null))
+        catchError(handleError("get", null))
+    );
+  }
+
+  getDynamicList(id: number): Observable<Dynamic[]> {
+    const url = `${apiUrl}/user/${id}/dynamic-list`;
+    return this.http.get<Dynamic[]>(url).pipe(
+        catchError(handleError("getDynamicList", []))
     );
   }
 
@@ -114,7 +123,7 @@ export class UserService implements OnInit {
     const url = `${apiUrl}/user/list`;
     const params = {page: page + "", size: size + ""};
     return this.http.get<Page<User>>(url, {params: params}).pipe(
-        catchError(this.handleError("list", null))
+        catchError(handleError("list", null))
     );
   }
 
@@ -122,22 +131,7 @@ export class UserService implements OnInit {
     const url = `${apiUrl}/user/search`;
     const params = {nickname: nickname, page: page + "", size: size + ""};
     return this.http.get<Page<User>>(url, {params: params}).pipe(
-        catchError(this.handleError("searchByNickname", null))
+        catchError(handleError("searchByNickname", null))
     );
-  }
-
-
-  /**
-   * 处理Http操作错误，让程序继续运行。
-   * @param operation 失败的操作的名字
-   * @param result 需要返回的可观察对象结果
-   */
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      //打印错误信息
-      console.log(error);
-      //通过返回一个空结果让程序得以继续运行
-      return of(result as T);
-    };
   }
 }

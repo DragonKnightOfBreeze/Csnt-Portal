@@ -28,9 +28,7 @@ import {Error404Component} from "./error-page/error404/error404.component";
 import {Error501Component} from "./error-page/error501/error501.component";
 
 //项目的路由数组
-//NOTE 因为后台已经使用了Spring Security，前端是否仍有必要严格限定canActive？
-//NOTE 增加、删除、查找操作默认合并在XxxComponent里面
-//NOTE 修改操作未确定是否要在XxxDetailComponent里面
+//NOTE 当路由地址并未发生改变时，angular并不会刷新页面
 const routes: Routes = [
   {path: "", redirectTo: "home", pathMatch: "full"},
   {path: "home", component: HomeComponent},
@@ -38,6 +36,9 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "login", component: LoginComponent},
   {path: "logout", component: LogoutComponent},
+
+  {path: ":item/list", redirectTo: ":item"},
+  {path: ":item/page", redirectTo: ":item"},
 
   {path: "account/:username", component: AccountComponent, canActivate: [LoginGuard]},
   {path: "development-column", component: DevelopmentColumnComponent},
@@ -60,7 +61,9 @@ const routes: Routes = [
   {path: "error/403", component: Error403Component},
   {path: "error/404", component: Error404Component},
   {path: "error/500", component: Error500Component},
-  {path: "error/501", component: Error501Component}
+  {path: "error/501", component: Error501Component},
+  //当前面的路由都不匹配时，跳转到404
+  {path: "**", component: Error404Component}
 ];
 
 /**

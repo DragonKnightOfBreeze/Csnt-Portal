@@ -4,5 +4,6 @@ export enum Profession {
   Se = "SE",
   Iot = "IOT",
   Imnis = "IMNIS",
-  Dmt = "DMT"
+  Dmt = "DMT",
+  Et = "ET"
 }

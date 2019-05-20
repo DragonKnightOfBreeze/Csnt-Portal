@@ -11,9 +11,6 @@ public class ValidationException extends BaseException {
 
 	protected BindingResult bindingResult;
 
-	public BindingResult getBindingResult() {
-		return bindingResult;
-	}
 
 	public ValidationException() {
 		super(ResultState.VALIDATION_ERROR.text());
@@ -26,5 +23,10 @@ public class ValidationException extends BaseException {
 	public ValidationException(BindingResult bindingResult) {
 		super(ResultState.VALIDATION_ERROR.text());
 		this.bindingResult = bindingResult;
+	}
+
+
+	public BindingResult getBindingResult() {
+		return bindingResult;
 	}
 }

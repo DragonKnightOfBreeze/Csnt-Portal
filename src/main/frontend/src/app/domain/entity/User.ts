@@ -14,5 +14,6 @@ export class User {
   role: Role;
   profession: Profession;
   registerTime: string;
+  /**NOTE 需要手动调用特定服务获取数据。*/
   dynamicList: Dynamic[];
 }

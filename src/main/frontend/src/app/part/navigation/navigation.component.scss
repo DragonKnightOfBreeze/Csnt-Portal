@@ -9,18 +9,16 @@
   top: 60px;
 }
 
-#nav li:hover {
+.nav-item:hover {
   font-size: 110%;
 }
 
-#nav ul {
-  color: hsla(0, 0%, 100%, .65);
-  background-image: -webkit-linear-gradient(left, #293547, #37a4b3 25%, #377ccc 50%, #298096 75%, #132236);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  -webkit-background-size: 200% 100%;
-  -webkit-animation: masked-animation 2s infinite linear;
-}
+//#nav ul {
+//  color: hsla(0, 0%, 100%, .65);
+//  background-image: linear-gradient(to left, #293547, #37a4b3 25%, #377ccc 50%, #298096 75%, #132236);
+//  background-size: 200% 100%;
+//  animation: masked-animation 2s infinite linear;
+//}
 
 @keyframes masked-animation {
   0% {
@@ -46,21 +44,4 @@
   position: absolute;
   top: 90px;
   left: 180px;
-}
-
-#nav-login {
-  position: absolute;
-  top: 105px;
-  right: 170px;
-}
-
-body:before {
-  content: "";
-  position: fixed;
-  top: -10px;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .8);
-  z-index: 100;
 }

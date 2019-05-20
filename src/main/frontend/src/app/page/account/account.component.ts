@@ -34,19 +34,7 @@ export class AccountComponent implements OnInit {
   //也可以在前端全局错误拦截器ErrorInterceptor中处理错误。
 
   ngOnInit() {
-    this.get();
-  }
-
-  /**
-   * 得到当前数据。
-   * 可能抛出：404 未找到
-   */
-  get() {
-    //从路由地址中得到路由参数
-    let username = this.route.snapshot.paramMap.get("username");
-    this.service.getAccountInfo(username).subscribe(user => {
-      this.user = user;
-    });
+    this.getAccountInfo();
   }
 
   /**
@@ -54,11 +42,30 @@ export class AccountComponent implements OnInit {
    * 只有管理员可以调用。
    * 可能抛出：400 参数错误，403 用户不匹配
    */
-  update() {
+  updateAccountInfo() {
     this.service.updateAccountInfo(this.user).subscribe(updatedUser => {
       this.user = updatedUser;
       this.isValidForUpdate = true;
     }, () => this.isValidForUpdate = false);
+  }
+
+  /**
+   * 得到当前数据。
+   * 可能抛出：404 未找到
+   */
+  getAccountInfo() {
+    //从路由地址中得到路由参数
+    let username = this.route.snapshot.queryParamMap.get("username");
+    this.service.getAccountInfo(username).subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  /**
+   * 得到动态列表。
+   */
+  getDynamicList(id: number) {
+    return this.service.getDynamicList(id);
   }
 
   /**

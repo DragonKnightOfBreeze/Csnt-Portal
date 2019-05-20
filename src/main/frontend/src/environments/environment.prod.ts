@@ -22,7 +22,11 @@ export const enumTexts = {
     CHAT: "闲聊",
     SEEK_HELP: "求助",
     DISCUSS: "讨论",
-    NOTICE: "通知"
+    NOTICE: "通知",
+    NEWS_FOCUS: "新闻聚焦",
+    CAMPUS_NEWS: "校园要闻",
+    MEDIA_REPORTS: "媒体报道",
+    ALUMNI_MIEN: "校友风采"
   },
   Gender: {
     MALE: "男性",
@@ -40,14 +44,15 @@ export const enumTexts = {
     SE: "软件工程",
     IOT: "物联网工程",
     IMNIS: "信息管理与信息系统",
-    DMT: "数字媒体技术"
+    DMT: "数字媒体技术",
+    ET: "教育技术"
   },
   ProfessionLevel: {
     NORMAL: "普通",
     PROFESSIONAL: "专业",
     VERY_PROFESSIONAL: "非常专业"
   },
-  RoleText: {
+  Role: {
     VISITOR: "游客",
     STUDENT: "学生",
     TEACHER: "教师",

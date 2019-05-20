@@ -20,7 +20,6 @@ import java.util.List;
 public class IntroduceController {
 	private final IntroduceService service;
 
-
 	public IntroduceController(IntroduceService service) {this.service = service;}
 
 
@@ -36,7 +35,7 @@ public class IntroduceController {
 		var validated = !bindingResult.hasErrors();
 		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
 
-		var result = service.save(introduce);
+		var result = service.create(introduce);
 		return result;
 	}
 
@@ -48,7 +47,7 @@ public class IntroduceController {
 	public void delete(
 		@PathVariable Integer id
 	) {
-		service.deleteById(id);
+		service.delete(id);
 	}
 
 	/**
@@ -75,7 +74,7 @@ public class IntroduceController {
 	public Introduce get(
 		@PathVariable Integer id
 	) {
-		var result = service.findById(id);
+		var result = service.get(id);
 		return result;
 	}
 
@@ -84,7 +83,7 @@ public class IntroduceController {
 	 */
 	@GetMapping("/list")
 	public List<Introduce> list() {
-		var resultList = service.findAll();
+		var resultList = service.list();
 		return resultList;
 	}
 }

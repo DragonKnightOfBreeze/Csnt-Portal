@@ -21,14 +21,14 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public StudyColumn save(StudyColumn column) {
+	public StudyColumn create(StudyColumn column) {
 		return repository.save(column);
 	}
 
 	@CacheEvict(allEntries = true)
 	@Transactional
 	@Override
-	public void deleteById(Integer id) {
+	public void delete(Integer id) {
 		repository.deleteById(id);
 	}
 
@@ -36,7 +36,7 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 	@Transactional
 	@Override
 	public StudyColumn update(StudyColumn column) {
-		var origin = findById(column.getId());
+		var origin = get(column.getId());
 		origin.setTitle(column.getTitle());
 		origin.setAuthor(column.getAuthor());
 		origin.setContent(column.getContent());
@@ -45,7 +45,7 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 
 	@Cacheable
 	@Override
-	public StudyColumn findById(Integer id) {
+	public StudyColumn get(Integer id) {
 		var result = repository.findById(id)
 			.orElseThrow(() -> {throw new NotFoundException();});
 		return result;
@@ -53,16 +53,16 @@ public class StudyColumnServiceImpl implements StudyColumnService {
 
 	@Cacheable
 	@Override
-	public Page<StudyColumn> findAllByTitle(String title, Pageable pageable) {
+	public Page<StudyColumn> searchByTitle(String title, Pageable pageable) {
 		//如果搜索域为空，则查询所有数据
 		title = title.strip();
-		var resultPage = repository.findAllByTitleContainingIgnoreCase(title, pageable);
+		var resultPage = repository.findAllByTitleContainsIgnoreCase(title, pageable);
 		return resultPage;
 	}
 
 	@Cacheable
 	@Override
-	public Page<StudyColumn> findAll(Pageable pageable) {
+	public Page<StudyColumn> list(Pageable pageable) {
 		var resultPage = repository.findAll(pageable);
 		return resultPage;
 	}

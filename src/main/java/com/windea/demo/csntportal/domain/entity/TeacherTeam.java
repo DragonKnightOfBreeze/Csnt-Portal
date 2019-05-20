@@ -1,5 +1,6 @@
 package com.windea.demo.csntportal.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.enums.ProfessionLevel;
 import org.hibernate.annotations.CreationTimestamp;
@@ -44,10 +45,14 @@ public class TeacherTeam extends TBean {
 	private LocalDateTime createTime;
 
 	/** 教师信息的集合。 */
+	@JsonIgnore
 	//NOTE fetchType默认LAZY，谁显示声明谁SB
 	//NOTE 这里的级联级别不能是ALL，当删除教师队伍时，教师信息不删除
-	@OneToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER, mappedBy = "teacherTeam")
+	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "teacherTeam")
 	private List<TeacherInfo> teacherInfoList = new ArrayList<>();
+
+	@Column(nullable = false, columnDefinition = "int default 0")
+	private Integer teacherCount;
 
 
 	public TeacherTeam() {}
@@ -108,6 +113,11 @@ public class TeacherTeam extends TBean {
 	}
 
 	public Integer getTeacherCount() {
-		return teacherInfoList.size();
+		teacherCount = teacherInfoList.size();
+		return teacherCount;
+	}
+
+	public void setTeacherCount(Integer teacherCount) {
+		this.teacherCount = teacherInfoList.size();
 	}
 }

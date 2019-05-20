@@ -1,3 +1,14 @@
 /* 添加bootstrap和font-awesome到全局样式表 */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.min.css";
+
+body:before {
+  content: "";
+  position: fixed;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .8);
+  z-index: 100;
+}
