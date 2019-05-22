@@ -221,7 +221,7 @@
 - [ ] 传递后台参数验证数据到前端（bindingResult），并能正确显示出错信息
 - [ ] 对于组件：添加background-bar组件，更改navigation为header，包含navigation和background-bar
 - [ ] 规范自定义css class和id的命名，以及补充和整理
-- [ ] 考虑整理组件对应的目录。暂定的格式：`/src/component/body/dynamic/dynamic-search.component.ts`
+- [ ] 考虑整理组件对应的目录。暂定的格式：`/src/component/body/...`（根据页面结构），`/src/page/dynamic/...`（根据路由结构）
 - [ ] 考虑拆分搜索功能为单独的组件
 - [ ] 考虑拆分各种模态框为单独的组件
 - [ ] 考虑更好的处理枚举值和枚举值对应文本的方式。对于前端和后台

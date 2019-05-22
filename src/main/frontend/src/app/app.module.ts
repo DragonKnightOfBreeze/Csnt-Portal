@@ -10,34 +10,37 @@ import {JwtInterceptor} from "./service/interceptor/jwt-interceptor.service";
 import {ErrorInterceptor} from "./service/interceptor/error-interceptor.service";
 import {LoginComponent} from "./page/login/login.component";
 import {LogoutComponent} from "./page/logout/logout.component";
-import {NavigationComponent} from "./part/navigation/navigation.component";
-import {PaginationComponent} from "./part/pagination/pagination.component";
-import {DevelopmentColumnDetailComponent} from "./page/development-column-detail/development-column-detail.component";
 import {RegisterComponent} from "./page/register/register.component";
 import {DynamicComponent} from "./page/dynamic/dynamic.component";
 import {IntroduceComponent} from "./page/introduce/introduce.component";
 import {AccountComponent} from "./page/account/account.component";
 import {DevelopmentColumnComponent} from "./page/development-column/development-column.component";
-import {UserDetailComponent} from "./page/user-detail/user-detail.component";
 import {StudyColumnComponent} from "./page/study-column/study-column.component";
 import {ReformColumnComponent} from "./page/reform-column/reform-column.component";
 import {UserComponent} from "./page/user/user.component";
 import {TeacherTeamComponent} from "./page/teacher-team/teacher-team.component";
-import {DynamicDetailComponent} from "./page/dynamic-detail/dynamic-detail.component";
-import {IntroduceDetailComponent} from "./page/introduce-detail/introduce-detail.component";
-import {ReformColumnDetailComponent} from "./page/reform-column-detail/reform-column-detail.component";
-import {StudyColumnDetailComponent} from "./page/study-column-detail/study-column-detail.component";
-import {TeacherTeamDetailComponent} from "./page/teacher-team-detail/teacher-team-detail.component";
-import {TeacherInfoDetailComponent} from "./page/teacher-info-detail/teacher-info-detail.component";
 import {HomeComponent} from './page/home/home.component';
-import {FooterComponent} from './part/footer/footer.component';
-import {Error403Component} from './error-page/error403/error403.component';
-import {Error404Component} from './error-page/error404/error404.component';
-import {Error500Component} from './error-page/error500/error500.component';
-import {Error501Component} from './error-page/error501/error501.component';
-import {ErrorComponent} from "./error-page/error/error.component";
+import {Error403Component} from './page/error/error403/error403.component';
+import {Error404Component} from './page/error/error404/error404.component';
+import {Error500Component} from './page/error/error500/error500.component';
+import {Error501Component} from './page/error/error501/error501.component';
+import {ErrorComponent} from "./page/error/error.component";
 import {EnumTextPipe} from './pipe/enum-text.pipe';
 import {EnumConstsPipe} from "./pipe/enum-consts.pipe";
+import {BodyComponent} from './component/body/body.component';
+import {HeaderComponent} from './component/header/header.component';
+import {DynamicsComponent} from './page/account/dynamics/dynamics.component';
+import {IntroduceDetailComponent} from "./page/introduce/introduce-detail/introduce-detail.component";
+import {DevelopmentColumnDetailComponent} from "./page/development-column/development-column-detail/development-column-detail.component";
+import {DynamicDetailComponent} from "./page/dynamic/dynamic-detail/dynamic-detail.component";
+import {PaginationComponent} from "./component/body/pagination/pagination.component";
+import {ReformColumnDetailComponent} from "./page/reform-column/reform-column-detail/reform-column-detail.component";
+import {StudyColumnDetailComponent} from "./page/study-column/study-column-detail/study-column-detail.component";
+import {UserDetailComponent} from "./page/user/user-detail/user-detail.component";
+import {TeacherInfoDetailComponent} from "./page/teacher-info/teacher-info-detail/teacher-info-detail.component";
+import {FooterComponent} from "./component/footer/footer.component";
+import {TeacherTeamDetailComponent} from "./page/teacher-team/teacher-team-detail/teacher-team-detail.component";
+import {NavigationComponent} from "./component/header/navigation/navigation.component";
 
 /**
  * 项目的主模块。
@@ -52,13 +55,18 @@ import {EnumConstsPipe} from "./pipe/enum-consts.pipe";
   declarations: [
     AppComponent,
 
+    HeaderComponent,
+    NavigationComponent,
+    BodyComponent,
+    PaginationComponent,
+    FooterComponent,
+
+    HomeComponent,
+    RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    NavigationComponent,
-    PaginationComponent,
-    RegisterComponent,
-
     AccountComponent,
+    DynamicsComponent,
     DevelopmentColumnComponent,
     DevelopmentColumnDetailComponent,
     DynamicComponent,
@@ -74,16 +82,14 @@ import {EnumConstsPipe} from "./pipe/enum-consts.pipe";
     TeacherInfoDetailComponent,
     UserComponent,
     UserDetailComponent,
-    HomeComponent,
-    FooterComponent,
-
     ErrorComponent,
     Error403Component,
     Error404Component,
     Error500Component,
     Error501Component,
+
     EnumConstsPipe,
-    EnumTextPipe,
+    EnumTextPipe
   ],
   providers: [
     //带有@Injectable({provideIn:"root"})的服务，不需要在这里声明
