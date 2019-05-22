@@ -1,11 +1,11 @@
 package com.windea.demo.csntportal.enums;
 
-import com.windea.commons.base.template.IEnumWithText;
+import com.windea.java.template.ITextEnum;
 
 /**
  * 结果状态的枚举。
  */
-public enum ResultState implements IEnumWithText {
+public enum ResultState implements ITextEnum {
 	OK("信息：正常。"),
 	FATAL_ERROR("错误：致命错误！"),
 	NO_CONTENT("错误：查询结果为空！"),

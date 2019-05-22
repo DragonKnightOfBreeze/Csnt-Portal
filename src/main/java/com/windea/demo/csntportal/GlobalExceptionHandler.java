@@ -1,7 +1,7 @@
 package com.windea.demo.csntportal;
 
-import com.windea.commons.base.exception.NotImplementedException;
 import com.windea.demo.csntportal.exception.*;
+import com.windea.java.exception.NotImplementedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

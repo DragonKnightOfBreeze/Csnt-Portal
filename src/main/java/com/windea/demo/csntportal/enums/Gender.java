@@ -1,11 +1,11 @@
 package com.windea.demo.csntportal.enums;
 
-import com.windea.commons.base.template.IEnumWithText;
+import com.windea.java.template.ITextEnum;
 
 /**
  * 用户性别的枚举。
  */
-public enum Gender implements IEnumWithText {
+public enum Gender implements ITextEnum {
 	MALE("男性"),
 	FEMALE("女性"),
 	ALIEN("外星人");

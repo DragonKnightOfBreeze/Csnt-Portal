@@ -1,7 +1,7 @@
 package com.windea.demo.csntportal;
 
-import com.windea.commons.base.template.TBean;
-import com.windea.commons.base.utils.ReflectionUtils;
+import com.windea.java.template.TBean;
+import com.windea.java.utils.ReflectionUtils;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.api;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
 import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
 import com.windea.demo.csntportal.enums.DynamicCategory;
@@ -45,7 +45,7 @@ public class DynamicControllerTests {
 		//传递的仍然是json数据，不要使用requestAttr，官方库如果有字段为null则NPE
 		//推荐使用FastJson，自动去除为null的字段
 		var dynamic = new Dynamic("动态1", DynamicCategory.CHAT, "没有内容");
-		var jsonStr = JSONObject.toJSONString(dynamic);
+		var jsonStr = new Gson().toJson(dynamic);
 
 		mockMvc.perform(post("/dynamic/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
 			.andExpect(status().isOk())
@@ -57,7 +57,7 @@ public class DynamicControllerTests {
 	@Test
 	public void createTest4() throws Exception {
 		var dynamic = new Dynamic("", DynamicCategory.CHAT, "没有内容");
-		var jsonStr = JSONObject.toJSONString(dynamic);
+		var jsonStr = new Gson().toJson(dynamic);
 
 		mockMvc.perform(post("/dynamic/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
 			.andExpect(status().isBadRequest())
@@ -69,7 +69,7 @@ public class DynamicControllerTests {
 	@Test
 	public void createTest2() throws Exception {
 		var dynamic = new Dynamic("动态1", DynamicCategory.CHAT, "没有内容");
-		var jsonStr = JSONObject.toJSONString(dynamic);
+		var jsonStr = new Gson().toJson(dynamic);
 
 		mockMvc.perform(post("/dynamic/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
 			.andExpect(status().isNotFound())
@@ -81,7 +81,7 @@ public class DynamicControllerTests {
 	@Test
 	public void createTest3() throws Exception {
 		var dynamic = new Dynamic("动态1", DynamicCategory.CHAT, "没有内容");
-		var jsonStr = JSONObject.toJSONString(dynamic);
+		var jsonStr = new Gson().toJson(dynamic);
 
 		mockMvc.perform(post("/dynamic/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))
 			.andExpect(status().isForbidden())
@@ -166,7 +166,7 @@ public class DynamicControllerTests {
 		vo.setSubject("主题");
 		vo.setCategorySet(Set.of(DynamicCategory.CHAT));
 		vo.setSponsorUsername("123");
-		var jsonStr = JSONObject.toJSONString(vo);
+		var jsonStr = new Gson().toJson(vo);
 
 		mockMvc.perform(post("/dynamic/advanceSearch").param("columnPage", "1").param("size", "4")
 			.contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonStr))

@@ -1,11 +1,11 @@
 package com.windea.demo.csntportal.enums;
 
-import com.windea.commons.base.template.IEnumWithText;
+import com.windea.java.template.ITextEnum;
 
 /**
  * 难度级别的枚举。
  */
-public enum DifficultyLevel implements IEnumWithText {
+public enum DifficultyLevel implements ITextEnum {
 	EASY("简单"),
 	NORMAL("普通"),
 	HARD("困难"),

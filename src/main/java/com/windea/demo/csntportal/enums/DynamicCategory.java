@@ -1,11 +1,11 @@
 package com.windea.demo.csntportal.enums;
 
-import com.windea.commons.base.template.IEnumWithText;
+import com.windea.java.template.ITextEnum;
 
 /**
  * 动态分类的枚举。
  */
-public enum DynamicCategory implements IEnumWithText {
+public enum DynamicCategory implements ITextEnum {
 	CHAT("闲聊"),
 	SEEK_HELP("求助"),
 	DISCUSS("讨论"),

@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.domain.entity;
 
-import com.windea.commons.base.template.TBean;
+import com.windea.java.template.TBean;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -47,7 +47,8 @@ public class DevelopmentColumn extends TBean {
 	private LocalDateTime updateTime;
 
 
-	public DevelopmentColumn() {}
+	public DevelopmentColumn() {
+	}
 
 	public DevelopmentColumn(String title, String content, String author) {
 		this.title = title;
