@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Jwt进入点的组件。<br>
+ * Jwt进入点的组件。
  * 由ExceptionTranslationFilter使用，开始一个安全验证方案。
  */
 @Component

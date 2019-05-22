@@ -5,7 +5,7 @@ import com.windea.commons.base.annotation.PerformanceAffectPossible;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * 泛型单例模式 - 双重校验锁。<br>
+ * 泛型单例模式 - 双重校验锁。
  * WARN 由于采用了反射技术，可能会影响性能。
  */
 @PerformanceAffectPossible

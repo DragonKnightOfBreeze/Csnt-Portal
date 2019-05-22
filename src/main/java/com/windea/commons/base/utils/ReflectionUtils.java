@@ -129,7 +129,7 @@ public class ReflectionUtils {
 	}
 
 	/**
-	 * 判断某个类型是否属于基础类型。<br>
+	 * 判断某个类型是否属于基础类型。
 	 * 例如：Integer、Enum、String
 	 */
 	public static boolean isBaseType(Class<?> clazz) {

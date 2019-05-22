@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * 通用实体类接口 - 实现通用的equals、hashCode、toString方法。<br>
+ * 通用实体类接口 - 实现通用的equals、hashCode、toString方法。
  * WARN 由于采用了反射技术，可能会影响性能。
  */
 @PerformanceAffectPossible
@@ -46,7 +46,7 @@ public abstract class TBean<ID> implements Serializable {
 	}
 
 	/**
-	 * 重写后的转化成字符串方法，写入所有匹配get方法的基本封装类型的属性。可以指定是否换行和缩进。<br>
+	 * 重写后的转化成字符串方法，写入所有匹配get方法的基本封装类型的属性。可以指定是否换行和缩进。
 	 * indent=-1时使用tab缩进。
 	 */
 	@Override

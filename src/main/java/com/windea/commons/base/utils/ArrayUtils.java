@@ -11,7 +11,7 @@ public class ArrayUtils {
 	private ArrayUtils() {}
 
 	/**
-	 * 判断数组是否为null、为空。<br>
+	 * 判断数组是否为null、为空。
 	 * 空值安全。
 	 * @param array 指定的泛型数组
 	 */
@@ -21,7 +21,7 @@ public class ArrayUtils {
 	}
 
 	/**
-	 * 判断数组是否为null、小于等于指定长度。<br>
+	 * 判断数组是否为null、小于等于指定长度。
 	 * 空值安全。
 	 * @param array 指定的泛型数组
 	 * @param length 指定的长度
@@ -32,7 +32,7 @@ public class ArrayUtils {
 	}
 
 	/**
-	 * 判断数组是否大于等于指定长度。<br>
+	 * 判断数组是否大于等于指定长度。
 	 * 空值安全。
 	 * @param array 指定的泛型数组
 	 * @param length 指定的长度
@@ -104,7 +104,7 @@ public class ArrayUtils {
 	}
 
 	/**
-	 * 将数组转化为字符串数组。<br>
+	 * 将数组转化为字符串数组。
 	 * 空值安全。
 	 * @param array 指定的泛型数组
 	 * @return 转化后的字符串数组

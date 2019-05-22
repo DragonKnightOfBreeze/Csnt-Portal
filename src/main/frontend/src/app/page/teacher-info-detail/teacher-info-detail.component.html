@@ -21,7 +21,7 @@
           </span>
         </p>
 
-        <article class="card-text">{{teacherInfo.introduce}}</article>
+        <article class="card-text" [innerHTML]="teacherInfo.introduce"></article>
 
         <!--当为管理员时才能添加、编辑和删除-->
         <div class="card-link text-center mx-auto">

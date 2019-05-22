@@ -13,12 +13,14 @@
   font-size: 110%;
 }
 
-//#nav ul {
-//  color: hsla(0, 0%, 100%, .65);
-//  background-image: linear-gradient(to left, #293547, #37a4b3 25%, #377ccc 50%, #298096 75%, #132236);
-//  background-size: 200% 100%;
-//  animation: masked-animation 2s infinite linear;
-//}
+#navsix {
+  color: hsla(0, 0%, 100%, .65);
+  background-image: linear-gradient(to left, #293547, #37a4b3 25%, #377ccc 50%, #298096 75%, #132236);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-size: 200% 100%;
+  animation: masked-animation 2s infinite linear;
+}
 
 @keyframes masked-animation {
   0% {
@@ -37,6 +39,27 @@
   top: 10px;
   left: 50px;
   background: url(https://upload-images.jianshu.io/upload_images/15241626-9cb184772c9e67b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500/format/webp) no-repeat;
+  background-size: 100% 100%;
+  animation: rotating 8s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0)
+  }
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.logo1 {
+  z-index: 999;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  background: url(http://prmm7vtod.bkt.clouddn.com/%E5%86%85%E5%9C%88.png) no-repeat;
   background-size: 100% 100%;
 }
 

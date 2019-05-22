@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * Jwt用户详情类。实现UserDetails接口以进行安全验证。<br>
+ * Jwt用户详情类。实现UserDetails接口以进行安全验证。
  * 不需要进行参数验证。
  */
 public class JwtUserDetails implements UserDetails {

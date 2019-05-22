@@ -1,5 +1,5 @@
 /**
- * 分页的接口。<br>
+ * 分页的接口。
  * 另见：{@code org.springframework.data.domain.Page}
  */
 
@@ -18,7 +18,7 @@ export interface Page<T> {
 }
 
 /**
- * 排序器的接口。<br>
+ * 排序器的接口。
  * 另见：{@code org.springframework.data.domain.Sort}
  */
 export interface Sort{
@@ -28,7 +28,7 @@ export interface Sort{
 }
 
 /**
- * 分页器的接口。<br>
+ * 分页器的接口。
  * 另见：{@code org.springframework.data.domain.Pageable}
  */
 export interface Pageable {
