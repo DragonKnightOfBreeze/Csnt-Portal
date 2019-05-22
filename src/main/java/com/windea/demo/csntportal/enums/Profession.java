@@ -1,11 +1,11 @@
 package com.windea.demo.csntportal.enums;
 
-import com.windea.commons.base.template.IEnumWithText;
+import com.windea.java.template.ITextEnum;
 
 /**
  * 用户或文章对应的专业的枚举。
  */
-public enum Profession implements IEnumWithText {
+public enum Profession implements ITextEnum {
 	NONE("无"),
 	CSNT("计算机科学与技术"),
 	SE("软件工程"),

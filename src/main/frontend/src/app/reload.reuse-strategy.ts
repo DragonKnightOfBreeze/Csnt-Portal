@@ -1,5 +1,8 @@
 import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@angular/router';
 
+/**
+ * 用于重新加载当前页面的重用策略。
+ */
 export class ReloadReuseStrategy implements RouteReuseStrategy {
 
   shouldDetach(route: ActivatedRouteSnapshot): boolean {

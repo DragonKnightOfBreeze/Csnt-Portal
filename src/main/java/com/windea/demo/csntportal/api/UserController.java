@@ -1,6 +1,5 @@
 package com.windea.demo.csntportal.api;
 
-import com.windea.commons.base.exception.NotImplementedException;
 import com.windea.demo.csntportal.domain.entity.*;
 import com.windea.demo.csntportal.domain.vo.UserLoginVo;
 import com.windea.demo.csntportal.domain.vo.UserResetPasswordVo;
@@ -8,6 +7,7 @@ import com.windea.demo.csntportal.exception.UserNotMatchedException;
 import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.security.JwtProvider;
 import com.windea.demo.csntportal.service.UserService;
+import com.windea.java.exception.NotImplementedException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;

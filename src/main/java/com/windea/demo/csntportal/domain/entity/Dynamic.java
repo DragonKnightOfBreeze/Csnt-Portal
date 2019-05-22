@@ -1,7 +1,7 @@
 package com.windea.demo.csntportal.domain.entity;
 
-import com.windea.commons.base.template.TBean;
 import com.windea.demo.csntportal.enums.DynamicCategory;
+import com.windea.java.template.TBean;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
