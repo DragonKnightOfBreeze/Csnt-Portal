@@ -2,14 +2,14 @@
 <div class="container mx-auto my-3 p-3 cp-content" id="form">
   <!--标题-->
   <div class="container mx-auto my-2 p-2 text-center w-75 bg-light cp-title">
-    <h1>登录表单</h1>
+    <h1 class="display-4">登录表单</h1>
   </div>
 
   <!--登录表单-->
   <div class="container mx-auto my-2 p-2 w-75 bg-light cp-form">
     <form class="mx-auto my-1 p-1" (ngSubmit)="login()" #loginForm="ngForm">
       <div class="form-group">
-        <label for="username">用户名：</label>
+        <label class="lead" for="username">用户名：</label>
         <input type="text" class="form-control bg-light" id="username" placeholder="请输入用户名"
                required
                [(ngModel)]="userLoginVo.username" name="username" #username="ngModel">
@@ -19,7 +19,7 @@
       </div>
 
       <div class="form-group">
-        <label for="password">密码：</label>
+        <label class="lead" for="password">密码：</label>
         <input type="password" class="form-control bg-light" id="password" placeholder="请输入密码"
                required
                [(ngModel)]="userLoginVo.password" name="password" #password="ngModel">

@@ -17,6 +17,12 @@ public class RepositoryTests {
 
 	private static final String prefix = "*****************";
 
+	@Test
+	public void get1() {
+		var result = dynamicRepository.findById(1);
+		System.out.println(result);
+	}
+
 	private void print(String arg) {
 		System.out.println(prefix);
 		System.out.println(arg);

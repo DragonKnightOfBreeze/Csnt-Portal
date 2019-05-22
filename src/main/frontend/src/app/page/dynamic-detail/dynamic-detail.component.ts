@@ -39,7 +39,8 @@ export class DynamicDetailComponent implements OnInit {
    */
   get() {
     //从路由地址中得到路由参数
-    let id = +this.route.snapshot.queryParamMap.get("id");
+    //NOTE 这里必须是paramMap，而不是queryParamMap
+    let id = +this.route.snapshot.paramMap.get("id");
     this.service.get(id).subscribe(dynamic => this.dynamic = dynamic);
   }
 

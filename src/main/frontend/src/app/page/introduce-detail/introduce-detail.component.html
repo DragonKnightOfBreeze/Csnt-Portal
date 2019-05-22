@@ -15,11 +15,11 @@
         <p class="card-subtitle">
           <span class="text-secondary">#{{introduce.id}}&emsp;</span>
           <span class="text-secondary">作者：{{introduce.author}}&emsp;</span>
-          <span class="text-secondary">发布时间：{{introduce.publishTime}}&emsp;</span>
-          <span class="text-secondary">更新时间：{{introduce.updateTime}}&emsp;</span>
+          <span class="text-secondary">发布时间：{{introduce.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}&emsp;</span>
+          <span class="text-secondary">更新时间：{{introduce.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}&emsp;</span>
         </p>
 
-        <article class="card-text">{{introduce.content}}</article>
+        <article class="card-text" [innerHTML]="introduce.content"></article>
 
         <!--当为管理员时才能编辑和删除-->
         <div class="card-link text-center mx-auto">

@@ -34,8 +34,8 @@
             <span class="badge badge-secondary">作者：{{column.author}}</span>
             <span class="badge badge-secondary">专业：{{column.profession | enumText:"Profession"}}</span>
             <span class="badge badge-secondary">难度：{{column.difficultyLevel | enumText:"DifficultyLevel"}}</span>
-            <span class="badge badge-secondary">发布时间：{{column.publishTime}}</span>
-            <span class="badge badge-secondary">更新时间：{{column.updateTime}}</span>
+            <span class="badge badge-secondary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+            <span class="badge badge-secondary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
           </p>
 
           <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{column.content}}</p>

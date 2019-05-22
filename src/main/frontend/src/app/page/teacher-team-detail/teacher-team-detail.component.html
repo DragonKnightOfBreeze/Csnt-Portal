@@ -16,11 +16,11 @@
           <small>
             <span class="text-secondary">#{{teacherTeam.id}}&emsp;</span>
             <span class="text-secondary">专业级别：{{teacherTeam.professionLevel | enumText:"ProfessionLevel"}}&emsp;</span>
-            <span class="text-secondary">创建时间：{{teacherTeam.createTime}}&emsp;</span>
+            <span class="text-secondary">创建时间：{{teacherTeam.createTime | date:"yyyy-MM-dd hh:mm:ss"}}&emsp;</span>
           </small>
         </p>
 
-        <article class="card-text">{{teacherTeam.introduce}}</article>
+        <article class="card-text" [innerHTML]="teacherTeam.introduce"></article>
         <hr>
         <h4>教师信息一览</h4>
         <table class="table table-bordered table-hover">

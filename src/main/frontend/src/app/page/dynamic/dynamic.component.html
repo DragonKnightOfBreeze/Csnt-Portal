@@ -65,7 +65,7 @@
             <span class="badge badge-secondary">#{{dynamic.id}}</span>
             <span class="badge badge-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>
             <span class="badge badge-primary">发起用户：{{dynamic.sponsorUser?.username || "未知"}}</span>
-            <span class="badge badge-secondary">发起时间：{{dynamic.sponsorTime}}</span>
+            <span class="badge badge-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
           </p>
 
           <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;">{{dynamic.content}}</p>

@@ -15,10 +15,10 @@
         <span class="text-secondary">#{{dynamic.id}}&emsp;</span>
         <span class="text-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}&emsp;</span>
         <span class="text-secondary">发起用户：{{dynamic.sponsorUser?.username || "未知"}}&emsp;</span>
-        <span class="text-secondary">发起时间：{{dynamic.sponsorTime}}&emsp;</span>
+        <span class="text-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}&emsp;</span>
       </p>
 
-      <article class="card-text">{{dynamic.content}}</article>
+      <article class="card-text" [innerHTML]="dynamic.content"></article>
 
       <!--当为发起用户时才能编辑，当为管理员或发起用户时才能删除-->
       <div class="card-link text-center mx-auto">

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {RouteReuseStrategy, RouterModule, Routes} from '@angular/router';
 import {LogoutComponent} from "./page/logout/logout.component";
 import {LoginGuard} from "./service/guard/login-guard.service";
 import {RegisterComponent} from "./page/register/register.component";
@@ -26,6 +26,7 @@ import {Error403Component} from "./error-page/error403/error403.component";
 import {Error500Component} from "./error-page/error500/error500.component";
 import {Error404Component} from "./error-page/error404/error404.component";
 import {Error501Component} from "./error-page/error501/error501.component";
+import {ReloadReuseStrategy} from "./reload.reuse-strategy";
 
 //项目的路由数组
 //NOTE 当路由地址并未发生改变时，angular并不会刷新页面
@@ -36,9 +37,6 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "login", component: LoginComponent},
   {path: "logout", component: LogoutComponent},
-
-  {path: ":item/list", redirectTo: ":item"},
-  {path: ":item/page", redirectTo: ":item"},
 
   {path: "account/:username", component: AccountComponent, canActivate: [LoginGuard]},
   {path: "development-column", component: DevelopmentColumnComponent},
@@ -66,13 +64,20 @@ const routes: Routes = [
   {path: "**", component: Error404Component}
 ];
 
+//NOTE 如何让angular允许刷新当前页面：
+// 1. 配置onSameUrlNavigation:"reload"
+// 2. 提供一个自定义的地址重用策略
+
 /**
  * 项目的路由模块。
  */
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: "reload"})],
+  exports: [RouterModule],
+  providers: [
+    {provide: RouteReuseStrategy, useClass: ReloadReuseStrategy}
+  ]
 })
 export class AppRoutingModule {
 }
