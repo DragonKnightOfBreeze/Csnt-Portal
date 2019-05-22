@@ -11,10 +11,6 @@
 * SpringBoot教程
     * [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
 	* [Spring Boot 中文导航](http://springboot.fun/)
-* Demo参考
-	* [Angular-SpringBoot-REST-JWT](https://github.com/mrin9/Angular-SpringBoot-REST-JWT)
-	* [SpringBootAngular7Integration](https://github.com/SKrudra/SpringBootAngular7Integration)
-	* [SpringBoot-Angular7-ShoppingCart](https://github.com/zhulinn/SpringBoot-Angular7-ShoppingCart)
 
 # 环境要求
 

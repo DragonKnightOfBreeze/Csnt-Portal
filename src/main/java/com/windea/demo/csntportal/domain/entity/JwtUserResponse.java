@@ -3,7 +3,7 @@ package com.windea.demo.csntportal.domain.entity;
 import java.io.Serializable;
 
 /**
- * Jwt用户响应类。用于回应用户基本信息到前端。<br>
+ * Jwt用户响应类。用于回应用户基本信息到前端。
  * 不需要进行参数验证。
  */
 public class JwtUserResponse implements Serializable {

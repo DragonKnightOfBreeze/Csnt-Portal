@@ -18,7 +18,7 @@ public class StringUtils {
 
 
 	/**
-	 * 判断字符串是否为null、为空。<br>
+	 * 判断字符串是否为null、为空。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 */
@@ -28,7 +28,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 判断字符串是否为null、为空、为空白。<br>
+	 * 判断字符串是否为null、为空、为空白。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 */
@@ -39,7 +39,7 @@ public class StringUtils {
 
 
 	/**
-	 * 判断字符串是否为null、小于等于指定长度。<br>
+	 * 判断字符串是否为null、小于等于指定长度。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param length 指定的长度
@@ -50,7 +50,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 判断字符串是否大于等于指定长度。<br>
+	 * 判断字符串是否大于等于指定长度。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param length 指定的长度
@@ -61,7 +61,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 判断字符串是否以指定的任意前缀开始。<br>
+	 * 判断字符串是否以指定的任意前缀开始。
 	 * 空值安全。
 	 */
 	public static boolean startsWith(@Nullable String str, String... prefixArray) {
@@ -77,7 +77,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 判断字符串是否以指定的任意后缀结束。<br>
+	 * 判断字符串是否以指定的任意后缀结束。
 	 * 空值安全。
 	 */
 	public static boolean endsWith(@Nullable String str, String... suffixArray) {
@@ -94,7 +94,7 @@ public class StringUtils {
 
 
 	/**
-	 * 判断两个字符串是否相等。<br>
+	 * 判断两个字符串是否相等。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param secStr 第二个字符串
@@ -111,7 +111,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 判断两个字符串是否相等，忽略空白。<br>
+	 * 判断两个字符串是否相等，忽略空白。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param secStr 第二个字符串
@@ -128,7 +128,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 判断两个字符串是否相等，忽略大小写。<br>
+	 * 判断两个字符串是否相等，忽略大小写。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param secStr 第二个字符串
@@ -145,7 +145,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 判断两个字符串是否相等，忽略空白和大小写。<br>
+	 * 判断两个字符串是否相等，忽略空白和大小写。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param secStr 第二个字符串
@@ -162,7 +162,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 判断指定的字符串和指定的枚举值是否相等。<br>
+	 * 判断指定的字符串和指定的枚举值是否相等。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param e 第二个枚举值
@@ -180,7 +180,7 @@ public class StringUtils {
 
 
 	/**
-	 * 将指定的字符串转化为整型数值（忽略空白）。如果失败，则转化为默认值。<br>
+	 * 将指定的字符串转化为整型数值（忽略空白）。如果失败，则转化为默认值。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param defaultVal 默认值
@@ -197,7 +197,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 将指定的字符串转化为整型数值（忽略空白）。如果失败，则转化为0。<br>
+	 * 将指定的字符串转化为整型数值（忽略空白）。如果失败，则转化为0。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 */
@@ -206,7 +206,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 将指定的字符串转化为单精度数值（忽略空白）。如果失败，则转化为默认值。<br>
+	 * 将指定的字符串转化为单精度数值（忽略空白）。如果失败，则转化为默认值。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param defaultVal 默认值
@@ -223,7 +223,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 将指定的字符串转化为单精度数值（忽略空白）。如果失败，则转化为默认值。<br>
+	 * 将指定的字符串转化为单精度数值（忽略空白）。如果失败，则转化为默认值。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 */
@@ -232,7 +232,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 将指定的字符串转化为双精度数值（忽略空白）。如果失败，则转化为默认值。<br>
+	 * 将指定的字符串转化为双精度数值（忽略空白）。如果失败，则转化为默认值。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param defaultVal 默认值
@@ -257,7 +257,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 如果指定的字符串为null、为空、为空格，则转化为默认值。否则去除空白返回。<br>
+	 * 如果指定的字符串为null、为空、为空格，则转化为默认值。否则去除空白返回。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param defaultVal 默认值
@@ -269,7 +269,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 如果指定的字符串为null、为空、为空格，则转化为空字符串。否则去除空白返回。<br>
+	 * 如果指定的字符串为null、为空、为空格，则转化为空字符串。否则去除空白返回。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 */
@@ -279,7 +279,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 将指定的字符串转化为枚举值。如果不匹配，则返回默认值。<br>
+	 * 将指定的字符串转化为枚举值。如果不匹配，则返回默认值。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param clazz 枚举类
@@ -300,7 +300,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 将指定的字符串转化为枚举值。如果不匹配，则返回null。<br>
+	 * 将指定的字符串转化为枚举值。如果不匹配，则返回null。
 	 * 空值安全。
 	 * @param str 指定的字符串
 	 * @param clazz 枚举类
@@ -313,7 +313,7 @@ public class StringUtils {
 
 
 	/**
-	 * 模拟模版字符串。<br>
+	 * 模拟模版字符串。
 	 * 自动转义单引号。
 	 * @param pattern 模版字符串
 	 * @param args 参数

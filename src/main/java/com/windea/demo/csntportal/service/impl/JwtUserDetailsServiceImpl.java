@@ -17,7 +17,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService, UserDetail
 
 
 	/**
-	 * 通过用户名得到用户，以进行权限验证。<br>
+	 * 通过用户名得到用户，以进行权限验证。
 	 * 可能会抛出运行时异常{@code UsernameNotFoundException}。
 	 */
 	@Override
@@ -28,7 +28,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService, UserDetail
 	}
 
 	/**
-	 * 修改密码。<br>
+	 * 修改密码。
 	 * 这里不需要手动进行加密。
 	 */
 	@Override

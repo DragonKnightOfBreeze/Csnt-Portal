@@ -397,7 +397,7 @@ public class TextGenerator implements TGenerator {
 
 
 	/**
-	 * 格式化文本。使用索引占位符{@code "{0}"}。<br>
+	 * 格式化文本。使用索引占位符{@code "{0}"}。
 	 * 用法示例：{@code gen.add("hello {0}").format("world";)}。
 	 * @see MessageFormat
 	 */
@@ -413,7 +413,7 @@ public class TextGenerator implements TGenerator {
 	}
 
 	/**
-	 * 格式化文本。使用名字占位符{@code "${name}"}。<br>
+	 * 格式化文本。使用名字占位符{@code "${name}"}。
 	 * 用法示例：{@code var name="world"; gen.add("hello ${name}").format(world)}。
 	 * @see MessageFormat
 	 */

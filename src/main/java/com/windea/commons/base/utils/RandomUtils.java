@@ -12,7 +12,7 @@ public class RandomUtils {
 	private RandomUtils() {}
 
 	/**
-	 * 生成指定范围内的随机数。<br>
+	 * 生成指定范围内的随机数。
 	 * 包含最大值和最小值。
 	 * @param min 最小值
 	 * @param max 最大值
@@ -25,7 +25,7 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 生成指定范围内的随机数（从0到指定值）。<br>
+	 * 生成指定范围内的随机数（从0到指定值）。
 	 * 包含最大值和最小值。
 	 * @param max 最大值
 	 */
@@ -34,7 +34,7 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 生成指定范围内的随机数（指定小数位数）。<br>
+	 * 生成指定范围内的随机数（指定小数位数）。
 	 * 包含最大值和最小值。
 	 * @param min 最小值
 	 * @param max 最大值
@@ -49,7 +49,7 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 生成指定范围内的随机数（从0到指定值，指定小数位数）。<br>
+	 * 生成指定范围内的随机数（从0到指定值，指定小数位数）。
 	 * 包含最大值和最小值。
 	 * @param max 最大值
 	 * @param bit 精确度，小数点后位数
@@ -60,7 +60,7 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 生成指定范围内的随机数（从0到1）。<br>
+	 * 生成指定范围内的随机数（从0到1）。
 	 * 包含最大值和最小值。
 	 */
 	public static float range01() {
@@ -68,7 +68,7 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 生成浮动范围内的随机数。<br>
+	 * 生成浮动范围内的随机数。
 	 * 包含最大值和最小值。
 	 * @param num 指定的数字
 	 * @param sub 向下浮动值
@@ -80,7 +80,7 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 生成浮动范围内的随机数。<br>
+	 * 生成浮动范围内的随机数。
 	 * 包含最大值和最小值。
 	 * @param num 指定的数字
 	 * @param delta 浮动值
@@ -90,7 +90,7 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 生成浮动范围内的随机数（指定位数）。<br>
+	 * 生成浮动范围内的随机数（指定位数）。
 	 * 包含最大值和最小值。
 	 * @param num 指定的数字
 	 * @param sub 向下浮动值
@@ -106,7 +106,7 @@ public class RandomUtils {
 	}
 
 	/**
-	 * 生成浮动范围内的随机数（指定位数）。<br>
+	 * 生成浮动范围内的随机数（指定位数）。
 	 * 包含最大值和最小值。
 	 * @param num 指定的数字
 	 * @param delta 浮动值

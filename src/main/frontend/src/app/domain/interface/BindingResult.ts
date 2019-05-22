@@ -1,5 +1,5 @@
 /**
- * 绑定结果的接口。<br>
+ * 绑定结果的接口。
  * 另见：{@code org.springframework.validation.BindingResult}
  */
 export interface BindingResult {
@@ -20,7 +20,7 @@ export interface BindingResult {
 }
 
 /**
- * 字段错误的接口。<br>
+ * 字段错误的接口。
  * 另见：{@code org.springframework.validation.FieldError}
  */
 export interface FieldError extends ObjectError {
@@ -30,7 +30,7 @@ export interface FieldError extends ObjectError {
 }
 
 /**
- * 对象错误的接口。<br>
+ * 对象错误的接口。
  * 另见：{@code org.springframework.validation.ObjectError}
  */
 export interface ObjectError {
