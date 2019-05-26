@@ -191,4 +191,17 @@ public class UserController {
 		var resultPage = service.searchByNickname(nickname, pageable);
 		return resultPage;
 	}
+
+	/**
+	 * 判断用户名、用户手机号码或用户邮箱是否已存在。
+	 */
+	@GetMapping("/exists-user")
+	public boolean exists(
+		@RequestParam String username,
+		@RequestParam String email,
+		@RequestParam String phoneNum
+	) {
+		var result = service.exists(username, email, phoneNum);
+		return result;
+	}
 }

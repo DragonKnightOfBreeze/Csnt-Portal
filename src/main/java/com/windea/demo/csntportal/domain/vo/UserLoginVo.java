@@ -12,12 +12,12 @@ import javax.validation.constraints.Pattern;
 public class UserLoginVo {
 	/** 用户名。 */
 	@NotEmpty()
-	@Pattern(regexp = RegexConsts.USERNAME,)
+	@Pattern(regexp = RegexConsts.USERNAME)
 	private String username;
 
 	/** 密码。 */
 	@NotEmpty()
-	@Pattern(regexp = RegexConsts.PASSWORD,)
+	@Pattern(regexp = RegexConsts.PASSWORD)
 	private String password;
 
 	/** 记住登录。 */

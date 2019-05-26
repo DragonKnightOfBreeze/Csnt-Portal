@@ -22,7 +22,7 @@ public class TeacherInfo extends TBean {
 
 	/** 名字。 */
 	@NotEmpty()
-	@Size(min = 1, max = 32,)
+	@Size(min = 1, max = 32)
 	@Column(nullable = false, length = 32)
 	private String name;
 
@@ -36,7 +36,7 @@ public class TeacherInfo extends TBean {
 
 	/** 介绍。 */
 	@NotEmpty()
-	@Size(min = 1, max = 256,)
+	@Size(min = 1, max = 256)
 	@Column(nullable = false, columnDefinition = "text")
 	private String introduce;
 

@@ -27,7 +27,7 @@ public class User extends TBean implements UserDetails {
 
 	/** 用户名。 */
 	@NotEmpty()
-	@Pattern(regexp = RegexConsts.USERNAME,)
+	@Pattern(regexp = RegexConsts.USERNAME)
 	@Column(unique = true, nullable = false, length = 12)
 	private String username;
 
@@ -35,13 +35,13 @@ public class User extends TBean implements UserDetails {
 	//密码需要被忽略掉，尽管是加密后的，并且不要限制行的长度
 	@JsonIgnore
 	@NotEmpty()
-	@Pattern(regexp = RegexConsts.PASSWORD,)
+	@Pattern(regexp = RegexConsts.PASSWORD)
 	@Column(nullable = false)
 	private String password;
 
 	/** 手机号码。 */
 	@NotEmpty()
-	@Pattern(regexp = RegexConsts.PHONE_NUM,)
+	@Pattern(regexp = RegexConsts.PHONE_NUM)
 	@Column(unique = true, nullable = false, length = 11)
 	private String phoneNum;
 
@@ -53,7 +53,7 @@ public class User extends TBean implements UserDetails {
 
 	/** 昵称。 */
 	@NotEmpty()
-	@Size(min = 1, max = 32,)
+	@Size(min = 1, max = 32)
 	@Column(nullable = false, length = 32)
 	private String nickname;
 

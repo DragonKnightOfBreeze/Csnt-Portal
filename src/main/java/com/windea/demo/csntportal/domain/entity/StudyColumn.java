@@ -25,7 +25,7 @@ public class StudyColumn extends TBean {
 
 	/** 标题。 */
 	@NotEmpty()
-	@Size(min = 1, max = 32,)
+	@Size(min = 1, max = 32)
 	@Column(nullable = false, length = 32, columnDefinition = "varchar default '请输入标题'")
 	private String title;
 
@@ -36,7 +36,7 @@ public class StudyColumn extends TBean {
 
 	/** 作者。 */
 	@NotEmpty()
-	@Size(min = 1, max = 32,)
+	@Size(min = 1, max = 32)
 	@Column(nullable = false, length = 32, columnDefinition = "varchar default '匿名'")
 	private String author;
 

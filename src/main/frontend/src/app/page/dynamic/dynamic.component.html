@@ -98,7 +98,7 @@
       </div>
       <div class="modal-body">
         <form (ngSubmit)="advanceSearch()">
-          <div class="alert alert-danger" [hidden]="isValidForSearch">
+          <div class="alert alert-danger" *ngIf="!isValidForSearch">
             参数有误！
           </div>
 
@@ -141,16 +141,21 @@
         <h4 class="modal-title">创建动态</h4>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="create()" #advanceSearchForm="ngForm">
-          <div class="alert alert-danger" [hidden]="isValidForSearch">
+        <form (ngSubmit)="create()">
+          <div class="alert alert-danger" *ngIf="!isValidForSearch">
             参数有误！
           </div>
 
           <div class="form-group">
             <label for="newSubject">主题：</label>
             <input type="text" class="form-control bg-light" id="newSubject" placeholder="请输入主题"
-                   required
-                   [(ngModel)]="newDynamic.subject" name="subject">
+                   required maxlength="32"
+                   [(ngModel)]="newDynamic.subject" name="subject" #subject="ngModel">
+          </div>
+
+          <div class="alert alert-danger" *ngIf="subject.invalid && (subject.dirty || subject.touched)">
+            <div *ngIf="subject.errors.required">主题不能为空！</div>
+            <div *ngIf="subject.errors.maxlength">主题格式不正确！</div>
           </div>
 
           <div class="form-group">
