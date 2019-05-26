@@ -176,3 +176,5 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+
+!/reference/libraries/java-utility-2.0.1.jar
