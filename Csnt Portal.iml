@@ -50,7 +50,6 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="popper" level="application" />
     <orderEntry type="library" name="bootstrap.bundle" level="application" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-rest:unknown" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:2.1.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.1.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.1.4.RELEASE" level="project" />
