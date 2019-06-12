@@ -41,7 +41,7 @@ spring:
         # 不使用SSL，否则结束应用时会报错SSLException
         useSSL: false
         # 配置数据库的时区，否则会报错
-        serverTimezone: GMT-8
+        serverTimezone: GMT+8
         # 允许使用服务器提供的公钥
         allowPublicKeyRetrieval: true
     tomcat:

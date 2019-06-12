@@ -29,9 +29,14 @@
 
         <!--更新资料表单-->
         <div class="container mx-auto my-2 p-2 bg-light cp-update-form">
-          <form (ngSubmit)="updateAccountInfo()" #updateForm="ngForm">
-            <div class="alert alert-danger" [hidden]="isValidForUpdate">
+          <form (ngSubmit)="updateAccountInfo()" #updateForm="ngForm" appUniqueUser>
+            <div class="alert alert-danger" *ngIf="!isValidForUpdate">
               参数有误！
+            </div>
+
+            <div class="alert alert-danger"
+                 *ngIf="updateForm.errors?.uniqueUser && (password.dirty || password.touched)">
+              用户名 / 用户手机号码 / 用户邮箱已存在！
             </div>
 
             <div class="form-group">
@@ -43,11 +48,14 @@
             <div class="form-group">
               <label for="password">密码：</label>
               <input type="password" class="form-control bg-light" id="password"
-                     required
+                     required pattern="\\w{6,16}"
                      [(ngModel)]="user.password" name="password" #password="ngModel">
-              <div class="alert alert-danger" [hidden]="password.valid || password.pristine">
-                密码不能为空！
-              </div>
+            </div>
+
+            <!--用于参数验证。包括异步参数验证在内。-->
+            <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+              <div *ngIf="password.errors.required">密码不能为空！</div>
+              <div *ngIf="password.errors.pattern">密码格式不正确！</div>
             </div>
 
             <div class="form-group">
@@ -55,9 +63,10 @@
               <input type="phone" class="form-control bg-light" id="phoneNum"
                      required
                      [(ngModel)]="user.phoneNum" name="phoneNum" #phoneNum="ngModel">
-              <div class="alert alert-danger" [hidden]="phoneNum.valid || phoneNum.pristine">
-                手机号码不能为空！
-              </div>
+            </div>
+
+            <div class="alert alert-danger" *ngIf="phoneNum.invalid && (phoneNum.dirty || phoneNum.touched)">
+              <div *ngIf="phoneNum.errors.required">手机号码不能为空！</div>
             </div>
 
             <div class="form-group">
@@ -65,19 +74,22 @@
               <input type="email" class="form-control bg-light" id="email"
                      required
                      [(ngModel)]="user.email" name="email" #email="ngModel">
-              <div class="alert alert-danger" [hidden]="email.valid || email.pristine">
-                邮箱不能为空！
-              </div>
+            </div>
+
+            <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div *ngIf="email.errors.required">邮箱不能为空！</div>
             </div>
 
             <div class="form-group">
               <label for="nickname">昵称：</label>
               <input type="text" class="form-control bg-light" id="nickname"
-                     required
+                     required maxlength="32"
                      [(ngModel)]="user.nickname" name="nickname" #nickname="ngModel">
-              <div class="alert alert-danger" [hidden]="nickname.valid || nickname.pristine">
-                昵称不能为空！
-              </div>
+            </div>
+
+            <div class="alert alert-danger" *ngIf="nickname.invalid && (nickname.dirty || nickname.touched)">
+              <div *ngIf="nickname.errors.required">昵称不能为空！</div>
+              <div *ngIf="nickname.errors.maxlength">昵称格式不正确！</div>
             </div>
 
             <div class="form-group">

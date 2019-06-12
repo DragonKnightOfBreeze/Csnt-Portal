@@ -134,4 +134,12 @@ export class UserService implements OnInit {
         catchError(handleError("searchByNickname", null))
     );
   }
+
+  exists(user: User): Observable<boolean> {
+    const url = `${apiUrl}/exists-user`;
+    const params = {username: user.username, email: user.email, phoneNum: user.phoneNum};
+    return this.http.get<boolean>(url, {params: params}).pipe(
+      catchError(handleError("exists", null))
+    );
+  }
 }

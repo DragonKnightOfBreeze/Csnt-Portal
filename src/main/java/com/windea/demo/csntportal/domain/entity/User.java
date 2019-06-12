@@ -26,34 +26,34 @@ public class User extends TBean implements UserDetails {
 	private Integer id;
 
 	/** 用户名。 */
-	@NotEmpty(message = "validation.user.username.notEmpty")
-	@Pattern(regexp = RegexConsts.USERNAME, message = "validation.user.username.pattern")
+	@NotEmpty()
+	@Pattern(regexp = RegexConsts.USERNAME)
 	@Column(unique = true, nullable = false, length = 12)
 	private String username;
 
 	/** 密码。 */
 	//密码需要被忽略掉，尽管是加密后的，并且不要限制行的长度
 	@JsonIgnore
-	@NotEmpty(message = "validation.user.password.notEmpty")
-	@Pattern(regexp = RegexConsts.PASSWORD, message = "validation.user.password.pattern")
+	@NotEmpty()
+	@Pattern(regexp = RegexConsts.PASSWORD)
 	@Column(nullable = false)
 	private String password;
 
 	/** 手机号码。 */
-	@NotEmpty(message = "validation.user.phoneNum.notEmpty")
-	@Pattern(regexp = RegexConsts.PHONE_NUM, message = "validation.user.phoneNum.pattern")
+	@NotEmpty()
+	@Pattern(regexp = RegexConsts.PHONE_NUM)
 	@Column(unique = true, nullable = false, length = 11)
 	private String phoneNum;
 
 	/** 邮箱地址。 */
-	@NotEmpty(message = "validation.user.email.notEmpty")
-	@Email(message = "validation.user.email.email")
+	@NotEmpty()
+	@Email()
 	@Column(unique = true, nullable = false)
 	private String email;
 
 	/** 昵称。 */
-	@NotEmpty(message = "validation.user.nickname.notEmpty")
-	@Size(min = 1, max = 32, message = "validation.user.nickname.size")
+	@NotEmpty()
+	@Size(min = 1, max = 32)
 	@Column(nullable = false, length = 32)
 	private String nickname;
 

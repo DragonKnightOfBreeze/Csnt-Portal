@@ -22,19 +22,19 @@ public class Introduce extends TBean {
 	private Integer id;
 
 	/** 标题。 */
-	@NotEmpty(message = "validation.column.title.notEmpty")
-	@Size(min = 1, max = 32, message = "validation.column.title.size")
+	@NotEmpty()
+	@Size(min = 1, max = 32)
 	@Column(nullable = false, length = 32, columnDefinition = "varchar default '请输入标题'")
 	private String title;
 
 	/** 内容。 */
-	@NotEmpty(message = "validation.column.content.notEmpty")
+	@NotEmpty()
 	@Column(nullable = false, columnDefinition = "text")
 	private String content;
 
 	/** 作者。 */
-	@NotEmpty(message = "validation.column.author.notEmpty")
-	@Size(min = 1, max = 32, message = "validation.column.author.size")
+	@NotEmpty()
+	@Size(min = 1, max = 32)
 	@Column(nullable = false, length = 32, columnDefinition = "varchar default '匿名'")
 	private String author;
 

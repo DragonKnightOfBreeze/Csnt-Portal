@@ -41,6 +41,7 @@ import {TeacherInfoDetailComponent} from "./page/teacher-info/teacher-info-detai
 import {FooterComponent} from "./component/footer/footer.component";
 import {TeacherTeamDetailComponent} from "./page/teacher-team/teacher-team-detail/teacher-team-detail.component";
 import {NavigationComponent} from "./component/header/navigation/navigation.component";
+import {UniqueUserValidator} from "./directive/unique-user.validator";
 
 /**
  * 项目的主模块。
@@ -87,6 +88,8 @@ import {NavigationComponent} from "./component/header/navigation/navigation.comp
     Error404Component,
     Error500Component,
     Error501Component,
+
+    UniqueUserValidator,
 
     EnumConstsPipe,
     EnumTextPipe

@@ -11,13 +11,13 @@ import javax.validation.constraints.Pattern;
  */
 public class UserLoginVo {
 	/** 用户名。 */
-	@NotEmpty(message = "{user.username.notEmpty}")
-	@Pattern(regexp = RegexConsts.USERNAME, message = "{user.username.pattern}")
+	@NotEmpty()
+	@Pattern(regexp = RegexConsts.USERNAME)
 	private String username;
 
 	/** 密码。 */
-	@NotEmpty(message = "{user.password.notEmpty}")
-	@Pattern(regexp = RegexConsts.PASSWORD, message = "{user.password.pattern}")
+	@NotEmpty()
+	@Pattern(regexp = RegexConsts.PASSWORD)
 	private String password;
 
 	/** 记住登录。 */

@@ -26,7 +26,7 @@ import {Error403Component} from "./page/error/error403/error403.component";
 import {Error500Component} from "./page/error/error500/error500.component";
 import {Error404Component} from "./page/error/error404/error404.component";
 import {Error501Component} from "./page/error/error501/error501.component";
-import {ReloadReuseStrategy} from "./reload.reuse-strategy";
+import {ReloadReuseStrategy} from "./reload-reuse-strategy";
 
 //项目的路由数组
 //NOTE 当路由地址并未发生改变时，angular并不会刷新页面
