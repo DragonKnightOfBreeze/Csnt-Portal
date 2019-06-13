@@ -169,7 +169,7 @@ ng e2e
 
 ## Ionic项目页面设计的一般思路
 
-* 项目的模版是tabs，包含3个tab：tab-home、tab-info、tab-account。
+* 项目的模版是tabs，包含3个tab：tab-home、tab-info、tab-info。
 * 项目的模块包括：app、tabs和所有的tab，以及app-route、tabs-route、tab-info-route等。
 * home页面包括静态展示信息，只需写在一个组件里。使用轮播图、卡片列表等标签。
 * info页面包括从后台读取的条目信息，分别写在不同的组件里，共享header和footer。使用搜索框、卡片列表等标签。
