@@ -1,12 +1,40 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/info/teacher-info"></ion-back-button>
+      <ion-back-button defaultHref="/tabs/info/teacher-team"></ion-back-button>
     </ion-buttons>
     <ion-title>教师队伍 详情</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{teacherTeam.name}}
+      </ion-card-title>
+      <ion-card-subtitle>
+        <ion-note slot="start">#{{teacherTeam.id}}</ion-note>
+        <ion-note slot="start">专业级别：{{teacherTeam.professionLevel | enumText:"ProfessionLevel"}}</ion-note>
+        <ion-note slot="start">创建时间：{{teacherTeam.createTime | localeDate}}</ion-note>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text>
+        {{teacherTeam.introduce}}
+      </ion-text>
 
+      <ion-list>
+        <ion-list-header>教师信息一览</ion-list-header>
+        <ng-container *ngFor="let teacherInfo of teacherTeam.teacherInfoList">
+          <ion-item button routerLink="/teacher-info/{{teacherInfo.id}}">
+            <ion-note slot="start">{{teacherInfo.id}}</ion-note>
+            {{teacherInfo.name}}
+            <ion-note slot="end">{{teacherInfo.gender | enumText:"Gender"}}</ion-note>
+            <ion-note slot="end">{{teacherInfo.profession | enumText:"Profession"}}</ion-note>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

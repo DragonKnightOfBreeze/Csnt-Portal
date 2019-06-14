@@ -3,7 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {UserService} from "../../../../service/api/user.service";
 import {DevelopmentColumnService} from "../../../../service/api/development-column.service";
-import {Dynamic} from "../../../../domain/entity/DevelopmentColumn";
+import {DevelopmentColumn} from "../../../../domain/entity/DevelopmentColumn";
 
 @Component({
   selector: "app-development-column-detail",
@@ -11,7 +11,7 @@ import {Dynamic} from "../../../../domain/entity/DevelopmentColumn";
   styleUrls: ["./development-column-detail.page.scss"],
 })
 export class DevelopmentColumnDetailPage implements OnInit {
-  column: Dynamic;
+  column: DevelopmentColumn;
 
   id: number;
 

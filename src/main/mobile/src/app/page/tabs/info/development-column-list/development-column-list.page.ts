@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {DevelopmentColumnService} from "../../../../service/api/development-column.service";
 import {UserService} from "../../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
-import {Dynamic} from "../../../../domain/entity/DevelopmentColumn";
+import {DevelopmentColumn} from "../../../../domain/entity/DevelopmentColumn";
 import {Page} from "../../../../domain/interface/Page";
 import {SearchParams} from "../../../../domain/vo/SearchParams";
 
@@ -14,8 +14,8 @@ import {SearchParams} from "../../../../domain/vo/SearchParams";
 export class DevelopmentColumnListPage implements OnInit {
   searchParams: SearchParams<string>;
 
-  currentPage: Page<Dynamic>;
-  newColumn = new Dynamic();
+  currentPage: Page<DevelopmentColumn>;
+  newColumn = new DevelopmentColumn();
 
   constructor(private service: DevelopmentColumnService,
               public userService: UserService,

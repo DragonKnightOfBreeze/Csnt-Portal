@@ -8,5 +8,25 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{teacherInfo.name}}
+      </ion-card-title>
+      <ion-card-subtitle>
+        <ion-note slot="start">#{{teacherInfo.id}}</ion-note>
+        <ion-note slot="start">{{teacherInfo.gender | enumText:"Gender"}}</ion-note>
+        <ion-note slot="start">专业：{{teacherInfo.profession | enumText:"Profession"}}</ion-note>
+        <ion-note slot="start">
+          所属队伍：
+          <a routerLink="/teacher-team/{{teacherInfo.teacherTeam?.id}}">{{teacherInfo.teacherTeam?.name}}</a>
+        </ion-note>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text>
+        {{teacherInfo.introduce}}
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
