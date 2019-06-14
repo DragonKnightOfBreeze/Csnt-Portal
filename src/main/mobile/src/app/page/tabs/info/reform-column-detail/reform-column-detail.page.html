@@ -8,5 +8,22 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{column.title}}
+      </ion-card-title>
+      <ion-card-subtitle>
+        <ion-note slot="start">#{{column.id}}</ion-note>
+        <ion-note slot="start">作者：{{column.author}}</ion-note>
+        <ion-note slot="start">发布时间：{{column.publishTime | localeDate}}</ion-note>
+        <ion-note slot="start">更新时间：{{column.updateTime | localeDate}}</ion-note>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text>
+        {{column.content}}
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
