@@ -11,6 +11,7 @@ export class LoginGuard implements CanLoad {
               private userService: UserService) {
   }
 
+
   canLoad(route: Route, segments: UrlSegment[]): boolean {
     if (this.userService.hasLogin) {
       return true;
