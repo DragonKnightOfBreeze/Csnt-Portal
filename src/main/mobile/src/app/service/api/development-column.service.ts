@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {DevelopmentColumn} from "../../domain/entity/DevelopmentColumn";
+import {Dynamic} from "../../domain/entity/DevelopmentColumn";
 import {Observable} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
 import {catchError} from "rxjs/operators";
@@ -16,10 +16,10 @@ export class DevelopmentColumnService {
   }
 
 
-  create(column: DevelopmentColumn): Observable<DevelopmentColumn> {
+  create(column: Dynamic): Observable<Dynamic> {
     const url = `${apiUrl}/development-column/create`;
-    return this.http.post<DevelopmentColumn>(url, column).pipe(
-      catchError(handleError("create", new DevelopmentColumn()))
+    return this.http.post<Dynamic>(url, column).pipe(
+      catchError(handleError("create", new Dynamic()))
     );
   }
 
@@ -30,32 +30,32 @@ export class DevelopmentColumnService {
     );
   }
 
-  update(column: DevelopmentColumn): Observable<DevelopmentColumn> {
+  update(column: Dynamic): Observable<Dynamic> {
     const url = `${apiUrl}/development-column/${column.id}`;
-    return this.http.put<DevelopmentColumn>(url, column).pipe(
+    return this.http.put<Dynamic>(url, column).pipe(
       catchError(handleError("update", column))
     );
   }
 
-  get(id: number): Observable<DevelopmentColumn> {
+  get(id: number): Observable<Dynamic> {
     const url = `${apiUrl}/development-column/${id}`;
-    return this.http.get<DevelopmentColumn>(url).pipe(
+    return this.http.get<Dynamic>(url).pipe(
       catchError(handleError("get", null))
     );
   }
 
-  list(page: number, size: number): Observable<Page<DevelopmentColumn>> {
+  list(page: number, size: number): Observable<Page<Dynamic>> {
     const url = `${apiUrl}/development-column/list`;
     const params = {page: page + "", size: size + ""};
-    return this.http.get<Page<DevelopmentColumn>>(url, {params: params}).pipe(
+    return this.http.get<Page<Dynamic>>(url, {params: params}).pipe(
       catchError(handleError("list", null))
     );
   }
 
-  searchByTitle(title: string, page: number, size: number): Observable<Page<DevelopmentColumn>> {
+  searchByTitle(title: string, page: number, size: number): Observable<Page<Dynamic>> {
     const url = `${apiUrl}/development-column/search`;
     const params = {title: title, page: page + "", size: size + ""};
-    return this.http.get<Page<DevelopmentColumn>>(url, {params: params}).pipe(
+    return this.http.get<Page<Dynamic>>(url, {params: params}).pipe(
       catchError(handleError("searchByTitle", null))
     );
   }

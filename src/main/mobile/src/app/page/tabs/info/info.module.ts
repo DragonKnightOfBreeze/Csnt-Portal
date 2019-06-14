@@ -23,6 +23,9 @@ import {Error404Page} from "../../error/error404/error404.page";
 import {LoginGuard} from "../../../service/guard/login-guard.service";
 import {InfoMenuPage} from "./info-menu/info-menu.page";
 import {AppModule} from "../../../app.module";
+import {DynamicCategoryPopoverPage} from "./dynamic-category-popover/dynamic-category-popover.page";
+import {DynamicSearchModalPage} from "./dynamic-search-modal/dynamic-search-modal.page";
+import {DynamicCreateModalPage} from "./dynamic-create-modal/dynamic-create-modal.page";
 
 const routes: Routes = [{
   path: "",
@@ -110,6 +113,9 @@ const routes: Routes = [{
     DevelopmentColumnDetailPage,
     DynamicListPage,
     DynamicDetailPage,
+    DynamicCategoryPopoverPage,
+    DynamicSearchModalPage,
+    DynamicCreateModalPage,
     IntroduceListPage,
     IntroduceDetailPage,
     ReformColumnListPage,

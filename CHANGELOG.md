@@ -18,3 +18,4 @@
 * 1.2.6 完成account-page组件的html、ts，为各组件导入AppModule。
 * 1.2.7 完成login、register组件的html、ts。
 * 1.2.8 完成各种column组件的html、ts（复制粘贴）。
+* 1.2.9 完成dynamic-list、dynamic-detail组件的html、ts。创建其他相关的dynamic组件。

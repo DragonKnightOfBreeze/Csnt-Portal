@@ -24,6 +24,8 @@ import {Events} from "@ionic/angular";
 export class UserService implements OnInit {
   /**当前用户信息的行为主题对象。*/
   public currentUserSubject = new BehaviorSubject<JwtUserResponse>(null);
+  /**当前用户信息。*/
+  public currentUser = this.currentUserSubject.value;
   /**当前用户是否已登录。*/
   public hasLogin = this.currentUserSubject.value != null;
   /**当前用户是否为管理员。*/

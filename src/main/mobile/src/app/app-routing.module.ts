@@ -24,6 +24,24 @@ const routes: Routes = [{
   loadChildren: "./page/error/error.module#ErrorPageModule"
 },];
 {
+  'dynamic-create-modal', loadChildren;
+:
+  './page/tabs/info/dynamic-create-modal/dynamic-create-modal.module#DynamicCreateModalPageModule'
+}
+,
+{
+  'dynamic-search-modal', loadChildren;
+:
+  './page/tabs/info/dynamic-search-modal/dynamic-search-modal.module#DynamicSearchModalPageModule'
+}
+,
+{
+  'dynamic-category-popover', loadChildren;
+:
+  './page/tabs/info/dynamic-category-popover/dynamic-category-popover.module#DynamicCategoryPopoverPageModule'
+}
+,
+{
   'account-menu', loadChildren;
 :
   './page/tabs/account/account-menu/account-menu.module#AccountMenuPageModule'

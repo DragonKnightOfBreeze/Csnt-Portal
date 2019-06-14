@@ -8,5 +8,28 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{dynamic.subject}}
+      </ion-card-title>
+      <ion-card-subtitle>
+        <ion-note slot="start">#{{dynamic.id}}</ion-note>
+        <ion-note slot="start">分类：{{dynamic.category | enumText:"DynamicCategory"}}</ion-note>
+        <ion-note slot="start">发起用户：{{dynamic.sponsorUser?.username || "未知"}}</ion-note>
+        <ion-note slot="start">发起时间：{{dynamic.sponsorTime | localeDate}}</ion-note>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text>
+        {{dynamic.content}}
+      </ion-text>
+      <ion-button color="primary" routerLink="/tabs/info/development-column/{{dynamic.id}}">
+        详情
+      </ion-button>
+      <ion-button color="danger" (click)="delete()" *ngIf="isSponsorUser()">
+        删除动态
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

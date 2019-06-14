@@ -8,5 +8,54 @@
 </ion-header>
 
 <ion-content>
+  <ion-searchbar placeholder="按主题搜索……" (ionInput)="search($event)"></ion-searchbar>
 
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="presentCategoryPopover()">选择分类</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button (click)="presentSearchModal()">高级查询</ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ng-container *ngFor="let dynamic of currentPage.content">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{dynamic.subject}}
+        </ion-card-title>
+        <ion-card-subtitle>
+          <ion-note slot="start">#{{dynamic.id}}</ion-note>
+          <ion-note slot="start">分类：{{dynamic.category | enumText:"DynamicCategory"}}</ion-note>
+          <ion-note slot="start">发起用户：{{dynamic.sponsorUser?.username || "未知"}}</ion-note>
+          <ion-note slot="start">发起时间：{{dynamic.sponsorTime | localeDate}}</ion-note>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text>
+          {{dynamic.content | limitText}}
+        </ion-text>
+        <ion-button color="primary" routerLink="/tabs/info/development-column/{{dynamic.id}}">
+          详情
+        </ion-button>
+        <!--TODO-->
+        <ion-button color="success" *ngIf="isSponsorUser(dynamic)">
+          创建动态
+        </ion-button>
+        <ion-button color="danger" (click)="delete(dynamic.id)" *ngIf="isSponsorUser(dynamic)">
+          删除动态
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ion-row>
+    <ion-col align-self-end>
+      <ion-button (click)="goPreviousPage()" [disabled]="currentPage.first">上一页</ion-button>
+    </ion-col>
+    <ion-col align-self-start="">
+      <ion-button (click)="goNextPage()" [disabled]="currentPage.last">下一页</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>
