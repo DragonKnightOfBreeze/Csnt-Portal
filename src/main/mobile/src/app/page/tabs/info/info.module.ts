@@ -102,7 +102,6 @@ const routes: Routes = [{
   ],
   declarations: [
     InfoPage,
-
     InfoMenuPage,
 
     DevelopmentColumnListPage,

@@ -14,3 +14,4 @@
 * 1.2.2 重命名组件显示的标题，完善ionic路由的配置，修正userService，使用ionic自身的storage
 * 1.2.3 为详情页添加ion-back-button
 * 1.2.4 添加info-menu组件，并为列表页添加ion-menu-toggle
+* 1.2.5 添加account-menu组件，替换ion-menu-toggle为ion-menu-button

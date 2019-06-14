@@ -24,6 +24,12 @@ const routes: Routes = [{
   loadChildren: "./page/error/error.module#ErrorPageModule"
 },];
 {
+  'account-menu', loadChildren;
+:
+  './page/tabs/account/account-menu/account-menu.module#AccountMenuPageModule'
+}
+,
+{
   'info-menu', loadChildren;
 :
   './page/tabs/info/info-menu/info-menu.module#InfoMenuPageModule'

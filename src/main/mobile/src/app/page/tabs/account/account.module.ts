@@ -6,6 +6,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {IonicModule} from "@ionic/angular";
 
 import {AccountPage} from "./account.page";
+import {AccountMenuPage} from "./account-menu/account-menu.page";
 
 const routes: Routes = [{
   path: "",
@@ -19,7 +20,10 @@ const routes: Routes = [{
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AccountPage]
+  declarations: [
+    AccountPage,
+    AccountMenuPage
+  ]
 })
 export class AccountPageModule {
 }
