@@ -22,6 +22,7 @@ import {TeacherTeamDetailPage} from "./teacher-team-detail/teacher-team-detail.p
 import {Error404Page} from "../../error/error404/error404.page";
 import {LoginGuard} from "../../../service/guard/login-guard.service";
 import {InfoMenuPage} from "./info-menu/info-menu.page";
+import {AppModule} from "../../../app.module";
 
 const routes: Routes = [{
   path: "",
@@ -98,7 +99,8 @@ const routes: Routes = [{
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AppModule
   ],
   declarations: [
     InfoPage,

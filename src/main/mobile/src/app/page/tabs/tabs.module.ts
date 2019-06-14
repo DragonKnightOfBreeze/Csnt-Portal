@@ -7,6 +7,7 @@ import {IonicModule} from "@ionic/angular";
 
 import {TabsPage} from "./tabs.page";
 import {LoginGuard} from "../../service/guard/login-guard.service";
+import {AppModule} from "../../app.module";
 
 const routes: Routes = [{
   path: '',
@@ -28,7 +29,8 @@ const routes: Routes = [{
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AppModule
   ],
   declarations: [TabsPage]
 })

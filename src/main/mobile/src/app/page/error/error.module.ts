@@ -8,6 +8,7 @@ import {IonicModule} from "@ionic/angular";
 import {ErrorPage} from "./error.page";
 import {Error403Page} from "./error403/error403.page";
 import {Error404Page} from "./error404/error404.page";
+import {AppModule} from "../../app.module";
 
 const routes: Routes = [{
   path: "",
@@ -25,7 +26,8 @@ const routes: Routes = [{
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AppModule
   ],
   declarations: [
     ErrorPage,

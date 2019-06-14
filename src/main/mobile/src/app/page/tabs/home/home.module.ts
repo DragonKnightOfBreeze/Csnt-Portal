@@ -6,6 +6,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {IonicModule} from "@ionic/angular";
 
 import {HomePage} from "./home.page";
+import {AppModule} from "../../../app.module";
 
 const routes: Routes = [{
   path: "",
@@ -17,7 +18,8 @@ const routes: Routes = [{
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    AppModule
   ],
   declarations: [HomePage]
 })

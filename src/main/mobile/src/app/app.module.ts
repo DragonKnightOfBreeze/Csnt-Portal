@@ -13,20 +13,9 @@ import {EnumTextPipe} from "./pipe/enum-text.pipe";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "../../../frontend/src/app/service/interceptor/jwt-interceptor.service";
 import {ErrorInterceptor} from "../../../frontend/src/app/service/interceptor/error-interceptor.service";
+import {LocaleDatePipe} from "./pipe/locale-date.pipe";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    EnumConstsPipe,
-    EnumTextPipe,
-  ],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    IonicModule.forRoot(),
-    AppRoutingModule
-  ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -35,6 +24,23 @@ import {ErrorInterceptor} from "../../../frontend/src/app/service/interceptor/er
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     //提供错误拦截器
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
+  declarations: [
+    AppComponent,
+    EnumConstsPipe,
+    EnumTextPipe,
+    LocaleDatePipe
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(),
+    AppRoutingModule
+  ],
+  exports: [
+    EnumConstsPipe,
+    EnumTextPipe,
+    LocaleDatePipe
   ],
   bootstrap: [AppComponent]
 })
