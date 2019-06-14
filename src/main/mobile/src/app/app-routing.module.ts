@@ -22,7 +22,12 @@ const routes: Routes = [{
 }, {
   path: "error",
   loadChildren: "./page/error/error.module#ErrorPageModule"
-}];
+},];
+{
+  'info-menu', loadChildren;
+:
+  './page/tabs/info/info-menu/info-menu.module#InfoMenuPageModule'
+}
 
 @NgModule({
   imports: [

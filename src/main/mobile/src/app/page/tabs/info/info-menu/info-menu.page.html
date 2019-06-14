@@ -1,0 +1,33 @@
+<!--资料菜单，使用ion-menu-toggle自动链接，不需要编写额外的ts代码-->
+<ion-menu class="info-menu" side="start" menuId="info-menu">
+  <ion-header>
+    <ion-toolbar color="medium">
+      <ion-title>info-menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <!--lines="inset" 使每行元素都带有下划线-->
+    <ion-list lines="inset">
+      <!--仍然使用routeLink链接其他路由-->
+      <ion-item color="light" routerLink="/tabs/info/introduce">
+        专业特色介绍
+      </ion-item>
+      <ion-item color="light" routerLink="/tabs/info/dynamic">
+        实时动态
+      </ion-item>
+      <ion-item color="light" routerLink="/tabs/info/development-column">
+        专业发展专栏
+      </ion-item>
+      <ion-item color="light" routerLink="/tabs/info/reform-column">
+        教学改革专栏
+      </ion-item>
+      <ion-item color="light" routerLink="/tabs/info/study-column">
+        学习专栏
+      </ion-item>
+      <ion-item color="light" routerLink="/tabs/info/teacher-team">
+        教师队伍
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

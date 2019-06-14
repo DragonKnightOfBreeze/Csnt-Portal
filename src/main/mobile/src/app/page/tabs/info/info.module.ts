@@ -21,6 +21,7 @@ import {TeacherTeamListPage} from "./teacher-team-list/teacher-team-list.page";
 import {TeacherTeamDetailPage} from "./teacher-team-detail/teacher-team-detail.page";
 import {Error404Page} from "../../error/error404/error404.page";
 import {LoginGuard} from "../../../service/guard/login-guard.service";
+import {InfoMenuPage} from "./info-menu/info-menu.page";
 
 const routes: Routes = [{
   path: "",
@@ -101,6 +102,9 @@ const routes: Routes = [{
   ],
   declarations: [
     InfoPage,
+
+    InfoMenuPage,
+
     DevelopmentColumnListPage,
     DevelopmentColumnDetailPage,
     DynamicListPage,

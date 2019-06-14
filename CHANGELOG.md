@@ -13,3 +13,4 @@
 * 1.2.1 完成ionic目录和文件的创建，完成ionic路由的配置。
 * 1.2.2 重命名组件显示的标题，完善ionic路由的配置，修正userService，使用ionic自身的storage
 * 1.2.3 为详情页添加ion-back-button
+* 1.2.4 添加info-menu组件，并为列表页添加ion-menu-toggle
