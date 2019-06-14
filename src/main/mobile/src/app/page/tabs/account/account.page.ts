@@ -20,7 +20,7 @@ export class AccountPage implements OnInit {
   Role = Role;
   Profession = Profession;
 
-  constructor(public userService: UserService,
+  constructor(public service: UserService,
               private route: ActivatedRoute) {
   }
 
@@ -31,13 +31,13 @@ export class AccountPage implements OnInit {
   }
 
   private getAccountInfo() {
-    this.userService.getAccountInfo(this.username).subscribe(user => {
+    this.service.getAccountInfo(this.username).subscribe(user => {
       this.user = user;
     });
   }
 
   updateAccountInfo() {
-    this.userService.updateAccountInfo(this.user).subscribe(updatedUser => {
+    this.service.updateAccountInfo(this.user).subscribe(updatedUser => {
       this.user = updatedUser;
     });
   }

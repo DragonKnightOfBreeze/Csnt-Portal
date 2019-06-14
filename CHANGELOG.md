@@ -17,3 +17,4 @@
 * 1.2.5 添加account-menu组件，替换ion-menu-toggle为ion-menu-button。
 * 1.2.6 完成account-page组件的html、ts，为各组件导入AppModule。
 * 1.2.7 完成login、register组件的html、ts。
+* 1.2.8 完成各种column组件的html、ts（复制粘贴）。

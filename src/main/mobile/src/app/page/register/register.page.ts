@@ -18,7 +18,7 @@ export class RegisterPage implements OnInit {
   Role = Role;
   Profession = Profession;
 
-  constructor(public userService: UserService,
+  constructor(public service: UserService,
               private router: Router) {
   }
 
@@ -28,7 +28,7 @@ export class RegisterPage implements OnInit {
 
   register() {
     //如果注册成功，则跳转到登录页
-    this.userService.register(this.user).subscribe(() => {
+    this.service.register(this.user).subscribe(() => {
       this.router.navigate(["/login"], {queryParams: {returnUrl: "/"}});
     });
   }

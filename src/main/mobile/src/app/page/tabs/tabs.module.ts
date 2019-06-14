@@ -25,14 +25,17 @@ const routes: Routes = [{
 }];
 
 @NgModule({
+  declarations: [
+    TabsPage,
+    NavigationComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     AppModule
-  ],
-  declarations: [TabsPage]
+  ]
 })
 export class TabsPageModule {
 }

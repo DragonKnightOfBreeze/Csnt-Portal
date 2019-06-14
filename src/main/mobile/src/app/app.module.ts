@@ -14,6 +14,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "../../../frontend/src/app/service/interceptor/jwt-interceptor.service";
 import {ErrorInterceptor} from "../../../frontend/src/app/service/interceptor/error-interceptor.service";
 import {LocaleDatePipe} from "./pipe/locale-date.pipe";
+import {LimitTextPipe} from "./pipe/limit-text.pipe";
 
 @NgModule({
   providers: [
@@ -29,7 +30,8 @@ import {LocaleDatePipe} from "./pipe/locale-date.pipe";
     AppComponent,
     EnumConstsPipe,
     EnumTextPipe,
-    LocaleDatePipe
+    LimitTextPipe,
+    LocaleDatePipe,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import {LocaleDatePipe} from "./pipe/locale-date.pipe";
   exports: [
     EnumConstsPipe,
     EnumTextPipe,
+    LimitTextPipe,
     LocaleDatePipe
   ],
   bootstrap: [AppComponent]

@@ -1,12 +1,49 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button menu="info-menu"></ion-menu-toggle>
+      <ion-menu-button menu="info-menu"></ion-menu-button>
     </ion-buttons>
     <ion-title>学习专栏</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar placeholder="按标题搜索……" (ionInput)="search($event)"></ion-searchbar>
 
+  <ng-container *ngFor="let column of currentPage.content">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{column.title}}
+        </ion-card-title>
+        <ion-card-subtitle>
+          <ion-note slot="start">#{{column.id}}</ion-note>
+          <ion-note slot="start">作者：{{column.author}}</ion-note>
+          <ion-note slot="start">发布时间：{{column.publishTime | localeDate}}</ion-note>
+          <ion-note slot="start">更新时间：{{column.updateTime | localeDate}}</ion-note>
+        </ion-card-subtitle>
+        <ion-card-subtitle>
+          <ion-note slot="start">难度：{{column.profession | enumText:"Profession"}}</ion-note>
+          <ion-note slot="start">专业：{{column.difficultyLevel | enumText:"DifficultyLevel"}}</ion-note>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text>
+          {{column.content | limitText}}
+        </ion-text>
+        <ion-button color="primary" routerLink="/tabs/info/development-column/{{column.id}}">
+          详情
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ion-row>
+    <ion-col align-self-end>
+      <ion-button (click)="goPreviousPage()" [disabled]="currentPage.first">上一页</ion-button>
+    </ion-col>
+    <ion-col align-self-start="">
+      <ion-button (click)="goNextPage()" [disabled]="currentPage.last">下一页</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

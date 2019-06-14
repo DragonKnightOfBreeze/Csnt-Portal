@@ -1,7 +1,7 @@
 /**
- * 查询参数的封装对象。
+ * 查询参数的封装接口。
  */
-export class SearchParams<T> {
+export interface SearchParams<T> {
   /**查询类型。*/
   type: string;
   /**查询域。*/

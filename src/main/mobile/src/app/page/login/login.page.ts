@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
 
   loginVo = new UserLoginVo();
 
-  constructor(public userService: UserService,
+  constructor(public service: UserService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
 
   login() {
     //如果登录成功，无论用户角色如何，都跳转到之前访问的页面
-    this.userService.login(this.loginVo).subscribe(() => {
+    this.service.login(this.loginVo).subscribe(() => {
       this.router.navigate([this.returnUrl]);
     });
   }
