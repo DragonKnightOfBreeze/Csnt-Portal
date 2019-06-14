@@ -20,6 +20,7 @@ import {TeacherInfoDetailPage} from "./teacher-info-detail/teacher-info-detail.p
 import {TeacherTeamListPage} from "./teacher-team-list/teacher-team-list.page";
 import {TeacherTeamDetailPage} from "./teacher-team-detail/teacher-team-detail.page";
 import {Error404Page} from "../../error/error404/error404.page";
+import {LoginGuard} from "../../../service/guard/login-guard.service";
 
 const routes: Routes = [{
   path: "",
@@ -68,7 +69,8 @@ const routes: Routes = [{
   }, {
     path: ":id",
     component: StudyColumnDetailPage
-  }]
+  }],
+  canLoad: [LoginGuard]
 }, {
   path: "teacher-info",
   children: [{
@@ -97,7 +99,22 @@ const routes: Routes = [{
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InfoPage]
+  declarations: [
+    InfoPage,
+    DevelopmentColumnListPage,
+    DevelopmentColumnDetailPage,
+    DynamicListPage,
+    DynamicDetailPage,
+    IntroduceListPage,
+    IntroduceDetailPage,
+    ReformColumnListPage,
+    ReformColumnDetailPage,
+    StudyColumnListPage,
+    StudyColumnDetailPage,
+    TeacherInfoDetailPage,
+    TeacherTeamListPage,
+    TeacherTeamDetailPage
+  ]
 })
 export class InfoPageModule {
 }

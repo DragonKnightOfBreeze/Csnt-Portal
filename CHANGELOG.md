@@ -10,4 +10,5 @@
 ## 1.2.x
 
 * 1.2.0 创建ionic子项目，更新README文档。
-* 1.2.3 完成ionic目录和文件的创建，完成ionic路由的配置。
+* 1.2.1 完成ionic目录和文件的创建，完成ionic路由的配置。
+* 1.2.2 重命名组件显示的标题，完善ionic路由的配置，修正userService，使用ionic自身的storage

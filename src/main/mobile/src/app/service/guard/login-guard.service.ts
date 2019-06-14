@@ -1,28 +1,22 @@
 import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from "@angular/router";
+import {CanLoad, Route, Router, UrlSegment} from "@angular/router";
 import {UserService} from "../api/user.service";
 
 /**
- * 已登录的守卫的服务。要求用户已登录。
+ * 要求用户已登录的守卫。
  */
 @Injectable({providedIn: "root"})
-export class LoginGuard implements CanActivate, CanActivateChild {
+export class LoginGuard implements CanLoad {
   constructor(private router: Router,
               private userService: UserService) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const currentUser = this.userService.currentUserSubject.value;
-    //如果当前用户已登录，则通过验证，否则转到首页或401
-    if (currentUser) {
+  canLoad(route: Route, segments: UrlSegment[]): boolean {
+    if (this.userService.hasLogin) {
       return true;
     }
     console.log("未验证！先请登录。");
-    this.router.navigate(["/login"], {queryParams: {returnUrl: state.url}});
+    this.router.navigate(["/login"], {queryParams: {returnUrl: segments}});
     return false;
-  }
-
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.canActivate(childRoute, state);
   }
 }

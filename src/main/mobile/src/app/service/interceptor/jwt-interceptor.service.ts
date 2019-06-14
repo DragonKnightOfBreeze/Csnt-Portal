@@ -11,6 +11,7 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private userService: UserService) {
   }
 
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     //如果可行，添加jwt令牌到验证头中
     const currentUser = this.userService.currentUserSubject.value;

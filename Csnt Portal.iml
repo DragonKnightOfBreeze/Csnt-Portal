@@ -41,6 +41,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/frontend/dist" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/frontend/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/mobile/www" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

@@ -6,6 +6,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {IonicModule} from "@ionic/angular";
 
 import {TabsPage} from "./tabs.page";
+import {LoginGuard} from "../../service/guard/login-guard.service";
 
 const routes: Routes = [{
   path: '',
@@ -18,7 +19,8 @@ const routes: Routes = [{
   loadChildren: "./info/info.module#InfoModule"
 }, {
   path: "account",
-  loadChildren: "./account.module#AccountModule"
+  loadChildren: "./account.module#AccountModule",
+  canLoad: [LoginGuard]
 }];
 
 @NgModule({
