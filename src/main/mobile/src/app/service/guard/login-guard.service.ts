@@ -17,7 +17,7 @@ export class LoginGuard implements CanLoad {
       return true;
     }
     console.log("未验证！先请登录。");
-    this.router.navigate(["/login"], {queryParams: {returnUrl: segments}});
+    this.router.navigate(["/login"], {queryParams: {returnUrl: segments[0].path}});
     return false;
   }
 }

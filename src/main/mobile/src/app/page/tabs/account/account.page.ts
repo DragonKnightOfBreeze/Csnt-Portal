@@ -12,12 +12,13 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ["./account.page.scss"],
 })
 export class AccountPage implements OnInit {
+  username: string;
+
   user: User;
 
   Gender = Gender;
   Role = Role;
   Profession = Profession;
-
 
   constructor(public userService: UserService,
               private route: ActivatedRoute) {
@@ -25,13 +26,12 @@ export class AccountPage implements OnInit {
 
 
   ngOnInit() {
+    this.username = this.route.snapshot.paramMap.get("username");
     this.getAccountInfo();
   }
 
   private getAccountInfo() {
-    //从路由地址中得到路由参数
-    let username = this.route.snapshot.paramMap.get("username");
-    this.userService.getAccountInfo(username).subscribe(user => {
+    this.userService.getAccountInfo(this.username).subscribe(user => {
       this.user = user;
     });
   }

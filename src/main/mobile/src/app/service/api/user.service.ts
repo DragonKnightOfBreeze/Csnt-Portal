@@ -22,9 +22,11 @@ import {Events} from "@ionic/angular";
  */
 @Injectable({providedIn: "root"})
 export class UserService implements OnInit {
-  /**当前用户信息的可观察对象。*/
-  public currentUserSubject: BehaviorSubject<JwtUserResponse>;
+  /**当前用户信息的行为主题对象。*/
+  public currentUserSubject = new BehaviorSubject<JwtUserResponse>(null);
+  /**当前用户是否已登录。*/
   public hasLogin = this.currentUserSubject.value != null;
+  /**当前用户是否为管理员。*/
   public isAdmin = this.currentUserSubject.value && this.currentUserSubject.value.role == "ADMIN";
 
   constructor(private http: HttpClient,
@@ -40,9 +42,8 @@ export class UserService implements OnInit {
 
   private getCurrentUser() {
     this.storage.get("currentUser").then(value => {
-      this.currentUserSubject = new BehaviorSubject(value as JwtUserResponse)
+      this.currentUserSubject.next(value as JwtUserResponse);
     });
-    this.currentUserSubject = new BehaviorSubject(null)
   }
 
   login(vo: UserLoginVo): Observable<JwtUserResponse> {

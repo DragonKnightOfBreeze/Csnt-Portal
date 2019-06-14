@@ -16,3 +16,4 @@
 * 1.2.4 添加info-menu组件，并为列表页添加ion-menu-toggle。
 * 1.2.5 添加account-menu组件，替换ion-menu-toggle为ion-menu-button。
 * 1.2.6 完成account-page组件的html、ts，为各组件导入AppModule。
+* 1.2.7 完成login、register组件的html、ts。
