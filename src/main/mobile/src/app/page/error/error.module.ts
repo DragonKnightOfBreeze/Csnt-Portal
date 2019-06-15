@@ -7,19 +7,21 @@ import {IonicModule} from "@ionic/angular";
 
 import {ErrorPage} from "./error.page";
 import {Error403Page} from "./error403/error403.page";
-import {Error404Page} from "./error404/error404.page";
 import {SharedModule} from "../../shared.module";
+import {Error404Page} from "./error404/error404.page";
 
-const routes: Routes = [{
-  path: "",
-  component: ErrorPage
-}, {
-  path: "403",
-  component: Error403Page
-}, {
-  path: "404",
-  component: Error404Page
-}];
+const routes: Routes = [
+  {
+    path: "",
+    component: ErrorPage
+  }, {
+    path: "403",
+    component: Error403Page
+  }, {
+    path: "404",
+    component: Error404Page
+  }
+];
 
 @NgModule({
   imports: [

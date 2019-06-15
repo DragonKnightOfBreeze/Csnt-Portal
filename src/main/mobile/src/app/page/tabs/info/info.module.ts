@@ -19,7 +19,6 @@ import {StudyColumnDetailPage} from "./study-column/study-column-detail/study-co
 import {TeacherInfoDetailPage} from "./teacher-info/teacher-info-detail/teacher-info-detail.page";
 import {TeacherTeamListPage} from "./teacher-team/teacher-team-list/teacher-team-list.page";
 import {TeacherTeamDetailPage} from "./teacher-team/teacher-team-detail/teacher-team-detail.page";
-import {Error404Page} from "../../error/error404/error404.page";
 import {LoginGuard} from "../../../service/guard/login-guard.service";
 import {InfoMenuPage} from "./info-menu/info-menu.page";
 import {DynamicCategoryPopoverPage} from "./dynamic/dynamic-category-popover/dynamic-category-popover.page";
@@ -29,75 +28,77 @@ import {TeacherTeamSearchModalPage} from "./teacher-team/teacher-team-search-mod
 import {TeacherTeamLevelPopoverPage} from "./teacher-team/teacher-team-level-popover/teacher-team-level-popover.page";
 import {SharedModule} from "../../../shared.module";
 
-const routes: Routes = [{
-  path: "",
-  component: InfoPage
-}, {
-  path: "development-column",
-  children: [{
+const routes: Routes = [
+  {
     path: "",
-    component: DevelopmentColumnListPage
+    component: InfoPage
   }, {
-    path: ":id",
-    component: DevelopmentColumnDetailPage
-  }]
-}, {
-  path: "dynamic",
-  children: [{
-    path: "",
-    component: DynamicListPage
+    path: "development-column",
+    children: [{
+      path: "",
+      component: DevelopmentColumnListPage
+    }, {
+      path: ":id",
+      component: DevelopmentColumnDetailPage
+    }]
   }, {
-    path: ":id",
-    component: DynamicDetailPage
-  }]
-}, {
-  path: "introduce",
-  children: [{
-    path: "",
-    component: IntroduceListPage
+    path: "dynamic",
+    children: [{
+      path: "",
+      component: DynamicListPage
+    }, {
+      path: ":id",
+      component: DynamicDetailPage
+    }]
   }, {
-    path: ":id",
-    component: IntroduceDetailPage
-  }]
-}, {
-  path: "reform-column",
-  children: [{
-    path: "",
-    component: ReformColumnListPage
+    path: "introduce",
+    children: [{
+      path: "",
+      component: IntroduceListPage
+    }, {
+      path: ":id",
+      component: IntroduceDetailPage
+    }]
   }, {
-    path: ":id",
-    component: ReformColumnDetailPage
-  }]
-}, {
-  path: "study-column",
-  children: [{
-    path: "",
-    component: StudyColumnListPage
+    path: "reform-column",
+    children: [{
+      path: "",
+      component: ReformColumnListPage
+    }, {
+      path: ":id",
+      component: ReformColumnDetailPage
+    }]
   }, {
-    path: ":id",
-    component: StudyColumnDetailPage
-  }],
-  canLoad: [LoginGuard]
-}, {
-  path: "teacher-info",
-  children: [{
-    path: ":id",
-    component: TeacherInfoDetailPage
-  }]
-}, {
-  path: "teacher-team",
-  children: [{
-    path: "",
-    component: TeacherTeamListPage
+    path: "study-column",
+    children: [{
+      path: "",
+      component: StudyColumnListPage
+    }, {
+      path: ":id",
+      component: StudyColumnDetailPage
+    }],
+    canLoad: [LoginGuard]
   }, {
-    path: "",
-    component: TeacherTeamDetailPage
-  }]
-}, {
-  //当都不匹配时重定向到404页面
-  path: "**",
-  component: Error404Page
-}];
+    path: "teacher-info",
+    children: [{
+      path: ":id",
+      component: TeacherInfoDetailPage
+    }]
+  }, {
+    path: "teacher-team",
+    children: [{
+      path: "",
+      component: TeacherTeamListPage
+    }, {
+      path: "",
+      component: TeacherTeamDetailPage
+    }]
+  }, {
+    //当都不匹配时重定向到404页面，不能直接引用组件
+    path: "**",
+    redirectTo: "error/404"
+  }
+];
 
 @NgModule({
   imports: [

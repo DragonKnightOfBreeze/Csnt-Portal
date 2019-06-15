@@ -8,11 +8,9 @@ import {IonicModule} from "@ionic/angular";
 import {TabsPage} from "./tabs.page";
 import {LoginGuard} from "../../service/guard/login-guard.service";
 import {SharedModule} from "../../shared.module";
-import {HomePageModule} from "./home/home.module";
-import {InfoPageModule} from "./info/info.module";
-import {AccountPageModule} from "./account/account.module";
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path: '',
   component: TabsPage
 }, {
@@ -25,7 +23,8 @@ const routes: Routes = [{
   path: "account",
   loadChildren: "./account/account.module#AccountPageModule",
   canLoad: [LoginGuard]
-}];
+  }
+];
 
 @NgModule({
   declarations: [
@@ -36,10 +35,7 @@ const routes: Routes = [{
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    SharedModule,
-    HomePageModule,
-    InfoPageModule,
-    AccountPageModule
+    SharedModule
   ]
 })
 export class TabsPageModule {

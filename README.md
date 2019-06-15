@@ -236,3 +236,7 @@ Error: RouterModule.forRoot() called twice. Lazy loaded modules should use Route
 ERROR Error: StaticInjectorError(AppModule)[IonRouterOutlet -> ChildrenOutletContexts]: 
 StaticInjectorError(Platform: core)[IonRouterOutlet -> ChildrenOutletContexts]: 
 ```
+
+问题解决：
+
+* 对于每个包含`router-outlet`的组件的html文件，其ts文件中必须具有对`RouterModule.forRoot()`的引用。

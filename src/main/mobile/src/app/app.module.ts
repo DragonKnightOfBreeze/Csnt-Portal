@@ -17,7 +17,8 @@ import {IonicStorageModule} from "@ionic/storage";
 //存在多级路由定义在不同模块对应的路由模块里。
 //有些路由存在激活或读取限制(canLoad,canActive)，有些路由带有数据(data)。
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path: "",
   redirectTo: "/tabs",
   pathMatch: "full"
@@ -33,7 +34,8 @@ const routes: Routes = [{
 }, {
   path: "error",
   loadChildren: "./page/error/error.module#ErrorPageModule"
-},];
+  }
+];
 
 @NgModule({
   providers: [
