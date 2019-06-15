@@ -45,13 +45,15 @@
       <ion-item>
         <ion-radio-group [(ngModel)]="user.gender" name="gender" required>
           <ion-grid>
-            <ion-row *ngFor="let gender of Gender | enumConsts;first as isFirst">
-              <ion-col>
-                <ion-item>
-                  <ion-label>{{gender | enumText:"Gender"}}</ion-label>
-                  <ion-radio [value]="gender" [checked]="isFirst"></ion-radio>
-                </ion-item>
-              </ion-col>
+            <ion-row>
+              <ng-container *ngFor="let gender of Gender | enumConsts;first as isFirst">
+                <ion-col>
+                  <ion-item>
+                    <ion-label>{{gender | enumText:"Gender"}}</ion-label>
+                    <ion-radio [value]="gender" [checked]="isFirst"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ng-container>
             </ion-row>
           </ion-grid>
         </ion-radio-group>
@@ -61,22 +63,25 @@
       <ion-item>
         <ion-radio-group [(ngModel)]="user.role" name="role" required>
           <ion-grid>
-            <ion-row *ngFor="let role of Role| enumConsts;first as isFirst">
-              <ion-col *ngIf="role!=Role.Admin">
-                <ion-item>
-                  <ion-label>{{role | enumText:"Role"}}</ion-label>
-                  <ion-radio [value]="role" [checked]="isFirst"></ion-radio>
-                </ion-item>
-              </ion-col>
+            <ion-row>
+              <ng-container *ngFor="let role of Role| enumConsts;first as isFirst">
+                <ion-col *ngIf="role!=Role.Admin">
+                  <ion-item>
+                    <ion-label>{{role | enumText:"Role"}}</ion-label>
+                    <ion-radio [value]="role" [checked]="isFirst"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ng-container>
             </ion-row>
           </ion-grid>
         </ion-radio-group>
       </ion-item>
 
       <ion-item>
-        <ion-select [(ngModel)]="user.profession" name="profession" required
-                    *ngFor="let profession of Profession | enumConsts">
-          <ion-select-option [value]="profession">{{profession | enumText:"Profession"}}</ion-select-option>
+        <ion-select [(ngModel)]="user.profession" name="profession" required>
+          <ng-container *ngFor="let profession of Profession | enumConsts">
+            <ion-select-option [value]="profession">{{profession | enumText:"Profession"}}</ion-select-option>
+          </ng-container>
         </ion-select>
       </ion-item>
 

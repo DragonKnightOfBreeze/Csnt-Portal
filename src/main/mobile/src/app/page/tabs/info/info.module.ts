@@ -96,7 +96,8 @@ const routes: Routes = [
   }, {
     //当都不匹配时重定向到404页面，不能直接引用组件
     path: "**",
-    redirectTo: "error/404"
+    redirectTo: "error/404",
+    pathMatch: "full"
   }
 ];
 

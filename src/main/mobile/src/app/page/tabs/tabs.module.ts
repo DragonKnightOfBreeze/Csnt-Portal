@@ -12,7 +12,8 @@ import {SharedModule} from "../../shared.module";
 const routes: Routes = [
   {
     path: '',
-    redirectTo: "./home"
+    redirectTo: "home",
+    pathMatch: "full"
   }, {
     path: "home",
     loadChildren: "./home/home.module#HomePageModule"

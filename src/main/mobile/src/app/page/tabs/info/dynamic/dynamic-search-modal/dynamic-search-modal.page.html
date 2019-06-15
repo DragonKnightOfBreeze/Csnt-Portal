@@ -13,9 +13,10 @@
       </ion-item>
 
       <ion-item>
-        <ion-select [(ngModel)]="queryVo.categorySet" name="categorySet" multiple
-                    *ngFor="let category of DynamicCategory | enumConsts">
-          <ion-select-option [value]="category">{{category | enumText:"DynamicCategory"}}</ion-select-option>
+        <ion-select [(ngModel)]="queryVo.categorySet" name="categorySet" multiple>
+          <ng-container *ngFor="let category of DynamicCategory | enumConsts">
+            <ion-select-option [value]="category">{{category | enumText:"DynamicCategory"}}</ion-select-option>
+          </ng-container>
         </ion-select>
       </ion-item>
 

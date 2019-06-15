@@ -32,15 +32,17 @@
             <td>专业</td>
           </tr>
           </thead>
-          <tbody *ngFor="let teacherInfo of teacherTeam.teacherInfoList">
-          <tr>
-            <td>{{teacherInfo.id}}</td>
-            <td>
-              <a routerLink="/teacher-info/{{teacherInfo.id}}">{{teacherInfo.name}}</a>
-            </td>
-            <td>{{teacherInfo.gender | enumText:"Gender"}}</td>
-            <td>{{teacherInfo.profession | enumText:"Profession"}}</td>
-          </tr>
+          <tbody>
+          <ng-container *ngFor="let teacherInfo of teacherTeam.teacherInfoList">
+            <tr>
+              <td>{{teacherInfo.id}}</td>
+              <td>
+                <a routerLink="/teacher-info/{{teacherInfo.id}}">{{teacherInfo.name}}</a>
+              </td>
+              <td>{{teacherInfo.gender | enumText:"Gender"}}</td>
+              <td>{{teacherInfo.profession | enumText:"Profession"}}</td>
+            </tr>
+          </ng-container>
           </tbody>
         </table>
 

@@ -5,9 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let category of DynamicCategory | enumConsts">
-    <ion-item (click)="searchByCategory(category)">
-      {{category | enumText: "DynamicCategory"}}
-    </ion-item>
+  <ion-list>
+    <ng-container *ngFor="let category of DynamicCategory | enumConsts">
+      <ion-item (click)="searchByCategory(category)">
+        {{category | enumText: "DynamicCategory"}}
+      </ion-item>
+    </ng-container>
   </ion-list>
 </ion-content>

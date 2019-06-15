@@ -22,30 +22,32 @@
 
   <!--卡片组-->
   <div class="container mx-auto my-2 p-2 w-75 cp-data-list">
-    <div class="card-group mx-auto" *ngFor="let column of currentPage.content">
-      <div class="card mx-auto my-1 p-1">
-        <div class="card-body">
-          <h3 class="card-title">
-            {{column.title}}
-          </h3>
+    <div class="card-group mx-auto">
+      <ng-container *ngFor="let column of currentPage.content">
+        <div class="card mx-auto my-1 p-1">
+          <div class="card-body">
+            <h3 class="card-title">
+              {{column.title}}
+            </h3>
 
-          <p class="card-subtitle">
-            <span class="badge badge-secondary">#{{column.id}}</span>
-            <span class="badge badge-secondary">作者：{{column.author}}</span>
-            <span class="badge badge-secondary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-            <span class="badge badge-secondary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-          </p>
+            <p class="card-subtitle">
+              <span class="badge badge-secondary">#{{column.id}}</span>
+              <span class="badge badge-secondary">作者：{{column.author}}</span>
+              <span class="badge badge-secondary">发布时间：{{column.publishTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+              <span class="badge badge-secondary">更新时间：{{column.updateTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+            </p>
 
-          <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;height:1.5em;">{{column.content}}</p>
+            <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;height:1.5em;">{{column.content}}</p>
 
-          <!--当为管理员时才能添加和删除-->
-          <div class="card-link text-center mx-auto">
-            <button class="btn btn-success" *ngIf="currentUser?.role=='ADMIN'">创建</button>
-            <a class="btn btn-info" routerLink="/development-column/{{column.id}}">详情</a>
-            <button class="btn btn-danger" (click)="delete(column.id)" *ngIf="currentUser?.role=='ADMIN'">删除</button>
+            <!--当为管理员时才能添加和删除-->
+            <div class="card-link text-center mx-auto">
+              <button class="btn btn-success" *ngIf="currentUser?.role=='ADMIN'">创建</button>
+              <a class="btn btn-info" routerLink="/development-column/{{column.id}}">详情</a>
+              <button class="btn btn-danger" (click)="delete(column.id)" *ngIf="currentUser?.role=='ADMIN'">删除</button>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 

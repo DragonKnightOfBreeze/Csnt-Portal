@@ -5,9 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let level of ProfessionLevel | enumConsts">
-    <ion-item (click)="searchByProfessionLevel(level)">
-      {{level | enumText: "ProfessionLevel"}}
-    </ion-item>
+  <ion-list>
+    <ng-container *ngFor="let level of ProfessionLevel | enumConsts">
+      <ion-item (click)="searchByProfessionLevel(level)">
+        {{level | enumText: "ProfessionLevel"}}
+      </ion-item>
+    </ng-container>
   </ion-list>
 </ion-content>

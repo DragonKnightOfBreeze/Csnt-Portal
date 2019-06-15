@@ -61,13 +61,15 @@
             <td>发起时间</td>
           </tr>
           </thead>
-          <tbody *ngFor="let dynamic of user.dynamicList">
-          <tr>
-            <td>{{dynamic.id}}</td>
-            <td>{{dynamic.subject}}</td>
-            <td>{{dynamic.category | enumText:"Profession"}}</td>
-            <td>{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</td>
-          </tr>
+          <tbody>
+          <ng-container *ngFor="let dynamic of user.dynamicList">
+            <tr>
+              <td>{{dynamic.id}}</td>
+              <td>{{dynamic.subject}}</td>
+              <td>{{dynamic.category | enumText:"Profession"}}</td>
+              <td>{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</td>
+            </tr>
+          </ng-container>
           </tbody>
         </table>
 

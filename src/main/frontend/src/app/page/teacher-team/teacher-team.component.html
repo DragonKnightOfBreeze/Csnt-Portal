@@ -13,10 +13,12 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown">
               分类<span class="caret"></span>
             </a>
-            <div class="dropdown-menu" *ngFor="let professionLevel of ProfessionLevel | enumConsts">
-              <button class="dropdown-item" (click)="searchByProfessionLevel(professionLevel)">
-                {{professionLevel | enumText:"ProfessionLevel"}}
-              </button>
+            <div class="dropdown-menu">
+              <ng-container *ngFor="let professionLevel of ProfessionLevel | enumConsts">
+                <button class="dropdown-item" (click)="searchByProfessionLevel(professionLevel)">
+                  {{professionLevel | enumText:"ProfessionLevel"}}
+                </button>
+              </ng-container>
             </div>
           </li>
         </ul>
@@ -57,35 +59,37 @@
 
   <!--卡片组-->
   <div class="container mx-auto my-2 p-2 w-75 cp-data-list">
-    <div class="card-group mx-auto" *ngFor="let teacherTeam of currentPage.content">
-      <div class="card mx-auto my-1 p-1">
-        <div class="card-body">
-          <h3 class="card-title">
-            {{teacherTeam.name}}
-          </h3>
+    <div class="card-group mx-auto">
+      <ng-container *ngFor="let teacherTeam of currentPage.content">
+        <div class="card mx-auto my-1 p-1">
+          <div class="card-body">
+            <h3 class="card-title">
+              {{teacherTeam.name}}
+            </h3>
 
-          <p class="card-subtitle">
-            <small>
-              <span class="badge badge-secondary">#{{teacherTeam.id}}</span>
-              <span class="badge badge-secondary">
+            <p class="card-subtitle">
+              <small>
+                <span class="badge badge-secondary">#{{teacherTeam.id}}</span>
+                <span class="badge badge-secondary">
                 专业级别：{{teacherTeam.professionLevel |enumText:"ProfessionLevel"}}
               </span>
-              <span class="badge badge-secondary">创建时间：{{teacherTeam.createTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-            </small>
-          </p>
+                <span class="badge badge-secondary">创建时间：{{teacherTeam.createTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+              </small>
+            </p>
 
-          <p class="card-text"
-             style="overflow:hidden;text-overflow:ellipsis;height:1.5em;">{{teacherTeam.introduce}}</p>
+            <p class="card-text"
+               style="overflow:hidden;text-overflow:ellipsis;height:1.5em;">{{teacherTeam.introduce}}</p>
 
-          <!--当为管理员时才能添加和删除-->
-          <div class="card-link text-center mx-auto">
-            <button class="btn btn-success" *ngIf="currentUser?.role=='ADMIN'">创建</button>
-            <a class="btn btn-info" routerLink="/teacher-team/{{teacherTeam.id}}">详情</a>
-            <button class="btn btn-danger" (click)="delete(teacherTeam.id)" *ngIf="currentUser?.role=='ADMIN'">删除
-            </button>
+            <!--当为管理员时才能添加和删除-->
+            <div class="card-link text-center mx-auto">
+              <button class="btn btn-success" *ngIf="currentUser?.role=='ADMIN'">创建</button>
+              <a class="btn btn-info" routerLink="/teacher-team/{{teacherTeam.id}}">详情</a>
+              <button class="btn btn-danger" (click)="delete(teacherTeam.id)" *ngIf="currentUser?.role=='ADMIN'">删除
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 

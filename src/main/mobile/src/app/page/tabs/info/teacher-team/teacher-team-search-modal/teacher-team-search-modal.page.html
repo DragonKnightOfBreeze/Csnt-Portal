@@ -13,9 +13,10 @@
       </ion-item>
 
       <ion-item>
-        <ion-select [(ngModel)]="queryVo.levelSet" name="levelSet" multiple
-                    *ngFor="let level of ProfessionLevel | enumConsts">
-          <ion-select-option [value]="level">{{level | enumText:"ProfessionLevel"}}</ion-select-option>
+        <ion-select [(ngModel)]="queryVo.levelSet" name="levelSet" multiple>
+          <ng-container *ngFor="let level of ProfessionLevel | enumConsts">
+            <ion-select-option [value]="level">{{level | enumText:"ProfessionLevel"}}</ion-select-option>
+          </ng-container>
         </ion-select>
       </ion-item>
 
