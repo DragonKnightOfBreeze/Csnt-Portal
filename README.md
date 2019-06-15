@@ -12,6 +12,67 @@
     * [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
 	* [Spring Boot 中文导航](http://springboot.fun/)
 
+# 功能需求
+
+* 注册登录系统
+    * 注册
+    * 登录
+    * 注销
+    * 找回密码？
+* 用户主页
+    * ［需要登录］修改账户信息
+    * ［需要登录］查看用户动态
+* 专业特色介绍（文章，允许切换分页）
+    * 单一数据展示
+    * 所有数据展示
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存 
+* 专业发展专栏（文章列表，存在详情页面）
+    * 单一数据展示
+    * 所有数据展示
+    * 分页功能
+    * 简单的查询功能
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存 
+* 教学改革专栏（文章列表，存在详情页面）
+    * 单一数据展示
+    * 所有数据展示
+    * 分页功能
+    * 简单的查询功能
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存
+* 学习专栏（文章列表，存在详情页面）
+    * ［需要登录］单一数据展示
+    * ［需要登录］所有数据展示
+    * ［需要登录］分页功能
+    * ［需要登录］简单的查询功能
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存 
+* 实时动态（媒体列表，存在详情页面）
+    * 单一数据展示
+    * 所有数据展示
+    * 分页功能
+    * 简单的查询功能
+    * 复杂的查询功能
+	* ［需要登录］用户动态增加
+	* ［需要登录］用户动态删除
+	* ［管理员］数据删除
+	* 启用Redis缓存
+* 教师队伍（媒体列表，存在详情页面）
+    * 单一数据展示
+    * 所有数据展示
+    * 分页功能
+    * 简单的查询功能
+    * 复杂的查询功能
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存
+* 用户
+    * ［管理员］单一数据展示
+    * ［管理员］所有数据展示
+    * ［管理员］分页功能
+    * ［管理员］简单的查询功能
+    * 启用Redis缓存
+
 # 环境要求
 
 * 通用
@@ -63,8 +124,6 @@
 
 # 目录说明
 
-## 目录结构
-
 ```
 [documents]     # 全局文档目录
   [common]          # 一般文档目录（文档，doc/ppt/uml）
@@ -87,7 +146,7 @@ README.md       # 说明文档
 ...
 ```
 
-## 需要注意的地方
+**［需要注意的地方］**
 
 * 忽略`src/frontend/node_modules`目录。
     * 在`src/frontend`目录下打开控制台，自行使用`npm install`命令下载ppm依赖包。考虑翻墙或配置淘宝镜像。
@@ -190,7 +249,7 @@ ng e2e
 ionic serve
 ```
 
-## 问题解决 
+## ionic的问题解决 
 
 错误信息：
 
@@ -237,6 +296,6 @@ ERROR Error: StaticInjectorError(AppModule)[IonRouterOutlet -> ChildrenOutletCon
 StaticInjectorError(Platform: core)[IonRouterOutlet -> ChildrenOutletContexts]: 
 ```
 
-问题解决：
+解决方法：
 
 * 对于每个包含`router-outlet`的组件的html文件，其ts文件中必须具有对`RouterModule.forRoot()`的引用。
