@@ -2,7 +2,6 @@
  * 分页的接口。
  * 另见：{@code org.springframework.data.domain.Page}
  */
-
 export interface Page<T> {
   totalPages: number;
   totalElements: number;

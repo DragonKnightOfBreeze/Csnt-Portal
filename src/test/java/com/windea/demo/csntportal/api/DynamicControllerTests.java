@@ -2,8 +2,8 @@ package com.windea.demo.csntportal.api;
 
 import com.google.gson.Gson;
 import com.windea.demo.csntportal.domain.entity.Dynamic;
-import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
-import com.windea.demo.csntportal.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.vo.DynamicQueryVo;
 import com.windea.demo.csntportal.service.DynamicService;
 import com.windea.demo.csntportal.service.impl.JwtUserDetailsServiceImpl;
 import org.junit.Test;
@@ -162,7 +162,7 @@ public class DynamicControllerTests {
 	//TESTED 需要指定contentType为application/json，指定content为json字符串，可以和param同时使用
 	@Test
 	public void advanceSearchTest() throws Exception {
-		var vo = new DynamicSearchVo();
+		var vo = new DynamicQueryVo();
 		vo.setSubject("主题");
 		vo.setCategorySet(Set.of(DynamicCategory.CHAT));
 		vo.setSponsorUsername("123");

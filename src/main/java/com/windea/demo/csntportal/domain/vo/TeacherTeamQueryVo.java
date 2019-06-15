@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.domain.vo;
 
-import com.windea.demo.csntportal.enums.ProfessionLevel;
+import com.windea.demo.csntportal.domain.enums.ProfessionLevel;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * 教师队伍高级查询表单的视图对象。
  */
-public class TeacherTeamSearchVo {
+public class TeacherTeamQueryVo {
 
 	/** 名字。 */
 	private String name;

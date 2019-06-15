@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.domain.vo;
 
-import com.windea.demo.csntportal.enums.RegexConsts;
+import com.windea.demo.csntportal.domain.enums.RegexConsts;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;

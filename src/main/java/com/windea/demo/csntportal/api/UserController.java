@@ -1,8 +1,8 @@
 package com.windea.demo.csntportal.api;
 
-import com.windea.demo.csntportal.domain.entity.*;
-import com.windea.demo.csntportal.domain.vo.UserLoginVo;
-import com.windea.demo.csntportal.domain.vo.UserResetPasswordVo;
+import com.windea.demo.csntportal.domain.entity.Dynamic;
+import com.windea.demo.csntportal.domain.entity.User;
+import com.windea.demo.csntportal.domain.vo.*;
 import com.windea.demo.csntportal.exception.UserNotMatchedException;
 import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.security.JwtProvider;
@@ -47,7 +47,7 @@ public class UserController {
 	 * 登录用户。使用参数验证。
 	 */
 	@PostMapping("/login")
-	public JwtUserResponse login(
+	public JwtUserResponseVo login(
 		@Valid @RequestBody UserLoginVo vo,
 		BindingResult bindingResult
 	) {
@@ -65,7 +65,7 @@ public class UserController {
 		//NOTE 返回的是包含jwt令牌的jwt响应视图对象
 		String jwt = jwtProvider.generate(validAuth);
 		var role = userDetails.getAuthorities().toArray()[0].toString();
-		var result = new JwtUserResponse(jwt, userDetails.getUsername(), role);
+		var result = new JwtUserResponseVo(jwt, userDetails.getUsername(), role);
 		return result;
 	}
 

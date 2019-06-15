@@ -1,5 +1,5 @@
-import {Gender} from "../../enum/Gender";
-import {Profession} from "../../enum/Profession";
+import {Gender} from "../enum/Gender";
+import {Profession} from "../enum/Profession";
 import {TeacherTeam} from "./TeacherTeam";
 
 export class TeacherInfo {

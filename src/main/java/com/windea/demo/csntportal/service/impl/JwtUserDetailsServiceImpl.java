@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.service.impl;
 
-import com.windea.demo.csntportal.enums.ResultState;
+import com.windea.demo.csntportal.domain.enums.ResultState;
 import com.windea.demo.csntportal.repository.UserRepository;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;

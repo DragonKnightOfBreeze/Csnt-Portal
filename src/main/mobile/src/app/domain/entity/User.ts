@@ -1,6 +1,6 @@
-import {Gender} from "../../enum/Gender";
-import {Role} from "../../enum/Role";
-import {Profession} from "../../enum/Profession";
+import {Gender} from "../enum/Gender";
+import {Role} from "../enum/Role";
+import {Profession} from "../enum/Profession";
 import {Dynamic} from "./Dynamic";
 
 export class User {

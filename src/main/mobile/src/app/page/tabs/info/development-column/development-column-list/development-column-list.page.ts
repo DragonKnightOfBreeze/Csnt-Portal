@@ -15,7 +15,6 @@ export class DevelopmentColumnListPage implements OnInit {
   queryParams: QueryParams<string>;
 
   currentPage: Page<DevelopmentColumn>;
-  newColumn = new DevelopmentColumn();
 
   constructor(private service: DevelopmentColumnService,
               public userService: UserService,

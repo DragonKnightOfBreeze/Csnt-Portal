@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.domain.vo;
 
-import com.windea.demo.csntportal.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.enums.DynamicCategory;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,7 +10,7 @@ import java.util.Set;
  * 实时动态高级查询表单的视图对象。
  */
 public class
-DynamicSearchVo {
+DynamicQueryVo {
 	/** 主题。 */
 	private String subject;
 

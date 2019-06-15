@@ -3,10 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {Dynamic} from "../../domain/entity/Dynamic";
 import {Observable} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
-import {DynamicSearchVo} from "../../domain/vo/DynamicSearchVo";
+import {DynamicQueryVo} from "../../domain/vo/DynamicQueryVo";
 import {catchError} from "rxjs/operators";
 import {Page} from "../../domain/interface/Page";
-import {DynamicCategory} from "../../enum/DynamicCategory";
+import {DynamicCategory} from "../../domain/enum/DynamicCategory";
 import {handleError} from "../handler/error-handler.service";
 
 /**
@@ -75,7 +75,7 @@ export class DynamicService {
     );
   }
 
-  advanceSearch(vo: DynamicSearchVo, page: number, size: number): Observable<Page<Dynamic>> {
+  advanceSearch(vo: DynamicQueryVo, page: number, size: number): Observable<Page<Dynamic>> {
     const url = `${apiUrl}/dynamic/advanceSearch`;
     const params = {page: page + "", size: size + ""};
     return this.http.post<Page<Dynamic>>(url, vo, {params: params}).pipe(

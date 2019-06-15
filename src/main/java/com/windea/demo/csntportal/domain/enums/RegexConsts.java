@@ -1,4 +1,4 @@
-package com.windea.demo.csntportal.enums;
+package com.windea.demo.csntportal.domain.enums;
 
 /**
  * 用于参数验证的正则表达式的常量一览。

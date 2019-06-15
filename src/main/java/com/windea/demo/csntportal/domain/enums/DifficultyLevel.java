@@ -1,4 +1,4 @@
-package com.windea.demo.csntportal.enums;
+package com.windea.demo.csntportal.domain.enums;
 
 import com.windea.java.template.ITextEnum;
 

@@ -1,7 +1,7 @@
 package com.windea.demo.csntportal;
 
-import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
-import com.windea.demo.csntportal.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.vo.DynamicQueryVo;
 import com.windea.demo.csntportal.service.DynamicService;
 import com.windea.demo.csntportal.service.UserService;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class ServiceTests {
 
 	@Test
 	public void test1() {
-		var vo = new DynamicSearchVo();
+		var vo = new DynamicQueryVo();
 		vo.setSubject("主题123");
 		vo.setCategorySet(Set.of(DynamicCategory.CHAT));
 		vo.setSponsorUsername("abc");

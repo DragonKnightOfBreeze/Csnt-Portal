@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.exception;
 
-import com.windea.demo.csntportal.enums.ResultState;
+import com.windea.demo.csntportal.domain.enums.ResultState;
 
 /**
  * 致命异常。

@@ -1,6 +1,6 @@
-import {ProfessionLevel} from "../../enum/ProfessionLevel";
+import {ProfessionLevel} from "../enum/ProfessionLevel";
 
-export class TeacherTeamSearchVo {
+export class TeacherTeamQueryVo {
   name: string = "";
   levelSet: ProfessionLevel[] = [];
   min: number = 0;

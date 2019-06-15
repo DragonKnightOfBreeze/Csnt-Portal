@@ -7,7 +7,7 @@ import {catchError, tap} from "rxjs/operators";
 import {Page} from "../../domain/interface/Page";
 import {UserLoginVo} from "../../domain/vo/UserLoginVo";
 import {UserResetPasswordVo} from "../../domain/vo/UserResetPasswordVo";
-import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
+import {JwtUserResponseVo} from "../../domain/vo/JwtUserResponseVo";
 import {handleError} from "../handler/error-handler.service";
 import {Dynamic} from "../../domain/entity/Dynamic";
 import {Storage} from "@ionic/storage";
@@ -23,7 +23,7 @@ import {Events} from "@ionic/angular";
 @Injectable({providedIn: "root"})
 export class UserService implements OnInit {
   /**当前用户信息的行为主题对象。*/
-  public currentUserSubject = new BehaviorSubject<JwtUserResponse>(null);
+  public currentUserSubject = new BehaviorSubject<JwtUserResponseVo>(null);
   /**当前用户信息。*/
   public currentUser = this.currentUserSubject.value;
   /**当前用户是否已登录。*/
@@ -44,13 +44,13 @@ export class UserService implements OnInit {
 
   private getCurrentUser() {
     this.storage.get("currentUser").then(value => {
-      this.currentUserSubject.next(value as JwtUserResponse);
+      this.currentUserSubject.next(value as JwtUserResponseVo);
     });
   }
 
-  login(vo: UserLoginVo): Observable<JwtUserResponse> {
+  login(vo: UserLoginVo): Observable<JwtUserResponseVo> {
     const url = `${apiUrl}/login`;
-    return this.http.post<JwtUserResponse>(url, vo).pipe(
+    return this.http.post<JwtUserResponseVo>(url, vo).pipe(
       tap(currentUser => {
         //如果用户和用户令牌存在，则进行后续操作
         if (currentUser && currentUser.token) {

@@ -1,6 +1,6 @@
-import {DynamicCategory} from "../../enum/DynamicCategory";
+import {DynamicCategory} from "../enum/DynamicCategory";
 
-export class DynamicSearchVo {
+export class DynamicQueryVo {
   subject: string = "";
   categorySet: DynamicCategory[] = [];
   sponsorUsername: string = "";

@@ -1,4 +1,4 @@
-export class JwtUserResponse {
+export class JwtUserResponseVo {
   username: string;
   role: string;
   token: string;

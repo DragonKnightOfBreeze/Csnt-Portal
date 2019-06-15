@@ -1,8 +1,8 @@
 package com.windea.demo.csntportal.api;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
-import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
-import com.windea.demo.csntportal.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.vo.DynamicQueryVo;
 import com.windea.demo.csntportal.exception.UserNotMatchedException;
 import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.service.DynamicService;
@@ -142,7 +142,7 @@ public class DynamicController {
 	 */
 	@PostMapping("/advanceSearch")
 	public Page<Dynamic> advanceSearch(
-		@RequestBody DynamicSearchVo vo,
+		@RequestBody DynamicQueryVo vo,
 		@RequestParam(defaultValue = "1") Integer page,
 		@RequestParam(defaultValue = "10") Integer size
 	) {

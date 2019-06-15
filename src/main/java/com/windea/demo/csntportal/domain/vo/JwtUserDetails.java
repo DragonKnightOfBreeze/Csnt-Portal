@@ -1,6 +1,7 @@
-package com.windea.demo.csntportal.domain.entity;
+package com.windea.demo.csntportal.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.windea.demo.csntportal.domain.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

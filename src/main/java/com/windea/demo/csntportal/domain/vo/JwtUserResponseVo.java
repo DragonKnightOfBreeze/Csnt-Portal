@@ -1,4 +1,4 @@
-package com.windea.demo.csntportal.domain.entity;
+package com.windea.demo.csntportal.domain.vo;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Jwt用户响应类。用于回应用户基本信息到前端。
  * 不需要进行参数验证。
  */
-public class JwtUserResponse implements Serializable {
+public class JwtUserResponseVo implements Serializable {
 	private static final long serialVersionUID = -2582893279697162978L;
 
 	/** Jwt用户名。 */
@@ -22,7 +22,7 @@ public class JwtUserResponse implements Serializable {
 	private String type = "Bearer";
 
 
-	public JwtUserResponse(String token, String username, String role) {
+	public JwtUserResponseVo(String token, String username, String role) {
 		this.token = token;
 		this.username = username;
 		this.role = role;

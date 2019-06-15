@@ -4,7 +4,7 @@ import {Page} from "../../../../../domain/interface/Page";
 import {UserService} from "../../../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {ModalController, PopoverController} from "@ionic/angular";
-import {TeacherTeamSearchVo} from "../../../../../domain/vo/TeacherTeamSearchVo";
+import {TeacherTeamQueryVo} from "../../../../../domain/vo/TeacherTeamQueryVo";
 import {TeacherTeam} from "../../../../../domain/entity/TeacherTeam";
 import {TeacherTeamService} from "../../../../../service/api/tearcher-team.service";
 import {TeacherTeamLevelPopoverPage} from "../teacher-team-level-popover/teacher-team-level-popover.page";
@@ -16,7 +16,7 @@ import {TeacherTeamSearchModalPage} from "../teacher-team-search-modal/teacher-t
   styleUrls: ["./teacher-team-list.page.scss"],
 })
 export class TeacherTeamListPage implements OnInit {
-  queryParams: QueryParams<TeacherTeamSearchVo>;
+  queryParams: QueryParams<TeacherTeamQueryVo>;
 
   currentPage: Page<TeacherTeam>;
 
@@ -31,7 +31,7 @@ export class TeacherTeamListPage implements OnInit {
   ngOnInit() {
     this.queryParams = {
       type: this.route.snapshot.queryParamMap.get("type") || "all",
-      field: JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new TeacherTeamSearchVo(),
+      field: JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new TeacherTeamQueryVo(),
       page: +this.route.snapshot.queryParamMap.get("page") || 1,
       size: +this.route.snapshot.queryParamMap.get("size") || 10
     };

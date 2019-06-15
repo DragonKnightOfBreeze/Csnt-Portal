@@ -5,8 +5,8 @@ import {Observable} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
 import {catchError} from "rxjs/operators";
 import {Page} from "../../domain/interface/Page";
-import {ProfessionLevel} from "../../enum/ProfessionLevel";
-import {TeacherTeamSearchVo} from "../../domain/vo/TeacherTeamSearchVo";
+import {ProfessionLevel} from "../../domain/enum/ProfessionLevel";
+import {TeacherTeamQueryVo} from "../../domain/vo/TeacherTeamQueryVo";
 import {TeacherInfo} from "../../domain/entity/TeacherInfo";
 import {handleError} from "../handler/error-handler.service";
 
@@ -86,7 +86,7 @@ export class TeacherTeamService {
     );
   }
 
-  advanceSearch(vo: TeacherTeamSearchVo, page: number, size: number): Observable<Page<TeacherTeam>> {
+  advanceSearch(vo: TeacherTeamQueryVo, page: number, size: number): Observable<Page<TeacherTeam>> {
     const url = `${apiUrl}/dynamic/advanceSearch`;
     const params = {page: page + "", size: size + ""};
     return this.http.post<Page<TeacherTeam>>(url, vo, {params: params}).pipe(

@@ -1,4 +1,4 @@
-import {DynamicCategory} from "../../enum/DynamicCategory";
+import {DynamicCategory} from "../enum/DynamicCategory";
 import {User} from "./User";
 
 export class Dynamic {

@@ -1,4 +1,4 @@
-import {ProfessionLevel} from "../../enum/ProfessionLevel";
+import {ProfessionLevel} from "../enum/ProfessionLevel";
 import {TeacherInfo} from "./TeacherInfo";
 
 export class TeacherTeam {

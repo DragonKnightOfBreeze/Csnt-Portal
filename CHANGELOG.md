@@ -22,3 +22,4 @@
 * 1.2.10 完成teacher-info-detail、teacher-team-detail组件的html、ts。
 * 1.2.11 完成除了popover和modal之外的所有组件的html、ts。
 * 1.2.12 将info目录下的组件拆分到具体的子目录中，去除ts中不必要的代码，使用解构声明重构。
+* 1.2.13 重命名文件（Vo），移动目录（enums），整理依赖。

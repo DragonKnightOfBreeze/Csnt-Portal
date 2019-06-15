@@ -1,5 +1,5 @@
-import {Profession} from "../../enum/Profession";
-import {DifficultyLevel} from "../../enum/DifficultyLevel";
+import {Profession} from "../enum/Profession";
+import {DifficultyLevel} from "../enum/DifficultyLevel";
 
 export class StudyColumn {
   id: number;
