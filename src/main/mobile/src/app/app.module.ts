@@ -1,20 +1,39 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
-import {RouteReuseStrategy} from "@angular/router";
+import {RouteReuseStrategy, RouterModule, Routes} from "@angular/router";
 
 import {IonicModule, IonicRouteStrategy} from "@ionic/angular";
 import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
-import {AppRoutingModule} from "./app-routing.module";
 import {AppComponent} from "./app.component";
-import {EnumConstsPipe} from "./pipe/enum-consts.pipe";
-import {EnumTextPipe} from "./pipe/enum-text.pipe";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "../../../frontend/src/app/service/interceptor/jwt-interceptor.service";
 import {ErrorInterceptor} from "../../../frontend/src/app/service/interceptor/error-interceptor.service";
-import {LocaleDatePipe} from "./pipe/locale-date.pipe";
-import {LimitTextPipe} from "./pipe/limit-text.pipe";
+import {IonicStorageModule} from "@ionic/storage";
+
+//NOTE 懒加载的loadChildren必须配合SomeModule.forChild()使用。
+//NOTE 懒加载不能与{preloadingStrategy: PreloadAllModules}一同使用。
+//存在多级路由定义在不同模块对应的路由模块里。
+//有些路由存在激活或读取限制(canLoad,canActive)，有些路由带有数据(data)。
+
+const routes: Routes = [{
+  path: "",
+  redirectTo: "/tabs",
+  pathMatch: "full"
+}, {
+  path: "tabs",
+  loadChildren: "./page/tabs/tabs.module#TabsPageModule"
+}, {
+  path: 'login',
+  loadChildren: './page/login/login.module#LoginPageModule'
+}, {
+  path: 'register',
+  loadChildren: './page/register/register.module#RegisterPageModule'
+}, {
+  path: "error",
+  loadChildren: "./page/error/error.module#ErrorPageModule"
+},];
 
 @NgModule({
   providers: [
@@ -26,24 +45,13 @@ import {LimitTextPipe} from "./pipe/limit-text.pipe";
     //提供错误拦截器
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
-  declarations: [
-    AppComponent,
-    EnumConstsPipe,
-    EnumTextPipe,
-    LimitTextPipe,
-    LocaleDatePipe,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    AppRoutingModule
-  ],
-  exports: [
-    EnumConstsPipe,
-    EnumTextPipe,
-    LimitTextPipe,
-    LocaleDatePipe
+    IonicStorageModule.forRoot(),
+    RouterModule.forRoot(routes)
   ],
   bootstrap: [AppComponent]
 })

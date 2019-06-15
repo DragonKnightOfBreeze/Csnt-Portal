@@ -180,3 +180,59 @@ ng e2e
     * 如果用户未登录/注册，account页面将会显示登录/注册按钮。
 * 所有页面的头部左上角都有返回上一页按钮。
 * 发生错误时，跳转到统一的错误页面。
+
+## 如何运行ionic项目
+
+```bash
+# 前置工作：npm, angular, ionic ,cordova
+
+# 用于调试项目
+ionic serve
+```
+
+## 问题解决 
+
+错误信息：
+
+```
+ERROR in node_modules/@angular/core/src/render3/ng_dev_mode.d.ts(9,11): error TS2451: Cannot redeclare block-scoped variable 'ngDevMode'.
+node_modules/angular-io-overlay/node_modules/@angular/core/src/render3/ng_dev_mode.d.ts(9,11): error TS2451: Cannot redeclare block-scoped variable 'ngDevMode'.
+```
+
+解决方法：在项目根目录的`tsconfig.json`的`compilerOptions`里面添加：
+
+```
+//锁定库的版本
+"paths": {
+  "@angular/*": ["node_modules/@angular/*"]
+}
+//或者：忽略重复的库
+"skipLibCheck": true
+```
+
+必要时，执行命令`npm uninstall` `npm install`
+
+******
+
+错误信息：
+
+```
+ERROR Error: Uncaught (in promise): Error: RouterModule.forRoot() called twice. Lazy loaded modules should use RouterModule.forChild() instead.
+Error: RouterModule.forRoot() called twice. Lazy loaded modules should use RouterModule.forChild() instead.
+```
+
+解决方法：
+
+* 这是使用懒加载时可能发生的问题
+* 只限顶层模块使用`RouterModule.forRoot()`，并且不能使用`{preloadingStrategy: PreloadAllModules}`
+* 子模块必须使用`RooterModule.forChild()`
+* 不要在其他模块中导入顶层模块，创建一个共享模块，然后包含需要经常使用的指令
+
+******
+
+错误信息：
+
+```
+ERROR Error: StaticInjectorError(AppModule)[IonRouterOutlet -> ChildrenOutletContexts]: 
+StaticInjectorError(Platform: core)[IonRouterOutlet -> ChildrenOutletContexts]: 
+```

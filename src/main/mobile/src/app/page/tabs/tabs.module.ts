@@ -7,20 +7,23 @@ import {IonicModule} from "@ionic/angular";
 
 import {TabsPage} from "./tabs.page";
 import {LoginGuard} from "../../service/guard/login-guard.service";
-import {AppModule} from "../../app.module";
+import {SharedModule} from "../../shared.module";
+import {HomePageModule} from "./home/home.module";
+import {InfoPageModule} from "./info/info.module";
+import {AccountPageModule} from "./account/account.module";
 
 const routes: Routes = [{
   path: '',
   component: TabsPage
 }, {
   path: "home",
-  loadChildren: "./home/home.module#HomeModule"
+  loadChildren: "./home/home.module#HomePageModule"
 }, {
   path: "info",
-  loadChildren: "./info/info.module#InfoModule"
+  loadChildren: "./info/info.module#InfoPageModule"
 }, {
   path: "account",
-  loadChildren: "./account.module#AccountModule",
+  loadChildren: "./account/account.module#AccountPageModule",
   canLoad: [LoginGuard]
 }];
 
@@ -33,7 +36,10 @@ const routes: Routes = [{
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    AppModule
+    SharedModule,
+    HomePageModule,
+    InfoPageModule,
+    AccountPageModule
   ]
 })
 export class TabsPageModule {

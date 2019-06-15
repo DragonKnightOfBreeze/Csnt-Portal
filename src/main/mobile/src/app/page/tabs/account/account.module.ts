@@ -7,7 +7,7 @@ import {IonicModule} from "@ionic/angular";
 
 import {AccountPage} from "./account.page";
 import {AccountMenuPage} from "./account-menu/account-menu.page";
-import {AppModule} from "../../../app.module";
+import {SharedModule} from "../../../shared.module";
 
 const routes: Routes = [{
   path: "",
@@ -20,7 +20,7 @@ const routes: Routes = [{
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    AppModule
+    SharedModule
   ],
   declarations: [
     AccountPage,

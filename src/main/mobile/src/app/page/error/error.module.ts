@@ -8,17 +8,17 @@ import {IonicModule} from "@ionic/angular";
 import {ErrorPage} from "./error.page";
 import {Error403Page} from "./error403/error403.page";
 import {Error404Page} from "./error404/error404.page";
-import {AppModule} from "../../app.module";
+import {SharedModule} from "../../shared.module";
 
 const routes: Routes = [{
   path: "",
   component: ErrorPage
 }, {
   path: "403",
-  loadChildren: "./error403/error403.module#Error403Module"
+  component: Error403Page
 }, {
   path: "404",
-  loadChildren: "./error404/error404.module#Error404Module"
+  component: Error404Page
 }];
 
 @NgModule({
@@ -27,7 +27,7 @@ const routes: Routes = [{
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    AppModule
+    SharedModule
   ],
   declarations: [
     ErrorPage,

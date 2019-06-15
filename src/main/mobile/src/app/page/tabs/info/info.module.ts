@@ -22,12 +22,12 @@ import {TeacherTeamDetailPage} from "./teacher-team/teacher-team-detail/teacher-
 import {Error404Page} from "../../error/error404/error404.page";
 import {LoginGuard} from "../../../service/guard/login-guard.service";
 import {InfoMenuPage} from "./info-menu/info-menu.page";
-import {AppModule} from "../../../app.module";
 import {DynamicCategoryPopoverPage} from "./dynamic/dynamic-category-popover/dynamic-category-popover.page";
 import {DynamicSearchModalPage} from "./dynamic/dynamic-search-modal/dynamic-search-modal.page";
 import {DynamicCreateModalPage} from "./dynamic/dynamic-create-modal/dynamic-create-modal.page";
 import {TeacherTeamSearchModalPage} from "./teacher-team/teacher-team-search-modal/teacher-team-search-modal.page";
 import {TeacherTeamLevelPopoverPage} from "./teacher-team/teacher-team-level-popover/teacher-team-level-popover.page";
+import {SharedModule} from "../../../shared.module";
 
 const routes: Routes = [{
   path: "",
@@ -105,12 +105,11 @@ const routes: Routes = [{
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    AppModule
+    SharedModule
   ],
   declarations: [
     InfoPage,
     InfoMenuPage,
-
     DevelopmentColumnListPage,
     DevelopmentColumnDetailPage,
     DynamicListPage,
