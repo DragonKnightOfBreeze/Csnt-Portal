@@ -20,3 +20,4 @@
 * 1.2.8 完成各种column组件的html、ts（复制粘贴）。
 * 1.2.9 完成dynamic-list、dynamic-detail组件的html、ts。创建其他相关的dynamic组件。
 * 1.2.10 完成teacher-info-detail、teacher-team-detail组件的html、ts。
+* 1.2.11 完成除了popover和modal之外的所有组件的html、ts。
