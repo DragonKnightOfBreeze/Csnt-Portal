@@ -11,9 +11,9 @@ import {ReformColumnService} from "../../../../service/api/reform-column.service
   styleUrls: ["./reform-column-detail.page.scss"],
 })
 export class ReformColumnDetailPage implements OnInit {
-  column: ReformColumn;
-
   id: number;
+
+  column: ReformColumn;
 
   constructor(private service: ReformColumnService,
               private userService: UserService,

@@ -9,6 +9,7 @@ import {DynamicSearchVo} from "../../../../../../../frontend/src/app/domain/vo/D
 import {ModalController, PopoverController} from "@ionic/angular";
 import {DynamicCategoryPopoverPage} from "../dynamic-category-popover/dynamic-category-popover.page";
 import {DynamicSearchModalPage} from "../dynamic-search-modal/dynamic-search-modal.page";
+import {DynamicCreateModalPage} from "../dynamic-create-modal/dynamic-create-modal.page";
 
 @Component({
   selector: "app-dynamic-list",
@@ -19,7 +20,7 @@ export class DynamicListPage implements OnInit {
   searchParams: SearchParams<DynamicSearchVo>;
 
   currentPage: Page<Dynamic>;
-  newColumn = new Dynamic();
+  newDynamic = new Dynamic();
 
   constructor(private service: DynamicService,
               public userService: UserService,
@@ -40,7 +41,7 @@ export class DynamicListPage implements OnInit {
   }
 
   create() {
-    this.service.create(this.newColumn).subscribe(dynamic => {
+    this.service.create(this.newDynamic).subscribe(dynamic => {
       this.currentPage.content.push(dynamic);
       this.currentPage.content.slice(0, 10);
     });
@@ -138,6 +139,13 @@ export class DynamicListPage implements OnInit {
   async presentSearchModal() {
     const modal = await this.modalController.create({
       component: DynamicSearchModalPage
+    });
+    return await modal.present();
+  }
+
+  async presentCreateModal() {
+    const modal = await this.modalController.create({
+      component: DynamicCreateModalPage
     });
     return await modal.present();
   }

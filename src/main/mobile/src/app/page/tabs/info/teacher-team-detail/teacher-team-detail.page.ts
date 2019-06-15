@@ -11,9 +11,9 @@ import {TeacherTeamService} from "../../../../service/api/tearcher-team.service"
   styleUrls: ["./teacher-team-detail.page.scss"],
 })
 export class TeacherTeamDetailPage implements OnInit {
-  teacherTeam: TeacherTeam;
-
   id: number;
+
+  teacherTeam: TeacherTeam;
 
   constructor(private service: TeacherTeamService,
               private userService: UserService,

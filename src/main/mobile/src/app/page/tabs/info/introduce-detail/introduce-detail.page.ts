@@ -11,9 +11,9 @@ import {Introduce} from "../../../../domain/entity/Introduce";
   styleUrls: ["./introduce-detail.page.scss"],
 })
 export class IntroduceDetailPage implements OnInit {
-  introduce: Introduce;
-
   id: number;
+
+  introduce: Introduce;
 
   constructor(private service: ReformColumnService,
               private userService: UserService,

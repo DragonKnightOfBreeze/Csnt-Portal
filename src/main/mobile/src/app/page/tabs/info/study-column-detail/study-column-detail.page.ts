@@ -11,9 +11,9 @@ import {StudyColumnService} from "../../../../service/api/study-reform.service";
   styleUrls: ["./study-column-detail.page.scss"],
 })
 export class StudyColumnDetailPage implements OnInit {
-  column: StudyColumn;
-
   id: number;
+
+  column: StudyColumn;
 
   constructor(private service: StudyColumnService,
               private userService: UserService,

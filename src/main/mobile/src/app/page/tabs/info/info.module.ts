@@ -26,6 +26,8 @@ import {AppModule} from "../../../app.module";
 import {DynamicCategoryPopoverPage} from "./dynamic-category-popover/dynamic-category-popover.page";
 import {DynamicSearchModalPage} from "./dynamic-search-modal/dynamic-search-modal.page";
 import {DynamicCreateModalPage} from "./dynamic-create-modal/dynamic-create-modal.page";
+import {TeacherTeamSearchModalPage} from "./teacher-team-search-modal/teacher-team-search-modal.page";
+import {TeacherTeamLevelPopoverPage} from "./teacher-team-level-popover/teacher-team-level-popover.page";
 
 const routes: Routes = [{
   path: "",
@@ -124,7 +126,9 @@ const routes: Routes = [{
     StudyColumnDetailPage,
     TeacherInfoDetailPage,
     TeacherTeamListPage,
-    TeacherTeamDetailPage
+    TeacherTeamDetailPage,
+    TeacherTeamLevelPopoverPage,
+    TeacherTeamSearchModalPage
   ]
 })
 export class InfoPageModule {

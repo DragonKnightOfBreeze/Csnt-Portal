@@ -39,8 +39,7 @@
         <ion-button color="primary" routerLink="/tabs/info/development-column/{{dynamic.id}}">
           详情
         </ion-button>
-        <!--TODO-->
-        <ion-button color="success" *ngIf="isSponsorUser(dynamic)">
+        <ion-button color="success" (click)="presentCreateModal()" *ngIf="isSponsorUser(dynamic)">
           创建动态
         </ion-button>
         <ion-button color="danger" (click)="delete(dynamic.id)" *ngIf="isSponsorUser(dynamic)">
