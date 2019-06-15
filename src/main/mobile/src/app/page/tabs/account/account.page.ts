@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {User} from "../../../../../../frontend/src/app/domain/entity/User";
 import {UserService} from "../../../service/api/user.service";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: "app-account",
@@ -13,13 +12,12 @@ export class AccountPage implements OnInit {
 
   user: User;
 
-  constructor(public service: UserService,
-              private route: ActivatedRoute) {
+  constructor(public service: UserService) {
   }
 
 
   ngOnInit() {
-    this.username = this.route.snapshot.paramMap.get("username");
+    this.username = this.service.currentUser.username;
     this.show();
   }
 

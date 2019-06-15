@@ -26,8 +26,7 @@ const routes: Routes = [{
 
 @NgModule({
   declarations: [
-    TabsPage,
-    NavigationComponent
+    TabsPage
   ],
   imports: [
     CommonModule,
