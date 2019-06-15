@@ -25,7 +25,9 @@ const routes: Routes = [{
   declarations: [
     AccountPage,
     AccountMenuPage
-  ]
+  ],
+  //这是必要声明的
+  entryComponents: [AccountMenuPage]
 })
 export class AccountPageModule {
 }

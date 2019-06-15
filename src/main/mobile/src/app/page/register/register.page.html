@@ -8,35 +8,35 @@
   <form (ngSubmit)="register()" #registerForm=ngForm>
     <ion-list>
       <ion-item>
-        <ion-label position="stacked">用户名</ion-label>
+        <ion-label slot="start">用户名</ion-label>
         <ion-input type="text" [(ngModel)]="user.username" name="username" placeholder="请输入用户名"
                    required maxlength="12">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">密码</ion-label>
+        <ion-label slot="start">密码</ion-label>
         <ion-input type="password" [(ngModel)]="user.password" name="password" placeholder="请输入密码"
                    required maxlength="16">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">手机号码</ion-label>
+        <ion-label slot="start">手机号码</ion-label>
         <ion-input type="tel" [(ngModel)]="user.phoneNum" name="phoneNum" placeholder="请输入手机号码"
                    required>
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">邮箱</ion-label>
+        <ion-label slot="start">邮箱</ion-label>
         <ion-input type="email" [(ngModel)]="user.email" name="email" placeholder="请输入邮箱"
                    required>
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">昵称</ion-label>
+        <ion-label slot="start">昵称</ion-label>
         <ion-input type="text" [(ngModel)]="user.nickname" name="nickname" placeholder="请输入昵称"
                    required
         ></ion-input>
@@ -44,28 +44,32 @@
 
       <ion-item>
         <ion-radio-group [(ngModel)]="user.gender" name="gender" required>
-          <ion-row *ngFor="let gender of Gender | enumConsts;first as isFirst">
-            <ion-col>
-              <ion-item>
-                <ion-label>{{gender | enumText:"Gender"}}</ion-label>
-                <ion-radio [value]="gender" [checked]="isFirst"></ion-radio>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+          <ion-grid>
+            <ion-row *ngFor="let gender of Gender | enumConsts;first as isFirst">
+              <ion-col>
+                <ion-item>
+                  <ion-label>{{gender | enumText:"Gender"}}</ion-label>
+                  <ion-radio [value]="gender" [checked]="isFirst"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-radio-group>
       </ion-item>
 
       <!--遍历枚举，但不包括管理员-->
       <ion-item>
         <ion-radio-group [(ngModel)]="user.role" name="role" required>
-          <ion-row *ngFor="let role of Role| enumConsts;first as isFirst">
-            <ion-col *ngIf="role!=Role.Admin">
-              <ion-item>
-                <ion-label>{{role | enumText:"Role"}}</ion-label>
-                <ion-radio [value]="role" [checked]="isFirst"></ion-radio>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+          <ion-grid>
+            <ion-row *ngFor="let role of Role| enumConsts;first as isFirst">
+              <ion-col *ngIf="role!=Role.Admin">
+                <ion-item>
+                  <ion-label>{{role | enumText:"Role"}}</ion-label>
+                  <ion-radio [value]="role" [checked]="isFirst"></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-radio-group>
       </ion-item>
 
@@ -75,15 +79,19 @@
           <ion-select-option [value]="profession">{{profession | enumText:"Profession"}}</ion-select-option>
         </ion-select>
       </ion-item>
-    </ion-list>
 
-    <ion-row align-items-center>
-      <ion-col>
-        <ion-button type="submit" color="primary">注册</ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button color="primary" routerLink="/login">登录</ion-button>
-      </ion-col>
-    </ion-row>
+      <ion-item>
+        <ion-grid>
+          <ion-row align-items-center>
+            <ion-col>
+              <ion-button type="submit" color="primary">注册</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button color="primary" routerLink="/login">登录</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
   </form>
 </ion-content>

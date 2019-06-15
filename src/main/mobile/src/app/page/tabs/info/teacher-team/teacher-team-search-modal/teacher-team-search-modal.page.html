@@ -8,7 +8,7 @@
   <form (ngSubmit)="advanceSearch()" #advanceSearchForm=ngForm>
     <ion-list>
       <ion-item>
-        <ion-label position="stacked">名字</ion-label>
+        <ion-label slot="start">名字</ion-label>
         <ion-input type="text" [(ngModel)]="queryVo.name" name="name"></ion-input>
       </ion-item>
 
@@ -20,12 +20,12 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">最小人数</ion-label>
+        <ion-label slot="start">最小人数</ion-label>
         <ion-input type="number" [(ngModel)]="queryVo.min" name="min" min="0"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">最大人数</ion-label>
+        <ion-label slot="start">最大人数</ion-label>
         <ion-input type="number" [(ngModel)]="queryVo.max" name="max" min="0"></ion-input>
       </ion-item>
 

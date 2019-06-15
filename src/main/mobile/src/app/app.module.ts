@@ -11,6 +11,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "../../../frontend/src/app/service/interceptor/jwt-interceptor.service";
 import {ErrorInterceptor} from "../../../frontend/src/app/service/interceptor/error-interceptor.service";
 import {IonicStorageModule} from "@ionic/storage";
+import {TabsPageModule} from "./page/tabs/tabs.module";
 
 //NOTE 懒加载的loadChildren必须配合SomeModule.forChild()使用。
 //NOTE 懒加载不能与{preloadingStrategy: PreloadAllModules}一同使用。
@@ -20,7 +21,7 @@ import {IonicStorageModule} from "@ionic/storage";
 const routes: Routes = [
   {
   path: "",
-  redirectTo: "/tabs",
+    redirectTo: "/tabs/home",
   pathMatch: "full"
 }, {
   path: "tabs",
@@ -53,7 +54,8 @@ const routes: Routes = [
     HttpClientModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    TabsPageModule
   ],
   bootstrap: [AppComponent]
 })

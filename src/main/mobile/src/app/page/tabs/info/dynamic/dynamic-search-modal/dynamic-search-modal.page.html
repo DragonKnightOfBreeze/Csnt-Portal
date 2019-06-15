@@ -8,7 +8,7 @@
   <form (ngSubmit)="advanceSearch()" #advanceSearchForm=ngForm>
     <ion-list>
       <ion-item>
-        <ion-label position="stacked">主题</ion-label>
+        <ion-label slot="start">主题</ion-label>
         <ion-input type="text" [(ngModel)]="queryVo.subject" name="subject"></ion-input>
       </ion-item>
 
@@ -20,7 +20,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">发起用户</ion-label>
+        <ion-label slot="start">发起用户</ion-label>
         <ion-input type="text" [(ngModel)]="queryVo.sponsorUsername" name="sponsorUsername"></ion-input>
       </ion-item>
 

@@ -8,7 +8,7 @@
   <form (ngSubmit)="create()" #createForm=ngForm>
     <ion-list>
       <ion-item>
-        <ion-label position="stacked">动态名</ion-label>
+        <ion-label slot="start">动态名</ion-label>
         <ion-input type="text" [(ngModel)]="dynamic.subject" name="v" placeholder="请输入动态名"
                    required maxlength="32">
         </ion-input>

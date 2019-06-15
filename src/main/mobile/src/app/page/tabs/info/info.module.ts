@@ -129,6 +129,14 @@ const routes: Routes = [
     TeacherTeamDetailPage,
     TeacherTeamLevelPopoverPage,
     TeacherTeamSearchModalPage
+  ],
+  entryComponents: [
+    InfoMenuPage,
+    DynamicCategoryPopoverPage,
+    DynamicCreateModalPage,
+    DynamicSearchModalPage,
+    TeacherTeamLevelPopoverPage,
+    TeacherTeamSearchModalPage
   ]
 })
 export class InfoPageModule {

@@ -11,18 +11,18 @@ import {SharedModule} from "../../shared.module";
 
 const routes: Routes = [
   {
-  path: '',
-  component: TabsPage
-}, {
-  path: "home",
-  loadChildren: "./home/home.module#HomePageModule"
-}, {
-  path: "info",
-  loadChildren: "./info/info.module#InfoPageModule"
-}, {
-  path: "account",
-  loadChildren: "./account/account.module#AccountPageModule",
-  canLoad: [LoginGuard]
+    path: '',
+    redirectTo: "./home"
+  }, {
+    path: "home",
+    loadChildren: "./home/home.module#HomePageModule"
+  }, {
+    path: "info",
+    loadChildren: "./info/info.module#InfoPageModule"
+  }, {
+    path: "account",
+    loadChildren: "./account/account.module#AccountPageModule",
+    canLoad: [LoginGuard]
   }
 ];
 
@@ -36,6 +36,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     SharedModule
+  ],
+  exports: [
+    TabsPage
   ]
 })
 export class TabsPageModule {

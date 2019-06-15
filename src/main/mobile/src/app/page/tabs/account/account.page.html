@@ -13,53 +13,55 @@
   <form (ngSubmit)="updateAccountInfo()" #updateForm=ngForm>
     <ion-list>
       <ion-list-header>
-        <ion-label position="fixed" color="primary">{{user.username}}</ion-label>
+        <ion-label slot="start" color="primary">{{user.username}}</ion-label>
       </ion-list-header>
 
       <ion-item-divider>个人资料</ion-item-divider>
 
       <ion-item>
-        <ion-label position="stacked">昵称</ion-label>
+        <ion-label slot="start">昵称</ion-label>
         <ion-input type="text" [(ngModel)]="user.nickname" name="nickname" [value]="user.nickname"
                    required maxlength="32">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">手机号码</ion-label>
+        <ion-label slot="start">手机号码</ion-label>
         <ion-input type="tel" [(ngModel)]="user.phoneNum" name="phoneNum" [value]="user.phoneNum"
                    required>
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">邮箱</ion-label>
+        <ion-label slot="start">邮箱</ion-label>
         <ion-input type="email" [(ngModel)]="user.email" name="email" [value]="user.email"
                    required>
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">性别</ion-label>
+        <ion-label slot="start">性别</ion-label>
         <ion-input type="text" [value]="user.gender | enumText:'Gender'" readonly></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">身份</ion-label>
+        <ion-label slot="start">身份</ion-label>
         <ion-input type="text" [value]="user.role | enumText:'Role'" readonly></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">注册时间</ion-label>
+        <ion-label slot="start">注册时间</ion-label>
         <ion-input type="text" [value]="user.registerTime | localeDate"></ion-input>
       </ion-item>
     </ion-list>
 
     <!--使用ionic流式结构，可使元素按照意愿对齐-->
-    <ion-row align-items-center>
-      <ion-col>
-        <ion-button type="submit" color="primary">更新资料</ion-button>
-      </ion-col>
-    </ion-row>
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col>
+          <ion-button type="submit" color="primary">更新资料</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </form>
 </ion-content>
