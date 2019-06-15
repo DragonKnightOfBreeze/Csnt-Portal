@@ -8,6 +8,8 @@
 
 * Angular教程
 	* [Angular - 什么是 Angular？](https://www.angular.cn/docs)
+* Ionic官方文档
+    * [Ionic Framework - Ionic Documentation](https://ionicframework.com/docs/)
 * SpringBoot教程
     * [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
 	* [Spring Boot 中文导航](http://springboot.fun/)
@@ -84,6 +86,7 @@
 	* NPM（最新版本，同时配置好相关环境变量）
 * Npm包
 	* Angular（最新版本，通过npm安装）
+	* Ionic & Cordova（最新版本，通过npm安装，**注意：cordova需要通过jdk1.8启动**）
 	* TypeScript（最新版本，通过npm安装）
 * 其他
 	* Github帐号（同时配置好ssh私钥）
@@ -108,6 +111,7 @@
 	* Sass
 	* Angular7
 	* Angular Cli
+    * Ionic & Cordova
 * 后台
 	* Java
 	* Spring Boot
@@ -123,6 +127,8 @@
 	* Maven
 
 # 目录说明
+
+## 目录结构
 
 ```
 [documents]     # 全局文档目录
@@ -146,7 +152,7 @@ README.md       # 说明文档
 ...
 ```
 
-**［需要注意的地方］**
+## 需要注意的地方
 
 * 忽略`src/frontend/node_modules`目录。
     * 在`src/frontend`目录下打开控制台，自行使用`npm install`命令下载ppm依赖包。考虑翻墙或配置淘宝镜像。
@@ -157,18 +163,28 @@ README.md       # 说明文档
 
 # 注意事项
 
-## 数据库连接出错
+## 如何运行项目
 
-* 对于Idea的数据库连接，打开配置，在参数`URL`后面加上`?GMT%2B8`。
-* 如果运行时出错，在`application.yml`中的`spring.datasource.url`后面也要加上，或者特别配置`serverTimezone: GMT-8`。
-* 解决关闭数据池时报错SSLException问题：特别配置`useSSL: false`
-* 解决内存溢出问题：在tomcat的配置文件`context.xml`中配置Resource.closeMethod=close
+首先运行后台的SpringBoot项目，然后运行前端的Angular / Ionic项目即可。
 
-## 后台异常解决
+```bash
+# 准备并运行后台程序
+cd project-dir
+mvn install
+mvn spring-boot:run
 
-* RequestRejectedException
-    * 解决方案：将请求链接写成`http://localhost:8080/csnt-portal/api`的形式。
-    * 参考链接：[Stack Overflow](https://stackoverflow.com/questions/48453980/spring-5-0-3-requestrejectedexception-the-request-was-rejected-because-the-url)
+# 准备并运行前端程序
+cd src/main/frontend
+npm install
+# ng build --prod
+ng serve
+
+### 或者：
+cd src/main/mobile
+npm install
+# ng build --prod
+ionic serve
+```
 
 ## 如何整合前后端
 
@@ -190,22 +206,6 @@ addHero (hero: Hero): Observable<Hero> {
 }
 ```
 
-## 如何运行项目
-
-首先运行后台的SpringBoot项目，然后运行前端的Angular项目即可。
-
-```bash
-# 准备并运行后台程序
-cd project-dir
-mvn install
-mvn spring-boot:run
-# 准备并运行前端程序
-cd src/main/frontend
-npm install
-ng build --prod
-ng serve
-```
-
 ## 如何运行Angular端对端测试
 
 [Angular E2E 测试之路一](https://segmentfault.com/a/1190000002454789)
@@ -221,6 +221,19 @@ ng build
 ng serve
 ng e2e
 ```
+
+## 数据库连接出错
+
+* 对于Idea的数据库连接，打开配置，在参数`URL`后面加上`?GMT%2B8`。
+* 如果运行时出错，在`application.yml`中的`spring.datasource.url`后面也要加上，或者特别配置`serverTimezone: GMT-8`。
+* 解决关闭数据池时报错SSLException问题：特别配置`useSSL: false`
+* 解决内存溢出问题：在tomcat的配置文件`context.xml`中配置Resource.closeMethod=close
+
+## 后台问题解决
+
+* RequestRejectedException
+    * 解决方案：将请求链接写成`http://localhost:8080/csnt-portal/api`的形式。
+    * 参考链接：[Stack Overflow](https://stackoverflow.com/questions/48453980/spring-5-0-3-requestrejectedexception-the-request-was-rejected-because-the-url)
 
 ## 如何让方滨兴教授加倍去世
 
@@ -239,15 +252,6 @@ ng e2e
     * 如果用户未登录/注册，account页面将会显示登录/注册按钮。
 * 所有页面的头部左上角都有返回上一页按钮。
 * 发生错误时，跳转到统一的错误页面。
-
-## 如何运行ionic项目
-
-```bash
-# 前置工作：npm, angular, ionic ,cordova
-
-# 用于调试项目
-ionic serve
-```
 
 ## ionic的问题解决 
 
