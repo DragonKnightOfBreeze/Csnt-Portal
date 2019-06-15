@@ -9,21 +9,21 @@
     <ion-list>
       <ion-item>
         <ion-label position="stacked">用户名</ion-label>
-        <ion-input type="text" [(ngModel)]="loginVo.username" name="username"
+        <ion-input type="text" [(ngModel)]="userLoginVo.username" name="username"
                    required maxlength="12">
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">密码</ion-label>
-        <ion-input type="password" [(ngModel)]="loginVo.password" name="password"
+        <ion-input type="password" [(ngModel)]="userLoginVo.password" name="password"
                    required maxlength="16">
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label>记住登录状态</ion-label>
-        <ion-radio slot="start" [(ngModel)]="loginVo.rememberMe" name="rememberMe"></ion-radio>
+        <ion-radio slot="start" [(ngModel)]="userLoginVo.rememberMe" name="rememberMe"></ion-radio>
       </ion-item>
 
       <ion-item>

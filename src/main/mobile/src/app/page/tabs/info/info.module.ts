@@ -6,28 +6,28 @@ import {RouterModule, Routes} from "@angular/router";
 import {IonicModule} from "@ionic/angular";
 
 import {InfoPage} from "./info.page";
-import {DevelopmentColumnListPage} from "./development-column-list/development-column-list.page";
-import {DevelopmentColumnDetailPage} from "./development-column-detail/development-column-detail.page";
-import {DynamicListPage} from "./dynamic-list/dynamic-list.page";
-import {DynamicDetailPage} from "./dynamic-detail/dynamic-detail.page";
-import {IntroduceListPage} from "./introduce-list/introduce-list.page";
-import {IntroduceDetailPage} from "./introduce-detail/introduce-detail.page";
-import {ReformColumnListPage} from "./reform-column-list/reform-column-list.page";
-import {ReformColumnDetailPage} from "./reform-column-detail/reform-column-detail.page";
-import {StudyColumnListPage} from "./study-column-list/study-column-list.page";
-import {StudyColumnDetailPage} from "./study-column-detail/study-column-detail.page";
-import {TeacherInfoDetailPage} from "./teacher-info-detail/teacher-info-detail.page";
-import {TeacherTeamListPage} from "./teacher-team-list/teacher-team-list.page";
-import {TeacherTeamDetailPage} from "./teacher-team-detail/teacher-team-detail.page";
+import {DevelopmentColumnListPage} from "./development-column/development-column-list/development-column-list.page";
+import {DevelopmentColumnDetailPage} from "./development-column/development-column-detail/development-column-detail.page";
+import {DynamicListPage} from "./dynamic/dynamic-list/dynamic-list.page";
+import {DynamicDetailPage} from "./dynamic/dynamic-detail/dynamic-detail.page";
+import {IntroduceListPage} from "./introduce/introduce-list/introduce-list.page";
+import {IntroduceDetailPage} from "./introduce/introduce-detail/introduce-detail.page";
+import {ReformColumnListPage} from "./reform-column/reform-column-list/reform-column-list.page";
+import {ReformColumnDetailPage} from "./reform-column/reform-column-detail/reform-column-detail.page";
+import {StudyColumnListPage} from "./study-column/study-column-list/study-column-list.page";
+import {StudyColumnDetailPage} from "./study-column/study-column-detail/study-column-detail.page";
+import {TeacherInfoDetailPage} from "./teacher-info/teacher-info-detail/teacher-info-detail.page";
+import {TeacherTeamListPage} from "./teacher-team/teacher-team-list/teacher-team-list.page";
+import {TeacherTeamDetailPage} from "./teacher-team/teacher-team-detail/teacher-team-detail.page";
 import {Error404Page} from "../../error/error404/error404.page";
 import {LoginGuard} from "../../../service/guard/login-guard.service";
 import {InfoMenuPage} from "./info-menu/info-menu.page";
 import {AppModule} from "../../../app.module";
-import {DynamicCategoryPopoverPage} from "./dynamic-category-popover/dynamic-category-popover.page";
-import {DynamicSearchModalPage} from "./dynamic-search-modal/dynamic-search-modal.page";
-import {DynamicCreateModalPage} from "./dynamic-create-modal/dynamic-create-modal.page";
-import {TeacherTeamSearchModalPage} from "./teacher-team-search-modal/teacher-team-search-modal.page";
-import {TeacherTeamLevelPopoverPage} from "./teacher-team-level-popover/teacher-team-level-popover.page";
+import {DynamicCategoryPopoverPage} from "./dynamic/dynamic-category-popover/dynamic-category-popover.page";
+import {DynamicSearchModalPage} from "./dynamic/dynamic-search-modal/dynamic-search-modal.page";
+import {DynamicCreateModalPage} from "./dynamic/dynamic-create-modal/dynamic-create-modal.page";
+import {TeacherTeamSearchModalPage} from "./teacher-team/teacher-team-search-modal/teacher-team-search-modal.page";
+import {TeacherTeamLevelPopoverPage} from "./teacher-team/teacher-team-level-popover/teacher-team-level-popover.page";
 
 const routes: Routes = [{
   path: "",

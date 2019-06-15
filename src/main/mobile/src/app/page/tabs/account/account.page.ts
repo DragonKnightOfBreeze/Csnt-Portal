@@ -1,8 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import {User} from "../../../../../../frontend/src/app/domain/entity/User";
-import {Gender} from "../../../../../../frontend/src/app/enums/Gender";
-import {Role} from "../../../../../../frontend/src/app/enums/Role";
-import {Profession} from "../../../../../../frontend/src/app/enums/Profession";
 import {UserService} from "../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
 
@@ -16,10 +13,6 @@ export class AccountPage implements OnInit {
 
   user: User;
 
-  Gender = Gender;
-  Role = Role;
-  Profession = Profession;
-
   constructor(public service: UserService,
               private route: ActivatedRoute) {
   }
@@ -27,18 +20,22 @@ export class AccountPage implements OnInit {
 
   ngOnInit() {
     this.username = this.route.snapshot.paramMap.get("username");
+    this.show();
+  }
+
+  updateAccountInfo() {
+    this.service.updateAccountInfo(this.user).subscribe(updatedUser => {
+      this.user = updatedUser;
+    });
+  }
+
+  private show() {
     this.getAccountInfo();
   }
 
   private getAccountInfo() {
     this.service.getAccountInfo(this.username).subscribe(user => {
       this.user = user;
-    });
-  }
-
-  updateAccountInfo() {
-    this.service.updateAccountInfo(this.user).subscribe(updatedUser => {
-      this.user = updatedUser;
     });
   }
 }

@@ -21,3 +21,4 @@
 * 1.2.9 完成dynamic-list、dynamic-detail组件的html、ts。创建其他相关的dynamic组件。
 * 1.2.10 完成teacher-info-detail、teacher-team-detail组件的html、ts。
 * 1.2.11 完成除了popover和modal之外的所有组件的html、ts。
+* 1.2.12 将info目录下的组件拆分到具体的子目录中，去除ts中不必要的代码，使用解构声明重构。

@@ -6,11 +6,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./account-menu.page.scss'],
 })
 export class AccountMenuPage implements OnInit {
-
   constructor() {
   }
 
   ngOnInit() {
   }
-
 }
