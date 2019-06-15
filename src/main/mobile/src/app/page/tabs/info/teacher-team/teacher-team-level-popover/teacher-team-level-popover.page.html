@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>teacher-team-level-popover</ion-title>
+    <ion-title>选择一个专业等级</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list *ngFor="let level of ProfessionLevel | enumConsts">
+    <ion-item (click)="searchByProfessionLevel(level)">
+      {{level | enumText: "ProfessionLevel"}}
+    </ion-item>
+  </ion-list>
 </ion-content>

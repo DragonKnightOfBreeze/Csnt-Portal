@@ -1,9 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>dynamic-search-modal</ion-title>
+    <ion-title>高级搜索</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="advanceSearch()" #advanceSearchForm=ngForm>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">主题</ion-label>
+        <ion-input type="text" [(ngModel)]="queryVo.subject" name="subject"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-select [(ngModel)]="queryVo.categorySet" name="categorySet" multiple
+                    *ngFor="let category of DynamicCategory | enumConsts">
+          <ion-select-option [value]="category">{{category | enumText:"DynamicCategory"}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">发起用户</ion-label>
+        <ion-input type="text" [(ngModel)]="queryVo.sponsorUsername" name="sponsorUsername"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-button type="submit" expand="block">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

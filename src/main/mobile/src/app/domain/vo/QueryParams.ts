@@ -1,13 +1,13 @@
 /**
- * 查询参数的封装接口。
+ * 查询参数的封装类。
  */
-export interface QueryParams<T> {
+export class QueryParams<T> {
   /**查询类型。*/
-  type: string;
+  type: string = "all";
   /**查询域。*/
   field: T;
   /**当前页数。*/
-  page: number;
+  page: number = 1;
   /**每页条目数。*/
-  size: number;
+  size: number = 10;
 }

@@ -31,19 +31,19 @@
       <ion-item>
         <ion-label position="stacked">邮箱</ion-label>
         <ion-input type="email" [(ngModel)]="user.email" name="email" placeholder="请输入邮箱"
-                   required="">
+                   required>
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">昵称</ion-label>
         <ion-input type="text" [(ngModel)]="user.nickname" name="nickname" placeholder="请输入昵称"
-                   required=""
+                   required
         ></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-radio-group [(ngModel)]="user.gender" name="gender">
+        <ion-radio-group [(ngModel)]="user.gender" name="gender" required>
           <ion-row *ngFor="let gender of Gender | enumConsts;first as isFirst">
             <ion-col>
               <ion-item>
@@ -57,7 +57,7 @@
 
       <!--遍历枚举，但不包括管理员-->
       <ion-item>
-        <ion-radio-group [(ngModel)]="user.role" name="role">
+        <ion-radio-group [(ngModel)]="user.role" name="role" required>
           <ion-row *ngFor="let role of Role| enumConsts;first as isFirst">
             <ion-col *ngIf="role!=Role.Admin">
               <ion-item>
@@ -70,7 +70,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-select [(ngModel)]="user.profession" name="profession"
+        <ion-select [(ngModel)]="user.profession" name="profession" required
                     *ngFor="let profession of Profession | enumConsts">
           <ion-select-option [value]="profession">{{profession | enumText:"Profession"}}</ion-select-option>
         </ion-select>

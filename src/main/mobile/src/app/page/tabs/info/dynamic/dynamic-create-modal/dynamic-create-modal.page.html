@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>dynamic-create-modal</ion-title>
+    <ion-title>创建你的动态</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="create()" #createForm=ngForm>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">动态名</ion-label>
+        <ion-input type="text" [(ngModel)]="dynamic.subject" name="v" placeholder="请输入动态名"
+                   required maxlength="32">
+        </ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-select [(ngModel)]="dynamic.category" name="category" placeholder="请选择动态分类" required
+                    *ngFor="let category of DynamicCategory | enumConsts">
+          <ion-select-option [value]="category">{{category | enumText:"DynamicCategory"}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea [(ngModel)]="dynamic.content" name="content" required="" rows="5">
+          Cum solem credere, omnes sagaes perdere mirabilis, fortis brodiumes.
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-button type="submit" expand="block">
+          创建
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

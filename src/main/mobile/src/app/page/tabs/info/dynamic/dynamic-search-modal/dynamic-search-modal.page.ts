@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {ModalController} from "@ionic/angular";
+import {Router} from "@angular/router";
+import {DynamicQueryVo} from "../../../../../domain/vo/DynamicQueryVo";
+import {DynamicCategory} from "../../../../../domain/enum/DynamicCategory";
 
 //TODO
 @Component({
@@ -7,11 +11,20 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./dynamic-search-modal.page.scss'],
 })
 export class DynamicSearchModalPage implements OnInit {
+  queryVo = new DynamicQueryVo();
 
-  constructor() {
+  DynamicCategory = DynamicCategory;
+
+  constructor(private modalController: ModalController,
+              private router: Router) {
   }
+
 
   ngOnInit() {
   }
 
+  advanceSearch() {
+    this.modalController.dismiss();
+    this.router.navigate(["/tabs/info/dynamic"], {queryParams: {type: "advance", field: this.queryVo}});
+  }
 }

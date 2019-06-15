@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>teacher-team-search-modal</ion-title>
+    <ion-title>高级搜索</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="advanceSearch()" #advanceSearchForm=ngForm>
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">名字</ion-label>
+        <ion-input type="text" [(ngModel)]="queryVo.name" name="name"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-select [(ngModel)]="queryVo.levelSet" name="levelSet" multiple
+                    *ngFor="let level of ProfessionLevel | enumConsts">
+          <ion-select-option [value]="level">{{level | enumText:"ProfessionLevel"}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">最小人数</ion-label>
+        <ion-input type="number" [(ngModel)]="queryVo.min" name="min" min="0"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">最大人数</ion-label>
+        <ion-input type="number" [(ngModel)]="queryVo.max" name="max" min="0"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-button type="submit" expand="block">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

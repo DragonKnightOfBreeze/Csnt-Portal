@@ -36,4 +36,6 @@ export class AccountPage implements OnInit {
       this.user = user;
     });
   }
+
+
 }
