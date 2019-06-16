@@ -32,5 +32,5 @@ const routes: Routes = [
   ],
   declarations: [LoginPage]
 })
-export class LoginPageModule {
+export class LoginModule {
 }

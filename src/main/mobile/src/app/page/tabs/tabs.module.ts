@@ -42,5 +42,5 @@ const routes: Routes = [
   declarations: [TabsPage],
   exports: [TabsPage]
 })
-export class TabsPageModule {
+export class TabsModule {
 }

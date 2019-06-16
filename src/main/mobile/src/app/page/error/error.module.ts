@@ -45,5 +45,5 @@ const routes: Routes = [
   ],
   bootstrap: [ErrorPage]
 })
-export class ErrorPageModule {
+export class ErrorModule {
 }

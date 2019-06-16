@@ -317,4 +317,6 @@ Menu: must have a "content" element to listen for drag events on.
 解决方法：
 
 * 首先，ion-menu必须与ion-router-outlet或ion-content处于同一级。
-* 为ion-menu添加属性contentId="myId"，然后为对应的ion-content、ion-router-outlet或ion-split-pane指定id="myId"。
+* 为ion-menu添加属性contentId="myId"，然后为对应的ion-content、ion-router-outlet指定id="myId"。
+* 如果有ion-split-pane，也要为其指定contentId="myId"。
+* 同一级可以存在多个ion-menu，使用不同的menuId加以区分，为ion-menu-button指定不同的menu属性。
