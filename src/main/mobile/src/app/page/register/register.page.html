@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>注册</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="register()" #registerForm=ngForm>
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label slot="start">用户名</ion-label>
+        <ion-input type="text" [(ngModel)]="user.username" name="username" placeholder="请输入用户名"
+                   required maxlength="12">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">密码</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" name="password" placeholder="请输入密码"
+                   required maxlength="16">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">手机号码</ion-label>
+        <ion-input type="tel" [(ngModel)]="user.phoneNum" name="phoneNum" placeholder="请输入手机号码"
+                   required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">邮箱</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" name="email" placeholder="请输入邮箱"
+                   required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">昵称</ion-label>
+        <ion-input type="text" [(ngModel)]="user.nickname" name="nickname" placeholder="请输入昵称"
+                   required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-radio-group [(ngModel)]="user.gender" name="gender" required>
+          <ion-row>
+            <ng-container *ngFor="let gender of Gender | enumConsts;first as isFirst">
+              <ion-col>
+                <ion-item>
+                  <ion-radio [value]="gender" [checked]="isFirst"></ion-radio>
+                  <ion-label>{{gender | enumText:"Gender"}}</ion-label>
+                </ion-item>
+              </ion-col>
+            </ng-container>
+          </ion-row>
+        </ion-radio-group>
+      </ion-item>
+
+      <!--遍历枚举，但不包括管理员-->
+      <ion-item>
+        <ion-radio-group [(ngModel)]="user.role" name="role" required>
+          <ion-row>
+            <ng-container *ngFor="let role of Role| enumConsts;first as isFirst">
+              <ion-col *ngIf="role!=Role.Admin">
+                <ion-item>
+                  <ion-radio [value]="role" [checked]="isFirst"></ion-radio>
+                  <ion-label>{{role | enumText:"Role"}}</ion-label>
+                </ion-item>
+              </ion-col>
+            </ng-container>
+          </ion-row>
+        </ion-radio-group>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">专业</ion-label>
+        <ion-select [(ngModel)]="user.profession" name="profession" required>
+          <ng-container *ngFor="let profession of Profession | enumConsts">
+            <ion-select-option [value]="profession">{{profession | enumText:"Profession"}}</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-row justify-content-center text-center>
+      <ion-col>
+        <ion-button type="submit" expand="block" color="primary">注册</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="secondary" routerLink="/login">登录</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

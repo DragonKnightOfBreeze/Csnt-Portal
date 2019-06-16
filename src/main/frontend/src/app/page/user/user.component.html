@@ -37,19 +37,21 @@
         <td>操作</td>
       </tr>
       </thead>
-      <tbody *ngFor="let user of currentPage.content">
-      <tr>
-        <td>{{user.id}}</td>
-        <td>{{user.username}}</td>
-        <td>{{user.phoneNum}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.nickname}}</td>
-        <td>{{user.gender | enumText:"Gender"}}</td>
-        <td>{{user.role | enumText:"Role"}}</td>
-        <td>{{user.profession | enumText:"Profession"}}</td>
-        <td>{{user.registerTime | date:"yyyy-MM-dd hh:mm:ss"}}</td>
-        <td><a class="btn btn-info" routerLink="/user/{{user.id}}">详情</a></td>
-      </tr>
+      <tbody>
+      <ng-container *ngFor="let user of currentPage.content">
+        <tr>
+          <td>{{user.id}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.phoneNum}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.nickname}}</td>
+          <td>{{user.gender | enumText:"Gender"}}</td>
+          <td>{{user.role | enumText:"Role"}}</td>
+          <td>{{user.profession | enumText:"Profession"}}</td>
+          <td>{{user.registerTime | date:"yyyy-MM-dd hh:mm:ss"}}</td>
+          <td><a class="btn btn-info" routerLink="/user/{{user.id}}">详情</a></td>
+        </tr>
+      </ng-container>
       </tbody>
     </table>
   </div>

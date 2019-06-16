@@ -2,8 +2,8 @@ package com.windea.demo.csntportal.api;
 
 import com.windea.demo.csntportal.domain.entity.TeacherInfo;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
-import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
-import com.windea.demo.csntportal.enums.ProfessionLevel;
+import com.windea.demo.csntportal.domain.enums.ProfessionLevel;
+import com.windea.demo.csntportal.domain.vo.TeacherTeamQueryVo;
 import com.windea.demo.csntportal.exception.ValidationException;
 import com.windea.demo.csntportal.service.TeacherTeamService;
 import org.springframework.data.domain.Page;
@@ -156,7 +156,7 @@ public class TeacherTeamController {
 	 */
 	@PostMapping("/advanceSearch")
 	public Page<TeacherTeam> advanceSearch(
-		@RequestBody TeacherTeamSearchVo vo,
+		@RequestBody TeacherTeamQueryVo vo,
 		@RequestParam(defaultValue = "1") Integer page,
 		@RequestParam(defaultValue = "10") Integer size
 	) {

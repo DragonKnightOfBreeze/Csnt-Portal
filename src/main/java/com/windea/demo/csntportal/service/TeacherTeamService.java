@@ -2,8 +2,8 @@ package com.windea.demo.csntportal.service;
 
 import com.windea.demo.csntportal.domain.entity.TeacherInfo;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
-import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
-import com.windea.demo.csntportal.enums.ProfessionLevel;
+import com.windea.demo.csntportal.domain.enums.ProfessionLevel;
+import com.windea.demo.csntportal.domain.vo.TeacherTeamQueryVo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -32,6 +32,6 @@ public interface TeacherTeamService {
 
 	Page<TeacherTeam> searchByProfessionLevel(Set<ProfessionLevel> levelSet, Pageable pageable);
 
-	Page<TeacherTeam> advanceSearch(TeacherTeamSearchVo vo, Pageable pageable);
+	Page<TeacherTeam> advanceSearch(TeacherTeamQueryVo vo, Pageable pageable);
 
 }

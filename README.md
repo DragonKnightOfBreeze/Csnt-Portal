@@ -1,3 +1,5 @@
+[TOC]
+
 # 概述
 
 学期项目：计算机科学与技术门户网站。
@@ -8,9 +10,72 @@
 
 * Angular教程
 	* [Angular - 什么是 Angular？](https://www.angular.cn/docs)
+* Ionic官方文档
+    * [Ionic Framework - Ionic Documentation](https://ionicframework.com/docs/)
 * SpringBoot教程
     * [Spring Boot Reference Guide](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
 	* [Spring Boot 中文导航](http://springboot.fun/)
+
+# 功能需求
+
+* 注册登录系统
+    * 注册
+    * 登录
+    * 注销
+    * 找回密码？
+* 用户主页
+    * ［需要登录］修改账户信息
+    * ［需要登录］查看用户动态
+* 专业特色介绍（文章，允许切换分页）
+    * 单一数据展示
+    * 所有数据展示
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存 
+* 专业发展专栏（文章列表，存在详情页面）
+    * 单一数据展示
+    * 所有数据展示
+    * 分页功能
+    * 简单的查询功能
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存 
+* 教学改革专栏（文章列表，存在详情页面）
+    * 单一数据展示
+    * 所有数据展示
+    * 分页功能
+    * 简单的查询功能
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存
+* 学习专栏（文章列表，存在详情页面）
+    * ［需要登录］单一数据展示
+    * ［需要登录］所有数据展示
+    * ［需要登录］分页功能
+    * ［需要登录］简单的查询功能
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存 
+* 实时动态（媒体列表，存在详情页面）
+    * 单一数据展示
+    * 所有数据展示
+    * 分页功能
+    * 简单的查询功能
+    * 复杂的查询功能
+	* ［需要登录］用户动态增加
+	* ［需要登录］用户动态删除
+	* ［管理员］数据删除
+	* 启用Redis缓存
+* 教师队伍（媒体列表，存在详情页面）
+    * 单一数据展示
+    * 所有数据展示
+    * 分页功能
+    * 简单的查询功能
+    * 复杂的查询功能
+    * ［管理员］数据增加、删除、修改
+    * 启用Redis缓存
+* 用户
+    * ［管理员］单一数据展示
+    * ［管理员］所有数据展示
+    * ［管理员］分页功能
+    * ［管理员］简单的查询功能
+    * 启用Redis缓存
 
 # 环境要求
 
@@ -23,6 +88,7 @@
 	* NPM（最新版本，同时配置好相关环境变量）
 * Npm包
 	* Angular（最新版本，通过npm安装）
+	* Ionic & Cordova（最新版本，通过npm安装，**注意：cordova需要通过jdk1.8启动**）
 	* TypeScript（最新版本，通过npm安装）
 * 其他
 	* Github帐号（同时配置好ssh私钥）
@@ -47,6 +113,7 @@
 	* Sass
 	* Angular7
 	* Angular Cli
+    * Ionic & Cordova
 * 后台
 	* Java
 	* Spring Boot
@@ -98,18 +165,28 @@ README.md       # 说明文档
 
 # 注意事项
 
-## 数据库连接出错
+## 如何运行项目
 
-* 对于Idea的数据库连接，打开配置，在参数`URL`后面加上`?GMT%2B8`。
-* 如果运行时出错，在`application.yml`中的`spring.datasource.url`后面也要加上，或者特别配置`serverTimezone: GMT-8`。
-* 解决关闭数据池时报错SSLException问题：特别配置`useSSL: false`
-* 解决内存溢出问题：在tomcat的配置文件`context.xml`中配置Resource.closeMethod=close
+首先运行后台的SpringBoot项目，然后运行前端的Angular / Ionic项目即可。
 
-## 后台异常解决
+```bash
+# 准备并运行后台程序
+cd project-dir
+mvn install
+mvn spring-boot:run
 
-* RequestRejectedException
-    * 解决方案：将请求链接写成`http://localhost:8080/csnt-portal/api`的形式。
-    * 参考链接：[Stack Overflow](https://stackoverflow.com/questions/48453980/spring-5-0-3-requestrejectedexception-the-request-was-rejected-because-the-url)
+# 准备并运行前端程序
+cd src/main/frontend
+npm install
+# ng build --prod
+ng serve
+
+### 或者：
+cd src/main/mobile
+npm install
+# ng build --prod
+ionic serve
+```
 
 ## 如何整合前后端
 
@@ -131,22 +208,6 @@ addHero (hero: Hero): Observable<Hero> {
 }
 ```
 
-## 如何运行项目
-
-首先运行后台的SpringBoot项目，然后运行前端的Angular项目即可。
-
-```bash
-# 准备并运行后台程序
-cd project-dir
-mvn install
-mvn spring-boot:run
-# 准备并运行前端程序
-cd src/main/frontend
-npm install
-ng build --prod
-ng serve
-```
-
 ## 如何运行Angular端对端测试
 
 [Angular E2E 测试之路一](https://segmentfault.com/a/1190000002454789)
@@ -163,13 +224,26 @@ ng serve
 ng e2e
 ```
 
+## 数据库连接出错
+
+* 对于Idea的数据库连接，打开配置，在参数`URL`后面加上`?GMT%2B8`。
+* 如果运行时出错，在`application.yml`中的`spring.datasource.url`后面也要加上，或者特别配置`serverTimezone: GMT-8`。
+* 解决关闭数据池时报错SSLException问题：特别配置`useSSL: false`
+* 解决内存溢出问题：在tomcat的配置文件`context.xml`中配置Resource.closeMethod=close
+
+## 后台问题解决
+
+* RequestRejectedException
+    * 解决方案：将请求链接写成`http://localhost:8080/csnt-portal/api`的形式。
+    * 参考链接：[Stack Overflow](https://stackoverflow.com/questions/48453980/spring-5-0-3-requestrejectedexception-the-request-was-rejected-because-the-url)
+
 ## 如何让方滨兴教授加倍去世
 
 [淘宝 NPM 镜像使用](https://segmentfault.com/a/1190000002558754)
 
 ## Ionic项目页面设计的一般思路
 
-* 项目的模版是tabs，包含3个tab：tab-home、tab-info、tab-account。
+* 项目的模版是tabs，包含3个tab：tab-home、tab-info、tab-info。
 * 项目的模块包括：app、tabs和所有的tab，以及app-route、tabs-route、tab-info-route等。
 * home页面包括静态展示信息，只需写在一个组件里。使用轮播图、卡片列表等标签。
 * info页面包括从后台读取的条目信息，分别写在不同的组件里，共享header和footer。使用搜索框、卡片列表等标签。
@@ -180,3 +254,67 @@ ng e2e
     * 如果用户未登录/注册，account页面将会显示登录/注册按钮。
 * 所有页面的头部左上角都有返回上一页按钮。
 * 发生错误时，跳转到统一的错误页面。
+
+## ionic的问题解决 
+
+错误信息：
+
+```
+ERROR in node_modules/@angular/core/src/render3/ng_dev_mode.d.ts(9,11): error TS2451: Cannot redeclare block-scoped variable 'ngDevMode'.
+node_modules/angular-io-overlay/node_modules/@angular/core/src/render3/ng_dev_mode.d.ts(9,11): error TS2451: Cannot redeclare block-scoped variable 'ngDevMode'.
+```
+
+解决方法：在项目根目录的`tsconfig.json`的`compilerOptions`里面添加：
+
+```
+//锁定库的版本
+"paths": {
+  "@angular/*": ["node_modules/@angular/*"]
+}
+//或者：忽略重复的库
+"skipLibCheck": true
+```
+
+必要时，执行命令`npm uninstall` `npm install`
+
+******
+
+错误信息：
+
+```
+ERROR Error: Uncaught (in promise): Error: RouterModule.forRoot() called twice. Lazy loaded modules should use RouterModule.forChild() instead.
+Error: RouterModule.forRoot() called twice. Lazy loaded modules should use RouterModule.forChild() instead.
+```
+
+解决方法：
+
+* 这是使用懒加载时可能发生的问题
+* 只限顶层模块使用`RouterModule.forRoot()`，并且不能使用`{preloadingStrategy: PreloadAllModules}`
+* 子模块必须使用`RooterModule.forChild()`
+* 不要在其他模块中导入顶层模块，创建一个共享模块，然后包含需要经常使用的指令
+
+******
+
+错误信息：
+
+```
+ERROR Error: StaticInjectorError(AppModule)[IonRouterOutlet -> ChildrenOutletContexts]: 
+StaticInjectorError(Platform: core)[IonRouterOutlet -> ChildrenOutletContexts]: 
+```
+
+解决方法：
+
+* 对于每个包含`router-outlet`的组件的html文件，其ts文件中必须具有对`RouterModule.forRoot()`的引用。
+
+******
+
+错误信息：
+
+```
+Menu: must have a "content" element to listen for drag events on.
+```
+
+解决方法：
+
+* 首先，ion-menu必须与ion-router-outlet或ion-content处于同一级。
+* 为ion-menu添加属性contentId="myId"，然后为对应的ion-content、ion-router-outlet或ion-split-pane指定id="myId"。

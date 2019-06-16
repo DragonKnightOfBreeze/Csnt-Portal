@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.security;
 
-import com.windea.demo.csntportal.enums.Role;
+import com.windea.demo.csntportal.domain.enums.Role;
 import com.windea.demo.csntportal.service.impl.JwtUserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

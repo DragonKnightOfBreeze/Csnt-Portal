@@ -1,7 +1,7 @@
 package com.windea.demo.csntportal.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.windea.demo.csntportal.enums.*;
+import com.windea.demo.csntportal.domain.enums.*;
 import com.windea.java.template.TBean;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;

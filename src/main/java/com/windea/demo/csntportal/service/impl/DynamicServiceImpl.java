@@ -1,8 +1,8 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
-import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
-import com.windea.demo.csntportal.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.vo.DynamicQueryVo;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.DynamicRepository;
 import com.windea.demo.csntportal.repository.UserRepository;
@@ -82,7 +82,7 @@ public class DynamicServiceImpl implements DynamicService {
 
 	@Cacheable
 	@Override
-	public Page<Dynamic> advanceSearch(DynamicSearchVo vo, Pageable pageable) {
+	public Page<Dynamic> advanceSearch(DynamicQueryVo vo, Pageable pageable) {
 		var resultPage = repository.findAllDistinctBySubjectContainsAndSponsorUser_UsernameAndCategoryInAllIgnoreCase(
 			vo.getSubject(), vo.getSponsorUsername(), vo.getCategorySet(), pageable
 		);

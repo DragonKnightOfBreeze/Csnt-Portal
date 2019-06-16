@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
    * 根据不同的查询类型和可能的分页参数，列出数据。
    */
   private show() {
-    this.searchParams.type = this.route.snapshot.queryParamMap.get("type") || "All";
+    this.searchParams.type = this.route.snapshot.queryParamMap.get("type") || "all";
     this.searchParams.field = JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new UserSearchVo();
     this.searchParams.page = +this.route.snapshot.queryParamMap.get("page") || 1;
     this.searchParams.size = +this.route.snapshot.queryParamMap.get("size") || 10;
@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
    * 列出所有数据，在组件初始化时调用。
    */
   private list() {
-    this.searchParams.type = "All";
+    this.searchParams.type = "all";
     this.service.list(this.searchParams.page, this.searchParams.size).subscribe(userPage => {
       this.currentPage = userPage;
     });

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>我的账户</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="account-menu">
+        <ion-icon name="more"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="updateAccountInfo()" #updateForm=ngForm>
+    <ion-list>
+      <ion-list-header>
+        <ion-label slot="start" color="primary">{{user.username}}</ion-label>
+      </ion-list-header>
+
+      <ion-item-divider>个人资料</ion-item-divider>
+
+      <ion-item>
+        <ion-label slot="start">昵称</ion-label>
+        <ion-input type="text" [(ngModel)]="user.nickname" name="nickname" [value]="user.nickname"
+                   required maxlength="32">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">手机号码</ion-label>
+        <ion-input type="tel" [(ngModel)]="user.phoneNum" name="phoneNum" [value]="user.phoneNum"
+                   required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">邮箱</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email" name="email" [value]="user.email"
+                   required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">性别</ion-label>
+        <ion-input type="text" [value]="user.gender | enumText:'Gender'" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">身份</ion-label>
+        <ion-input type="text" [value]="user.role | enumText:'Role'" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">注册时间</ion-label>
+        <ion-input type="text" [value]="user.registerTime | localeDate"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-row justify-content-center="4" text-center>
+      <ion-col size="4">
+        <ion-button type="submit" expand="block" color="primary">更新资料</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

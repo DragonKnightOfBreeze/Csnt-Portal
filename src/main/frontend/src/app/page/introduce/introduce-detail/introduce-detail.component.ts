@@ -59,8 +59,8 @@ export class IntroduceDetailComponent implements OnInit {
    * 可能抛出：400 参数错误，403 权限错误
    */
   update() {
-    this.service.update(this.introduce).subscribe(updatedColumn => {
-      this.introduce = updatedColumn;
+    this.service.update(this.introduce).subscribe(updatedIntroduce => {
+      this.introduce = updatedIntroduce;
       this.isValidForUpdate = true;
     },()=>this.isValidForUpdate = false);
   }

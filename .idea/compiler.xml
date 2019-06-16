@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <option name="BUILD_PROCESS_ADDITIONAL_VM_OPTIONS" value="--enable-preview" />
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -10,21 +9,10 @@
         <module name="Csnt Portal" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="12">
-      <module name="Csnt Portal" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Csnt Portal" options="-parameters" />
     </option>
-  </component>
-  <component name="TypeScriptCompiler">
-    <option name="nodeInterpreterTextField" value="node" />
-    <option name="recompileOnChanges" value="true" />
-    <option name="typeScriptCompilerParams" value="--sourceMap true" />
-    <option name="typeScriptServiceDirectory" value="$USER_HOME$/AppData/Roaming/npm/node_modules/typescript" />
-    <option name="useConfig" value="true" />
-    <option name="versionType" value="SERVICE_DIRECTORY" />
   </component>
 </project>

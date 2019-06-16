@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>选择一个专业等级</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ng-container *ngFor="let level of ProfessionLevel | enumConsts">
+      <ion-item (click)="searchByProfessionLevel(level)">
+        {{level | enumText: "ProfessionLevel"}}
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

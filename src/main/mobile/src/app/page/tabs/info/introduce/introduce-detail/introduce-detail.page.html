@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>专业特色介绍 详情</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{introduce.title}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-note>作者：{{introduce.author}}</ion-note>
+        </ion-col>
+        <ion-col>
+          <ion-note>发布时间：{{introduce.publishTime | localeDate}}</ion-note>
+        </ion-col>
+        <ion-col>
+          <ion-note>更新时间：{{introduce.updateTime | localeDate}}</ion-note>
+        </ion-col>
+      </ion-row>
+      <ion-row text-center>
+        <ion-col>
+          <ion-text>
+            {{introduce.content}}
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

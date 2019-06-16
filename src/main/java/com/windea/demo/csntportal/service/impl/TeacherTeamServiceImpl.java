@@ -2,8 +2,8 @@ package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.TeacherInfo;
 import com.windea.demo.csntportal.domain.entity.TeacherTeam;
-import com.windea.demo.csntportal.domain.vo.TeacherTeamSearchVo;
-import com.windea.demo.csntportal.enums.ProfessionLevel;
+import com.windea.demo.csntportal.domain.enums.ProfessionLevel;
+import com.windea.demo.csntportal.domain.vo.TeacherTeamQueryVo;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.TeacherInfoRepository;
 import com.windea.demo.csntportal.repository.TeacherTeamRepository;
@@ -102,7 +102,7 @@ public class TeacherTeamServiceImpl implements TeacherTeamService {
 
 	@Cacheable
 	@Override
-	public Page<TeacherTeam> advanceSearch(TeacherTeamSearchVo vo, Pageable pageable) {
+	public Page<TeacherTeam> advanceSearch(TeacherTeamQueryVo vo, Pageable pageable) {
 		var resultPage = repository.findAllByNameContainsAndTeacherCountBetweenAndProfessionLevelIn(
 			vo.getName(), vo.getMin(), vo.getMax(), vo.getLevelSet(), pageable
 		);

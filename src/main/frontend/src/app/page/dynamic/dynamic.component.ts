@@ -6,7 +6,7 @@ import {UserService} from "../../service/api/user.service";
 import {JwtUserResponse} from "../../domain/entity/JwtUserResponse";
 import {ActivatedRoute} from "@angular/router";
 import {SearchParams} from "../../domain/vo/SearchParams";
-import {DynamicSearchVo} from "../../domain/vo/DynamicSearchVo";
+import {DynamicQueryVo} from "../../domain/vo/DynamicQueryVo";
 import {DynamicCategory} from "../../enums/DynamicCategory";
 
 @Component({
@@ -27,7 +27,7 @@ export class DynamicComponent implements OnInit {
   isValidForCreate = true;
 
   /**查询参数的封装对象。*/
-  searchParams = new SearchParams<DynamicSearchVo>();
+  searchParams = new SearchParams<DynamicQueryVo>();
 
   /**查询表单是否通过后台表单参数验证。*/
   isValidForSearch = true;
@@ -73,8 +73,8 @@ export class DynamicComponent implements OnInit {
    * 根据不同的查询类型和可能的分页参数，列出数据。
    */
   private show() {
-    this.searchParams.type = this.route.snapshot.queryParamMap.get("type") || "All";
-    this.searchParams.field = JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new DynamicSearchVo();
+    this.searchParams.type = this.route.snapshot.queryParamMap.get("type") || "all";
+    this.searchParams.field = JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new DynamicQueryVo();
     this.searchParams.page = +this.route.snapshot.queryParamMap.get("page") || 1;
     this.searchParams.size = +this.route.snapshot.queryParamMap.get("size") || 10;
 
@@ -95,7 +95,7 @@ export class DynamicComponent implements OnInit {
    * 列出所有数据，在组件初始化时调用。
    */
   list() {
-    this.searchParams.type = "All";
+    this.searchParams.type = "all";
     this.service.list(this.searchParams.page, this.searchParams.size).subscribe(dynamicPage => {
       this.currentPage = dynamicPage;
     });

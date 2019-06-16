@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>登录</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="login()" #loginForm=ngForm>
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label slot="start">用户名</ion-label>
+        <ion-input type="text" [(ngModel)]="userLoginVo.username" name="username"
+                   required maxlength="12">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label slot="start">密码</ion-label>
+        <ion-input type="password" [(ngModel)]="userLoginVo.password" name="password"
+                   required maxlength="16">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>记住登录状态</ion-label>
+        <ion-radio slot="start" [(ngModel)]="userLoginVo.rememberMe" name="rememberMe"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-button fill="outline" routerLink="/reset-password">重置密码</ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ion-row justify-content-center text-center>
+      <ion-col>
+        <ion-button type="submit" expand="block" color="primary">登录</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="secondary" routerLink="/register">注册</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

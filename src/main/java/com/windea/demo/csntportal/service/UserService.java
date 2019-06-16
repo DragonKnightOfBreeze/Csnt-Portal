@@ -2,7 +2,7 @@ package com.windea.demo.csntportal.service;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
-import com.windea.demo.csntportal.enums.*;
+import com.windea.demo.csntportal.domain.enums.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

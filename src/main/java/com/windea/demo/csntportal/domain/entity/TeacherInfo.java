@@ -1,7 +1,7 @@
 package com.windea.demo.csntportal.domain.entity;
 
-import com.windea.demo.csntportal.enums.Gender;
-import com.windea.demo.csntportal.enums.Profession;
+import com.windea.demo.csntportal.domain.enums.Gender;
+import com.windea.demo.csntportal.domain.enums.Profession;
 import com.windea.java.template.TBean;
 
 import javax.persistence.*;

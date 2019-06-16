@@ -2,7 +2,7 @@ package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
 import com.windea.demo.csntportal.domain.entity.User;
-import com.windea.demo.csntportal.enums.*;
+import com.windea.demo.csntportal.domain.enums.*;
 import com.windea.demo.csntportal.exception.NotFoundException;
 import com.windea.demo.csntportal.repository.DynamicRepository;
 import com.windea.demo.csntportal.repository.UserRepository;

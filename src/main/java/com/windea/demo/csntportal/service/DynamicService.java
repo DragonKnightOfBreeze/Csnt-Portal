@@ -1,8 +1,8 @@
 package com.windea.demo.csntportal.service;
 
 import com.windea.demo.csntportal.domain.entity.Dynamic;
-import com.windea.demo.csntportal.domain.vo.DynamicSearchVo;
-import com.windea.demo.csntportal.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.enums.DynamicCategory;
+import com.windea.demo.csntportal.domain.vo.DynamicQueryVo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -26,5 +26,5 @@ public interface DynamicService {
 
 	Page<Dynamic> searchByCategory(Set<DynamicCategory> categorySet, Pageable pageable);
 
-	Page<Dynamic> advanceSearch(DynamicSearchVo vo, Pageable pageable);
+	Page<Dynamic> advanceSearch(DynamicQueryVo vo, Pageable pageable);
 }

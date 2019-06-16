@@ -1,6 +1,6 @@
 package com.windea.demo.csntportal.exception;
 
-import com.windea.demo.csntportal.enums.ResultState;
+import com.windea.demo.csntportal.domain.enums.ResultState;
 
 /**
  * 查询结果不存在时的异常。

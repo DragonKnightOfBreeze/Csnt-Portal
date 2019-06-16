@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Page} from "../../../domain/interface/Page";
-import {Router} from "@angular/router";
 
 /**
  * 项目的分页组件。
@@ -22,7 +21,7 @@ export class PaginationComponent implements OnInit {
 
   JSON = JSON;
 
-  constructor(router: Router) {
+  constructor() {
   }
 
 

@@ -13,10 +13,12 @@
             <a class="nav-link dropdown-toggle" data-toggle="dropdown">
               分类<span class="caret"></span>
             </a>
-            <div class="dropdown-menu" *ngFor="let category of DynamicCategory | enumConsts">
-              <button class="dropdown-item" (click)="searchByCategory(category)">
-                {{category | enumText:"DynamicCategory"}}
-              </button>
+            <div class="dropdown-menu">
+              <ng-container *ngFor="let category of DynamicCategory | enumConsts">
+                <button class="dropdown-item" (click)="searchByCategory(category)">
+                  {{category | enumText:"DynamicCategory"}}
+                </button>
+              </ng-container>
             </div>
           </li>
         </ul>
@@ -54,34 +56,36 @@
 
   <!--卡片组-->
   <div class="container mx-auto my-2 p-2 w-75 cp-data-list">
-    <div class="card-group mx-auto" *ngFor="let dynamic of currentPage.content">
-      <div class="card mx-auto my-1 p-1">
-        <div class="card-body">
-          <h3 class="card-title">
-            {{dynamic.subject}}
-          </h3>
+    <div class="card-group mx-auto">
+      <ng-container *ngFor="let dynamic of currentPage.content">
+        <div class="card mx-auto my-1 p-1">
+          <div class="card-body">
+            <h3 class="card-title">
+              {{dynamic.subject}}
+            </h3>
 
-          <p class="card-subtitle">
-            <span class="badge badge-secondary">#{{dynamic.id}}</span>
-            <span class="badge badge-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>
-            <span class="badge badge-primary">发起用户：{{dynamic.sponsorUser?.username || "未知"}}</span>
-            <span class="badge badge-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
-          </p>
+            <p class="card-subtitle">
+              <span class="badge badge-secondary">#{{dynamic.id}}</span>
+              <span class="badge badge-secondary">分类：{{dynamic.category | enumText:"DynamicCategory"}}</span>
+              <span class="badge badge-primary">发起用户：{{dynamic.sponsorUser?.username || "未知"}}</span>
+              <span class="badge badge-secondary">发起时间：{{dynamic.sponsorTime | date:"yyyy-MM-dd hh:mm:ss"}}</span>
+            </p>
 
-          <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;height:1.5em">{{dynamic.content}}</p>
+            <p class="card-text" style="overflow:hidden;text-overflow:ellipsis;height:1.5em">{{dynamic.content}}</p>
 
-          <!--当已登录时才能添加当为管理员或者发起用户时才能删除-->
-          <div class="card-link text-center mx-auto">
-            <button class="btn btn-success" data-toggle="modal" data-target="#createModal"
-                    *ngIf="currentUser">创建
-            </button>
-            <a class="btn btn-info" routerLink="/dynamic/{{dynamic.id}}">详情</a>
-            <button class="btn btn-danger" (click)="delete(dynamic.id)"
-                    *ngIf="currentUser?.role=='ADMIN'||currentUser?.username==dynamic.sponsorUser?.username">删除
-            </button>
+            <!--当已登录时才能添加当为管理员或者发起用户时才能删除-->
+            <div class="card-link text-center mx-auto">
+              <button class="btn btn-success" data-toggle="modal" data-target="#createModal"
+                      *ngIf="currentUser">创建
+              </button>
+              <a class="btn btn-info" routerLink="/dynamic/{{dynamic.id}}">详情</a>
+              <button class="btn btn-danger" (click)="delete(dynamic.id)"
+                      *ngIf="currentUser?.role=='ADMIN'||currentUser?.username==dynamic.sponsorUser?.username">删除
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 
