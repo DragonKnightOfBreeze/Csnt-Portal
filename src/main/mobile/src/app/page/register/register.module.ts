@@ -8,10 +8,15 @@ import {IonicModule} from '@ionic/angular';
 import {RegisterPage} from './register.page';
 import {SharedModule} from "../../shared.module";
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path: '',
   component: RegisterPage
-}];
+  }, {
+    path: "**",
+    redirectTo: ""
+  }
+];
 
 @NgModule({
   imports: [

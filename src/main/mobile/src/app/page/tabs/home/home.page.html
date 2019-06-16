@@ -6,42 +6,29 @@
 
 <ion-content>
   <!--由于没有页面原型，暂且就这样写了-->
-  <ion-list>
-    <ion-list-header>计算机科学与门户网站首页</ion-list-header>
-    <ion-item>
-      <ion-icon name="heart"></ion-icon>
-      欢迎造访！
-      <ion-icon name="heart"></ion-icon>
-    </ion-item>
-  </ion-list>
+  <ion-row text-center>
+    <ion-col>
+      <ion-text>
+        <h3>
+          计算机科学与技术门户App
+        </h3>
+        <h4>
+          <ion-icon name="heart"></ion-icon>
+          欢迎造访！
+          <ion-icon name="heart"></ion-icon>
+        </h4>
+      </ion-text>
+    </ion-col>
+  </ion-row>
 
-  <!--以下为测试内容-->
-  <ion-grid>
-    <ion-row>
-      <!--在ion-grid之内时，是为左右对齐-->
-      <ion-col class="ion-align-self-start">
-        <div>
-          1 of 4
-        </div>
-      </ion-col>
-      <ion-col class="ion-align-self-center">
-        <div>
-          2 of 4
-        </div>
-      </ion-col>
-      <ion-col class="ion-align-self-end">
-        <div>
-          3 of 4
-        </div>
-      </ion-col>
-      <ion-col>
-        <div>
-          4 of 4 <br>
-          # <br>
-          # <br>
-          #
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <!--NOTE 以下为测试内容-->
+
+  <ion-row justify-content-center text-center>
+    <ion-col size="3">
+      <ion-button>上一页</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button>下一页</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

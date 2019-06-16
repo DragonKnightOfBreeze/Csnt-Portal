@@ -12,29 +12,36 @@ import {JwtInterceptor} from "../../../frontend/src/app/service/interceptor/jwt-
 import {ErrorInterceptor} from "../../../frontend/src/app/service/interceptor/error-interceptor.service";
 import {IonicStorageModule} from "@ionic/storage";
 import {TabsPageModule} from "./page/tabs/tabs.module";
+import {AccountMenuPage} from "./menu/account-menu/account-menu.page";
+import {InfoMenuPage} from "./menu/info-menu/info-menu.page";
+import {FormsModule} from "@angular/forms";
 
 //NOTE 懒加载的loadChildren必须配合SomeModule.forChild()使用。
 //NOTE 懒加载不能与{preloadingStrategy: PreloadAllModules}一同使用。
 //存在多级路由定义在不同模块对应的路由模块里。
 //有些路由存在激活或读取限制(canLoad,canActive)，有些路由带有数据(data)。
+//如果path=""，需要指定pathMatch="full"
 
 const routes: Routes = [
   {
-  path: "",
+    path: "",
     redirectTo: "/tabs/home",
-  pathMatch: "full"
-}, {
-  path: "tabs",
-  loadChildren: "./page/tabs/tabs.module#TabsPageModule"
-}, {
-  path: 'login',
-  loadChildren: './page/login/login.module#LoginPageModule'
-}, {
-  path: 'register',
-  loadChildren: './page/register/register.module#RegisterPageModule'
-}, {
-  path: "error",
-  loadChildren: "./page/error/error.module#ErrorPageModule"
+    pathMatch: "full"
+  }, {
+    path: "tabs",
+    loadChildren: "./page/tabs/tabs.module#TabsPageModule"
+  }, {
+    path: 'login',
+    loadChildren: './page/login/login.module#LoginPageModule'
+  }, {
+    path: 'register',
+    loadChildren: './page/register/register.module#RegisterPageModule'
+  }, {
+    path: "error",
+    loadChildren: "./page/error/error.module#ErrorPageModule"
+  }, {
+    path: "**",
+    redirectTo: "/error/404"
   }
 ];
 
@@ -48,16 +55,25 @@ const routes: Routes = [
     //提供错误拦截器
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    AccountMenuPage,
+    InfoMenuPage
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     RouterModule.forRoot(routes),
     TabsPageModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AccountMenuPage,
+    InfoMenuPage
+  ]
 })
 export class AppModule {
 }

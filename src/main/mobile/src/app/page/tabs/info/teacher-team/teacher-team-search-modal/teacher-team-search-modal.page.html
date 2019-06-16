@@ -1,18 +1,22 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/info/teacher-team"></ion-back-button>
+    </ion-buttons>
     <ion-title>高级搜索</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form (ngSubmit)="advanceSearch()" #advanceSearchForm=ngForm>
-    <ion-list>
+    <ion-list lines="none">
       <ion-item>
         <ion-label slot="start">名字</ion-label>
         <ion-input type="text" [(ngModel)]="queryVo.name" name="name"></ion-input>
       </ion-item>
 
       <ion-item>
+        <ion-label slot="start">专业等级</ion-label>
         <ion-select [(ngModel)]="queryVo.levelSet" name="levelSet" multiple>
           <ng-container *ngFor="let level of ProfessionLevel | enumConsts">
             <ion-select-option [value]="level">{{level | enumText:"ProfessionLevel"}}</ion-select-option>
@@ -29,12 +33,12 @@
         <ion-label slot="start">最大人数</ion-label>
         <ion-input type="number" [(ngModel)]="queryVo.max" name="max" min="0"></ion-input>
       </ion-item>
-
-      <ion-item>
-        <ion-button type="submit" expand="block">
-          <ion-icon name="search"></ion-icon>
-        </ion-button>
-      </ion-item>
     </ion-list>
+
+    <ion-row text-center>
+      <ion-col>
+        <ion-button type="submit" expand="block" color="primary">搜索</ion-button>
+      </ion-col>
+    </ion-row>
   </form>
 </ion-content>

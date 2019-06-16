@@ -17,8 +17,8 @@ export class AdminGuard implements CanLoad {
     if (this.userService.isAdmin) {
       return true;
     }
-    console.log("权限错误！");
-    this.router.navigate(["/error/403"]);
+    console.log("权限错误！请以管理员身份登录。");
+    this.router.navigate(["error/403"]);
     return false;
   }
 }

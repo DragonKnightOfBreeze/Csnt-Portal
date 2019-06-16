@@ -6,13 +6,17 @@ import {RouterModule, Routes} from "@angular/router";
 import {IonicModule} from "@ionic/angular";
 
 import {AccountPage} from "./account.page";
-import {AccountMenuPage} from "./account-menu/account-menu.page";
 import {SharedModule} from "../../../shared.module";
 
-const routes: Routes = [{
-  path: "",
-  component: AccountPage
-}];
+const routes: Routes = [
+  {
+    path: "",
+    component: AccountPage
+  }, {
+    path: "**",
+    redirectTo: ""
+  }
+];
 
 @NgModule({
   imports: [
@@ -22,12 +26,7 @@ const routes: Routes = [{
     RouterModule.forChild(routes),
     SharedModule
   ],
-  declarations: [
-    AccountPage,
-    AccountMenuPage
-  ],
-  //这是必要声明的
-  entryComponents: [AccountMenuPage]
+  declarations: [AccountPage]
 })
 export class AccountPageModule {
 }

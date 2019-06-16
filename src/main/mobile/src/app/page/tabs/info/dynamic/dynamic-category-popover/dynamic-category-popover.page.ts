@@ -26,6 +26,6 @@ export class DynamicCategoryPopoverPage implements OnInit {
   searchByCategory(category: DynamicCategory) {
     this.popoverController.dismiss();
     this.queryVo.categorySet = [category];
-    this.router.navigate(["/tabs/info/dynamic"], {queryParams: {type: "category", field: this.queryVo}})
+    this.router.navigate(["tabs/info/dynamic"], {queryParams: {type: "category", field: this.queryVo}})
   }
 }

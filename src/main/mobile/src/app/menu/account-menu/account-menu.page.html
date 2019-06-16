@@ -1,0 +1,19 @@
+<!--ion-menu必须是ion-content的兄弟节点，可以存在多个-->
+
+<ion-menu class="account-menu" side="start" menuId="info-menu" contentId="root-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>更多操作</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle autoHide="false">
+        <ion-item (click)="logout()">
+          注销
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>

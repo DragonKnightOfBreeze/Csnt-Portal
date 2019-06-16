@@ -25,6 +25,6 @@ export class TeacherTeamSearchModalPage implements OnInit {
 
   advanceSearch() {
     this.modalController.dismiss();
-    this.router.navigate(["/tabs/info/teacher-team"], {queryParams: {type: "advance", field: this.queryVo}});
+    this.router.navigate(["tabs/info/teacher-team"], {queryParams: {type: "advance", field: this.queryVo}});
   }
 }

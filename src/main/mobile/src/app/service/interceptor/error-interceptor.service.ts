@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       console.log(err.status);
       console.log(err);
 
-      this.router.navigate(["/error"]);
+      this.router.navigate(["error"]);
 
       // //根据错误状态码，分别跳转到不同的错误页面
       // switch (err.status) {

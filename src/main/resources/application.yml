@@ -19,6 +19,7 @@ server:
   servlet:
     # 指定服务器的内容根路径
     context-path: /csnt-portal/api
+
 spring:
   jpa:
     # 用于Jpa控制台调试

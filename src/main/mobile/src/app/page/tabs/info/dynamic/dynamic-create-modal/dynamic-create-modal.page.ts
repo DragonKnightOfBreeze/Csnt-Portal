@@ -25,7 +25,7 @@ export class DynamicCreateModalPage implements OnInit {
 
   create() {
     this.service.create(this.dynamic).subscribe(() => {
-      this.router.navigate(["/tabs/info/dynamic"])
+      this.router.navigate(["tabs/info/dynamic"])
     })
   }
 }

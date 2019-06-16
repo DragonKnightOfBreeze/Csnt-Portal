@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/info/dynamic"></ion-back-button>
+    </ion-buttons>
     <ion-title>高级搜索</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,6 +16,7 @@
       </ion-item>
 
       <ion-item>
+        <ion-label slot="start">动态分类</ion-label>
         <ion-select [(ngModel)]="queryVo.categorySet" name="categorySet" multiple>
           <ng-container *ngFor="let category of DynamicCategory | enumConsts">
             <ion-select-option [value]="category">{{category | enumText:"DynamicCategory"}}</ion-select-option>
@@ -24,12 +28,12 @@
         <ion-label slot="start">发起用户</ion-label>
         <ion-input type="text" [(ngModel)]="queryVo.sponsorUsername" name="sponsorUsername"></ion-input>
       </ion-item>
-
-      <ion-item>
-        <ion-button type="submit" expand="block">
-          <ion-icon name="search"></ion-icon>
-        </ion-button>
-      </ion-item>
     </ion-list>
+
+    <ion-row text-center>
+      <ion-col>
+        <ion-button type="submit" expand="block" color="primary">搜索</ion-button>
+      </ion-col>
+    </ion-row>
   </form>
 </ion-content>

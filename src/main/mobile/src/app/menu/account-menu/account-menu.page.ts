@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../../../service/api/user.service";
+import {UserService} from "../../service/api/user.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -17,6 +17,6 @@ export class AccountMenuPage implements OnInit {
 
   private logout() {
     this.service.logout();
-    this.router.navigate(["/"]);
+    this.router.navigate([""]);
   }
 }

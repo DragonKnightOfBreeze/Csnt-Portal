@@ -25,6 +25,6 @@ export class DynamicSearchModalPage implements OnInit {
 
   advanceSearch() {
     this.modalController.dismiss();
-    this.router.navigate(["/tabs/info/dynamic"], {queryParams: {type: "advance", field: this.queryVo}});
+    this.router.navigate(["tabs/info/dynamic"], {queryParams: {type: "advance", field: this.queryVo}});
   }
 }

@@ -35,14 +35,12 @@
     </ion-card>
   </ng-container>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col align-self-end>
-        <ion-button (click)="goPreviousPage()" [disabled]="currentPage.first">上一页</ion-button>
-      </ion-col>
-      <ion-col align-self-start="">
-        <ion-button (click)="goNextPage()" [disabled]="currentPage.last">下一页</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-row justify-content-center text-center>
+    <ion-col size="3">
+      <ion-button (click)="goPreviousPage()" [disabled]="currentPage.first">上一页</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button (click)="goNextPage()" [disabled]="currentPage.last">下一页</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

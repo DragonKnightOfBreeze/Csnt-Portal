@@ -305,3 +305,16 @@ StaticInjectorError(Platform: core)[IonRouterOutlet -> ChildrenOutletContexts]:
 解决方法：
 
 * 对于每个包含`router-outlet`的组件的html文件，其ts文件中必须具有对`RouterModule.forRoot()`的引用。
+
+******
+
+错误信息：
+
+```
+Menu: must have a "content" element to listen for drag events on.
+```
+
+解决方法：
+
+* 首先，ion-menu必须与ion-router-outlet或ion-content处于同一级。
+* 为ion-menu添加属性contentId="myId"，然后为对应的ion-content、ion-router-outlet或ion-split-pane指定id="myId"。

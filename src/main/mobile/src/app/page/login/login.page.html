@@ -6,7 +6,7 @@
 
 <ion-content>
   <form (ngSubmit)="login()" #loginForm=ngForm>
-    <ion-list>
+    <ion-list lines="none">
       <ion-item>
         <ion-label slot="start">用户名</ion-label>
         <ion-input type="text" [(ngModel)]="userLoginVo.username" name="username"
@@ -27,21 +27,17 @@
       </ion-item>
 
       <ion-item>
-        <ion-button routerLink="/reset-password">重置密码</ion-button>
-      </ion-item>
-
-      <ion-item>
-        <ion-grid>
-          <ion-row align-items-center>
-            <ion-col>
-              <ion-button type="submit" color="primary">登录</ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button color="primary" routerLink="/register">注册</ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <ion-button fill="outline" routerLink="/reset-password">重置密码</ion-button>
       </ion-item>
     </ion-list>
+
+    <ion-row text-center>
+      <ion-col>
+        <ion-button type="submit" expand="block" color="primary">登录</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" color="secondary" routerLink="/register">注册</ion-button>
+      </ion-col>
+    </ion-row>
   </form>
 </ion-content>

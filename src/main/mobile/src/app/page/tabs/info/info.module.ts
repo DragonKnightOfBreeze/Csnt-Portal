@@ -20,7 +20,6 @@ import {TeacherInfoDetailPage} from "./teacher-info/teacher-info-detail/teacher-
 import {TeacherTeamListPage} from "./teacher-team/teacher-team-list/teacher-team-list.page";
 import {TeacherTeamDetailPage} from "./teacher-team/teacher-team-detail/teacher-team-detail.page";
 import {LoginGuard} from "../../../service/guard/login-guard.service";
-import {InfoMenuPage} from "./info-menu/info-menu.page";
 import {DynamicCategoryPopoverPage} from "./dynamic/dynamic-category-popover/dynamic-category-popover.page";
 import {DynamicSearchModalPage} from "./dynamic/dynamic-search-modal/dynamic-search-modal.page";
 import {DynamicCreateModalPage} from "./dynamic/dynamic-create-modal/dynamic-create-modal.page";
@@ -96,22 +95,13 @@ const routes: Routes = [
   }, {
     //当都不匹配时重定向到404页面，不能直接引用组件
     path: "**",
-    redirectTo: "error/404",
-    pathMatch: "full"
+    redirectTo: "/error/404"
   }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes),
-    SharedModule
-  ],
   declarations: [
     InfoPage,
-    InfoMenuPage,
     DevelopmentColumnListPage,
     DevelopmentColumnDetailPage,
     DynamicListPage,
@@ -131,8 +121,14 @@ const routes: Routes = [
     TeacherTeamLevelPopoverPage,
     TeacherTeamSearchModalPage
   ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes),
+    SharedModule
+  ],
   entryComponents: [
-    InfoMenuPage,
     DynamicCategoryPopoverPage,
     DynamicCreateModalPage,
     DynamicSearchModalPage,
