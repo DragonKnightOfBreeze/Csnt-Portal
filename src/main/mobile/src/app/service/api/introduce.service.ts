@@ -4,7 +4,7 @@ import {Introduce} from "../../domain/entity/Introduce";
 import {Observable} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
 import {catchError} from "rxjs/operators";
-import {handleError} from "../handler/error-handler.service";
+import {handleError} from "../handler/error-handler";
 
 /**
  * 专业特色介绍的服务类。

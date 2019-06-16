@@ -9,6 +9,8 @@ import {ErrorPage} from "./error.page";
 import {Error403Page} from "./error403/error403.page";
 import {SharedModule} from "../../shared.module";
 import {Error404Page} from "./error404/error404.page";
+import {HttpClientModule} from "@angular/common/http";
+import {IonicStorageModule} from "@ionic/storage";
 
 const routes: Routes = [
   {
@@ -29,8 +31,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     RouterModule.forChild(routes),
     SharedModule
   ],
@@ -38,7 +42,8 @@ const routes: Routes = [
     ErrorPage,
     Error403Page,
     Error404Page
-  ]
+  ],
+  bootstrap: [ErrorPage]
 })
 export class ErrorPageModule {
 }

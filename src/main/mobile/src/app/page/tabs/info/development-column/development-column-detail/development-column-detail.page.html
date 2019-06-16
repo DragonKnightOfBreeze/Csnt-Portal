@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/info/development-column"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>专业发展专栏 详情</ion-title>
   </ion-toolbar>
@@ -13,17 +13,26 @@
       <ion-card-title>
         {{column.title}}
       </ion-card-title>
-      <ion-card-subtitle>
-        <ion-note slot="start">#{{column.id}}</ion-note>
-        <ion-note slot="start">作者：{{column.author}}</ion-note>
-        <ion-note slot="start">发布时间：{{column.publishTime | localeDate}}</ion-note>
-        <ion-note slot="start">更新时间：{{column.updateTime | localeDate}}</ion-note>
-      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-text>
-        {{column.content}}
-      </ion-text>
+      <ion-row>
+        <ion-col>
+          <ion-note>作者：{{column.author}}</ion-note>
+        </ion-col>
+        <ion-col>
+          <ion-note>发布时间：{{column.publishTime | localeDate}}</ion-note>
+        </ion-col>
+        <ion-col>
+          <ion-note>更新时间：{{column.updateTime | localeDate}}</ion-note>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            {{column.content}}
+          </ion-text>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-content>

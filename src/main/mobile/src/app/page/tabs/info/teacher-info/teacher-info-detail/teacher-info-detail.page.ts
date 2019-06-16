@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {UserService} from "../../../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
@@ -10,7 +10,7 @@ import {TeacherInfoService} from "../../../../../service/api/teacher-info.servic
   templateUrl: "./teacher-info-detail.page.html",
   styleUrls: ["./teacher-info-detail.page.scss"],
 })
-export class TeacherInfoDetailPage implements OnInit {
+export class TeacherInfoDetailPage {
   id: number;
 
   teacherInfo: TeacherInfo;

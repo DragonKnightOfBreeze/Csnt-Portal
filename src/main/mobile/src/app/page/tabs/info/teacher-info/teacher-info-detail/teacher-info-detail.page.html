@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/info/teacher-team"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>教师信息 详情</ion-title>
   </ion-toolbar>
@@ -13,17 +13,26 @@
       <ion-card-title>
         {{teacherInfo.name}}
       </ion-card-title>
-      <ion-card-subtitle>
-        <ion-note slot="start">#{{teacherInfo.id}}</ion-note>
-        <ion-note slot="start">{{teacherInfo.gender | enumText:"Gender"}}</ion-note>
-        <ion-note slot="start">专业：{{teacherInfo.profession | enumText:"Profession"}}</ion-note>
-        <ion-note slot="start">所属队伍：{{teacherInfo.teacherTeam?.name}}</ion-note>
-      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-text>
-        {{teacherInfo.introduce}}
-      </ion-text>
+      <ion-row>
+        <ion-col>
+          <ion-note>{{teacherInfo.gender | enumText:"Gender"}}</ion-note>
+        </ion-col>
+        <ion-col>
+          <ion-note>专业：{{teacherInfo.profession | enumText:"Profession"}}</ion-note>
+        </ion-col>
+        <ion-col>
+          <ion-note>所属队伍：{{teacherInfo.teacherTeam?.name}}</ion-note>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+            {{teacherInfo.introduce}}
+          </ion-text>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-content>

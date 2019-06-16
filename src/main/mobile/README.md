@@ -13,6 +13,7 @@
 
 * ion-list：lines="inset"
 * ion-button：color="primary"
+* ion-note: color="medium"
 
 对齐：
 
@@ -21,3 +22,15 @@
 * 可以使用对应的class，也可以使用对应的顺序。
 * 可以省略ion-grid。ion-row里面必须是ion-col。
 * 对于ion-row、ion-col、里面的div：使用text-xxx进行文本的对齐。
+
+模块导入问题：
+
+* 每个模块都有必要导入必要的模块，作为提供商。
+* BrowserModule只需要导入一次。其他模块导入CommonModule。
+* 父模块使用RouterModule.forRoot()，子模块只能使用RouterModule.forChild()
+
+其他问题：
+
+* popover、modal等类型的组件，需要在对应模块的entryComponents中声明。
+* 若要在页面打开时加载数据，使用ionViewWIllEnter或ionViewDidEnter，而不是onInit。
+* 一旦一个页面中出现错误，整个页面都将不能正常显示。

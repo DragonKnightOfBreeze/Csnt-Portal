@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/info/introduce"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>专业特色介绍 详情</ion-title>
   </ion-toolbar>
@@ -13,17 +13,26 @@
       <ion-card-title>
         {{introduce.title}}
       </ion-card-title>
-      <ion-card-subtitle>
-        <ion-note slot="start">#{{introduce.id}}</ion-note>
-        <ion-note slot="start">作者：{{introduce.author}}</ion-note>
-        <ion-note slot="start">发布时间：{{introduce.publishTime | localeDate}}</ion-note>
-        <ion-note slot="start">更新时间：{{introduce.updateTime | localeDate}}</ion-note>
-      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-text>
-        {{introduce.content}}
-      </ion-text>
+      <ion-row>
+        <ion-col>
+          <ion-note>作者：{{introduce.author}}</ion-note>
+        </ion-col>
+        <ion-col>
+          <ion-note>发布时间：{{introduce.publishTime | localeDate}}</ion-note>
+        </ion-col>
+        <ion-col>
+          <ion-note>更新时间：{{introduce.updateTime | localeDate}}</ion-note>
+        </ion-col>
+      </ion-row>
+      <ion-row text-center>
+        <ion-col>
+          <ion-text>
+            {{introduce.content}}
+          </ion-text>
+        </ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-content>

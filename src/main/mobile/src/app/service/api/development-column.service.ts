@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
 import {catchError} from "rxjs/operators";
 import {Page} from "../../domain/interface/Page";
-import {handleError} from "../handler/error-handler.service";
+import {handleError} from "../handler/error-handler";
 
 /**
  * 专业发展专栏的服务类。

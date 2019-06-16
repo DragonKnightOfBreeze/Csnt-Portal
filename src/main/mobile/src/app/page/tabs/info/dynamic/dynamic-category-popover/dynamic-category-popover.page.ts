@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {PopoverController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {DynamicCategory} from "../../../../../domain/enum/DynamicCategory";
 import {DynamicQueryVo} from "../../../../../domain/vo/DynamicQueryVo";
 
-//TODO
 @Component({
   selector: 'app-dynamic-category-popover',
   templateUrl: './dynamic-category-popover.page.html',
   styleUrls: ['./dynamic-category-popover.page.scss'],
 })
-export class DynamicCategoryPopoverPage implements OnInit {
+export class DynamicCategoryPopoverPage {
   queryVo = new DynamicQueryVo();
 
   DynamicCategory = DynamicCategory;
@@ -19,9 +18,6 @@ export class DynamicCategoryPopoverPage implements OnInit {
               private router: Router) {
   }
 
-
-  ngOnInit() {
-  }
 
   searchByCategory(category: DynamicCategory) {
     this.popoverController.dismiss();

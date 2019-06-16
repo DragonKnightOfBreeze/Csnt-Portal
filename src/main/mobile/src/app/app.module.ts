@@ -7,9 +7,7 @@ import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 import {AppComponent} from "./app.component";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {JwtInterceptor} from "../../../frontend/src/app/service/interceptor/jwt-interceptor.service";
-import {ErrorInterceptor} from "../../../frontend/src/app/service/interceptor/error-interceptor.service";
+import {HttpClientModule} from "@angular/common/http";
 import {IonicStorageModule} from "@ionic/storage";
 import {TabsPageModule} from "./page/tabs/tabs.module";
 import {AccountMenuPage} from "./menu/account-menu/account-menu.page";
@@ -46,20 +44,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-    //提供Jwt安全验证拦截器；
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    //提供错误拦截器
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
-  ],
-  declarations: [
-    AppComponent,
-    AccountMenuPage,
-    InfoMenuPage
-  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -69,11 +53,21 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     TabsPageModule
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [
+  declarations: [
+    AppComponent,
     AccountMenuPage,
     InfoMenuPage
-  ]
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+    // //提供Jwt安全验证拦截器；
+    // {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    // //提供错误拦截器
+    // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {User} from "../../../../../../frontend/src/app/domain/entity/User";
 import {UserService} from "../../../service/api/user.service";
 
@@ -7,7 +7,7 @@ import {UserService} from "../../../service/api/user.service";
   templateUrl: "./account.page.html",
   styleUrls: ["./account.page.scss"],
 })
-export class AccountPage implements OnInit {
+export class AccountPage {
   username: string;
 
   user: User;

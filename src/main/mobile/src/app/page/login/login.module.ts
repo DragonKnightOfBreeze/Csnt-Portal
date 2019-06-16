@@ -7,6 +7,8 @@ import {IonicModule} from '@ionic/angular';
 
 import {LoginPage} from './login.page';
 import {SharedModule} from "../../shared.module";
+import {HttpClientModule} from "@angular/common/http";
+import {IonicStorageModule} from "@ionic/storage";
 
 const routes: Routes = [
   {
@@ -21,8 +23,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     RouterModule.forChild(routes),
     SharedModule
   ],

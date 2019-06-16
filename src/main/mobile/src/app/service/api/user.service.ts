@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../domain/entity/User";
 import {BehaviorSubject, Observable} from "rxjs";
@@ -8,7 +8,7 @@ import {Page} from "../../domain/interface/Page";
 import {UserLoginVo} from "../../domain/vo/UserLoginVo";
 import {UserResetPasswordVo} from "../../domain/vo/UserResetPasswordVo";
 import {JwtUserResponseVo} from "../../domain/vo/JwtUserResponseVo";
-import {handleError} from "../handler/error-handler.service";
+import {handleError} from "../handler/error-handler";
 import {Dynamic} from "../../domain/entity/Dynamic";
 import {Storage} from "@ionic/storage";
 import {Events} from "@ionic/angular";
@@ -21,7 +21,7 @@ import {Events} from "@ionic/angular";
  * 用户的服务类。
  */
 @Injectable({providedIn: "root"})
-export class UserService implements OnInit {
+export class UserService {
   /**当前用户信息的行为主题对象。*/
   public currentUserSubject = new BehaviorSubject<JwtUserResponseVo>(null);
   /**当前用户信息。*/
@@ -38,9 +38,6 @@ export class UserService implements OnInit {
     this.getCurrentUser();
   }
 
-
-  ngOnInit(): void {
-  }
 
   private getCurrentUser() {
     this.storage.get("currentUser").then(value => {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {QueryParams} from "../../../../../domain/vo/QueryParams";
 import {Page} from "../../../../../domain/interface/Page";
 import {Dynamic} from "../../../../../domain/entity/Dynamic";
@@ -16,7 +16,7 @@ import {DynamicCreateModalPage} from "../dynamic-create-modal/dynamic-create-mod
   templateUrl: "./dynamic-list.page.html",
   styleUrls: ["./dynamic-list.page.scss"],
 })
-export class DynamicListPage implements OnInit {
+export class DynamicListPage {
   queryParams: QueryParams<DynamicQueryVo>;
 
   currentPage: Page<Dynamic>;
@@ -29,7 +29,7 @@ export class DynamicListPage implements OnInit {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.queryParams = {
       type: this.route.snapshot.queryParamMap.get("type") || "all",
       field: JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new DynamicQueryVo(),
@@ -109,7 +109,8 @@ export class DynamicListPage implements OnInit {
   }
 
   isSponsorUser(dynamic: Dynamic) {
-    return this.userService.currentUser.username == dynamic.sponsorUser.username;
+    return this.userService.hasLogin && dynamic.sponsorUser
+      && this.userService.currentUser.username == dynamic.sponsorUser.username;
   }
 
   async presentCategoryPopover() {

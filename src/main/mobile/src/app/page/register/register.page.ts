@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from "../../domain/entity/User";
 import {Gender} from "../../../../../frontend/src/app/enums/Gender";
 import {Role} from "../../../../../frontend/src/app/enums/Role";
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
   user = new User();
 
   Gender = Gender;
@@ -22,9 +22,6 @@ export class RegisterPage implements OnInit {
               private router: Router) {
   }
 
-
-  ngOnInit() {
-  }
 
   register() {
     //如果注册成功，则跳转到登录页

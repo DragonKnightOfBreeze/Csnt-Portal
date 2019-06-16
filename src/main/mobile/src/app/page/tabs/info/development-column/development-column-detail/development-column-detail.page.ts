@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {UserService} from "../../../../../service/api/user.service";
@@ -10,7 +10,7 @@ import {DevelopmentColumn} from "../../../../../domain/entity/DevelopmentColumn"
   templateUrl: "./development-column-detail.page.html",
   styleUrls: ["./development-column-detail.page.scss"],
 })
-export class DevelopmentColumnDetailPage implements OnInit {
+export class DevelopmentColumnDetailPage {
   id: number;
 
   column: DevelopmentColumn;

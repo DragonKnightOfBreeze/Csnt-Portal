@@ -8,7 +8,7 @@ import {Page} from "../../domain/interface/Page";
 import {ProfessionLevel} from "../../domain/enum/ProfessionLevel";
 import {TeacherTeamQueryVo} from "../../domain/vo/TeacherTeamQueryVo";
 import {TeacherInfo} from "../../domain/entity/TeacherInfo";
-import {handleError} from "../handler/error-handler.service";
+import {handleError} from "../handler/error-handler";
 
 /**
  * 教师队伍的服务类。

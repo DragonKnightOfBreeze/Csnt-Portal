@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {QueryParams} from "../../../../../domain/vo/QueryParams";
 import {Page} from "../../../../../domain/interface/Page";
 import {StudyColumn} from "../../../../../domain/entity/StudyColumn";
@@ -11,7 +11,7 @@ import {StudyColumnService} from "../../../../../service/api/study-reform.servic
   templateUrl: "./study-column-list.page.html",
   styleUrls: ["./study-column-list.page.scss"],
 })
-export class StudyColumnListPage implements OnInit {
+export class StudyColumnListPage {
   queryParams: QueryParams<string>;
 
   currentPage: Page<StudyColumn>;

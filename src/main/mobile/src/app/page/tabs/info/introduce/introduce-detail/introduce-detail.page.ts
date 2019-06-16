@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {ReformColumnService} from "../../../../../service/api/reform-column.service";
 import {UserService} from "../../../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
@@ -10,7 +10,7 @@ import {Introduce} from "../../../../../domain/entity/Introduce";
   templateUrl: "./introduce-detail.page.html",
   styleUrls: ["./introduce-detail.page.scss"],
 })
-export class IntroduceDetailPage implements OnInit {
+export class IntroduceDetailPage {
   id: number;
 
   introduce: Introduce;

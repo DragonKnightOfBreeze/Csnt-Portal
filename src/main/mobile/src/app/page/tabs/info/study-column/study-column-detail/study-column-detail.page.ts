@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {UserService} from "../../../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
@@ -10,7 +10,7 @@ import {StudyColumnService} from "../../../../../service/api/study-reform.servic
   templateUrl: "./study-column-detail.page.html",
   styleUrls: ["./study-column-detail.page.scss"],
 })
-export class StudyColumnDetailPage implements OnInit {
+export class StudyColumnDetailPage {
   id: number;
 
   column: StudyColumn;

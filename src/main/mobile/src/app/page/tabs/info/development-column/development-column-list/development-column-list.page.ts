@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {DevelopmentColumnService} from "../../../../../service/api/development-column.service";
 import {UserService} from "../../../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
@@ -11,7 +11,7 @@ import {QueryParams} from "../../../../../domain/vo/QueryParams";
   templateUrl: "./development-column-list.page.html",
   styleUrls: ["./development-column-list.page.scss"],
 })
-export class DevelopmentColumnListPage implements OnInit {
+export class DevelopmentColumnListPage {
   queryParams: QueryParams<string>;
 
   currentPage: Page<DevelopmentColumn>;

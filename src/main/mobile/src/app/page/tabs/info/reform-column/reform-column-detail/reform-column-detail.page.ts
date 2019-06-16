@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {ReformColumn} from "../../../../../domain/entity/ReformColumn";
 import {UserService} from "../../../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
@@ -10,7 +10,7 @@ import {ReformColumnService} from "../../../../../service/api/reform-column.serv
   templateUrl: "./reform-column-detail.page.html",
   styleUrls: ["./reform-column-detail.page.scss"],
 })
-export class ReformColumnDetailPage implements OnInit {
+export class ReformColumnDetailPage {
   id: number;
 
   column: ReformColumn;

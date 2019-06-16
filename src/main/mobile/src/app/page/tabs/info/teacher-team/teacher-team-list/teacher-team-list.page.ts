@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {QueryParams} from "../../../../../domain/vo/QueryParams";
 import {Page} from "../../../../../domain/interface/Page";
 import {UserService} from "../../../../../service/api/user.service";
@@ -15,7 +15,7 @@ import {TeacherTeamSearchModalPage} from "../teacher-team-search-modal/teacher-t
   templateUrl: "./teacher-team-list.page.html",
   styleUrls: ["./teacher-team-list.page.scss"],
 })
-export class TeacherTeamListPage implements OnInit {
+export class TeacherTeamListPage {
   queryParams: QueryParams<TeacherTeamQueryVo>;
 
   currentPage: Page<TeacherTeam>;

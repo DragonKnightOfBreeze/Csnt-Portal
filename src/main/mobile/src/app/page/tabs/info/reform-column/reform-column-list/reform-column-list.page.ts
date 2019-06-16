@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {QueryParams} from "../../../../../domain/vo/QueryParams";
 import {Page} from "../../../../../domain/interface/Page";
 import {UserService} from "../../../../../service/api/user.service";
@@ -11,7 +11,7 @@ import {ReformColumnService} from "../../../../../service/api/reform-column.serv
   templateUrl: "./reform-column-list.page.html",
   styleUrls: ["./reform-column-list.page.scss"],
 })
-export class ReformColumnListPage implements OnInit {
+export class ReformColumnListPage {
   queryParams: QueryParams<string>;
 
   currentPage: Page<ReformColumn>;

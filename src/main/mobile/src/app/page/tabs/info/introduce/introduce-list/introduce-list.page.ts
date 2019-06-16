@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {UserService} from "../../../../../service/api/user.service";
 import {Introduce} from "../../../../../domain/entity/Introduce";
 import {IntroduceService} from "../../../../../service/api/introduce.service";
@@ -8,7 +8,7 @@ import {IntroduceService} from "../../../../../service/api/introduce.service";
   templateUrl: "./introduce-list.page.html",
   styleUrls: ["./introduce-list.page.scss"],
 })
-export class IntroduceListPage implements OnInit {
+export class IntroduceListPage {
   currentList: Introduce[];
 
   constructor(private service: IntroduceService,

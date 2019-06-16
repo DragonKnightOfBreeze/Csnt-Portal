@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {UserLoginVo} from "../../domain/vo/UserLoginVo";
 import {UserService} from "../../service/api/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -8,7 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   returnUrl: String;
 
   userLoginVo = new UserLoginVo();

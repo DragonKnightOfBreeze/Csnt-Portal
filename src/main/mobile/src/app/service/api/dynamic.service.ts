@@ -7,7 +7,7 @@ import {DynamicQueryVo} from "../../domain/vo/DynamicQueryVo";
 import {catchError} from "rxjs/operators";
 import {Page} from "../../domain/interface/Page";
 import {DynamicCategory} from "../../domain/enum/DynamicCategory";
-import {handleError} from "../handler/error-handler.service";
+import {handleError} from "../handler/error-handler";
 
 /**
  * 实时动态的服务类。

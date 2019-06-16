@@ -8,6 +8,8 @@ import {IonicModule} from "@ionic/angular";
 import {TabsPage} from "./tabs.page";
 import {LoginGuard} from "../../service/guard/login-guard.service";
 import {SharedModule} from "../../shared.module";
+import {HttpClientModule} from "@angular/common/http";
+import {IonicStorageModule} from "@ionic/storage";
 
 const routes: Routes = [
   {
@@ -28,19 +30,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    TabsPage
-  ],
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     RouterModule.forChild(routes),
     SharedModule
   ],
-  exports: [
-    TabsPage
-  ]
+  declarations: [TabsPage],
+  exports: [TabsPage]
 })
 export class TabsPageModule {
 }

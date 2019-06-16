@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {UserService} from "../../../../../service/api/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
@@ -10,7 +10,7 @@ import {Dynamic} from "../../../../../domain/entity/Dynamic";
   templateUrl: "./dynamic-detail.page.html",
   styleUrls: ["./dynamic-detail.page.scss"],
 })
-export class DynamicDetailPage implements OnInit {
+export class DynamicDetailPage {
   id: number;
 
   dynamic: Dynamic;
@@ -43,6 +43,7 @@ export class DynamicDetailPage implements OnInit {
   }
 
   isSponsorUser() {
-    return this.userService.currentUser.username == this.dynamic.sponsorUser.username;
+    return this.userService.hasLogin && this.dynamic.sponsorUser
+      && this.userService.currentUser.username == this.dynamic.sponsorUser.username;
   }
 }

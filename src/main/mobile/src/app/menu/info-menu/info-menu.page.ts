@@ -1,14 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-info-menu',
   templateUrl: './info-menu.page.html',
   styleUrls: ['./info-menu.page.scss'],
 })
-export class InfoMenuPage implements OnInit {
+export class InfoMenuPage {
   constructor() {
-  }
-
-  ngOnInit() {
   }
 }

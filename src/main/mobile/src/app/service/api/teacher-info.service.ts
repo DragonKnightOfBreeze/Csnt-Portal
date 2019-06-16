@@ -4,7 +4,7 @@ import {TeacherInfo} from "../../domain/entity/TeacherInfo";
 import {Observable} from "rxjs";
 import {apiUrl} from "../../../environments/environment.prod";
 import {catchError} from "rxjs/operators";
-import {handleError} from "../handler/error-handler.service";
+import {handleError} from "../handler/error-handler";
 
 /**
  * 教师详情的服务类。

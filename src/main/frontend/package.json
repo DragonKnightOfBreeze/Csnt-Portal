@@ -1,6 +1,8 @@
 {
 	"name": "frontend",
 	"version": "1.0.0",
+	"author": "DragonKnightOfBreeze",
+	"description": "学期项目：计算机科学与技术门户网站。",
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",

@@ -1,10 +1,3 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import {RouterModule, Routes} from "@angular/router";
-
-import {IonicModule} from "@ionic/angular";
-
 import {InfoPage} from "./info.page";
 import {DevelopmentColumnListPage} from "./development-column/development-column-list/development-column-list.page";
 import {DevelopmentColumnDetailPage} from "./development-column/development-column-detail/development-column-detail.page";
@@ -26,6 +19,13 @@ import {DynamicCreateModalPage} from "./dynamic/dynamic-create-modal/dynamic-cre
 import {TeacherTeamSearchModalPage} from "./teacher-team/teacher-team-search-modal/teacher-team-search-modal.page";
 import {TeacherTeamLevelPopoverPage} from "./teacher-team/teacher-team-level-popover/teacher-team-level-popover.page";
 import {SharedModule} from "../../../shared.module";
+import {IonicStorageModule} from "@ionic/storage";
+import {RouterModule, Routes} from "@angular/router";
+import {IonicModule} from "@ionic/angular";
+import {CommonModule} from "@angular/common";
+import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 const routes: Routes = [
   {
@@ -100,6 +100,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
+    RouterModule.forChild(routes),
+    SharedModule
+  ],
   declarations: [
     InfoPage,
     DevelopmentColumnListPage,
@@ -121,20 +130,13 @@ const routes: Routes = [
     TeacherTeamLevelPopoverPage,
     TeacherTeamSearchModalPage
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes),
-    SharedModule
-  ],
+  bootstrap: [InfoPage],
   entryComponents: [
     DynamicCategoryPopoverPage,
     DynamicCreateModalPage,
     DynamicSearchModalPage,
     TeacherTeamLevelPopoverPage,
-    TeacherTeamSearchModalPage
-  ]
+    TeacherTeamSearchModalPage]
 })
 export class InfoPageModule {
 }

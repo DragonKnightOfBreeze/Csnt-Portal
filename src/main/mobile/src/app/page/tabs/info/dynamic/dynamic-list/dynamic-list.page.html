@@ -4,6 +4,11 @@
       <ion-menu-button menu="info-menu"></ion-menu-button>
     </ion-buttons>
     <ion-title>实时动态</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="presentCreateModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -27,26 +32,41 @@
         <ion-card-title>
           {{dynamic.subject}}
         </ion-card-title>
-        <ion-card-subtitle>
-          <ion-note slot="start">#{{dynamic.id}}</ion-note>
-          <ion-note slot="start">分类：{{dynamic.category | enumText:"DynamicCategory"}}</ion-note>
-          <ion-note slot="start">发起用户：{{dynamic.sponsorUser?.username || "未知"}}</ion-note>
-          <ion-note slot="start">发起时间：{{dynamic.sponsorTime | localeDate}}</ion-note>
-        </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <ion-text>
-          {{dynamic.content | limitText}}
-        </ion-text>
-        <ion-button color="primary" routerLink="/tabs/info/development-column/{{dynamic.id}}">
-          详情
-        </ion-button>
-        <ion-button color="success" (click)="presentCreateModal()" *ngIf="isSponsorUser(dynamic)">
-          创建动态
-        </ion-button>
-        <ion-button color="danger" (click)="delete(dynamic.id)" *ngIf="isSponsorUser(dynamic)">
-          删除动态
-        </ion-button>
+        <ion-row>
+          <ion-col>
+            <ion-note>分类：{{dynamic.category | enumText:"DynamicCategory"}}</ion-note>
+          </ion-col>
+          <ion-col>
+            <ion-note>发起用户：{{dynamic.sponsorUser.username || "未知"}}</ion-note>
+          </ion-col>
+          <ion-col>
+            <ion-note>发起时间：{{dynamic.sponsorTime | localeDate}}</ion-note>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text>
+              {{dynamic.content | limitText}}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row justify-content-center text-center>
+          <ion-col>
+            <ion-button expand="block" color="primary" routerLink="/tabs/info/development-column/{{dynamic.id}}">详情
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="success" (click)="presentCreateModal()" *ngIf="isSponsorUser(dynamic)">
+              创建
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="danger" (click)="delete(dynamic.id)" *ngIf="isSponsorUser(dynamic)">删除
+            </ion-button>
+          </ion-col>
+        </ion-row>
       </ion-card-content>
     </ion-card>
   </ng-container>
