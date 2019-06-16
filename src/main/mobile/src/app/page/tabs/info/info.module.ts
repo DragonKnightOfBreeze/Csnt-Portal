@@ -138,5 +138,5 @@ const routes: Routes = [
     TeacherTeamLevelPopoverPage,
     TeacherTeamSearchModalPage]
 })
-export class InfoPageModule {
+export class InfoModule {
 }

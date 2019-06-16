@@ -9,7 +9,7 @@ import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {AppComponent} from "./app.component";
 import {HttpClientModule} from "@angular/common/http";
 import {IonicStorageModule} from "@ionic/storage";
-import {TabsPageModule} from "./page/tabs/tabs.module";
+import {TabsModule} from "./page/tabs/tabs.module";
 import {AccountMenuPage} from "./menu/account-menu/account-menu.page";
 import {InfoMenuPage} from "./menu/info-menu/info-menu.page";
 import {FormsModule} from "@angular/forms";
@@ -51,7 +51,7 @@ const routes: Routes = [
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     RouterModule.forRoot(routes),
-    TabsPageModule
+    TabsModule
   ],
   declarations: [
     AppComponent,
