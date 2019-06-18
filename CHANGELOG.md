@@ -45,3 +45,4 @@
 - [ ] 整合Swagger。
 - [ ] 使用Vue代替Angular。
 - [ ] 使用Weex替代Ionic。
+- [ ] 重构后台高级查询的实现，基于Specification的Spring Data Jpa查询。
