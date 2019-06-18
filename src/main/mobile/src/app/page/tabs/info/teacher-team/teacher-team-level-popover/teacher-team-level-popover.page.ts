@@ -24,6 +24,6 @@ export class TeacherTeamLevelPopoverPage {
     this.queryVo.levelSet = [level];
     this.router.navigate(["tabs/info/dynamic"], {
       queryParams: {type: "professionLevel", field: JSON.stringify(this.queryVo)}
-    })
+    });
   }
 }

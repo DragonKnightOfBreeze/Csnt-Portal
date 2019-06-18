@@ -44,7 +44,7 @@ export class TeacherTeamListPage {
   }
 
   search(event) {
-    this.queryParams.field = event.target.value;
+    this.queryParams.field.name = event.target.value;
     this.searchByName();
   }
 

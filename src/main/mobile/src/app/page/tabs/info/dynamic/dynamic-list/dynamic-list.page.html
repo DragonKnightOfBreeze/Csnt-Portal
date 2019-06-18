@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>实时动态</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="presentCreateModal()">
+      <ion-button (click)="presentCreateModal()" *ngIf="userService.hasLogin">
         <ion-icon name="add"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -54,12 +54,12 @@
         </ion-row>
         <ion-row justify-content-center text-center>
           <ion-col>
-            <ion-button expand="block" color="primary" routerLink="/tabs/info/development-column/{{dynamic.id}}">详情
+            <ion-button expand="block" color="success" (click)="presentCreateModal()" *ngIf="isSponsorUser(dynamic)">
+              创建
             </ion-button>
           </ion-col>
           <ion-col>
-            <ion-button expand="block" color="success" (click)="presentCreateModal()" *ngIf="isSponsorUser(dynamic)">
-              创建
+            <ion-button expand="block" color="primary" routerLink="/tabs/info/development-column/{{dynamic.id}}">详情
             </ion-button>
           </ion-col>
           <ion-col>

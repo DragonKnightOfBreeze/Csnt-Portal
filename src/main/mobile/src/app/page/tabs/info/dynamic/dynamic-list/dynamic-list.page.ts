@@ -45,7 +45,7 @@ export class DynamicListPage {
   }
 
   search(event) {
-    this.queryParams.field = event.target.value;
+    this.queryParams.field.subject = event.target.value;
     this.searchBySubject();
   }
 
