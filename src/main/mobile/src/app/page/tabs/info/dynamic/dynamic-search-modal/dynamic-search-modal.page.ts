@@ -21,6 +21,8 @@ export class DynamicSearchModalPage {
 
   advanceSearch() {
     this.modalController.dismiss();
-    this.router.navigate(["tabs/info/dynamic"], {queryParams: {type: "advance", field: this.queryVo}});
+    this.router.navigate(["tabs/info/dynamic"], {
+      queryParams: {type: "advance", field: JSON.stringify(this.queryVo)}
+    });
   }
 }

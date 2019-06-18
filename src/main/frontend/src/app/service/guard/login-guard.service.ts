@@ -18,7 +18,7 @@ export class LoginGuard implements CanActivate, CanActivateChild {
       return true;
     }
     console.log("未验证！先请登录。");
-    this.router.navigate(["/login"], {queryParams: {returnUrl: state.url}});
+    this.router.navigate(["login"], {queryParams: {returnUrl: state.url}});
     return false;
   }
 

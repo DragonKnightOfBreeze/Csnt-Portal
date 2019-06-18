@@ -3,13 +3,14 @@ import {QueryParams} from "../../../../../domain/vo/QueryParams";
 import {Page} from "../../../../../domain/interface/Page";
 import {Dynamic} from "../../../../../domain/entity/Dynamic";
 import {UserService} from "../../../../../service/api/user.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {DynamicService} from "../../../../../service/api/dynamic.service";
 import {DynamicQueryVo} from "../../../../../../../../frontend/src/app/domain/vo/DynamicQueryVo";
 import {ModalController, PopoverController} from "@ionic/angular";
 import {DynamicCategoryPopoverPage} from "../dynamic-category-popover/dynamic-category-popover.page";
 import {DynamicSearchModalPage} from "../dynamic-search-modal/dynamic-search-modal.page";
 import {DynamicCreateModalPage} from "../dynamic-create-modal/dynamic-create-modal.page";
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: "app-dynamic-list",
@@ -24,29 +25,26 @@ export class DynamicListPage {
   constructor(private service: DynamicService,
               public userService: UserService,
               private route: ActivatedRoute,
+              private router: Router,
               private popoverController: PopoverController,
               private modalController: ModalController) {
   }
 
 
-  ionViewWillEnter() {
+  ngOnInit() {
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      this.getQueryParams();
+      this.show();
+    });
+  }
+
+  private getQueryParams() {
     this.queryParams = {
       type: this.route.snapshot.queryParamMap.get("type") || "all",
       field: JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new DynamicQueryVo(),
       page: +this.route.snapshot.queryParamMap.get("page") || 1,
       size: +this.route.snapshot.queryParamMap.get("size") || 10
     };
-    this.show();
-  }
-
-  delete(id: number) {
-    this.currentPage.content.filter(e => e.id !== id);
-    this.service.delete(id).subscribe();
-  }
-
-  search(event) {
-    this.queryParams.field = event.target.value;
-    this.searchBySubject();
   }
 
   private show() {
@@ -92,6 +90,16 @@ export class DynamicListPage {
     this.service.advanceSearch(field, page, size).subscribe(dynamicPage => {
       this.currentPage = dynamicPage;
     });
+  }
+
+  delete(id: number) {
+    this.currentPage.content.filter(e => e.id !== id);
+    this.service.delete(id).subscribe();
+  }
+
+  search(event) {
+    this.queryParams.field.subject = event.target.value;
+    this.searchBySubject();
   }
 
   goPreviousPage() {

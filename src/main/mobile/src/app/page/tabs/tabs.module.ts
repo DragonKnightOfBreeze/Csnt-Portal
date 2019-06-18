@@ -18,13 +18,13 @@ const routes: Routes = [
     pathMatch: "full"
   }, {
     path: "home",
-    loadChildren: "./home/home.module#HomePageModule"
+    loadChildren: "./home/home.module#HomeModule"
   }, {
     path: "info",
-    loadChildren: "./info/info.module#InfoPageModule"
+    loadChildren: "./info/info.module#InfoModule"
   }, {
     path: "account",
-    loadChildren: "./account/account.module#AccountPageModule",
+    loadChildren: "./account/account.module#AccountModule",
     canLoad: [LoginGuard]
   }
 ];
