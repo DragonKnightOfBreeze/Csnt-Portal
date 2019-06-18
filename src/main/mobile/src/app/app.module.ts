@@ -7,12 +7,14 @@ import {SplashScreen} from "@ionic-native/splash-screen/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 import {AppComponent} from "./app.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {IonicStorageModule} from "@ionic/storage";
 import {TabsModule} from "./page/tabs/tabs.module";
 import {AccountMenuPage} from "./menu/account-menu/account-menu.page";
 import {InfoMenuPage} from "./menu/info-menu/info-menu.page";
 import {FormsModule} from "@angular/forms";
+import {JwtInterceptor} from "./service/interceptor/jwt-interceptor.service";
+import {ErrorInterceptor} from "./service/interceptor/error-interceptor.service";
 
 //NOTE 懒加载的loadChildren必须配合SomeModule.forChild()使用。
 //NOTE 懒加载不能与{preloadingStrategy: PreloadAllModules}一同使用。
@@ -27,16 +29,16 @@ const routes: Routes = [
     pathMatch: "full"
   }, {
     path: "tabs",
-    loadChildren: "./page/tabs/tabs.module#TabsPageModule"
+    loadChildren: "./page/tabs/tabs.module#TabsModule"
   }, {
     path: 'login',
-    loadChildren: './page/login/login.module#LoginPageModule'
+    loadChildren: './page/login/login.module#LoginModule'
   }, {
     path: 'register',
-    loadChildren: './page/register/register.module#RegisterPageModule'
+    loadChildren: './page/register/register.module#RegisterModule'
   }, {
     path: "error",
-    loadChildren: "./page/error/error.module#ErrorPageModule"
+    loadChildren: "./page/error/error.module#ErrorModule"
   }, {
     path: "**",
     redirectTo: "/error/404"
@@ -62,10 +64,10 @@ const routes: Routes = [
     StatusBar,
     SplashScreen,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-    // //提供Jwt安全验证拦截器；
-    // {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    // //提供错误拦截器
-    // {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    //提供Jwt安全验证拦截器；
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    //提供错误拦截器
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

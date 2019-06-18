@@ -29,7 +29,7 @@ export class DynamicListPage {
   }
 
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.queryParams = {
       type: this.route.snapshot.queryParamMap.get("type") || "all",
       field: JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new DynamicQueryVo(),

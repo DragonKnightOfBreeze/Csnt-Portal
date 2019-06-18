@@ -32,5 +32,5 @@
 其他问题：
 
 * popover、modal等类型的组件，需要在对应模块的entryComponents中声明。
-* 若要在页面打开时加载数据，使用ionViewWIllEnter或ionViewDidEnter，而不是onInit。
+* 若要在页面打开时加载数据，使用onInit或ionViewDidEnter，而不是onInit。
 * 一旦一个页面中出现错误，整个页面都将不能正常显示。
