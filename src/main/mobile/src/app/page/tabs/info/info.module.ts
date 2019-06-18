@@ -35,7 +35,8 @@ const routes: Routes = [
     path: "development-column",
     children: [{
       path: "",
-      component: DevelopmentColumnListPage
+      component: DevelopmentColumnListPage,
+      runGuardsAndResolvers: "always"
     }, {
       path: ":id",
       component: DevelopmentColumnDetailPage
@@ -44,7 +45,8 @@ const routes: Routes = [
     path: "dynamic",
     children: [{
       path: "",
-      component: DynamicListPage
+      component: DynamicListPage,
+      runGuardsAndResolvers: "always"
     }, {
       path: ":id",
       component: DynamicDetailPage
@@ -62,7 +64,8 @@ const routes: Routes = [
     path: "reform-column",
     children: [{
       path: "",
-      component: ReformColumnListPage
+      component: ReformColumnListPage,
+      runGuardsAndResolvers: "always"
     }, {
       path: ":id",
       component: ReformColumnDetailPage
@@ -71,11 +74,13 @@ const routes: Routes = [
     path: "study-column",
     children: [{
       path: "",
-      component: StudyColumnListPage
+      component: StudyColumnListPage,
+      runGuardsAndResolvers: "always"
     }, {
       path: ":id",
       component: StudyColumnDetailPage
     }],
+    //BUG 我怎么知道为什么这个大多数情况下没有？
     canLoad: [LoginGuard]
   }, {
     path: "teacher-info",
@@ -87,7 +92,8 @@ const routes: Routes = [
     path: "teacher-team",
     children: [{
       path: "",
-      component: TeacherTeamListPage
+      component: TeacherTeamListPage,
+      runGuardsAndResolvers: "always"
     }, {
       path: "",
       component: TeacherTeamDetailPage

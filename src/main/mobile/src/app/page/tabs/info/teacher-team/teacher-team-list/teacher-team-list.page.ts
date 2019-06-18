@@ -2,13 +2,14 @@ import {Component} from "@angular/core";
 import {QueryParams} from "../../../../../domain/vo/QueryParams";
 import {Page} from "../../../../../domain/interface/Page";
 import {UserService} from "../../../../../service/api/user.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {ModalController, PopoverController} from "@ionic/angular";
 import {TeacherTeamQueryVo} from "../../../../../domain/vo/TeacherTeamQueryVo";
 import {TeacherTeam} from "../../../../../domain/entity/TeacherTeam";
 import {TeacherTeamService} from "../../../../../service/api/tearcher-team.service";
 import {TeacherTeamLevelPopoverPage} from "../teacher-team-level-popover/teacher-team-level-popover.page";
 import {TeacherTeamSearchModalPage} from "../teacher-team-search-modal/teacher-team-search-modal.page";
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: "app-teacher-team-list",
@@ -23,29 +24,26 @@ export class TeacherTeamListPage {
   constructor(private service: TeacherTeamService,
               public userService: UserService,
               private route: ActivatedRoute,
+              private router: Router,
               private popoverController: PopoverController,
               private modalController: ModalController) {
   }
 
 
   ngOnInit() {
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      this.getQueryParams();
+      this.show();
+    });
+  }
+
+  private getQueryParams() {
     this.queryParams = {
       type: this.route.snapshot.queryParamMap.get("type") || "all",
       field: JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new TeacherTeamQueryVo(),
       page: +this.route.snapshot.queryParamMap.get("page") || 1,
       size: +this.route.snapshot.queryParamMap.get("size") || 10
     };
-    this.show();
-  }
-
-  delete(id: number) {
-    this.currentPage.content.filter(e => e.id !== id);
-    this.service.delete(id).subscribe();
-  }
-
-  search(event) {
-    this.queryParams.field.name = event.target.value;
-    this.searchByName();
   }
 
   private show() {
@@ -86,11 +84,21 @@ export class TeacherTeamListPage {
     });
   }
 
-  advanceSearch() {
+  private advanceSearch() {
     const {field, page, size} = this.queryParams;
     this.service.advanceSearch(field, page, size).subscribe(teacherTeamPage => {
       this.currentPage = teacherTeamPage;
     });
+  }
+
+  delete(id: number) {
+    this.currentPage.content.filter(e => e.id !== id);
+    this.service.delete(id).subscribe();
+  }
+
+  search(event) {
+    this.queryParams.field.name = event.target.value;
+    this.searchByName();
   }
 
   goPreviousPage() {

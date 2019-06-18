@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {DevelopmentColumnService} from "../../../../../service/api/development-column.service";
 import {UserService} from "../../../../../service/api/user.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {DevelopmentColumn} from "../../../../../domain/entity/DevelopmentColumn";
 import {Page} from "../../../../../domain/interface/Page";
 import {QueryParams} from "../../../../../domain/vo/QueryParams";
 import {BehaviorSubject, Observable} from "rxjs";
-import {switchMap, tap} from "rxjs/operators";
+import {filter, switchMap, tap} from "rxjs/operators";
 
 //尝试将这个组件改成异步的
 
@@ -22,13 +22,17 @@ export class DevelopmentColumnListPage implements OnInit, OnDestroy {
 
   constructor(private service: DevelopmentColumnService,
               public userService: UserService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
 
   ngOnInit() {
-    this.getQueryParams();
-    this.show();
+    //确保地址刷新时，重新读取数据
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      this.getQueryParams();
+      this.show();
+    });
   }
 
   private getQueryParams() {

@@ -3,8 +3,9 @@ import {QueryParams} from "../../../../../domain/vo/QueryParams";
 import {Page} from "../../../../../domain/interface/Page";
 import {StudyColumn} from "../../../../../domain/entity/StudyColumn";
 import {UserService} from "../../../../../service/api/user.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {StudyColumnService} from "../../../../../service/api/study-reform.service";
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: "app-study-column-list",
@@ -18,28 +19,25 @@ export class StudyColumnListPage {
 
   constructor(private service: StudyColumnService,
               public userService: UserService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
 
   ngOnInit() {
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      this.getQueryParams();
+      this.show();
+    });
+  }
+
+  private getQueryParams() {
     this.queryParams = {
       type: this.route.snapshot.queryParamMap.get("type") || "all",
       field: this.route.snapshot.queryParamMap.get("field") || "",
       page: +this.route.snapshot.queryParamMap.get("page") || 1,
       size: +this.route.snapshot.queryParamMap.get("size") || 10
     };
-    this.show();
-  }
-
-  delete(id: number) {
-    this.currentPage.content.filter(e => e.id !== id);
-    this.service.delete(id).subscribe();
-  }
-
-  search(event) {
-    this.queryParams.field = event.target.value;
-    this.searchByTitle();
   }
 
   private show() {
@@ -62,6 +60,16 @@ export class StudyColumnListPage {
     this.service.searchByTitle(field, page, size).subscribe(columnPage => {
       this.currentPage = columnPage;
     });
+  }
+
+  delete(id: number) {
+    this.currentPage.content.filter(e => e.id !== id);
+    this.service.delete(id).subscribe();
+  }
+
+  search(event) {
+    this.queryParams.field = event.target.value;
+    this.searchByTitle();
   }
 
   goPreviousPage() {
