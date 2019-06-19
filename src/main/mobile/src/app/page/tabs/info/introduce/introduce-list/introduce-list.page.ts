@@ -20,18 +20,14 @@ export class IntroduceListPage {
     this.show();
   }
 
-  delete(id: number) {
-    this.currentList.filter(e => e.id !== id);
-    this.service.delete(id).subscribe();
-  }
-
   private show() {
-    this.list();
-  }
-
-  private list() {
     this.service.list().subscribe(introduceList => {
       this.currentList = introduceList;
     });
+  }
+
+  delete(id: number) {
+    this.currentList.filter(e => e.id !== id);
+    this.service.delete(id).subscribe();
   }
 }

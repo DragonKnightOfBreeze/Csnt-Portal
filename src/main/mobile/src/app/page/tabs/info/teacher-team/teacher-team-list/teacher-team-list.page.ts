@@ -31,6 +31,9 @@ export class TeacherTeamListPage {
 
 
   ngOnInit() {
+    this.getQueryParams();
+    this.show();
+    //更新查询参数后，也会更新当前显示数据
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
       this.getQueryParams();
       this.show();
@@ -38,57 +41,40 @@ export class TeacherTeamListPage {
   }
 
   private getQueryParams() {
-    this.queryParams = {
-      type: this.route.snapshot.queryParamMap.get("type") || "all",
-      field: JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new TeacherTeamQueryVo(),
-      page: +this.route.snapshot.queryParamMap.get("page") || 1,
-      size: +this.route.snapshot.queryParamMap.get("size") || 10
-    };
+    this.route.queryParamMap.subscribe(queryParamMap => {
+      this.queryParams = {
+        type: queryParamMap.get("type") || "all",
+        field: JSON.parse(queryParamMap.get("field")) || new TeacherTeamQueryVo(),
+        page: +queryParamMap.get("page") || 1,
+        size: +queryParamMap.get("size") || 10
+      }
+    });
   }
 
   private show() {
-    switch (this.queryParams.type) {
+    const {type, field, page, size} = this.queryParams;
+    switch (type) {
       case "name":
-        this.searchByName();
+        this.service.searchByName(field.name, page, size).subscribe(teacherTeamPage => {
+          this.currentPage = teacherTeamPage;
+        });
         break;
       case "professionLevel":
-        this.searchByProfessionLevel();
+        this.service.searchByProfessionLevel(field.levelSet, page, size).subscribe(teacherTeamPage => {
+          this.currentPage = teacherTeamPage;
+        });
         break;
       case "advance":
-        this.advanceSearch();
+        this.service.advanceSearch(field, page, size).subscribe(teacherTeamPage => {
+          this.currentPage = teacherTeamPage;
+        });
         break;
       default:
-        this.list();
+        this.service.list(page, size).subscribe(teacherTeamPage => {
+          this.currentPage = teacherTeamPage;
+        });
         break;
     }
-  }
-
-  private list() {
-    const {page, size} = this.queryParams;
-    this.service.list(page, size).subscribe(dynamicPage => {
-      this.currentPage = dynamicPage;
-    });
-  }
-
-  private searchByName() {
-    const {field, page, size} = this.queryParams;
-    this.service.searchByName(field.name, page, size).subscribe(dynamicPage => {
-      this.currentPage = dynamicPage;
-    });
-  }
-
-  private searchByProfessionLevel() {
-    const {field, page, size} = this.queryParams;
-    this.service.searchByProfessionLevel(field.levelSet, page, size).subscribe(dynamicPage => {
-      this.currentPage = dynamicPage;
-    });
-  }
-
-  private advanceSearch() {
-    const {field, page, size} = this.queryParams;
-    this.service.advanceSearch(field, page, size).subscribe(teacherTeamPage => {
-      this.currentPage = teacherTeamPage;
-    });
   }
 
   delete(id: number) {
@@ -97,8 +83,10 @@ export class TeacherTeamListPage {
   }
 
   search(event) {
+    this.queryParams = new QueryParams();
+    this.queryParams.type = "name";
     this.queryParams.field.name = event.target.value;
-    this.searchByName();
+    this.show();
   }
 
   goPreviousPage() {

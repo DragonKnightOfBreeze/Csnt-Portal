@@ -25,7 +25,7 @@ import {ErrorInterceptor} from "./service/interceptor/error-interceptor.service"
 //NOTE 如何强制刷新当前路由地址
 //* 导入 `RouterModule.forRoot(routes, {onSameUrlNavigation: "reload"})`
 //* 在需要强制刷新的路由中配置runGuardsAndResolvers属性
-//* 在对应组件的初始化方法中监听NavigationEnd事件
+//* 在对应组件的初始化方法中监听NavigationEnd事件，不能和this.route.snapshot一同使用
 
 const routes: Routes = [
   {

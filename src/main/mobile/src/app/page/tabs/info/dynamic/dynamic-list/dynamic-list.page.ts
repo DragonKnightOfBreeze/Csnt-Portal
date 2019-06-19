@@ -32,6 +32,9 @@ export class DynamicListPage {
 
 
   ngOnInit() {
+    this.getQueryParams();
+    this.show();
+    //更新查询参数后，也会更新当前显示数据
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
       this.getQueryParams();
       this.show();
@@ -39,57 +42,40 @@ export class DynamicListPage {
   }
 
   private getQueryParams() {
-    this.queryParams = {
-      type: this.route.snapshot.queryParamMap.get("type") || "all",
-      field: JSON.parse(this.route.snapshot.queryParamMap.get("field")) || new DynamicQueryVo(),
-      page: +this.route.snapshot.queryParamMap.get("page") || 1,
-      size: +this.route.snapshot.queryParamMap.get("size") || 10
-    };
+    this.route.queryParamMap.subscribe(queryParamMap => {
+      this.queryParams = {
+        type: queryParamMap.get("type") || "all",
+        field: JSON.parse(queryParamMap.get("field")) || new DynamicQueryVo(),
+        page: +queryParamMap.get("page") || 1,
+        size: +queryParamMap.get("size") || 10
+      }
+    });
   }
 
   private show() {
-    switch (this.queryParams.type) {
+    const {type, field, page, size} = this.queryParams;
+    switch (type) {
       case "subject":
-        this.searchBySubject();
+        this.service.searchBySubject(field.subject, page, size).subscribe(dynamicPage => {
+          this.currentPage = dynamicPage;
+        });
         break;
       case "category":
-        this.searchByCategory();
+        this.service.searchByCategory(field.categorySet, page, size).subscribe(dynamicPage => {
+          this.currentPage = dynamicPage;
+        });
         break;
       case "advance":
-        this.advanceSearch();
+        this.service.advanceSearch(field, page, size).subscribe(dynamicPage => {
+          this.currentPage = dynamicPage;
+        });
         break;
       default:
-        this.list();
+        this.service.list(page, size).subscribe(dynamicPage => {
+          this.currentPage = dynamicPage;
+        });
         break;
     }
-  }
-
-  private list() {
-    const {page, size} = this.queryParams;
-    this.service.list(page, size).subscribe(dynamicPage => {
-      this.currentPage = dynamicPage;
-    });
-  }
-
-  private searchBySubject() {
-    const {field, page, size} = this.queryParams;
-    this.service.searchBySubject(field.subject, page, size).subscribe(dynamicPage => {
-      this.currentPage = dynamicPage;
-    });
-  }
-
-  private searchByCategory() {
-    const {field, page, size} = this.queryParams;
-    this.service.searchByCategory(field.categorySet, page, size).subscribe(dynamicPage => {
-      this.currentPage = dynamicPage;
-    });
-  }
-
-  private advanceSearch() {
-    const {field, page, size} = this.queryParams;
-    this.service.advanceSearch(field, page, size).subscribe(dynamicPage => {
-      this.currentPage = dynamicPage;
-    });
   }
 
   delete(id: number) {
@@ -98,8 +84,10 @@ export class DynamicListPage {
   }
 
   search(event) {
+    this.queryParams = new QueryParams();
+    this.queryParams.type = "subject";
     this.queryParams.field.subject = event.target.value;
-    this.searchBySubject();
+    this.show();
   }
 
   goPreviousPage() {

@@ -38,7 +38,7 @@
       </tr>
       </thead>
       <tbody>
-      <ng-container *ngFor="let user of currentPage.content">
+      <ng-container *ngFor="let user of currentPage?.content">
         <tr>
           <td>{{user.id}}</td>
           <td>{{user.username}}</td>
