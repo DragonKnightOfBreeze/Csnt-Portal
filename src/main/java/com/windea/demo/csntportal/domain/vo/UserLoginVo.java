@@ -1,6 +1,8 @@
 package com.windea.demo.csntportal.domain.vo;
 
+
 import com.windea.demo.csntportal.domain.enums.RegexConsts;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -9,15 +11,14 @@ import javax.validation.constraints.Pattern;
  * 用户登录表单的视图对象。
  * TODO 适配多种登录方式，但本质上还是用户名登录。
  */
+@PropertySource("classpath:messages.properties")
 public class UserLoginVo {
 	/** 用户名。 */
-	@NotEmpty()
-	@Pattern(regexp = RegexConsts.USERNAME)
+	@NotEmpty(message = "{validation.user.username.notEmpty}")
+	@Pattern(regexp = RegexConsts.USERNAME, message = "{validation.user.username.pattern}")
 	private String username;
 
 	/** 密码。 */
-	@NotEmpty()
-	@Pattern(regexp = RegexConsts.PASSWORD)
 	private String password;
 
 	/** 记住登录。 */

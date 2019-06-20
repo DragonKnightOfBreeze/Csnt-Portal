@@ -33,7 +33,7 @@ public class IntroduceController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		var result = service.create(introduce);
 		return result;
@@ -61,7 +61,7 @@ public class IntroduceController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		var result = service.update(introduce);
 		return result;

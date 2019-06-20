@@ -13,8 +13,8 @@ import {TabsModule} from "./page/tabs/tabs.module";
 import {AccountMenuPage} from "./menu/account-menu/account-menu.page";
 import {InfoMenuPage} from "./menu/info-menu/info-menu.page";
 import {FormsModule} from "@angular/forms";
-import {JwtInterceptor} from "./service/interceptor/jwt-interceptor.service";
-import {ErrorInterceptor} from "./service/interceptor/error-interceptor.service";
+import {JwtInterceptor} from "./service/interceptor/jwt.interceptor";
+import {ErrorInterceptor} from "./service/interceptor/error.interceptor";
 
 //NOTE 懒加载的loadChildren必须配合SomeModule.forChild()使用。
 //NOTE 懒加载不能与{preloadingStrategy: PreloadAllModules}一同使用。
@@ -25,7 +25,7 @@ import {ErrorInterceptor} from "./service/interceptor/error-interceptor.service"
 //NOTE 如何强制刷新当前路由地址
 //* 导入 `RouterModule.forRoot(routes, {onSameUrlNavigation: "reload"})`
 //* 在需要强制刷新的路由中配置runGuardsAndResolvers属性
-//* 在对应组件的初始化方法中监听NavigationEnd事件
+//* 在对应组件的初始化方法中监听NavigationEnd事件，不能和this.route.snapshot一同使用
 
 const routes: Routes = [
   {
@@ -75,7 +75,11 @@ const routes: Routes = [
     //提供错误拦截器
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AccountMenuPage,
+    InfoMenuPage
+  ]
 })
 export class AppModule {
 }

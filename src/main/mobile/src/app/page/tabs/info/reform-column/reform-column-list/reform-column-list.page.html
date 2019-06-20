@@ -10,7 +10,7 @@
 <ion-content>
   <ion-searchbar placeholder="按标题搜索……" (ionInput)="search($event)"></ion-searchbar>
 
-  <ng-container *ngFor="let column of currentPage.content">
+  <ng-container *ngFor="let column of currentPage?.content">
     <ion-card>
       <ion-card-header>
         <ion-card-title>
@@ -40,7 +40,7 @@
         </ion-row>
         <ion-row justify-content-center text-center>
           <ion-col size="4">
-            <ion-button expand="block" color="primary" routerLink="/tabs/info/development-column/{{column.id}}">详情
+            <ion-button expand="block" color="primary" routerLink="/tabs/info/reform-column/{{column.id}}">详情
             </ion-button>
           </ion-col>
         </ion-row>
@@ -50,10 +50,10 @@
 
   <ion-row justify-content-center text-center>
     <ion-col size="3">
-      <ion-button expand="block" (click)="goPreviousPage()" [disabled]="currentPage.first">上一页</ion-button>
+      <ion-button expand="block" (click)="goPreviousPage()" [disabled]="currentPage?.first">上一页</ion-button>
     </ion-col>
     <ion-col size="3">
-      <ion-button expand="block" (click)="goNextPage()" [disabled]="currentPage.last">下一页</ion-button>
+      <ion-button expand="block" (click)="goNextPage()" [disabled]="currentPage?.last">下一页</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

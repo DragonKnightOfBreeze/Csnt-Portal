@@ -24,7 +24,10 @@ export class ReformColumnListPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.getQueryParams();
+    this.show();
+    //更新查询参数后，也会更新当前显示数据
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
       this.getQueryParams();
       this.show();
@@ -32,35 +35,27 @@ export class ReformColumnListPage {
   }
 
   private getQueryParams() {
-    this.queryParams = {
-      type: this.route.snapshot.queryParamMap.get("type") || "all",
-      field: this.route.snapshot.queryParamMap.get("field") || "",
-      page: +this.route.snapshot.queryParamMap.get("page") || 1,
-      size: +this.route.snapshot.queryParamMap.get("size") || 10
-    };
+    this.route.queryParamMap.subscribe(queryParamMap => {
+      this.queryParams = {
+        type: queryParamMap.get("type") || "all",
+        field: JSON.parse(queryParamMap.get("field")) || "",
+        page: +queryParamMap.get("page") || 1,
+        size: +queryParamMap.get("size") || 10
+      }
+    });
   }
 
   private show() {
-    if (this.queryParams.type == "title") {
-      this.searchByTitle();
+    const {type, field, page, size} = this.queryParams;
+    if (type === "title") {
+      this.service.searchByTitle(field, page, size).subscribe(columnPage => {
+        this.currentPage = columnPage;
+      });
     } else {
-      this.list();
+      this.service.list(page, size).subscribe(dynamicPage => {
+        this.currentPage = dynamicPage;
+      });
     }
-  }
-
-  private list() {
-    const {page, size} = this.queryParams;
-    this.service.list(page, size).subscribe(columnPage => {
-      this.currentPage = columnPage;
-    });
-  }
-
-
-  private searchByTitle() {
-    const {field, page, size} = this.queryParams;
-    this.service.searchByTitle(field, page, size).subscribe(columnPage => {
-      this.currentPage = columnPage;
-    });
   }
 
   delete(id: number) {
@@ -69,8 +64,10 @@ export class ReformColumnListPage {
   }
 
   search(event) {
+    this.queryParams = new QueryParams();
+    this.queryParams.type = "title";
     this.queryParams.field = event.target.value;
-    this.searchByTitle();
+    this.show();
   }
 
   goPreviousPage() {

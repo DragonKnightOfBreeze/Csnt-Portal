@@ -22,23 +22,25 @@ export class TeacherInfoDetailPage {
   }
 
 
-  ngOnInit() {
-    this.id = +this.route.snapshot.paramMap.get("id");
+  ionViewWillEnter() {
+    this.getParams();
     this.show();
+  }
+
+  private getParams() {
+    this.route.paramMap.subscribe(paramMap => {
+      this.id = +paramMap.get("id");
+    })
+  }
+
+  private show() {
+    this.service.get(this.id).subscribe(teacherInfo => {
+      this.teacherInfo = teacherInfo;
+    });
   }
 
   delete() {
     this.location.back();
     this.service.delete(this.id).subscribe();
-  }
-
-  private show() {
-    this.get();
-  }
-
-  private get() {
-    this.service.get(this.id).subscribe(teacherInfo => {
-      this.teacherInfo = teacherInfo;
-    });
   }
 }

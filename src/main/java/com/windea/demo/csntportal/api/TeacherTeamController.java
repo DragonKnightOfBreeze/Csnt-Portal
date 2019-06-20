@@ -39,7 +39,7 @@ public class TeacherTeamController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		var result = service.create(teacherTeam);
 		return result;
@@ -67,7 +67,7 @@ public class TeacherTeamController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		var result = service.update(teacherTeam);
 		return result;

@@ -16,6 +16,6 @@ export class EnumTextPipe implements PipeTransform {
    * @return 对应的格式化文本。
    */
   transform(value: any, enumName: string): string {
-    return enumTexts[enumName][value.toString()];
+    return enumTexts[enumName][value];
   }
 }

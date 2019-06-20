@@ -52,7 +52,7 @@ public class UserController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		//创建验证令牌，然后进行验证，然后保存到SecurityContextHolder中
 		var auth = new UsernamePasswordAuthenticationToken(vo.getUsername(), vo.getPassword());
@@ -90,13 +90,13 @@ public class UserController {
 	) {
 		//首先处理已判定的验证错误，然后调用服务层，异常处理交由全局异常处理器
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		//不允许重复用户名、邮箱和手机号码的新注册用户
 		var exists = service.exists(user.getUsername(), user.getEmail(), user.getPhoneNum());
 		Assert.isTrue(exists, () -> {
 			bindingResult.reject("validation.user.duplicate");
-			throw new ValidationException(bindingResult);
+			throw new ValidationException(bindingResult.getAllErrors());
 		});
 
 		var result = service.register(user);
@@ -118,7 +118,7 @@ public class UserController {
 		Assert.isTrue(authenticated, () -> {throw new UserNotMatchedException();});
 
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		var result = service.update(user);
 		return result;

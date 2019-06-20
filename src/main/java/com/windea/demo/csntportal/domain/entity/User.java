@@ -26,22 +26,19 @@ public class User extends TBean implements UserDetails {
 	private Integer id;
 
 	/** 用户名。 */
-	@NotEmpty()
-	@Pattern(regexp = RegexConsts.USERNAME)
+	@NotEmpty(message = "{validation.user.username.notEmpty}")
+	@Pattern(regexp = RegexConsts.USERNAME, message = "{validation.user.username.pattern}")
 	@Column(unique = true, nullable = false, length = 12)
 	private String username;
 
 	/** 密码。 */
-	//密码需要被忽略掉，尽管是加密后的，并且不要限制行的长度
+	//密码需要被忽略掉，尽管是加密后的，并且不要限制行的长度，也不要进行后台参数验证
 	@JsonIgnore
-	@NotEmpty()
-	@Pattern(regexp = RegexConsts.PASSWORD)
-	@Column(nullable = false)
 	private String password;
 
 	/** 手机号码。 */
-	@NotEmpty()
-	@Pattern(regexp = RegexConsts.PHONE_NUM)
+	@NotEmpty(message = "{validation.user.phoneNum.notEmpty}")
+	@Pattern(regexp = RegexConsts.PHONE_NUM, message = "{validation.user.phoneNum.pattern}")
 	@Column(unique = true, nullable = false, length = 11)
 	private String phoneNum;
 
@@ -52,8 +49,8 @@ public class User extends TBean implements UserDetails {
 	private String email;
 
 	/** 昵称。 */
-	@NotEmpty()
-	@Size(min = 1, max = 32)
+	@NotEmpty(message = "{validation.user.nickname.notEmpty}")
+	@Size(min = 1, max = 32, message = "{validation.user.nickname.size}")
 	@Column(nullable = false, length = 32)
 	private String nickname;
 
@@ -84,7 +81,8 @@ public class User extends TBean implements UserDetails {
 	private List<Dynamic> dynamicList = new ArrayList<>();
 
 
-	public User() {}
+	public User() {
+	}
 
 	public User(String username, String password, String phoneNum, String email, String nickname, Gender gender,
 		Role role, Profession profession) {

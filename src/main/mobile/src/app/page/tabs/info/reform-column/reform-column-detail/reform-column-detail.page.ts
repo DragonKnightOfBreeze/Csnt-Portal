@@ -22,23 +22,25 @@ export class ReformColumnDetailPage {
   }
 
 
-  ngOnInit() {
-    this.id = +this.route.snapshot.paramMap.get("id");
+  ionViewWillEnter() {
+    this.getParams();
     this.show();
   }
 
-  delete() {
-    this.location.back();
-    this.service.delete(this.column.id).subscribe();
+  private getParams() {
+    this.route.paramMap.subscribe(paramMap => {
+      this.id = +paramMap.get("id");
+    })
   }
 
-  private get() {
+  private show() {
     this.service.get(this.id).subscribe(column => {
       this.column = column;
     });
   }
 
-  private show() {
-    this.get();
+  delete() {
+    this.location.back();
+    this.service.delete(this.column.id).subscribe();
   }
 }

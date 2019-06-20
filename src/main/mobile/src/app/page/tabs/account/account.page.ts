@@ -1,6 +1,8 @@
 import {Component} from "@angular/core";
 import {User} from "../../../../../../frontend/src/app/domain/entity/User";
 import {UserService} from "../../../service/api/user.service";
+import {ValidationService} from "../../../service/api/validation.service";
+import {MenuController} from "@ionic/angular";
 
 @Component({
   selector: "app-account",
@@ -10,15 +12,28 @@ import {UserService} from "../../../service/api/user.service";
 export class AccountPage {
   username: string;
 
-  user: User;
+  user = new User();
 
-  constructor(public service: UserService) {
+  constructor(public service: UserService,
+              public validationService: ValidationService,
+              public menuController: MenuController) {
   }
 
 
   ngOnInit() {
-    this.username = this.service.currentUser.username;
+    console.log(this.service.hasLogin());
+    this.getData();
     this.show();
+  }
+
+  private getData() {
+    this.username = this.service.getCurrentUser().username;
+  }
+
+  private show() {
+    this.service.getAccountInfo(this.username).subscribe(user => {
+      this.user = user;
+    });
   }
 
   updateAccountInfo() {
@@ -27,15 +42,9 @@ export class AccountPage {
     });
   }
 
-  private show() {
-    this.getAccountInfo();
-  }
-
-  private getAccountInfo() {
-    this.service.getAccountInfo(this.username).subscribe(user => {
-      this.user = user;
+  async openAccountMenu() {
+    await this.menuController.enable(true, "account-menu").then(() => {
+      this.menuController.open("account-menu");
     });
   }
-
-
 }

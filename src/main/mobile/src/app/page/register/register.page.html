@@ -7,6 +7,13 @@
 <ion-content>
   <form (ngSubmit)="register()" #registerForm=ngForm>
     <ion-list lines="none">
+      <!--显示后台参数验证数据-->
+      <ng-container *ngFor="let error of validationService.validationErrors$ | async">
+        <ion-item>
+          <ion-label color="warning">{{error.defaultMessage}}</ion-label>
+        </ion-item>
+      </ng-container>
+
       <ion-item>
         <ion-label slot="start">用户名</ion-label>
         <ion-input type="text" [(ngModel)]="user.username" name="username" placeholder="请输入用户名"

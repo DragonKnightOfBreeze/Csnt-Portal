@@ -34,7 +34,7 @@ public class ReformColumnController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		var result = service.create(column);
 		return result;
@@ -62,7 +62,7 @@ public class ReformColumnController {
 		BindingResult bindingResult
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		var result = service.update(column);
 		return result;

@@ -12,7 +12,6 @@ import {StudyColumnDetailPage} from "./study-column/study-column-detail/study-co
 import {TeacherInfoDetailPage} from "./teacher-info/teacher-info-detail/teacher-info-detail.page";
 import {TeacherTeamListPage} from "./teacher-team/teacher-team-list/teacher-team-list.page";
 import {TeacherTeamDetailPage} from "./teacher-team/teacher-team-detail/teacher-team-detail.page";
-import {LoginGuard} from "../../../service/guard/login-guard.service";
 import {DynamicCategoryPopoverPage} from "./dynamic/dynamic-category-popover/dynamic-category-popover.page";
 import {DynamicSearchModalPage} from "./dynamic/dynamic-search-modal/dynamic-search-modal.page";
 import {DynamicCreateModalPage} from "./dynamic/dynamic-create-modal/dynamic-create-modal.page";
@@ -40,7 +39,7 @@ const routes: Routes = [
     }, {
       path: ":id",
       component: DevelopmentColumnDetailPage
-    }]
+    }],
   }, {
     path: "dynamic",
     children: [{
@@ -65,7 +64,7 @@ const routes: Routes = [
     children: [{
       path: "",
       component: ReformColumnListPage,
-      runGuardsAndResolvers: "always"
+      runGuardsAndResolvers: "always",
     }, {
       path: ":id",
       component: ReformColumnDetailPage
@@ -80,8 +79,8 @@ const routes: Routes = [
       path: ":id",
       component: StudyColumnDetailPage
     }],
-    //BUG 我怎么知道为什么这个大多数情况下没有？
-    canLoad: [LoginGuard]
+    //BUG 我怎么知道为什么这个大多数情况下没有用？难道必须用loadChildren？
+    // canLoad: [LoginGuard]
   }, {
     path: "teacher-info",
     children: [{

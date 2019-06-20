@@ -1,6 +1,7 @@
 package com.windea.demo.csntportal.service.impl;
 
 import com.windea.demo.csntportal.domain.enums.ResultState;
+import com.windea.demo.csntportal.domain.vo.JwtUserDetails;
 import com.windea.demo.csntportal.repository.UserRepository;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,9 @@ import org.springframework.util.Assert;
 public class JwtUserDetailsServiceImpl implements UserDetailsService, UserDetailsPasswordService {
 	protected final UserRepository repository;
 
-	public JwtUserDetailsServiceImpl(UserRepository repository) {this.repository = repository;}
+	public JwtUserDetailsServiceImpl(UserRepository repository) {
+		this.repository = repository;
+	}
 
 
 	/**
@@ -24,7 +27,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService, UserDetail
 	public UserDetails loadUserByUsername(String username) {
 		var result = repository.findByUsername(username);
 		Assert.notNull(result, () -> {throw new UsernameNotFoundException(ResultState.USER_NOT_FOUND.text());});
-		return result;
+		return JwtUserDetails.create(result);
 	}
 
 	/**
@@ -36,6 +39,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService, UserDetail
 		var origin = repository.findByUsername(user.getUsername());
 		Assert.notNull(origin, () -> {throw new UsernameNotFoundException(ResultState.USER_NOT_FOUND.text());});
 		origin.setPassword(user.getPassword());
-		return repository.save(origin);
+		var result = repository.save(origin);
+		return JwtUserDetails.create(result);
 	}
 }
