@@ -30,7 +30,7 @@ export class TeacherTeamListPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getQueryParams();
     this.show();
     //更新查询参数后，也会更新当前显示数据
@@ -108,13 +108,13 @@ export class TeacherTeamListPage {
       component: TeacherTeamLevelPopoverPage,
       translucent: true
     });
-    return await popover.present();
+    await popover.present();
   }
 
   async presentSearchModal() {
     const modal = await this.modalController.create({
       component: TeacherTeamSearchModalPage
     });
-    return await modal.present();
+    await modal.present();
   }
 }

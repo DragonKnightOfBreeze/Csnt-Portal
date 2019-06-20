@@ -22,7 +22,7 @@ export class DynamicDetailPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getParams();
     this.show();
   }
@@ -45,7 +45,7 @@ export class DynamicDetailPage {
   }
 
   isSponsorUser() {
-    return this.userService.hasLogin && this.dynamic.sponsorUser
-      && this.userService.currentUser.username == this.dynamic.sponsorUser.username;
+    return this.userService.hasLogin() && this.dynamic.sponsorUser
+      && this.userService.getCurrentUser().username == this.dynamic.sponsorUser.username;
   }
 }

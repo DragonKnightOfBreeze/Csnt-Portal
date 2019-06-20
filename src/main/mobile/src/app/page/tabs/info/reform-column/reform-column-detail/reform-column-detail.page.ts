@@ -22,7 +22,7 @@ export class ReformColumnDetailPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getParams();
     this.show();
   }

@@ -24,7 +24,7 @@ export class StudyColumnListPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getQueryParams();
     this.show();
     //更新查询参数后，也会更新当前显示数据

@@ -1,3 +1,6 @@
+import {Pageable} from "./Pageable";
+import {Sort} from "./Sort";
+
 /**
  * 分页的接口。
  * 另见：{@code org.springframework.data.domain.Page}
@@ -14,27 +17,5 @@ export interface Page<T> {
   first: boolean;
   last: boolean;
   pageable: Pageable;
-}
-
-/**
- * 排序器的接口。
- * 另见：{@code org.springframework.data.domain.Sort}
- */
-export interface Sort {
-  empty: boolean;
-  sorted: boolean;
-  unsorted: boolean;
-}
-
-/**
- * 分页器的接口。
- * 另见：{@code org.springframework.data.domain.Pageable}
- */
-export interface Pageable {
-  paged: boolean;
-  unpaged: boolean;
-  pageNumber: number;
-  pageSize: number;
-  offset: number;
-  sort: Sort;
+  class: any;
 }

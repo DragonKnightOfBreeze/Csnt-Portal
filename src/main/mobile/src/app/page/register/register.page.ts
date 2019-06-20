@@ -5,6 +5,7 @@ import {Role} from "../../../../../frontend/src/app/enums/Role";
 import {Profession} from "../../../../../frontend/src/app/enums/Profession";
 import {UserService} from "../../service/api/user.service";
 import {Router} from "@angular/router";
+import {ValidationService} from "../../service/api/validation.service";
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,7 @@ export class RegisterPage {
   Profession = Profession;
 
   constructor(public service: UserService,
+              public validationService: ValidationService,
               private router: Router) {
   }
 

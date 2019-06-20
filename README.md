@@ -101,7 +101,7 @@
 	* Json
 	* Yaml
 	* Git
-	* Docker？
+	* ［未使用］Docker
 * 前端
 	* Html5
 	* Css3
@@ -122,8 +122,8 @@
 	* Spring Data Jpa
 	* Spring Security
 	* JWT Authentication
-	* ~~Lombok？~~
-	* Swagger？
+	* ［不使用］~~Lombok~~
+	* ［未使用］Swagger
 	* Redis
 	* MySQL
 	* Maven

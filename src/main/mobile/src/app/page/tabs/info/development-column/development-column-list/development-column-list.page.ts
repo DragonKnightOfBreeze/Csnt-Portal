@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {DevelopmentColumnService} from "../../../../../service/api/development-column.service";
 import {UserService} from "../../../../../service/api/user.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
@@ -12,7 +12,7 @@ import {filter} from "rxjs/operators";
   templateUrl: "./development-column-list.page.html",
   styleUrls: ["./development-column-list.page.scss"],
 })
-export class DevelopmentColumnListPage implements OnInit {
+export class DevelopmentColumnListPage {
   queryParams: QueryParams<string>;
 
   currentPage: Page<DevelopmentColumn>;
@@ -24,7 +24,7 @@ export class DevelopmentColumnListPage implements OnInit {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getQueryParams();
     this.show();
     //更新查询参数后，也会更新当前显示数据

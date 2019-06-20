@@ -13,8 +13,8 @@ import {TabsModule} from "./page/tabs/tabs.module";
 import {AccountMenuPage} from "./menu/account-menu/account-menu.page";
 import {InfoMenuPage} from "./menu/info-menu/info-menu.page";
 import {FormsModule} from "@angular/forms";
-import {JwtInterceptor} from "./service/interceptor/jwt-interceptor.service";
-import {ErrorInterceptor} from "./service/interceptor/error-interceptor.service";
+import {JwtInterceptor} from "./service/interceptor/jwt.interceptor";
+import {ErrorInterceptor} from "./service/interceptor/error.interceptor";
 
 //NOTE 懒加载的loadChildren必须配合SomeModule.forChild()使用。
 //NOTE 懒加载不能与{preloadingStrategy: PreloadAllModules}一同使用。
@@ -75,7 +75,11 @@ const routes: Routes = [
     //提供错误拦截器
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AccountMenuPage,
+    InfoMenuPage
+  ]
 })
 export class AppModule {
 }

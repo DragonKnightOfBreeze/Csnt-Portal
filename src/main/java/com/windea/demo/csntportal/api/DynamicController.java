@@ -44,7 +44,7 @@ public class DynamicController {
 		Principal principal
 	) {
 		var validated = !bindingResult.hasErrors();
-		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult);});
+		Assert.isTrue(validated, () -> {throw new ValidationException(bindingResult.getAllErrors());});
 
 		var username = principal.getName();
 		var result = service.createBySponsorUsername(dynamic, username);

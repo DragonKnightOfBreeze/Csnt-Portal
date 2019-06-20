@@ -22,7 +22,7 @@ export class IntroduceDetailPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getParams();
     this.show();
   }

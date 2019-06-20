@@ -16,7 +16,7 @@ export class IntroduceListPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.show();
   }
 

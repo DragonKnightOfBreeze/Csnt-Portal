@@ -40,7 +40,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(ValidationException.class)
 	ResponseEntity<?> handleValidationException(ValidationException e) {
 		e.printStackTrace();
-		return ResponseEntity.badRequest().body(e.getBindingResult());
+		//不能直接返回bindingResult，否则会由400变成500
+		return ResponseEntity.badRequest().body(e);
 	}
 
 	//可以通过该方法处理其他未明确的异常，但是优先级高于`@ResponseStatus`，高于@PreAuthorize。

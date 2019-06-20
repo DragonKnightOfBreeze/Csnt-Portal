@@ -22,7 +22,7 @@ export class TeacherInfoDetailPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getParams();
     this.show();
   }

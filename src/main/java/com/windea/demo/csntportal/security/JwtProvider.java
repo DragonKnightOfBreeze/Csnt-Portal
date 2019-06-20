@@ -4,25 +4,28 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+//使用@ConfigurationProperties从application.yml中注入对应前缀的属性到对应字段，必须是组件类或者已显式声明
+//必须具有对应的set方法，或者以动态方式初始化（例如对象、列表，基本类型除外）
+//也可以作为替代使用@Value注解，两种方式都适用于yaml和properties
 
 /**
  * Jwt提供器的组件。
  */
 @Component
-//使用这个注解从application.yml中的对应前缀的属性注入到对应的字段，必须是组件类或者已经显示声明
-@ConfigurationProperties("com.windea.security")
 public class JwtProvider {
 	private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
+	@Value("${com.windea.security.jwtSecret}")
 	private String jwtSecret;
 
+	@Value("${com.windea.security.jwtExpiration}")
 	private int jwtExpiration;
 
 	/**

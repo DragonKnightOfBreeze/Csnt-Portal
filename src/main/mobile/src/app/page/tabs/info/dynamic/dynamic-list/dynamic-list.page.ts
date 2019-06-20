@@ -31,7 +31,7 @@ export class DynamicListPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getQueryParams();
     this.show();
     //更新查询参数后，也会更新当前显示数据
@@ -105,8 +105,8 @@ export class DynamicListPage {
   }
 
   isSponsorUser(dynamic: Dynamic) {
-    return this.userService.hasLogin && dynamic.sponsorUser
-      && this.userService.currentUser.username == dynamic.sponsorUser.username;
+    return this.userService.hasLogin() && dynamic.sponsorUser
+      && this.userService.getCurrentUser().username == dynamic.sponsorUser.username;
   }
 
   async presentCategoryPopover() {
@@ -114,20 +114,20 @@ export class DynamicListPage {
       component: DynamicCategoryPopoverPage,
       translucent: true
     });
-    return await popover.present();
+    await popover.present();
   }
 
   async presentSearchModal() {
     const modal = await this.modalController.create({
       component: DynamicSearchModalPage
     });
-    return await modal.present();
+    await modal.present();
   }
 
   async presentCreateModal() {
     const modal = await this.modalController.create({
       component: DynamicCreateModalPage
     });
-    return await modal.present();
+    await modal.present();
   }
 }

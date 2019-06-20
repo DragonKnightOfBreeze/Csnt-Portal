@@ -2,21 +2,32 @@
   <ion-toolbar>
     <ion-title>我的账户</ion-title>
     <ion-buttons slot="end">
-      <ion-menu-button menu="account-menu">
+      <!--为什么这里不能使用ion-menu-button？ 同时只能启用一个菜单-->
+      <ion-button (click)="openAccountMenu()">
         <ion-icon name="more"></ion-icon>
-      </ion-menu-button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
   <form (ngSubmit)="updateAccountInfo()" #updateForm=ngForm>
     <ion-list>
-      <ion-list-header>
-        <ion-label slot="start" color="primary">{{user.username}}</ion-label>
-      </ion-list-header>
+      <ion-item>
+        <ion-label color="primary">{{username}}</ion-label>
+      </ion-item>
 
-      <ion-item-divider>个人资料</ion-item-divider>
+      <ion-item-divider>
+        <ion-label>个人资料</ion-label>
+      </ion-item-divider>
+
+      <!--显示后台参数验证数据-->
+      <ng-container *ngFor="let error of validationService.validationErrors$ | async">
+        <ion-item>
+          <ion-label color="warning">{{error.defaultMessage}}</ion-label>
+        </ion-item>
+      </ng-container>
 
       <ion-item>
         <ion-label slot="start">昵称</ion-label>

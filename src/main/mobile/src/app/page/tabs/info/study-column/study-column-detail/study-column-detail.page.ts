@@ -22,7 +22,7 @@ export class StudyColumnDetailPage {
   }
 
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.getParams();
     this.show();
   }

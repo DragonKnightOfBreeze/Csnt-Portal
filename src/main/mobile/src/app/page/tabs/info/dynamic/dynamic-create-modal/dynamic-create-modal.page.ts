@@ -4,6 +4,7 @@ import {Dynamic} from "../../../../../domain/entity/Dynamic";
 import {DynamicCategory} from "../../../../../domain/enum/DynamicCategory";
 import {Router} from "@angular/router";
 import {ModalController} from "@ionic/angular";
+import {ValidationService} from "../../../../../service/api/validation.service";
 
 @Component({
   selector: 'app-dynamic-create-modal',
@@ -16,6 +17,7 @@ export class DynamicCreateModalPage {
   DynamicCategory = DynamicCategory;
 
   constructor(private service: DynamicService,
+              public validationService: ValidationService,
               private modalController: ModalController,
               private router: Router) {
   }
