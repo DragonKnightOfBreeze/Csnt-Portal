@@ -4,18 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.demo.csntportal.domain.enums.*;
 import com.windea.java.template.TBean;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 用户的实体类。
  */
 @Entity
-public class User extends TBean {
+public class User extends TBean implements UserDetails {
 	private static final long serialVersionUID = 1767704296003338587L;
 
 	/** 主键。 */
@@ -24,20 +26,19 @@ public class User extends TBean {
 	private Integer id;
 
 	/** 用户名。 */
-	@NotEmpty()
-	@Pattern(regexp = RegexConsts.USERNAME)
+	@NotEmpty(message = "{validation.user.username.notEmpty}")
+	@Pattern(regexp = RegexConsts.USERNAME, message = "{validation.user.username.pattern}")
 	@Column(unique = true, nullable = false, length = 12)
 	private String username;
 
 	/** 密码。 */
 	//密码需要被忽略掉，尽管是加密后的，并且不要限制行的长度，也不要进行后台参数验证
 	@JsonIgnore
-	@Column(nullable = false)
 	private String password;
 
 	/** 手机号码。 */
-	@NotEmpty()
-	@Pattern(regexp = RegexConsts.PHONE_NUM)
+	@NotEmpty(message = "{validation.user.phoneNum.notEmpty}")
+	@Pattern(regexp = RegexConsts.PHONE_NUM, message = "{validation.user.phoneNum.pattern}")
 	@Column(unique = true, nullable = false, length = 11)
 	private String phoneNum;
 
@@ -48,8 +49,8 @@ public class User extends TBean {
 	private String email;
 
 	/** 昵称。 */
-	@NotEmpty()
-	@Size(min = 1, max = 32)
+	@NotEmpty(message = "{validation.user.nickname.notEmpty}")
+	@Size(min = 1, max = 32, message = "{validation.user.nickname.size}")
 	@Column(nullable = false, length = 32)
 	private String nickname;
 
@@ -182,5 +183,31 @@ public class User extends TBean {
 
 	public void setDynamicList(List<Dynamic> dynamicList) {
 		this.dynamicList = dynamicList;
+	}
+
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return Set.of(new SimpleGrantedAuthority(role.toString()));
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 }

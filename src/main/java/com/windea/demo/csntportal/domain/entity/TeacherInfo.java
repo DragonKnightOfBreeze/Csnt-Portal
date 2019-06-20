@@ -21,8 +21,8 @@ public class TeacherInfo extends TBean {
 	private Integer id;
 
 	/** 名字。 */
-	@NotEmpty()
-	@Size(min = 1, max = 32)
+	@NotEmpty(message = "{validation.teacherInfo.name.notEmpty}")
+	@Size(min = 1, max = 32, message = "{validation.teacherInfo.name.size}")
 	@Column(nullable = false, length = 32)
 	private String name;
 
@@ -35,8 +35,8 @@ public class TeacherInfo extends TBean {
 	private Profession profession;
 
 	/** 介绍。 */
-	@NotEmpty()
-	@Size(min = 1, max = 256)
+	@NotEmpty(message = "{validation.teacherInfo.introduce.notEmpty}")
+	@Size(min = 1, max = 256, message = "{validation.teacherInfo.introduce.notEmpty}")
 	@Column(nullable = false, columnDefinition = "text")
 	private String introduce;
 

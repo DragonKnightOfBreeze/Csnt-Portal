@@ -24,8 +24,8 @@ public class StudyColumn extends TBean {
 	private Integer id;
 
 	/** 标题。 */
-	@NotEmpty()
-	@Size(min = 1, max = 32)
+	@NotEmpty(message = "{validation.column.title.notEmpty}")
+	@Size(min = 1, max = 32, message = "{validation.column.title.size}")
 	@Column(nullable = false, length = 32, columnDefinition = "varchar default '请输入标题'")
 	private String title;
 
@@ -35,8 +35,8 @@ public class StudyColumn extends TBean {
 	private String content;
 
 	/** 作者。 */
-	@NotEmpty()
-	@Size(min = 1, max = 32)
+	@NotEmpty(message = "{validation.column.author.notEmpty}")
+	@Size(min = 1, max = 32, message = "{validation.column.author.size}")
 	@Column(nullable = false, length = 32, columnDefinition = "varchar default '匿名'")
 	private String author;
 
