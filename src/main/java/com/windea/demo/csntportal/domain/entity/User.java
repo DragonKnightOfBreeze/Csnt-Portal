@@ -4,20 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.windea.demo.csntportal.domain.enums.*;
 import com.windea.java.template.TBean;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户的实体类。
  */
 @Entity
-public class User extends TBean implements UserDetails {
+public class User extends TBean {
 	private static final long serialVersionUID = 1767704296003338587L;
 
 	/** 主键。 */
@@ -183,31 +181,5 @@ public class User extends TBean implements UserDetails {
 
 	public void setDynamicList(List<Dynamic> dynamicList) {
 		this.dynamicList = dynamicList;
-	}
-
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Set.of(new SimpleGrantedAuthority(role.toString()));
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
 	}
 }

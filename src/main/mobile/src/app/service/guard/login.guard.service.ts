@@ -13,7 +13,6 @@ export class LoginGuard implements CanActivate, CanActivateChild {
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log(this.userService.hasLogin());
     if (this.userService.hasLogin()) {
       return true;
     }
